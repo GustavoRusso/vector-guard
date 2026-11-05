@@ -1,0 +1,13 @@
+[project]
+name = "ml-zoomcamp-homework"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "jupyter",
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "seaborn",
+  "tqdm>=4.70.1",
+  "xgboost>=3.4.1",
+]
