@@ -67,6 +67,14 @@ jupyter notebook notebooks/01_extract_vectors.ipynb
 
 Then run all cells. The notebook writes `manifest.json` (fetch time, URL, SHA-256) next to the extracted archive.
 
+Downstream notebooks load the table with the shared helper:
+
+```python
+from vector_guard.data import load_vector_detections
+
+df = load_vector_detections()
+```
+
 ### Virus detections
 
 **Still pending.** Candidate leads are noted under [`docs/`](docs/) (surveillance portals, sequence metadata repositories, and related background).
@@ -79,8 +87,10 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 
 | Path | Role |
 |------|------|
+| `src/vector_guard/` | Shared helpers (e.g. `load_vector_detections`) used by notebooks |
 | `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet DwC-A and overwrite `data/raw/vector/` |
-| `notebook.ipynb` | Data preparation, EDA, feature importance, model comparison and tuning |
+| `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
+| `notebook.ipynb` | Model comparison and tuning (after EDA) |
 | `train.py` | Train the final model and save it to disk |
 | `predict.py` | Load the model and serve predictions via a web service |
 | Dependency file (`requirements.txt`, `Pipfile`, or `pyproject.toml`) | Environment and package versions |
