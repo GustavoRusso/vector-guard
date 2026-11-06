@@ -1,6 +1,6 @@
 # Vector Guard roadmap
 
-Feature and deliverable plan derived from the evaluation criteria in [`docs/02-Evaluation-Criteria.md`](docs/02-Evaluation-Criteria.md). Items are ordered for a practical build sequence.
+Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Status | Meaning |
 |--------|---------|
@@ -27,14 +27,14 @@ Feature and deliverable plan derived from the evaluation criteria in [`docs/02-E
 
 **Criteria:** Reproducibility (data committed or clearly downloadable); feeds EDA and training.
 
-| Feature / deliverable | Status | Notes |
-|-----------------------|--------|-------|
-| Select and document vector detection source(s) | Next | Species/taxon, location, time |
-| Select and document virus detection source(s) | Next | Pathogen, location, time |
-| Build vector dataset (geo + time) | Planned | Clean, schema, citation |
-| Build virus dataset (geo + time) | Planned | Clean, schema, citation |
-| Join / aggregate to common spatial-temporal units | Planned | Grid or admin area × time window |
-| Commit data or publish reproducible download steps | Planned | Required for reproducibility |
+| Feature / deliverable                              | Status  | Notes                            |
+| -------------------------------------------------- | ------- | -------------------------------- |
+| Select and document vector detection source(s)     | Done    | Species/taxon, location, time    |
+| Select and document virus detection source(s)      | Next    | Pathogen, location, time         |
+| Build vector dataset (geo + time)                  | Planned | Clean, schema, citation          |
+| Build virus dataset (geo + time)                   | Planned | Clean, schema, citation          |
+| Join / aggregate to common spatial-temporal units  | Planned | Grid or admin area × time window |
+| Commit data or publish reproducible download steps | Planned | Required for reproducibility     |
 
 ---
 
@@ -142,12 +142,12 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-1. Lock data sources and publish reproducible datasets  
-2. Extensive EDA in the notebook  
-3. Train, compare, and tune multiple models; pick one  
-4. Export `train.py` and ship `predict.py` API  
-5. Finish environment docs, Docker, and README run instructions  
-6. Optionally deploy to the cloud and add proof of the live service  
+1. Lock data sources and publish reproducible datasets
+2. Extensive EDA in the notebook
+3. Train, compare, and tune multiple models; pick one
+4. Export `train.py` and ship `predict.py` API
+5. Finish environment docs, Docker, and README run instructions
+6. Optionally deploy to the cloud and add proof of the live service
 
 ---
 

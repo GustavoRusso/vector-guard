@@ -11,3 +11,21 @@
 - Store documentation of **decisions taken** on the project in `specs/`.
 - One document per **topic or project step** (for example dataset choice, geographic unit, model selection).
 - When a decision is made or changed during work, record or update it in `specs/`, not in `docs/`.
+
+
+
+## `notebooks/` — Jupyter notebooks with all ML steps
+
+
+
+## `src/vector_guard` — reutilizable code for notebooks
+
+
+
+## Related project files
+
+| Path                       | Role                               |
+| -------------------------- | ---------------------------------- |
+| [`README.md`](README.md)   | Problem statement and intended use |
+| [`ROADMAP.md`](ROADMAP.md) | Feature and deliverable plan       |
+
