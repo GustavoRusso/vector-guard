@@ -38,7 +38,7 @@ flowchart LR
   model --> api
 ```
 
-1. **Build two datasets** (concrete sources still TBD; see [Data](#data)):
+1. **Build two datasets** (vector source selected; virus still TBD — see [Data](#data)):
    - **Vector detections** — taxon/species, geographic location, detection time
    - **Virus detections** — pathogen, geographic location, detection time
 2. **Join and aggregate** records to a common geographic-temporal unit (for example grid cells or administrative areas × time windows).
@@ -48,19 +48,28 @@ flowchart LR
 
 ## Data
 
-**Selected data sources are still pending.**
+### Vector detections — VectorNet (selected)
 
-Research notes and candidate sources are documented under [`docs/`](docs/), including leads such as:
+| Field | Value |
+|-------|-------|
+| Dataset | [VectorNet](https://ipt.gbif.org/resource?r=vndatabase) (ECDC / EFSA) |
+| GBIF UUID | `e497586a-1bdf-4f69-90eb-645d615762c8` |
+| Format | Darwin Core Archive (DwC-A) |
+| Latest download URL | `https://ipt.gbif.org/archive.do?r=vndatabase` |
+| License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| Local path | `data/raw/vector/` (not committed; re-fetched on demand) |
 
-- Vector occurrence data (for example GBIF / VectorNet-style datasets)
-- Virus / disease surveillance data (for example institutional surveillance portals or sequence metadata repositories)
-- Related background on vector-borne diseases and geographic localization
+Refresh the local raw copy (wipes and replaces `data/raw/vector/`):
 
-Once sources are fixed, this section will include:
+```bash
+jupyter notebook notebooks/01_extract_vectors.ipynb
+```
 
-- Exact dataset names and citations
-- Clear download or inclusion instructions for reproducibility
-- Schema notes for the vector and virus tables
+Then run all cells. The notebook writes `manifest.json` (fetch time, URL, SHA-256) next to the extracted archive.
+
+### Virus detections
+
+**Still pending.** Candidate leads are noted under [`docs/`](docs/) (surveillance portals, sequence metadata repositories, and related background).
 
 ## Roadmap
 
@@ -70,6 +79,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 
 | Path | Role |
 |------|------|
+| `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet DwC-A and overwrite `data/raw/vector/` |
 | `notebook.ipynb` | Data preparation, EDA, feature importance, model comparison and tuning |
 | `train.py` | Train the final model and save it to disk |
 | `predict.py` | Load the model and serve predictions via a web service |

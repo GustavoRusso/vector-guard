@@ -1,1 +1,5 @@
 docs
+
+# VectorNet DwC-A raw downloads (re-fetch via notebooks/01_extract_vectors.ipynb)
+data/raw/vector/*
+!data/raw/vector/.gitkeep
