@@ -4,7 +4,7 @@ Decision record for the **virus detections** source used by Vector Guard (pathog
 
 | Field | Value |
 |-------|-------|
-| Status | Selected (extraction pipeline to follow) |
+| Status | Selected and implemented (raw extract + loader) |
 | Decision date | 2026-11 |
 | Spec order | `02` (after vector dataset selection; before spatial-temporal matching) |
 
@@ -17,11 +17,12 @@ Use the **ENA Portal REST API** as the primary virus detection source. The API e
 | Dataset | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) (INSDC mirror) |
 | Search endpoint | `https://www.ebi.ac.uk/ena/portal/api/search` |
 | Result type | `result=sequence` |
-| Format | TSV / JSON over HTTP GET |
+| Format | TSV metadata extract (HTTP GET) |
 | License / terms | [EMBL-EBI Terms of Use](https://www.ebi.ac.uk/about/terms-of-use/) (public open data; no account required) |
-| Planned local path | `data/raw/virus/` (not committed; re-fetched on demand) |
-| Planned extract notebook | `notebooks/03_extract_viruses.ipynb` |
-| Planned loader | `src/vector_guard/data.py` — `load_virus_detections()` |
+| Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
+| Extract notebook | [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) |
+| Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_virus_detections()`, `VIRUS_VECTOR_TAXON_MAP` |
+| EDA notebook | [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) |
 
 ## Requirements that drove the choice
 
@@ -92,10 +93,10 @@ Virus records must be joinable later to VectorNet on space and time (join design
 
 ## Target virus taxonomy
 
-Each target taxon is mapped to a VectorNet vector group so features can relate mosquito / tick / midge / sandfly presence to the matching pathogens. NCBI Taxonomy IDs are used with ENA’s `tax_tree(...)` filter (children included).
+Each target taxon is mapped to a VectorNet vector group so features can relate mosquito / tick / midge / sandfly presence to the matching pathogens. NCBI Taxonomy IDs below are the **ENA-verified** `tax_tree(...)` IDs used in `VIRUS_VECTOR_TAXON_MAP` and the extract notebook (some early candidate IDs returned empty trees in ENA and were replaced).
 
-| Pathogen (canonical name) | NCBI tax ID(s) | VectorNet vector group | Primary vector genera (indicative) |
-|---------------------------|----------------|------------------------|------------------------------------|
+| Pathogen (canonical name) | NCBI tax ID(s) used in extract | VectorNet vector group | Primary vector genera (indicative) |
+|---------------------------|--------------------------------|------------------------|------------------------------------|
 | West Nile virus | `11082` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
 | Usutu virus | `64286` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
 | Dengue virus | `12637` | Mosquito (`Culicidae`) | `Aedes` |
@@ -104,20 +105,45 @@ Each target taxon is mapped to a VectorNet vector group so features can relate m
 | Sindbis virus | `11034` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
 | Rift Valley fever virus | `11588` | Mosquito (`Culicidae`) | `Aedes`, `Culex` |
 | Tick-borne encephalitis virus | `11084` | Tick (`Ixodida`) | `Ixodes`, `Dermacentor`, `Haemaphysalis` |
-| Crimean-Congo hemorrhagic fever virus | `11593` / `1980519` | Tick (`Ixodida`) | `Hyalomma` |
+| Crimean-Congo hemorrhagic fever virus | `3052518` (`Orthonairovirus haemorrhagiae`) | Tick (`Ixodida`) | `Hyalomma` |
 | Bluetongue virus | `40051` | Biting midge (`Ceratopogonidae`) | `Culicoides` |
 | Schmallenberg virus | `1133363` | Biting midge (`Ceratopogonidae`) | `Culicoides` |
-| Sandfly fever Naples phlebovirus / Toscana virus | `1914374` / `11589` | Sandfly (`Phlebotominae`) | `Phlebotomus` |
+| Sandfly fever Naples phlebovirus / Toscana virus | `11590`, `206160`, `1933189` | Sandfly (`Phlebotominae`) | `Phlebotomus` |
 
-### Planned ENA query shape
+### Implemented ENA extract
 
-Conceptual pattern for the extract notebook (not implemented in this spec):
+[`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) implements:
 
-- `result=sequence`
-- Filter: `tax_tree(<tax_id>)` for each row above (or batched equivalent)
-- Require usable place and/or time metadata (at least `country` or `collection_date`)
-- Return fields such as: accession, `scientific_name`, `tax_id`, `country`, `location`, `collection_date`, `host`, `isolation_source`, and related sample fields when available
+- `result=sequence` with `tax_tree(<tax_id>)` for each tax ID above (`limit=0`)
+- Keep rows with non-empty `country` or `collection_date`; dedupe by `accession`
+- Tag rows with `pathogen_name` and `vector_group`
+- Write `data/raw/virus/virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation)
+
+Load in other notebooks:
+
+```python
+from vector_guard.data import load_virus_detections
+
+df = load_virus_detections()
+```
 
 ### Auxiliary signal from VectorNet
 
 VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g. `{"pathogen": "West Nile virus"}`). Those sparse rows are **not** the virus dataset; they may be used later as an optional validation / enrichment signal during EDA or matching.
+
+## Out of scope for this decision
+
+- Spatial-temporal join implementation (design in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md))
+- Cleaning / ISO-2 / H3 feature engineering beyond the raw extract
+- Clinical diagnosis or exact introduction-date prediction
+
+## Related project files
+
+| Path | Role |
+|------|------|
+| [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | Paired vector source (VectorNet) |
+| [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) | Join design (H3 + country) |
+| [`README.md`](../README.md) | Published virus data table and refresh steps |
+| [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) | ENA extract |
+| [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) | Initial virus EDA |
+| [`src/vector_guard/data.py`](../src/vector_guard/data.py) | `VIRUS_VECTOR_TAXON_MAP`, `load_virus_detections()` |

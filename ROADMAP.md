@@ -19,7 +19,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 |-----------------------|--------|-------|
 | README problem statement and intended use | Done | See [`README.md`](README.md) |
 | Run instructions for setup, train, predict, Docker | Planned | Fill stub sections as components land |
-| Link data download / inclusion instructions in README | Planned | Depends on final source selection |
+| Link data download / inclusion instructions in README | Done | VectorNet + ENA extract steps in [`README.md`](README.md); decisions in [`specs/`](specs/) |
 
 ---
 
@@ -27,14 +27,14 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 **Criteria:** Reproducibility (data committed or clearly downloadable); feeds EDA and training.
 
-| Feature / deliverable                              | Status  | Notes                            |
-| -------------------------------------------------- | ------- | -------------------------------- |
-| Select and document vector detection source(s)     | Done    | Species/taxon, location, time    |
-| Select and document virus detection source(s)      | Next    | Pathogen, location, time         |
-| Build vector dataset (geo + time)                  | Planned | Clean, schema, citation          |
-| Build virus dataset (geo + time)                   | Planned | Clean, schema, citation          |
-| Join / aggregate to common spatial-temporal units  | Planned | Grid or admin area × time window |
-| Commit data or publish reproducible download steps | Planned | Required for reproducibility     |
+| Feature / deliverable | Status | Notes |
+|-----------------------|--------|-------|
+| Select and document vector detection source(s) | Done | VectorNet DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
+| Select and document virus detection source(s) | Done | ENA / INSDC — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+| Build vector dataset (geo + time) | Planned | Raw extract Done via `01_extract_vectors.ipynb`; cleaning / schema still open |
+| Build virus dataset (geo + time) | Planned | Raw extract Done via `03_extract_viruses.ipynb` + `load_virus_detections`; cleaning still open |
+| Join / aggregate to common spatial-temporal units | Next | Design: H3 Tier 1 + country Tier 2 — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
+| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README |
 
 ---
 
@@ -44,6 +44,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
+| Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (coverage / completeness first look) |
 | Data cleaning and preparation in `notebook.ipynb` | Planned | Missing values, outliers, geo/time filters |
 | Distribution and range analysis of features | Planned | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
@@ -142,8 +143,8 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-1. Lock data sources and publish reproducible datasets
-2. Extensive EDA in the notebook
+1. Lock data sources and publish reproducible download steps (vector + virus sources selected; raw extracts in place)
+2. Implement spatial-temporal join (H3 / country) and deepen EDA
 3. Train, compare, and tune multiple models; pick one
 4. Export `train.py` and ship `predict.py` API
 5. Finish environment docs, Docker, and README run instructions
@@ -154,5 +155,4 @@ flowchart TD
 ## Out of scope for this roadmap
 
 - Clinical diagnosis or medical decision support  
-- Exact virus introduction *timing* (stochastic; not the modeling target)  
-- Final virus / vector / region choice (tracked under Data foundation until selected)
+- Exact virus introduction *timing* (stochastic; not the modeling target)

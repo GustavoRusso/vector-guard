@@ -38,15 +38,23 @@ flowchart LR
   model --> api
 ```
 
-1. **Build two datasets** (vector source selected; virus still TBD — see [Data](#data)):
+1. **Build two datasets** (both sources selected — see [Data](#data)):
    - **Vector detections** — taxon/species, geographic location, detection time
    - **Virus detections** — pathogen, geographic location, detection time
-2. **Join and aggregate** records to a common geographic-temporal unit (for example grid cells or administrative areas × time windows).
+2. **Join and aggregate** records to a common geographic-temporal unit (primarily Uber H3 cells, with ISO-2 country fallback — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md)).
 3. **EDA** — missing values, spatial and temporal coverage, target distribution, and feature importance.
 4. **Model selection** — train multiple models (linear and tree-based), tune hyperparameters, and select the best performer.
 5. **Deploy** — export training to a script, serve the final model via a web API, and run it locally in Docker (cloud deployment optional).
 
 ## Data
+
+Decision records for source selection and join design live under [`specs/`](specs/):
+
+| Spec | Topic |
+|------|-------|
+| [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) | VectorNet DwC-A selection and discarded alternatives |
+| [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | ENA / INSDC selection, candidate comparison, target taxonomy |
+| [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 + country join design (not implemented yet) |
 
 ### Vector detections — VectorNet (selected)
 
@@ -58,6 +66,7 @@ flowchart LR
 | Latest download URL | `https://ipt.gbif.org/archive.do?r=vndatabase` |
 | License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Local path | `data/raw/vector/` (not committed; re-fetched on demand) |
+| Decision | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
 
 Refresh the local raw copy (wipes and replaces `data/raw/vector/`):
 
@@ -75,9 +84,37 @@ from vector_guard.data import load_vector_detections
 df = load_vector_detections()
 ```
 
-### Virus detections
+### Virus detections — ENA / INSDC (selected)
 
-**Still pending.** Candidate leads are noted under [`docs/`](docs/) (surveillance portals, sequence metadata repositories, and related background).
+| Field | Value |
+|-------|-------|
+| Dataset | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) (INSDC: ENA + GenBank + DDBJ) |
+| Search endpoint | `https://www.ebi.ac.uk/ena/portal/api/search` |
+| Result type | `result=sequence` (`tax_tree` per target pathogen) |
+| Format | TSV metadata extract |
+| License / terms | [EMBL-EBI Terms of Use](https://www.ebi.ac.uk/about/terms-of-use/) (no account required) |
+| Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
+| Decision | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+
+Twelve vector-borne pathogens are fetched (mosquito-, tick-, biting-midge-, and sandfly-borne), tagged with `pathogen_name` and `vector_group`. Taxonomy and ENA tax IDs are listed in the virus dataset spec and in `VIRUS_VECTOR_TAXON_MAP` in [`src/vector_guard/data.py`](src/vector_guard/data.py).
+
+Refresh the local raw copy (wipes and replaces `data/raw/virus/`):
+
+```bash
+jupyter notebook notebooks/03_extract_viruses.ipynb
+```
+
+Then run all cells. The notebook writes `virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation).
+
+Downstream notebooks load the table with the shared helper:
+
+```python
+from vector_guard.data import load_virus_detections
+
+df = load_virus_detections()
+```
+
+Initial exploratory analysis: [`notebooks/04_eda_viruses.ipynb`](notebooks/04_eda_viruses.ipynb).
 
 ## Roadmap
 
@@ -87,15 +124,18 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 
 | Path | Role |
 |------|------|
-| `src/vector_guard/` | Shared helpers (e.g. `load_vector_detections`) used by notebooks |
+| `src/vector_guard/` | Shared helpers (`load_vector_detections`, `load_virus_detections`, `VIRUS_VECTOR_TAXON_MAP`) |
 | `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet DwC-A and overwrite `data/raw/vector/` |
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
+| `notebooks/03_extract_viruses.ipynb` | Fetch ENA / INSDC virus metadata into `data/raw/virus/` |
+| `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |
+| `specs/` | Decision records (dataset selection, matching strategy) |
 | `notebook.ipynb` | Model comparison and tuning (after EDA) |
 | `train.py` | Train the final model and save it to disk |
 | `predict.py` | Load the model and serve predictions via a web service |
 | Dependency file (`requirements.txt`, `Pipfile`, or `pyproject.toml`) | Environment and package versions |
 | `Dockerfile` | Container image for the prediction service |
-| `docs/` | Research notes and working documentation |
+| `docs/` | Early research notes (read-only; not the decision source of truth) |
 
 ## Setup
 
