@@ -67,6 +67,19 @@ from vector_guard.data import load_vector_detections
 df = load_vector_detections()
 ```
 
+## Candidates for future additions
+
+Sources below are **not** part of the primary vector table. They may be joined later if geographic or pathogen coverage needs it.
+
+### SPVECTORSURV (Spain tick and mosquito monitoring)
+
+- **What:** [SPVECTORSURV](https://www.gbif.org/dataset/fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8) — *Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks), West Nile and Rift Valley Fever in Spain (mosquitos)* (Ministerio de Agricultura, Pesca y Alimentación; DOI [10.15470/fn1bet](https://doi.org/10.15470/fn1bet)). Occurrence Darwin Core Archive on the Spanish GBIF IPT ([`r=spvectorsurv`](https://ipt.gbif.es/resource?r=spvectorsurv)).
+- **GBIF dataset UUID:** `fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8`
+- **Latest download URL:** `https://ipt.gbif.es/archive.do?r=spvectorsurv`
+- **License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+- **Coverage:** Spain (southern mainland via IREC; Balearic Islands via the University of the Balearic Islands). Version 1.5 (published 2026-07-03) holds on the order of ~2.6k occurrences, currently tick sampling from 2024. The project window is January 2024–December 2026; mosquito surveillance for West Nile and Rift Valley fever is in scope and expected in later releases. Sampling follows a predefined protocol and is published in Darwin Core aligned with VectorNet.
+- **Why a candidate, not the primary source:** Expert One Health surveillance (EU4Health, EFSA-coordinated) aimed at competent vectors of Crimean–Congo haemorrhagic fever, West Nile, and Rift Valley fever. It can densify Spanish tick detections, and later mosquito detections, on top of VectorNet. It does not replace VectorNet: geography is Spain only, the current extract is small and tick-only, the series is still being filled through 2026, and the license is non-commercial (CC BY-NC 4.0), which is stricter than VectorNet’s CC BY 4.0.
+
 ## Discarded alternatives
 
 The options below were considered during early research and **not** selected as the primary vector source.
