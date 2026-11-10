@@ -4,6 +4,10 @@ docs
 data/raw/vector/*
 !data/raw/vector/.gitkeep
 
+# ENA / INSDC virus detection raw downloads (re-fetch via notebooks/03_extract_viruses.ipynb)
+data/raw/virus/*
+!data/raw/virus/.gitkeep
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
