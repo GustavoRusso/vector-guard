@@ -56,14 +56,14 @@ Decision records for source selection and join design live under [`specs/`](spec
 | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | ENA / INSDC selection, candidate comparison, target taxonomy |
 | [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 + country join design (not implemented yet) |
 
-### Vector detections — VectorNet (selected)
+### Vector detections — VectorNet observations (selected)
 
 | Field | Value |
 |-------|-------|
-| Dataset | [VectorNet](https://ipt.gbif.org/resource?r=vndatabase) (ECDC / EFSA) |
-| GBIF UUID | `e497586a-1bdf-4f69-90eb-645d615762c8` |
+| Dataset | [VectorNet observations](https://www.gbif.org/dataset/4abd984b-122c-44a0-8c92-b37e2f5299b1) (ECDC / EFSA) |
+| GBIF UUID | `4abd984b-122c-44a0-8c92-b37e2f5299b1` |
 | Format | Darwin Core Archive (DwC-A) |
-| Latest download URL | `https://ipt.gbif.org/archive.do?r=vndatabase` |
+| Latest download URL | `https://www.gbif.se/ipt/archive.do?r=vectornet_historical_data` |
 | License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Local path | `data/raw/vector/` (not committed; re-fetched on demand) |
 | Decision | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
@@ -125,7 +125,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | Path | Role |
 |------|------|
 | `src/vector_guard/` | Shared helpers (`load_vector_detections`, `load_virus_detections`, `VIRUS_VECTOR_TAXON_MAP`) |
-| `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet DwC-A and overwrite `data/raw/vector/` |
+| `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet observations DwC-A and overwrite `data/raw/vector/` |
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
 | `notebooks/03_extract_viruses.ipynb` | Fetch ENA / INSDC virus metadata into `data/raw/virus/` |
 | `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |

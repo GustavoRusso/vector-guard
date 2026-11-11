@@ -29,7 +29,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Select and document vector detection source(s) | Done | VectorNet DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
+| Select and document vector detection source(s) | Done | VectorNet observations DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
 | Select and document virus detection source(s) | Done | ENA / INSDC — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
 | Build vector dataset (geo + time) | Planned | Raw extract Done via `01_extract_vectors.ipynb`; cleaning / schema still open |
 | Build virus dataset (geo + time) | Planned | Raw extract Done via `03_extract_viruses.ipynb` + `load_virus_detections`; cleaning still open |
