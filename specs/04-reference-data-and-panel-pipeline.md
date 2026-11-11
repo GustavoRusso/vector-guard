@@ -174,8 +174,8 @@ flowchart TD
 | Extract viruses | `03_extract_viruses.ipynb` (exists; **multi-source upgrade Planned**) | `data/raw/virus/virus_detections.tsv` + `manifest.json` | ENA Portal (`sequence`, `read_run`, `sample`); BV-BRC; Pathoplexus; FAO EMPRES-i; ECDC NUTS3 / seasonal tables — see [Virus extract contract](#virus-extract-contract-notebook-03) |
 | Source EDA vectors | `02_eda_vectors.ipynb` (exists) | Insights / cleaning rules only | raw vectors |
 | Source EDA viruses | `04_eda_viruses.ipynb` (exists; extend after upgrade) | Insights / cleaning rules only | raw viruses |
-| Country + subnational reference | `05_reference_countries.ipynb` | `data/reference/countries.csv`, `data/reference/subnational_locations.csv` | ISO list + alias / region / NUTS needs from EDA |
-| Vector group map | `06_reference_vector_groups.ipynb` | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
+| Country + subnational reference | `05_reference_countries.ipynb` (exists) | `data/reference/countries.csv`, `data/reference/subnational_locations.csv` | ISO list + alias / region / NUTS needs from EDA |
+| Vector group map | `06_reference_vector_groups.ipynb` (exists) | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
 | H3 density check | `07_h3_resolution_density.ipynb` | Decision in specs/ROADMAP (+ later code constant); no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `08_clean_vectors.ipynb` | `data/interim/vectors_normalized.parquet` (or CSV) | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | Clean viruses | `09_clean_viruses.ipynb` | `data/interim/viruses_normalized.parquet` (or CSV) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |

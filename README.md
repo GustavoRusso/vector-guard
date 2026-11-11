@@ -63,7 +63,7 @@ Data layout (ladder):
 | Path | Role |
 |------|------|
 | `data/raw/` | Source extracts (VectorNet, multi-source virus TSV); not committed; refresh via extract notebooks |
-| `data/reference/` | Master/lookup tables (`countries.csv`, `subnational_locations.csv`, vector taxon → group); committed when built |
+| `data/reference/` | Master/lookup tables (`countries.csv`, `subnational_locations.csv`, `vector_taxon_groups.csv`); committed |
 | `data/interim/` | Normalized per-side detection tables after cleaning |
 | `data/processed/` | Merged **modelling panel** used by `notebook.ipynb` / `train.py` |
 
@@ -141,7 +141,9 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
 | `notebooks/03_extract_viruses.ipynb` | Virus extract into `data/raw/virus/` (v1 ENA `sequence`; multi-source upgrade Planned) |
 | `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |
-| `notebooks/05`–`10` (planned) | Reference tables (`countries`, `subnational_locations`, vector groups), H3 density check (exact vs centroid), clean both sides, merge modelling panel — see spec `04` |
+| `notebooks/05_reference_countries.ipynb` | Build `countries.csv` + `subnational_locations.csv` |
+| `notebooks/06_reference_vector_groups.ipynb` | Build `vector_taxon_groups.csv` |
+| `notebooks/07`–`10` (planned) | H3 density check, clean both sides, merge modelling panel — see spec `04` |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |
