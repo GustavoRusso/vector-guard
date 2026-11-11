@@ -8,6 +8,9 @@ data/raw/vector/*
 data/raw/virus/*
 !data/raw/virus/.gitkeep
 
+# Cached GIS downloads used to build reference CSVs (notebook 05)
+data/reference/.cache/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

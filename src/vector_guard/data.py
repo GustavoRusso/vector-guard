@@ -111,6 +111,11 @@ def default_virus_raw_dir(repo_root: Path | None = None) -> Path:
     return root / "data" / "raw" / "virus"
 
 
+def default_reference_dir(repo_root: Path | None = None) -> Path:
+    root = repo_root or find_repo_root()
+    return root / "data" / "reference"
+
+
 def resolve_vector_core_path(raw_dir: Path) -> Path:
     """Resolve the DwC-A core table path under *raw_dir* via ``meta.xml``."""
     if not raw_dir.exists():

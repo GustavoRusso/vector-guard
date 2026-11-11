@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Design documented — **not implemented** (no reference CSVs, interim tables, or merge notebook yet) |
+| Status | Partially implemented — `countries.csv` + `subnational_locations.csv` via `05_reference_countries.ipynb`; vector groups / H3 / clean / merge still open |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -19,7 +19,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Temporal grain | **`year` × `month`** |
 | H3 resolution | Chosen later in a density-check notebook; document the process here; record the chosen integer when selected |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Planned** |
-| This iteration | Documentation only — no code, notebooks, or data files created yet |
+| This iteration | Reference countries + subnational centroids implemented (`05`); remaining pipeline steps still Planned |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
 
@@ -313,7 +313,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 ## Implementation checklist (future)
 
 1. Upgrade `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` to the multi-source contract (spec `02`); refresh `04_eda_viruses` for per-source / geo coverage.
-2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv`.
+2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv`. **Done (files written; commit when ready).**
 3. Add `vector_taxon_groups.csv` via notebook `06`.
 4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`.
 5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`.
