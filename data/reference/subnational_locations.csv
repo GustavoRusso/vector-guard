@@ -12,6 +12,8 @@ AL,al032,nuts3,Fier,40.764165,19.618887,NUTS_2021
 AL,al033,nuts3,Gjirokastër,40.200017,20.193454,NUTS_2021
 AL,al034,nuts3,Korcë,40.622513,20.672428,NUTS_2021
 AL,al035,nuts3,Vlorë,40.159731,19.806151,NUTS_2021
+AL,elbasan,nuts3,Elbasan,41.067845,20.197947,NUTS_2021
+AL,korce,nuts3,Korcë,40.622513,20.672428,NUTS_2021
 AO,bengo,admin2,Bengo,-8.99949,13.907,NaturalEarth_10m_admin1
 AO,cunene,admin2,Cunene,-16.6271,15.281,NaturalEarth_10m_admin1
 AO,luanda,admin2,Luanda,-8.95941,13.3166,NaturalEarth_10m_admin1
@@ -31,6 +33,7 @@ AT,at112,nuts3,Nordburgenland,47.860178,16.776055,NUTS_2021
 AT,at113,nuts3,Südburgenland,47.165475,16.258969,NUTS_2021
 AT,at121,nuts3,Mostviertel-Eisenwurzen,48.052183,15.002846,NUTS_2021
 AT,at122,nuts3,Niederösterreich-Süd,47.794361,15.912569,NUTS_2021
+AT,at123,nuts3,Sankt Pölten,48.215442,15.665891,NUTS_2021
 AT,at125,nuts3,Weinviertel,48.626414,16.05267,NUTS_2021
 AT,at126,nuts3,Wiener Umland/Nordteil,48.298201,16.665094,NUTS_2021
 AT,at127,nuts3,Wiener Umland/Südteil,48.03974,16.491644,NUTS_2021
@@ -52,9 +55,15 @@ AT,at335,nuts3,Tiroler Unterland,47.387105,12.004652,NUTS_2021
 AT,at342,nuts3,Rheintal-Bodenseegebiet,47.390671,9.722125,NUTS_2021
 AT,burgenland,admin1,Burgenland,47.236076,16.287376,NUTS_2021
 AT,graz,nuts3,Graz,47.12851,15.361976,NUTS_2021
+AT,karnten,admin1,Kärnten,46.716091,14.462861,NUTS_2021
 AT,lower-austria,admin1,Niederösterreich,48.2477,15.7448,NaturalEarth_10m_admin1
+AT,nordburgenland,nuts3,Nordburgenland,47.860178,16.776055,NUTS_2021
+AT,sankt-polten,nuts3,Sankt Pölten,48.215442,15.665891,NUTS_2021
 AT,upper-austria,admin1,Oberösterreich,48.2377,13.856,NaturalEarth_10m_admin1
 AT,vienna,admin1,Wien,48.2247,16.3798,NaturalEarth_10m_admin1
+AT,wien,admin1,Wien,48.202775,16.393215,NUTS_2021
+AT,wiener-umland-nordteil,nuts3,Wiener Umland/Nordteil,48.298201,16.665094,NUTS_2021
+AT,wiener-umland-sudteil,nuts3,Wiener Umland/Südteil,48.03974,16.491644,NUTS_2021
 AU,new-south-wales,admin1,New South Wales,-32.4751,146.781,NaturalEarth_10m_admin1
 AU,northern-territory,admin1,Northern Territory,-20.1026,133.78,NaturalEarth_10m_admin1
 AU,nsw,admin1,New South Wales,-32.4751,146.781,NaturalEarth_10m_admin1
@@ -63,21 +72,51 @@ AU,south-australia,admin1,South Australia,-29.6504,135.783,NaturalEarth_10m_admi
 AU,victoria,admin1,Victoria,-37.0082,144.75,NaturalEarth_10m_admin1
 AU,western-australia,admin1,Western Australia,-25.8483,121.646,NaturalEarth_10m_admin1
 BA,banja-luka,admin1,Banja Luka,44.8146,17.2619,NaturalEarth_10m_admin1
+BA,doboj,admin1,Doboj,44.9307,18.0675,NaturalEarth_10m_admin1
+BA,sarajevo,admin1,Sarajevo,43.7991,18.3077,NaturalEarth_10m_admin1
+BA,tuzla,admin1,Tuzla,44.5325,18.5549,NaturalEarth_10m_admin1
+BA,vlasenica,admin1,Vlasenica,44.1968,19.0758,NaturalEarth_10m_admin1
+BD,chattogram,admin1,Chittagong,22.4245,92.1333,NaturalEarth_10m_admin1
+BD,chittagong,admin1,Chittagong,22.4245,92.1333,NaturalEarth_10m_admin1
 BD,dhaka,admin1,Dhaka,24.1653,90.4053,NaturalEarth_10m_admin1
 BE,antwerp,admin2,Antwerp,51.2485,4.72122,NaturalEarth_10m_admin1
+BE,arr-aalst,nuts3,Arr. Aalst,50.877225,3.935791,NUTS_2021
+BE,arr-antwerpen,nuts3,Arr. Antwerpen,51.277811,4.494056,NUTS_2021
+BE,arr-charleroi,nuts3,Arr. Charleroi,50.458803,4.422204,NUTS_2021
+BE,arr-de-bruxelles-capitale-arr-brussel-hoofdstad,nuts3,Arr. de Bruxelles-Capitale/Arr. Brussel-Hoofdstad,50.840051,4.356929,NUTS_2021
+BE,arr-dendermonde,nuts3,Arr. Dendermonde,51.04093,4.04435,NUTS_2021
+BE,arr-eeklo,nuts3,Arr. Eeklo,51.210968,3.556681,NUTS_2021
+BE,arr-gent,nuts3,Arr. Gent,51.063069,3.660671,NUTS_2021
+BE,arr-halle-vilvoorde,nuts3,Arr. Halle-Vilvoorde,50.765481,4.261108,NUTS_2021
+BE,arr-hasselt,nuts3,Arr. Hasselt,50.954981,5.272292,NUTS_2021
+BE,arr-leuven,nuts3,Arr. Leuven,50.891045,4.849754,NUTS_2021
+BE,arr-liege,nuts3,Arr. Liège,50.619704,5.60507,NUTS_2021
+BE,arr-maaseik,nuts3,Arr. Maaseik,51.136258,5.506246,NUTS_2021
+BE,arr-mechelen,nuts3,Arr. Mechelen,51.086587,4.635937,NUTS_2021
+BE,arr-namur,nuts3,Arr. Namur,50.466508,4.850321,NUTS_2021
+BE,arr-nivelles,nuts3,Arr. Nivelles,50.665915,4.592262,NUTS_2021
+BE,arr-sint-niklaas,nuts3,Arr. Sint-Niklaas,51.198156,4.142305,NUTS_2021
+BE,arr-tielt,nuts3,Arr. Tielt,50.999134,3.301963,NUTS_2021
+BE,arr-turnhout,nuts3,Arr. Turnhout,51.245097,4.950239,NUTS_2021
+BE,be100,nuts3,Arr. de Bruxelles-Capitale/Arr. Brussel-Hoofdstad,50.840051,4.356929,NUTS_2021
 BE,be211,nuts3,Arr. Antwerpen,51.277811,4.494056,NUTS_2021
 BE,be212,nuts3,Arr. Mechelen,51.086587,4.635937,NUTS_2021
 BE,be213,nuts3,Arr. Turnhout,51.245097,4.950239,NUTS_2021
 BE,be223,nuts3,Arr. Tongeren,50.843122,5.52783,NUTS_2021
 BE,be224,nuts3,Arr. Hasselt,50.954981,5.272292,NUTS_2021
 BE,be225,nuts3,Arr. Maaseik,51.136258,5.506246,NUTS_2021
+BE,be231,nuts3,Arr. Aalst,50.877225,3.935791,NUTS_2021
 BE,be232,nuts3,Arr. Dendermonde,51.04093,4.04435,NUTS_2021
+BE,be233,nuts3,Arr. Eeklo,51.210968,3.556681,NUTS_2021
 BE,be234,nuts3,Arr. Gent,51.063069,3.660671,NUTS_2021
 BE,be235,nuts3,Arr. Oudenaarde,50.826409,3.63282,NUTS_2021
 BE,be236,nuts3,Arr. Sint-Niklaas,51.198156,4.142305,NUTS_2021
+BE,be241,nuts3,Arr. Halle-Vilvoorde,50.765481,4.261108,NUTS_2021
 BE,be242,nuts3,Arr. Leuven,50.891045,4.849754,NUTS_2021
 BE,be251,nuts3,Arr. Brugge,51.201295,3.224831,NUTS_2021
 BE,be254,nuts3,Arr. Kortrijk,50.822291,3.306643,NUTS_2021
+BE,be257,nuts3,Arr. Tielt,50.999134,3.301963,NUTS_2021
+BE,be310,nuts3,Arr. Nivelles,50.665915,4.592262,NUTS_2021
 BE,be323,nuts3,Arr. Mons,50.450319,3.884636,NUTS_2021
 BE,be328,nuts3,Arr. Tournai-Mouscron,50.631819,3.446876,NUTS_2021
 BE,be32b,nuts3,Arr. Charleroi,50.458803,4.422204,NUTS_2021
@@ -90,6 +129,7 @@ BE,be342,nuts3,Arr. Bastogne,50.087739,5.752308,NUTS_2021
 BE,be351,nuts3,Arr. Dinant,50.180418,5.046507,NUTS_2021
 BE,be352,nuts3,Arr. Namur,50.466508,4.850321,NUTS_2021
 BE,east-flanders,admin2,East Flanders,50.9749,3.83186,NaturalEarth_10m_admin1
+BE,namur,admin2,Namur,50.3244,4.88712,NaturalEarth_10m_admin1
 BE,oost-vlaanderen,admin2,East Flanders,50.9749,3.83186,NaturalEarth_10m_admin1
 BE,west-flanders,admin2,West Flanders,51.0312,3.02202,NaturalEarth_10m_admin1
 BG,bg314,nuts3,Плевен,43.476764,24.604911,NUTS_2021
@@ -99,17 +139,47 @@ BG,bg325,nuts3,Силистра,43.937063,27.029812,NUTS_2021
 BG,bg331,nuts3,Варна,43.176079,27.590324,NUTS_2021
 BG,bg332,nuts3,Добрич,43.648123,27.942111,NUTS_2021
 BG,bg341,nuts3,Бургас,42.506228,27.297379,NUTS_2021
+BG,bg342,nuts3,Сливен,42.682749,26.247639,NUTS_2021
+BG,bg344,nuts3,Стара Загора,42.444103,25.56533,NUTS_2021
+BG,bg411,nuts3,София (столица),42.674698,23.33394,NUTS_2021
+BG,bg421,nuts3,Пловдив,42.270985,24.816213,NUTS_2021
 BG,bg422,nuts3,Хасково,41.845797,25.906109,NUTS_2021
+BG,bg423,nuts3,Пазарджик,42.123911,24.146196,NUTS_2021
+BG,bulgaria,admin1,България,42.754596,25.234958,NUTS_2021
+BG,burgas,nuts3,Бургас,42.506228,27.297379,NUTS_2021
+BG,gabrovo,nuts3,Габрово,42.935415,25.220773,NUTS_2021
+BG,gorna-oryahovitsa,admin2,Veliko Tarnovo,42.8079,25.6222,NaturalEarth_10m_admin1
+BG,pazardzhik,nuts3,Пазарджик,42.123911,24.146196,NUTS_2021
+BG,pernik,nuts3,Перник,42.630672,22.853885,NUTS_2021
+BG,plovdiv,nuts3,Пловдив,42.270985,24.816213,NUTS_2021
+BG,sliven,nuts3,Сливен,42.682749,26.247639,NUTS_2021
+BG,smoljan,admin2,Smolyan,41.6644,24.6089,NaturalEarth_10m_admin1
+BG,sofia,nuts3,София,42.271278,23.584705,NUTS_2021
+BG,sofiya,admin2,Sofia,42.288,23.606,NaturalEarth_10m_admin1
+BG,stara-zagora,nuts3,Стара Загора,42.444103,25.56533,NUTS_2021
+BG,varna,nuts3,Варна,43.176079,27.590324,NUTS_2021
+BI,bubanza,admin2,Bubanza,-3.1045,29.3862,NaturalEarth_10m_admin1
+BI,bujumbura-rural,admin2,Bujumbura Rural,-3.61843,29.4237,NaturalEarth_10m_admin1
+BI,cibitoke,admin2,Cibitoke,-2.86742,29.2407,NaturalEarth_10m_admin1
+BI,karuzi,admin2,Karuzi,-3.14444,30.1146,NaturalEarth_10m_admin1
+BI,kayanza,admin2,Kayanza,-3.02498,29.6613,NaturalEarth_10m_admin1
+BI,kirundo,admin2,Kirundo,-2.56414,30.1647,NaturalEarth_10m_admin1
+BI,makamba,admin2,Makamba,-4.21622,29.771,NaturalEarth_10m_admin1
+BI,muramvya,admin2,Muramvya,-3.2533,29.668,NaturalEarth_10m_admin1
+BI,mwaro,admin2,Mwaro,-3.51787,29.6943,NaturalEarth_10m_admin1
 BI,ngozi,admin2,Ngozi,-2.86902,29.896,NaturalEarth_10m_admin1
 BO,beni,admin1,El Beni,-14.0358,-64.5806,NaturalEarth_10m_admin1
 BO,cochabamba,admin1,Cochabamba,-17.2884,-65.6137,NaturalEarth_10m_admin1
 BO,santa-cruz,admin1,Santa Cruz,-16.5168,-61.137,NaturalEarth_10m_admin1
+BR,ac,admin1,Acre,-8.9285,-70.2976,NaturalEarth_10m_admin1
 BR,acre,admin1,Acre,-8.9285,-70.2976,NaturalEarth_10m_admin1
 BR,al,admin1,Alagoas,-9.77391,-36.6917,NaturalEarth_10m_admin1
 BR,alagoas,admin1,Alagoas,-9.77391,-36.6917,NaturalEarth_10m_admin1
+BR,am,admin1,Amazonas,-4.21774,-63.7853,NaturalEarth_10m_admin1
 BR,amapa,admin1,Amapá,1.41157,-51.6842,NaturalEarth_10m_admin1
 BR,amazonas,admin1,Amazonas,-4.21774,-63.7853,NaturalEarth_10m_admin1
 BR,ap,admin1,Amapá,1.41157,-51.6842,NaturalEarth_10m_admin1
+BR,ba,admin1,Bahia,-12.3651,-41.8027,NaturalEarth_10m_admin1
 BR,bahia,admin1,Bahia,-12.3651,-41.8027,NaturalEarth_10m_admin1
 BR,ce,admin1,Ceará,-5.37602,-39.3429,NaturalEarth_10m_admin1
 BR,ceara,admin1,Ceará,-5.37602,-39.3429,NaturalEarth_10m_admin1
@@ -117,7 +187,9 @@ BR,df,admin1,Distrito Federal,-15.7665,-47.7902,NaturalEarth_10m_admin1
 BR,distrito-federal,admin1,Distrito Federal,-15.7665,-47.7902,NaturalEarth_10m_admin1
 BR,es,admin1,Espírito Santo,-19.6916,-40.5436,NaturalEarth_10m_admin1
 BR,espirito-santo,admin1,Espírito Santo,-19.6916,-40.5436,NaturalEarth_10m_admin1
+BR,go,admin1,Goiás,-15.863,-49.5786,NaturalEarth_10m_admin1
 BR,goias,admin1,Goiás,-15.863,-49.5786,NaturalEarth_10m_admin1
+BR,ma,admin1,Maranhão,-5.01897,-45.389,NaturalEarth_10m_admin1
 BR,maranhao,admin1,Maranhão,-5.01897,-45.389,NaturalEarth_10m_admin1
 BR,mato-grosso,admin1,Mato Grosso,-13.3926,-55.9235,NaturalEarth_10m_admin1
 BR,mato-grosso-do-sul,admin1,Mato Grosso do Sul,-20.6756,-54.5502,NaturalEarth_10m_admin1
@@ -125,20 +197,25 @@ BR,mg,admin1,Minas Gerais,-18.5895,-44.4808,NaturalEarth_10m_admin1
 BR,minas-gerais,admin1,Minas Gerais,-18.5895,-44.4808,NaturalEarth_10m_admin1
 BR,ms,admin1,Mato Grosso do Sul,-20.6756,-54.5502,NaturalEarth_10m_admin1
 BR,mt,admin1,Mato Grosso,-13.3926,-55.9235,NaturalEarth_10m_admin1
+BR,pa,admin1,Pará,-4.44313,-52.6491,NaturalEarth_10m_admin1
 BR,para,admin1,Pará,-4.44313,-52.6491,NaturalEarth_10m_admin1
 BR,paraiba,admin1,Paraíba,-7.34234,-36.2726,NaturalEarth_10m_admin1
 BR,parana,admin1,Paraná,-24.6618,-51.3228,NaturalEarth_10m_admin1
 BR,pb,admin1,Paraíba,-7.34234,-36.2726,NaturalEarth_10m_admin1
+BR,pe,admin1,Pernambuco,-8.47283,-37.2958,NaturalEarth_10m_admin1
 BR,pernambuco,admin1,Pernambuco,-8.47283,-37.2958,NaturalEarth_10m_admin1
 BR,pi,admin1,Piauí,-8.08698,-43.1974,NaturalEarth_10m_admin1
 BR,piaui,admin1,Piauí,-8.08698,-43.1974,NaturalEarth_10m_admin1
 BR,pr,admin1,Paraná,-24.6618,-51.3228,NaturalEarth_10m_admin1
 BR,rio-de-janeiro,admin1,Rio de Janeiro,-22.4049,-43.1152,NaturalEarth_10m_admin1
 BR,rio-grande-do-norte,admin1,Rio Grande do Norte,-5.66157,-36.5472,NaturalEarth_10m_admin1
+BR,rio-grande-do-sul,admin1,Rio Grande do Sul,-29.7277,-53.656,NaturalEarth_10m_admin1
 BR,rj,admin1,Rio de Janeiro,-22.4049,-43.1152,NaturalEarth_10m_admin1
 BR,rn,admin1,Rio Grande do Norte,-5.66157,-36.5472,NaturalEarth_10m_admin1
+BR,ro,admin1,Rondônia,-10.9712,-63.1439,NaturalEarth_10m_admin1
 BR,rondonia,admin1,Rondônia,-10.9712,-63.1439,NaturalEarth_10m_admin1
 BR,roraima,admin1,Roraima,1.93803,-61.3325,NaturalEarth_10m_admin1
+BR,rs,admin1,Rio Grande do Sul,-29.7277,-53.656,NaturalEarth_10m_admin1
 BR,santa-catarina,admin1,Santa Catarina,-27.0392,-51.1586,NaturalEarth_10m_admin1
 BR,sao-paulo,admin1,São Paulo,-22.2267,-48.5206,NaturalEarth_10m_admin1
 BR,se,admin1,Sergipe,-10.5918,-37.3836,NaturalEarth_10m_admin1
@@ -150,14 +227,20 @@ BT,paro,admin1,Paro,27.4896,89.3837,NaturalEarth_10m_admin1
 BT,samdrup-jongkhar,admin1,Samdrup Jongkhar,26.9509,91.7328,NaturalEarth_10m_admin1
 BT,samtse,admin1,Samchi,27.0219,89.0493,NaturalEarth_10m_admin1
 BT,trongsa,admin1,Tongsa,27.4491,90.4811,NaturalEarth_10m_admin1
+BW,gaborone,admin1,Gaborone,-24.6239,25.9171,NaturalEarth_10m_admin1
 BY,gomel,admin1,Gomel,52.1969,29.5189,NaturalEarth_10m_admin1
+BY,minsk,admin1,Minsk,53.1945,27.4703,NaturalEarth_10m_admin1
 CA,alberta,admin2,Alberta,55.2816,-115.0,NaturalEarth_10m_admin1
+CA,british-columbia,admin2,British Columbia,54.6943,-124.662,NaturalEarth_10m_admin1
 CA,manitoba,admin2,Manitoba,54.85,-97.3828,NaturalEarth_10m_admin1
+CA,quebec,admin2,Québec,52.2593,-73.7168,NaturalEarth_10m_admin1
 CA,saskatchewan,admin2,Saskatchewan,54.4965,-105.682,NaturalEarth_10m_admin1
 CF,bangui,admin1,Bangui,4.38332,18.5457,NaturalEarth_10m_admin1
 CG,brazzaville,admin1,Brazzaville,-4.06879,15.3319,NaturalEarth_10m_admin1
+CG,kouilou,admin1,Kouilou,-4.3684,11.9549,NaturalEarth_10m_admin1
 CG,pointe-noire,admin1,Pointe Noire,-4.80537,11.859,NaturalEarth_10m_admin1
 CH,aargau,nuts3,Aargau,47.411178,8.154324,NUTS_2021
+CH,ar,admin1,Appenzell Ausserrhoden,47.3911,9.39726,NaturalEarth_10m_admin1
 CH,basel-stadt,nuts3,Basel-Stadt,47.561191,7.593256,NUTS_2021
 CH,be,admin1,Bern,46.7988,7.65026,NaturalEarth_10m_admin1
 CH,ch011,nuts3,Vaud,46.552568,6.620689,NUTS_2021
@@ -187,27 +270,43 @@ CH,ju,admin1,Jura,47.3636,7.19817,NaturalEarth_10m_admin1
 CH,jura,nuts3,Jura,47.355708,7.155565,NUTS_2021
 CH,kanton-bern,admin1,Bern,46.7988,7.65026,NaturalEarth_10m_admin1
 CH,lu,admin1,Lucerne,47.096,8.17219,NaturalEarth_10m_admin1
+CH,luzern,nuts3,Luzern,47.089539,8.132831,NUTS_2021
+CH,schaffhausen,nuts3,Schaffhausen,47.725406,8.575135,NUTS_2021
 CH,st-gallen,nuts3,St. Gallen,47.114429,9.370987,NUTS_2021
+CH,thurgau,nuts3,Thurgau,47.565649,9.081417,NUTS_2021
 CH,ti,admin1,Ticino,46.3604,8.79019,NaturalEarth_10m_admin1
 CH,ticino,admin1,Ticino,46.304508,8.808153,NUTS_2021
 CH,valais,nuts3,Valais,46.213586,7.642916,NUTS_2021
 CH,zurich,admin1,Zürich,47.407404,8.646065,NUTS_2021
+CI,vallee-du-bandama,admin1,Vallée du Bandama,8.22668,-4.85838,NaturalEarth_10m_admin1
 CN,anhui,admin2,Anhui,31.9537,117.253,NaturalEarth_10m_admin1
 CN,beijing,admin1,Beijing,39.9488,116.389,NaturalEarth_10m_admin1
 CN,fujian,admin2,Fujian,26.408,118.178,NaturalEarth_10m_admin1
+CN,gansu,admin2,Gansu,38.7393,100.735,NaturalEarth_10m_admin1
 CN,guangdong,admin2,Guangdong,23.7924,113.72,NaturalEarth_10m_admin1
 CN,guangdong-province,admin2,Guangdong,23.7924,113.72,NaturalEarth_10m_admin1
 CN,guangxi,admin1,Guangxi,23.7451,108.756,NaturalEarth_10m_admin1
 CN,guizhou,admin2,Guizhou,26.8033,106.559,NaturalEarth_10m_admin1
 CN,hainan,admin2,Hainan,19.1865,109.825,NaturalEarth_10m_admin1
+CN,hebei,admin2,Hebei,38.5205,115.314,NaturalEarth_10m_admin1
 CN,heilongjiang,admin2,Heilongjiang,46.8451,127.97,NaturalEarth_10m_admin1
 CN,henan,admin2,Henan,33.9055,113.484,NaturalEarth_10m_admin1
+CN,henan-sheng,admin2,Henan,33.9055,113.484,NaturalEarth_10m_admin1
+CN,hubei,admin2,Hubei,30.9857,112.264,NaturalEarth_10m_admin1
 CN,hunan,admin2,Hunan,27.6667,111.712,NaturalEarth_10m_admin1
 CN,inner-mongolia,admin1,Inner Mongol,41.5938,111.623,NaturalEarth_10m_admin1
+CN,inner-mongolia-autonomous-region,admin1,Inner Mongol,41.5938,111.623,NaturalEarth_10m_admin1
 CN,jiangsu,admin2,Jiangsu,32.9844,119.942,NaturalEarth_10m_admin1
 CN,jiangxi,admin2,Jiangxi,27.6397,116.017,NaturalEarth_10m_admin1
 CN,jilin,admin2,Jilin,43.2978,126.466,NaturalEarth_10m_admin1
+CN,liaoning,admin2,Liaoning,41.386,123.07,NaturalEarth_10m_admin1
+CN,neimenggu,admin1,Inner Mongol,41.5938,111.623,NaturalEarth_10m_admin1
+CN,ningxia,admin1,Ningxia,37.1762,106.038,NaturalEarth_10m_admin1
+CN,qinghai,admin2,Qinghai,35.2652,96.2377,NaturalEarth_10m_admin1
+CN,shaanxi,admin2,Shaanxi,33.7713,108.363,NaturalEarth_10m_admin1
+CN,shandong,admin2,Shandong,36.3271,118.114,NaturalEarth_10m_admin1
 CN,shanghai,admin1,Shanghai,31.0909,121.409,NaturalEarth_10m_admin1
+CN,shanxi,admin2,Shaanxi,33.7713,108.363,NaturalEarth_10m_admin1
 CN,sichuan,admin2,Sichuan,30.5431,102.384,NaturalEarth_10m_admin1
 CN,tianjin,admin1,Tianjin,39.3708,117.347,NaturalEarth_10m_admin1
 CN,xinjiang,admin1,Xinjiang,41.122,85.4253,NaturalEarth_10m_admin1
@@ -245,9 +344,28 @@ CO,sucre,admin1,Sucre,9.01236,-75.1319,NaturalEarth_10m_admin1
 CO,tolima,admin1,Tolima,3.93749,-75.2073,NaturalEarth_10m_admin1
 CO,valle,admin1,Valle del Cauca,3.58331,-76.5923,NaturalEarth_10m_admin1
 CO,valle-del-cauca,admin1,Valle del Cauca,3.58331,-76.5923,NaturalEarth_10m_admin1
+CO,vichada,admin1,Vichada,4.89224,-69.2414,NaturalEarth_10m_admin1
+CR,limon,admin2,Limón,9.7018,-83.1486,NaturalEarth_10m_admin1
+CU,artemisa,admin2,Artemisa,22.8546,-82.6903,NaturalEarth_10m_admin1
+CU,camaguey,admin2,Camagüey,21.3675,-77.9304,NaturalEarth_10m_admin1
+CU,ciego-de-avila,admin2,Ciego de Ávila,21.9626,-78.6388,NaturalEarth_10m_admin1
+CU,cienfuegos,admin2,Cienfuegos,22.3253,-80.4831,NaturalEarth_10m_admin1
+CU,granma,admin2,Granma,20.3212,-76.8386,NaturalEarth_10m_admin1
+CU,guantanamo,admin2,Guantánamo,20.2358,-74.8112,NaturalEarth_10m_admin1
+CU,havana,admin2,Ciudad de la Habana,23.0737,-82.3075,NaturalEarth_10m_admin1
+CU,holguin,admin2,Holguín,20.808,-76.1892,NaturalEarth_10m_admin1
+CU,las-tunas,admin2,Las Tunas,21.0299,-77.0723,NaturalEarth_10m_admin1
+CU,matanzas,admin2,Matanzas,22.6152,-81.186,NaturalEarth_10m_admin1
+CU,pinar-del-rio,admin2,Pinar del Río,22.4952,-83.674,NaturalEarth_10m_admin1
+CU,sancti-spiritus,admin2,Sancti Spíritus,21.9618,-79.3804,NaturalEarth_10m_admin1
+CU,santiago-de-cuba,admin2,Santiago de Cuba,20.1959,-76.2117,NaturalEarth_10m_admin1
+CU,villa-clara,admin2,Villa Clara,22.601,-79.9527,NaturalEarth_10m_admin1
 CY,ammochostos,admin1,Famagusta,35.0164,33.9489,NaturalEarth_10m_admin1
 CY,cy000,nuts3,Κύπρος,35.028353,33.173903,NUTS_2021
+CY,kypros,admin1,Κύπρος,35.028353,33.173903,NUTS_2021
 CY,larnaca,admin1,Larnaca,34.9728,33.8678,NaturalEarth_10m_admin1
+CY,lefkosia,admin1,Nicosia,35.0214,33.043,NaturalEarth_10m_admin1
+CY,limassol,admin1,Limassol,34.7755,32.9674,NaturalEarth_10m_admin1
 CY,nicosia,admin1,Nicosia,35.0214,33.043,NaturalEarth_10m_admin1
 CY,paphos,admin1,Paphos,34.9307,32.5276,NaturalEarth_10m_admin1
 CZ,cz010,nuts3,Hlavní město Praha,50.066265,14.462998,NUTS_2021
@@ -266,12 +384,25 @@ CZ,cz072,nuts3,Zlínský kraj,49.225429,17.741398,NUTS_2021
 CZ,cz080,nuts3,Moravskoslezský kraj,49.802873,18.009823,NUTS_2021
 CZ,prague,admin1,Prague,50.0647,14.4487,NaturalEarth_10m_admin1
 CZ,usti-nad-labem,admin1,Ústecký,50.4996,13.8424,NaturalEarth_10m_admin1
+DE,anhalt-bitterfeld,nuts3,Anhalt-Bitterfeld,51.653947,12.222691,NUTS_2021
+DE,arnsberg,admin1,Arnsberg,51.311947,7.992823,NUTS_2021
+DE,aurich,nuts3,Aurich,53.456879,7.471278,NUTS_2021
 DE,baden-wuerttemberg,admin1,Baden-Württemberg,48.59,9.00328,NaturalEarth_10m_admin1
 DE,baden-wurttemberg,admin1,Baden-Württemberg,48.534223,9.050931,NUTS_2021
+DE,bautzen,nuts3,Bautzen,51.270642,14.213049,NUTS_2021
 DE,bavaria,admin1,Bayern,48.947441,11.421321,NUTS_2021
 DE,bayern,admin1,Bayern,48.947441,11.421321,NUTS_2021
+DE,bergstrasse,nuts3,Bergstraße,49.673222,8.657173,NUTS_2021
 DE,berlin,admin1,Berlin,52.500466,13.402229,NUTS_2021
+DE,birkenfeld,nuts3,Birkenfeld,49.711271,7.271978,NUTS_2021
+DE,borken,nuts3,Borken,51.966248,6.909331,NUTS_2021
 DE,brandenburg,admin1,Brandenburg,53.083621,12.138106,NUTS_2021
+DE,chemnitz,admin1,Chemnitz,50.73232,12.814262,NUTS_2021
+DE,cloppenburg,nuts3,Cloppenburg,52.896343,7.935364,NUTS_2021
+DE,coesfeld,nuts3,Coesfeld,51.851774,7.413558,NUTS_2021
+DE,cottbus-kreisfreie-stadt,nuts3,"Cottbus, Kreisfreie Stadt",51.771286,14.3457,NUTS_2021
+DE,cuxhaven,nuts3,Cuxhaven,53.616089,8.802542,NUTS_2021
+DE,darmstadt,admin1,Darmstadt,50.061292,8.760306,NUTS_2021
 DE,de111,nuts3,"Stuttgart, Stadtkreis",48.770947,9.180483,NUTS_2021
 DE,de112,nuts3,Böblingen,48.682609,8.948778,NUTS_2021
 DE,de113,nuts3,Esslingen,48.656584,9.364521,NUTS_2021
@@ -282,6 +413,7 @@ DE,de11d,nuts3,Ostalbkreis,48.87865,10.090454,NUTS_2021
 DE,de122,nuts3,"Karlsruhe, Stadtkreis",49.022736,8.350031,NUTS_2021
 DE,de123,nuts3,"Karlsruhe, Landkreis",49.120689,8.569539,NUTS_2021
 DE,de124,nuts3,Rastatt,48.66215,8.188128,NUTS_2021
+DE,de125,nuts3,"Heidelberg, Stadtkreis",49.402471,8.704387,NUTS_2021
 DE,de128,nuts3,Rhein-Neckar-Kreis,49.293753,8.781412,NUTS_2021
 DE,de12a,nuts3,Calw,48.680684,8.625682,NUTS_2021
 DE,de131,nuts3,"Freiburg im Breisgau, Stadtkreis",48.003924,7.815634,NUTS_2021
@@ -318,11 +450,13 @@ DE,de25c,nuts3,Weißenburg-Gunzenhausen,49.028467,10.912577,NUTS_2021
 DE,de271,nuts3,"Augsburg, Kreisfreie Stadt",48.35737,10.898081,NUTS_2021
 DE,de279,nuts3,Neu-Ulm,48.29712,10.129596,NUTS_2021
 DE,de300,nuts3,Berlin,52.500466,13.402229,NUTS_2021
+DE,de402,nuts3,"Cottbus, Kreisfreie Stadt",51.771286,14.3457,NUTS_2021
 DE,de404,nuts3,"Potsdam, Kreisfreie Stadt",52.424928,13.032777,NUTS_2021
 DE,de405,nuts3,Barnim,52.770935,13.588078,NUTS_2021
 DE,de406,nuts3,Dahme-Spreewald,52.014594,13.933491,NUTS_2021
 DE,de407,nuts3,Elbe-Elster,51.615654,13.436026,NUTS_2021
 DE,de409,nuts3,Märkisch-Oderland,52.665795,14.087945,NUTS_2021
+DE,de40b,nuts3,Oberspreewald-Lausitz,51.601001,13.948689,NUTS_2021
 DE,de40c,nuts3,Oder-Spree,52.231965,14.226823,NUTS_2021
 DE,de40e,nuts3,Potsdam-Mittelmark,52.233763,12.698203,NUTS_2021
 DE,de40h,nuts3,Teltow-Fläming,52.071284,13.234559,NUTS_2021
@@ -331,6 +465,7 @@ DE,de501,nuts3,"Bremen, Kreisfreie Stadt",53.106459,8.78765,NUTS_2021
 DE,de600,nuts3,Hamburg,53.539192,10.010044,NUTS_2021
 DE,de712,nuts3,"Frankfurt am Main, Kreisfreie Stadt",50.11838,8.657536,NUTS_2021
 DE,de714,nuts3,"Wiesbaden, Kreisfreie Stadt",50.072949,8.257654,NUTS_2021
+DE,de715,nuts3,Bergstraße,49.673222,8.657173,NUTS_2021
 DE,de719,nuts3,Main-Kinzig-Kreis,50.24344,9.287991,NUTS_2021
 DE,de71d,nuts3,Rheingau-Taunus-Kreis,50.138551,8.084534,NUTS_2021
 DE,de71e,nuts3,Wetteraukreis,50.357958,8.872721,NUTS_2021
@@ -362,45 +497,85 @@ DE,deb22,nuts3,Bernkastel-Wittlich,49.927207,6.964705,NUTS_2021
 DE,deb23,nuts3,Eifelkreis Bitburg-Prüm,50.068097,6.445888,NUTS_2021
 DE,deb33,nuts3,"Landau in der Pfalz, Kreisfreie Stadt",49.197264,8.113799,NUTS_2021
 DE,deb34,nuts3,"Ludwigshafen am Rhein, Kreisfreie Stadt",49.483574,8.406692,NUTS_2021
+DE,deb39,nuts3,"Worms, Kreisfreie Stadt",49.631194,8.324595,NUTS_2021
 DE,deb3d,nuts3,Donnersbergkreis,49.623147,7.915347,NUTS_2021
 DE,deb3g,nuts3,Kusel,49.549872,7.467656,NUTS_2021
 DE,deb3h,nuts3,Südliche Weinstraße,49.100038,7.984601,NUTS_2021
+DE,deb3i,nuts3,Rhein-Pfalz-Kreis,49.406368,8.370493,NUTS_2021
 DE,ded21,nuts3,"Dresden, Kreisfreie Stadt",51.06966,13.77816,NUTS_2021
 DE,ded2d,nuts3,Görlitz,51.207351,14.84258,NUTS_2021
 DE,ded2e,nuts3,Meißen,51.243974,13.496431,NUTS_2021
+DE,ded42,nuts3,Erzgebirgskreis,50.606371,12.942861,NUTS_2021
 DE,ded51,nuts3,"Leipzig, Kreisfreie Stadt",51.320686,12.388394,NUTS_2021
 DE,ded52,nuts3,Leipzig,51.20705,12.578703,NUTS_2021
+DE,ded53,nuts3,Nordsachsen,51.539867,12.701847,NUTS_2021
 DE,dee01,nuts3,"Dessau-Roßlau, Kreisfreie Stadt",51.853775,12.233298,NUTS_2021
 DE,dee02,nuts3,"Halle (Saale), Kreisfreie Stadt",51.478806,11.971188,NUTS_2021
 DE,dee04,nuts3,Altmarkkreis Salzwedel,52.691658,11.20914,NUTS_2021
+DE,dee05,nuts3,Anhalt-Bitterfeld,51.653947,12.222691,NUTS_2021
 DE,dee06,nuts3,Jerichower Land,52.246502,12.028725,NUTS_2021
+DE,dee0c,nuts3,Salzlandkreis,51.846578,11.651437,NUTS_2021
 DE,dee0e,nuts3,Wittenberg,51.823696,12.688673,NUTS_2021
 DE,def06,nuts3,Herzogtum Lauenburg,53.583443,10.601796,NUTS_2021
 DE,def07,nuts3,Nordfriesland,54.626036,8.968575,NUTS_2021
 DE,deg0j,nuts3,Saale-Holzland-Kreis,50.899857,11.727245,NUTS_2021
 DE,deg0k,nuts3,Saale-Orla-Kreis,50.579192,11.727495,NUTS_2021
+DE,dessau-rosslau-kreisfreie-stadt,nuts3,"Dessau-Roßlau, Kreisfreie Stadt",51.853775,12.233298,NUTS_2021
 DE,dresden,admin1,Dresden,51.180881,14.126705,NUTS_2021
+DE,erzgebirgskreis,nuts3,Erzgebirgskreis,50.606371,12.942861,NUTS_2021
+DE,euskirchen,nuts3,Euskirchen,50.538151,6.641019,NUTS_2021
 DE,freiburg,admin1,Freiburg,48.023712,8.218851,NUTS_2021
+DE,fulda,nuts3,Fulda,50.555565,9.764531,NUTS_2021
 DE,giessen,admin1,Gießen,50.71341,8.791512,NUTS_2021
+DE,gorlitz,nuts3,Görlitz,51.207351,14.84258,NUTS_2021
 DE,hamburg,admin1,Hamburg,53.539192,10.010044,NUTS_2021
 DE,hannover,admin1,Hannover,52.396262,9.3691,NUTS_2021
+DE,havelland,nuts3,Havelland,52.612795,12.616745,NUTS_2021
+DE,heidelberg-stadtkreis,nuts3,"Heidelberg, Stadtkreis",49.402471,8.704387,NUTS_2021
 DE,hesse,admin1,Hessen,50.600557,9.032516,NUTS_2021
 DE,hessen,admin1,Hessen,50.600557,9.032516,NUTS_2021
+DE,hoxter,nuts3,Höxter,51.662551,9.172609,NUTS_2021
 DE,karlsruhe,admin1,Karlsruhe,49.014415,8.672717,NUTS_2021
+DE,karlsruhe-landkreis,nuts3,"Karlsruhe, Landkreis",49.120689,8.569539,NUTS_2021
+DE,kassel,admin1,Kassel,51.051544,9.455621,NUTS_2021
+DE,kleve,nuts3,Kleve,51.618502,6.234918,NUTS_2021
+DE,koln,admin1,Köln,50.828334,6.808698,NUTS_2021
+DE,kulmbach,nuts3,Kulmbach,50.105692,11.470334,NUTS_2021
 DE,leipzig,admin1,Leipzig,51.358276,12.67044,NUTS_2021
+DE,leipzig-kreisfreie-stadt,nuts3,"Leipzig, Kreisfreie Stadt",51.320686,12.388394,NUTS_2021
 DE,lower-saxony,admin1,Niedersachsen,52.762099,9.183745,NUTS_2021
 DE,mecklenburg-west-pomerania,admin1,Mecklenburg-Vorpommern,53.7528,12.5647,NaturalEarth_10m_admin1
+DE,munster,admin1,Münster,51.945811,7.402167,NUTS_2021
+DE,neunkirchen,nuts3,Neunkirchen,49.385288,7.111583,NUTS_2021
 DE,niedersachsen,admin1,Niedersachsen,52.762099,9.183745,NUTS_2021
 DE,nordrhein-westfalen,admin1,Nordrhein-Westfalen,51.474939,7.550672,NUTS_2021
+DE,nordsachsen,nuts3,Nordsachsen,51.539867,12.701847,NUTS_2021
 DE,north-rhine-westphalia,admin1,Nordrhein-Westfalen,51.474939,7.550672,NUTS_2021
+DE,northeim,nuts3,Northeim,51.741208,9.859156,NUTS_2021
+DE,oberspreewald-lausitz,nuts3,Oberspreewald-Lausitz,51.601001,13.948689,NUTS_2021
+DE,ostprignitz-ruppin,nuts3,Ostprignitz-Ruppin,53.001129,12.600221,NUTS_2021
 DE,pinneberg,nuts3,Pinneberg,53.711781,9.733272,NUTS_2021
+DE,rhein-neckar-kreis,nuts3,Rhein-Neckar-Kreis,49.293753,8.781412,NUTS_2021
+DE,rhein-pfalz-kreis,nuts3,Rhein-Pfalz-Kreis,49.406368,8.370493,NUTS_2021
 DE,rhineland-palatinate,admin1,Rheinland-Pfalz,49.8685,7.36974,NaturalEarth_10m_admin1
+DE,saalekreis,nuts3,Saalekreis,51.454643,11.813904,NUTS_2021
 DE,saarland,admin1,Saarland,49.392248,6.956966,NUTS_2021
 DE,sachsen,admin1,Sachsen,51.058275,13.333162,NUTS_2021
+DE,salzlandkreis,nuts3,Salzlandkreis,51.846578,11.651437,NUTS_2021
 DE,saxony,admin1,Sachsen,51.058275,13.333162,NUTS_2021
 DE,saxony-anhalt,admin1,Sachsen-Anhalt,51.9338,11.6796,NaturalEarth_10m_admin1
 DE,schleswig-holstein,admin1,Schleswig-Holstein,54.080354,9.821162,NUTS_2021
+DE,spree-neisse,nuts3,Spree-Neiße,51.621295,14.409174,NUTS_2021
+DE,stuttgart-stadtkreis,nuts3,"Stuttgart, Stadtkreis",48.770947,9.180483,NUTS_2021
 DE,thuringia,admin1,Thüringen,50.9052,11.0976,NaturalEarth_10m_admin1
+DE,unna,nuts3,Unna,51.545346,7.730611,NUTS_2021
+DE,verden,nuts3,Verden,52.970125,9.180901,NUTS_2021
+DE,viersen,nuts3,Viersen,51.28697,6.326441,NUTS_2021
+DE,vorpommern-rugen,nuts3,Vorpommern-Rügen,54.210202,12.839956,NUTS_2021
+DE,warendorf,nuts3,Warendorf,51.870295,7.951812,NUTS_2021
+DE,wesel,nuts3,Wesel,51.624373,6.630695,NUTS_2021
+DE,wittenberg,nuts3,Wittenberg,51.823696,12.688673,NUTS_2021
+DE,worms-kreisfreie-stadt,nuts3,"Worms, Kreisfreie Stadt",49.631194,8.324595,NUTS_2021
 DK,dk012,nuts3,Københavns omegn,55.685345,12.418994,NUTS_2021
 DK,dk013,nuts3,Nordsjælland,55.912128,12.293027,NUTS_2021
 DK,dk014,nuts3,Bornholm,55.122152,14.921381,NUTS_2021
@@ -412,9 +587,13 @@ DK,dk041,nuts3,Vestjylland,56.271616,8.857637,NUTS_2021
 DK,dk042,nuts3,Østjylland,56.213609,10.017837,NUTS_2021
 DK,dk050,nuts3,Nordjylland,57.271941,9.95296,NUTS_2021
 DK,sj-lland,admin1,Sjælland,55.437645,11.750947,NUTS_2021
+DK,zealand,admin1,Sjaælland,55.4417,11.7483,NaturalEarth_10m_admin1
 DO,distrito-nacional,admin1,Distrito Nacional,18.4746,-69.9376,NaturalEarth_10m_admin1
+DZ,blida,admin2,Blida,36.503,2.99331,NaturalEarth_10m_admin1
 DZ,guelma,admin2,Guelma,36.4381,7.46291,NaturalEarth_10m_admin1
+DZ,illizi,admin2,Illizi,26.8506,8.7628,NaturalEarth_10m_admin1
 DZ,jijel,admin2,Jijel,36.7106,5.95292,NaturalEarth_10m_admin1
+DZ,tindouf,admin2,Tindouf,27.4985,-5.8285,NaturalEarth_10m_admin1
 EC,el-oro,admin2,El Oro,-3.43657,-79.8552,NaturalEarth_10m_admin1
 EC,esmeraldas,admin2,Esmeraldas,1.29253,-78.9448,NaturalEarth_10m_admin1
 EC,guayas,admin2,Guayas,-1.98384,-79.8608,NaturalEarth_10m_admin1
@@ -432,14 +611,20 @@ EG,asyut,admin1,Asyut,27.2223,31.1431,NaturalEarth_10m_admin1
 EG,bani-suwayf,admin1,Bani Suwayf,28.8948,30.5041,NaturalEarth_10m_admin1
 EG,gharbiya,admin1,Al Gharbiyah,30.8504,31.0287,NaturalEarth_10m_admin1
 EG,sharqiya,admin1,Ash Sharqiyah,30.8161,31.8817,NaturalEarth_10m_admin1
+EH,western-sahara,admin1,Western Sahara,23.813,-12.8924,NaturalEarth_10m_admin1
+ES,almeria,nuts3,Almería,37.210875,-2.312152,NUTS_2021
+ES,andalucia,admin1,Andalucía,37.460727,-4.58037,NUTS_2021
 ES,andalusia,admin1,Andalucía,37.460727,-4.58037,NUTS_2021
 ES,asturias,nuts3,Asturias,43.301705,-5.997242,NUTS_2021
 ES,badajoz,nuts3,Badajoz,38.538519,-6.028405,NUTS_2021
 ES,balearic-islands,admin1,Baleares,39.6162,2.99156,NaturalEarth_10m_admin1
 ES,barcelona,nuts3,Barcelona,41.70749,1.971875,NUTS_2021
+ES,caceres,nuts3,Cáceres,39.724384,-6.163345,NUTS_2021
 ES,cadiz,nuts3,Cádiz,36.545112,-5.774659,NUTS_2021
+ES,castellon,admin1,Castellón,40.222,-0.097511,NaturalEarth_10m_admin1
 ES,catalonia,admin1,Cataluña,41.800535,1.507768,NUTS_2021
 ES,cataluna,admin1,Cataluña,41.800535,1.507768,NUTS_2021
+ES,ciudad-real,nuts3,Ciudad Real,38.837331,-3.894622,NUTS_2021
 ES,cordoba,nuts3,Córdoba,37.991734,-4.807134,NUTS_2021
 ES,es111,nuts3,A Coruña,43.092952,-8.478136,NUTS_2021
 ES,es112,nuts3,Lugo,43.016694,-7.445208,NUTS_2021
@@ -450,8 +635,11 @@ ES,es211,nuts3,Araba/Álava,42.85413,-2.681562,NUTS_2021
 ES,es212,nuts3,Gipuzkoa,43.155963,-2.186665,NUTS_2021
 ES,es213,nuts3,Bizkaia,43.257645,-2.832763,NUTS_2021
 ES,es230,nuts3,La Rioja,42.313217,-2.433239,NUTS_2021
+ES,es241,nuts3,Huesca,42.213803,-0.085942,NUTS_2021
 ES,es300,nuts3,Madrid,40.50076,-3.711936,NUTS_2021
+ES,es425,nuts3,Toledo,39.901755,-4.137003,NUTS_2021
 ES,es431,nuts3,Badajoz,38.538519,-6.028405,NUTS_2021
+ES,es432,nuts3,Cáceres,39.724384,-6.163345,NUTS_2021
 ES,es511,nuts3,Barcelona,41.70749,1.971875,NUTS_2021
 ES,es512,nuts3,Girona,42.060367,2.814179,NUTS_2021
 ES,es513,nuts3,Lleida,42.039901,1.049182,NUTS_2021
@@ -476,12 +664,23 @@ ES,es705,nuts3,Gran Canaria,27.958743,-15.585429,NUTS_2021
 ES,es708,nuts3,Lanzarote,29.011784,-13.65195,NUTS_2021
 ES,es709,nuts3,Tenerife,28.245655,-16.564575,NUTS_2021
 ES,galicia,admin1,Galicia,42.743126,-7.895674,NUTS_2021
+ES,girona,nuts3,Girona,42.060367,2.814179,NUTS_2021
+ES,gran-canaria,nuts3,Gran Canaria,27.958743,-15.585429,NUTS_2021
 ES,granada,nuts3,Granada,37.310874,-3.253068,NUTS_2021
 ES,huelva,nuts3,Huelva,37.569979,-6.856213,NUTS_2021
+ES,huesca,nuts3,Huesca,42.213803,-0.085942,NUTS_2021
 ES,jaen,nuts3,Jaén,38.017816,-3.444921,NUTS_2021
+ES,lleida,nuts3,Lleida,42.039901,1.049182,NUTS_2021
+ES,madrid,nuts3,Madrid,40.50076,-3.711936,NUTS_2021
 ES,malaga,nuts3,Málaga,36.822229,-4.71385,NUTS_2021
 ES,menorca,nuts3,Menorca,39.950076,4.129265,NUTS_2021
+ES,murcia,nuts3,Murcia,37.999895,-1.490742,NUTS_2021
+ES,pais-vasco,admin1,País Vasco,43.065084,-2.58634,NUTS_2021
+ES,sevilla,nuts3,Sevilla,37.427421,-5.699422,NUTS_2021
+ES,seville,admin1,Sevilla,37.438,-5.73917,NaturalEarth_10m_admin1
+ES,toledo,nuts3,Toledo,39.901755,-4.137003,NUTS_2021
 ES,valencia,admin1,Comunitat Valenciana,39.394508,-0.539952,NUTS_2021
+ET,afar,admin1,Afar,12.1232,41.0236,NaturalEarth_10m_admin1
 FI,fi193,nuts3,Keski-Suomi,62.530411,25.422981,NUTS_2021
 FI,fi194,nuts3,Etelä-Pohjanmaa,62.728464,23.058558,NUTS_2021
 FI,fi195,nuts3,Pohjanmaa,63.067546,22.171375,NUTS_2021
@@ -505,21 +704,39 @@ FI,pohjois-karjala,nuts3,Pohjois-Karjala,62.90675,29.950709,NUTS_2021
 FM,pohnpei,admin1,Pohnpei,6.86579,158.163,NaturalEarth_10m_admin1
 FM,yap,admin1,Yap,9.58101,138.114,NaturalEarth_10m_admin1
 FM,yap-state,admin1,Yap,9.58101,138.114,NaturalEarth_10m_admin1
+FR,ain,nuts3,Ain,46.134971,5.116558,NUTS_2021
 FR,allier,nuts3,Allier,46.387541,3.195469,NUTS_2021
+FR,alpes-maritimes,nuts3,Alpes-Maritimes,43.920594,7.175313,NUTS_2021
+FR,alsace,admin1,Alsace,48.318261,7.451482,NUTS_2021
 FR,aquitaine,admin1,Aquitaine,44.36937,-0.218617,NUTS_2021
+FR,ariege,nuts3,Ariège,42.910382,1.501853,NUTS_2021
+FR,aude,nuts3,Aude,43.106813,2.436803,NUTS_2021
 FR,auvergne,admin1,Auvergne,45.661137,3.15838,NUTS_2021
+FR,auvergne-rhone-alpes,admin1,Auvergne-Rhône-Alpes,45.28151,4.592739,NUTS_2021
 FR,aveyron,nuts3,Aveyron,44.279252,2.692096,NUTS_2021
+FR,bas-rhin,nuts3,Bas-Rhin,48.662886,7.582868,NUTS_2021
 FR,basse-normandie,admin1,Basse-Normandie,48.909237,-0.474206,NUTS_2021
+FR,bouches-du-rhone,nuts3,Bouches-du-Rhône,43.546931,5.087852,NUTS_2021
 FR,bourgogne,admin1,Bourgogne,47.253658,4.153071,NUTS_2021
 FR,champagne-ardenne,admin1,Champagne-Ardenne,48.743492,4.53867,NUTS_2021
+FR,charente-maritime,nuts3,Charente-Maritime,45.779885,-0.646328,NUTS_2021
 FR,cher,nuts3,Cher,47.056474,2.484882,NUTS_2021
 FR,corse,admin1,Corse,42.126719,9.097578,NUTS_2021
+FR,corse-du-sud,nuts3,Corse-du-Sud,41.859262,9.030259,NUTS_2021
 FR,corsica,admin1,Corse,42.126719,9.097578,NUTS_2021
 FR,cote-dor,admin1,Côte-d'Or,47.4003,4.76991,NaturalEarth_10m_admin1
+FR,deux-sevres,nuts3,Deux-Sèvres,46.55423,-0.311936,NUTS_2021
+FR,dordogne,nuts3,Dordogne,45.1164,0.734811,NUTS_2021
+FR,doubs,nuts3,Doubs,47.172322,6.362711,NUTS_2021
+FR,drome,nuts3,Drôme,44.690305,5.168872,NUTS_2021
+FR,essonne,nuts3,Essonne,48.517184,2.245372,NUTS_2021
 FR,fr101,nuts3,Paris,48.85625,2.347464,NUTS_2021
 FR,fr102,nuts3,Seine-et-Marne,48.653107,2.952337,NUTS_2021
 FR,fr103,nuts3,Yvelines,48.819443,1.855044,NUTS_2021
 FR,fr104,nuts3,Essonne,48.517184,2.245372,NUTS_2021
+FR,fr105,nuts3,Hauts-de-Seine,48.798448,2.266244,NUTS_2021
+FR,fr106,nuts3,Seine-Saint-Denis,48.913029,2.475069,NUTS_2021
+FR,fr107,nuts3,Val-de-Marne,48.773815,2.464167,NUTS_2021
 FR,fr108,nuts3,Val-d’Oise,49.087831,2.099664,NUTS_2021
 FR,franche-comte,admin1,Franche-Comté,47.197159,6.079541,NUTS_2021
 FR,frb01,nuts3,Cher,47.056474,2.484882,NUTS_2021
@@ -542,6 +759,7 @@ FR,frd22,nuts3,Seine-Maritime,49.665605,1.067423,NUTS_2021
 FR,fre11,nuts3,Nord,50.434199,3.245859,NUTS_2021
 FR,fre12,nuts3,Pas-de-Calais,50.50093,2.276212,NUTS_2021
 FR,fre21,nuts3,Aisne,49.560973,3.560342,NUTS_2021
+FR,fre22,nuts3,Oise,49.408813,2.423367,NUTS_2021
 FR,fre23,nuts3,Somme,49.952215,2.284553,NUTS_2021
 FR,frf11,nuts3,Bas-Rhin,48.662886,7.582868,NUTS_2021
 FR,frf12,nuts3,Haut-Rhin,47.859213,7.27708,NUTS_2021
@@ -554,12 +772,16 @@ FR,frf32,nuts3,Meuse,48.970837,5.385279,NUTS_2021
 FR,frf33,nuts3,Moselle,49.045949,6.63024,NUTS_2021
 FR,frf34,nuts3,Vosges,48.195406,6.395694,NUTS_2021
 FR,frg01,nuts3,Loire-Atlantique,47.385206,-1.681825,NUTS_2021
+FR,frg02,nuts3,Maine-et-Loire,47.390072,-0.541773,NUTS_2021
+FR,frg03,nuts3,Mayenne,48.147521,-0.663105,NUTS_2021
 FR,frg05,nuts3,Vendée,46.679917,-1.277811,NUTS_2021
 FR,frh01,nuts3,Côtes-d’Armor,48.421821,-2.892044,NUTS_2021
 FR,frh02,nuts3,Finistère,48.266401,-4.006576,NUTS_2021
 FR,frh03,nuts3,Ille-et-Vilaine,48.142053,-1.646783,NUTS_2021
 FR,frh04,nuts3,Morbihan,47.855231,-2.800558,NUTS_2021
 FR,fri11,nuts3,Dordogne,45.1164,0.734811,NUTS_2021
+FR,fri12,nuts3,Gironde,44.794671,-0.47838,NUTS_2021
+FR,fri13,nuts3,Landes,43.951999,-0.795178,NUTS_2021
 FR,fri14,nuts3,Lot-et-Garonne,44.356839,0.467104,NUTS_2021
 FR,fri15,nuts3,Pyrénées-Atlantiques,43.276957,-0.766739,NUTS_2021
 FR,fri21,nuts3,Corrèze,45.359815,1.873298,NUTS_2021
@@ -567,6 +789,7 @@ FR,fri22,nuts3,Creuse,46.088549,2.054872,NUTS_2021
 FR,fri23,nuts3,Haute-Vienne,45.883242,1.243441,NUTS_2021
 FR,fri31,nuts3,Charente,45.736121,0.22797,NUTS_2021
 FR,fri32,nuts3,Charente-Maritime,45.779885,-0.646328,NUTS_2021
+FR,fri33,nuts3,Deux-Sèvres,46.55423,-0.311936,NUTS_2021
 FR,fri34,nuts3,Vienne,46.564569,0.465723,NUTS_2021
 FR,frj11,nuts3,Aude,43.106813,2.436803,NUTS_2021
 FR,frj12,nuts3,Gard,43.994996,4.173949,NUTS_2021
@@ -575,6 +798,8 @@ FR,frj14,nuts3,Lozère,44.536008,3.50659,NUTS_2021
 FR,frj15,nuts3,Pyrénées-Orientales,42.597993,2.546668,NUTS_2021
 FR,frj21,nuts3,Ariège,42.910382,1.501853,NUTS_2021
 FR,frj22,nuts3,Aveyron,44.279252,2.692096,NUTS_2021
+FR,frj23,nuts3,Haute-Garonne,43.366104,1.188804,NUTS_2021
+FR,frj24,nuts3,Gers,43.700389,0.445302,NUTS_2021
 FR,frj26,nuts3,Hautes-Pyrénées,43.066567,0.168828,NUTS_2021
 FR,frj27,nuts3,Tarn,43.778626,2.19072,NUTS_2021
 FR,frj28,nuts3,Tarn-et-Garonne,44.084846,1.288978,NUTS_2021
@@ -597,40 +822,117 @@ FR,frl05,nuts3,Var,43.465483,6.255834,NUTS_2021
 FR,frl06,nuts3,Vaucluse,44.03404,5.152331,NUTS_2021
 FR,frm01,nuts3,Corse-du-Sud,41.859262,9.030259,NUTS_2021
 FR,frm02,nuts3,Haute-Corse,42.35543,9.167091,NUTS_2021
+FR,gard,nuts3,Gard,43.994996,4.173949,NUTS_2021
+FR,gers,nuts3,Gers,43.700389,0.445302,NUTS_2021
+FR,gironde,nuts3,Gironde,44.794671,-0.47838,NUTS_2021
+FR,guadeloupe,admin1,Guadeloupe,16.177558,-61.687704,NUTS_2021
 FR,guyane,admin1,Guyane,3.922059,-53.226287,NUTS_2021
+FR,haut-rhin,nuts3,Haut-Rhin,47.859213,7.27708,NUTS_2021
+FR,haute-corse,nuts3,Haute-Corse,42.35543,9.167091,NUTS_2021
 FR,haute-garonne,nuts3,Haute-Garonne,43.366104,1.188804,NUTS_2021
 FR,haute-loire,nuts3,Haute-Loire,45.120859,3.784344,NUTS_2021
 FR,haute-normandie,admin1,Haute-Normandie,49.39095,1.028581,NUTS_2021
+FR,haute-savoie,nuts3,Haute-Savoie,46.067671,6.456486,NUTS_2021
+FR,haute-vienne,nuts3,Haute-Vienne,45.883242,1.243441,NUTS_2021
+FR,hautes-pyrenees,nuts3,Hautes-Pyrénées,43.066567,0.168828,NUTS_2021
+FR,hauts-de-seine,nuts3,Hauts-de-Seine,48.798448,2.266244,NUTS_2021
+FR,herault,nuts3,Hérault,43.569979,3.362149,NUTS_2021
+FR,ile-de-france,admin1,Ile-de-France,48.719623,2.523399,NUTS_2021
+FR,ille-et-vilaine,nuts3,Ille-et-Vilaine,48.142053,-1.646783,NUTS_2021
 FR,indre,nuts3,Indre,46.767777,1.571275,NUTS_2021
+FR,isere,nuts3,Isère,45.279445,5.554035,NUTS_2021
 FR,la-reunion,admin1,La Réunion,-21.127069,55.532845,NUTS_2021
+FR,landes,nuts3,Landes,43.951999,-0.795178,NUTS_2021
 FR,limousin,admin1,Limousin,45.769165,1.720371,NUTS_2021
+FR,loire-atlantique,nuts3,Loire-Atlantique,47.385206,-1.681825,NUTS_2021
 FR,loiret,nuts3,Loiret,47.914018,2.346842,NUTS_2021
+FR,lot-et-garonne,nuts3,Lot-et-Garonne,44.356839,0.467104,NUTS_2021
+FR,maine-et-loire,nuts3,Maine-et-Loire,47.390072,-0.541773,NUTS_2021
 FR,mayenne,nuts3,Mayenne,48.147521,-0.663105,NUTS_2021
+FR,mayotte,admin1,Mayotte,-12.829407,45.154606,NUTS_2021
 FR,midi-pyrenees,admin1,Midi-Pyrénées,43.771028,1.491101,NUTS_2021
+FR,morbihan,nuts3,Morbihan,47.855231,-2.800558,NUTS_2021
+FR,moselle,nuts3,Moselle,49.045949,6.63024,NUTS_2021
 FR,nord-pas-de-calais,admin1,Nord-Pas de Calais,50.478903,2.709785,NUTS_2021
+FR,nouvelle-aquitaine,admin1,Nouvelle-Aquitaine,45.482217,0.389697,NUTS_2021
+FR,occitanie,admin1,Occitanie,43.706962,2.144213,NUTS_2021
+FR,oise,nuts3,Oise,49.408813,2.423367,NUTS_2021
+FR,paris,nuts3,Paris,48.85625,2.347464,NUTS_2021
 FR,pays-de-la-loire,admin1,Pays de la Loire,47.493575,-0.79587,NUTS_2021
 FR,picardie,admin1,Picardie,49.640576,2.799866,NUTS_2021
 FR,poitou-charentes,admin1,Poitou-Charentes,46.164352,-0.066888,NUTS_2021
+FR,provence-alpes-cote-d-azur,admin1,Provence-Alpes-Côte d’Azur,43.962896,6.064085,NUTS_2021
+FR,puy-de-dome,nuts3,Puy-de-Dôme,45.707872,3.132396,NUTS_2021
 FR,pyrenees-atlantiques,nuts3,Pyrénées-Atlantiques,43.276957,-0.766739,NUTS_2021
+FR,pyrenees-orientales,nuts3,Pyrénées-Orientales,42.597993,2.546668,NUTS_2021
+FR,reunion,admin1,La Réunion,-21.1155,55.5405,NaturalEarth_10m_admin1
+FR,rhone,nuts3,Rhône,45.875051,4.634208,NUTS_2021
 FR,rhone-alpes,admin1,Rhône-Alpes,45.442025,5.344763,NUTS_2021
+FR,saone-et-loire,nuts3,Saône-et-Loire,46.651627,4.527655,NUTS_2021
+FR,sarthe,nuts3,Sarthe,47.999501,0.23353,NUTS_2021
+FR,seine-et-marne,nuts3,Seine-et-Marne,48.653107,2.952337,NUTS_2021
+FR,seine-saint-denis,nuts3,Seine-Saint-Denis,48.913029,2.475069,NUTS_2021
+FR,tarn,nuts3,Tarn,43.778626,2.19072,NUTS_2021
 FR,tarn-et-garonne,nuts3,Tarn-et-Garonne,44.084846,1.288978,NUTS_2021
+FR,val-d-oise,nuts3,Val-d’Oise,49.087831,2.099664,NUTS_2021
+FR,val-de-marne,nuts3,Val-de-Marne,48.773815,2.464167,NUTS_2021
+FR,var,nuts3,Var,43.465483,6.255834,NUTS_2021
+FR,vaucluse,nuts3,Vaucluse,44.03404,5.152331,NUTS_2021
+FR,vendee,nuts3,Vendée,46.679917,-1.277811,NUTS_2021
 FR,yonne,nuts3,Yonne,47.826268,3.577799,NUTS_2021
+FR,yvelines,nuts3,Yvelines,48.819443,1.855044,NUTS_2021
+GB,aberdeen,admin1,Aberdeen,57.1676,-2.19814,NaturalEarth_10m_admin1
+GB,bedfordshire,admin1,Central Bedfordshire,52.0236,-0.376341,NaturalEarth_10m_admin1
+GB,berkshire,nuts3,Berkshire,51.452747,-1.311014,NUTS_2021
+GB,blaenau-gwent,admin1,Blaenau Gwent,51.7719,-3.1998,NaturalEarth_10m_admin1
+GB,buckinghamshire,admin2,Buckinghamshire,51.7717,-0.806599,NaturalEarth_10m_admin1
 GB,cambridgeshire,admin2,Cambridgeshire,52.3476,0.015806,NaturalEarth_10m_admin1
+GB,cardiff,admin1,Cardiff,51.5049,-3.1785,NaturalEarth_10m_admin1
+GB,ceredigion,admin1,Ceredigion,52.1793,-4.17527,NaturalEarth_10m_admin1
+GB,cheshire,admin1,Cheshire,53.205953,-2.512392,NUTS_2021
+GB,cheshire-east,nuts3,Cheshire East,53.240544,-2.165351,NUTS_2021
+GB,cheshire-west-and-chester,nuts3,Cheshire West and Chester,53.202854,-2.78266,NUTS_2021
 GB,cornwall,admin2,Cornwall,50.4407,-4.75267,NaturalEarth_10m_admin1
 GB,cumbria,admin1,Cumbria,54.597337,-2.872363,NUTS_2021
+GB,derbyshire,admin2,Derbyshire,52.9938,-1.58946,NaturalEarth_10m_admin1
 GB,devon,admin1,Devon,50.744894,-3.800584,NUTS_2021
 GB,dorset,nuts3,Dorset,50.845357,-2.33085,NUTS_2021
+GB,down,admin1,Down,54.3616,-5.80955,NaturalEarth_10m_admin1
+GB,east-riding-of-yorkshire,nuts3,East Riding of Yorkshire,53.899147,-0.526601,NUTS_2021
+GB,east-sussex,admin2,East Sussex,50.9537,0.372063,NaturalEarth_10m_admin1
+GB,england,admin1,Leicestershire,52.491,-1.11707,NaturalEarth_10m_admin1
 GB,essex,admin1,Essex,51.799025,0.480868,NUTS_2021
+GB,gloucestershire,nuts3,Gloucestershire,51.822121,-2.12096,NUTS_2021
+GB,greater-london,admin1,Wandsworth,51.4523,-0.184208,NaturalEarth_10m_admin1
+GB,hampshire,admin2,Hampshire,51.1286,-1.23817,NaturalEarth_10m_admin1
+GB,harrow,admin1,Harrow,51.5894,-0.333295,NaturalEarth_10m_admin1
 GB,herefordshire,admin1,Herefordshire,52.0807,-2.73691,NaturalEarth_10m_admin1
+GB,hertfordshire,nuts3,Hertfordshire,51.824189,-0.222041,NUTS_2021
+GB,hull,admin1,Kingston upon Hull,53.7577,-0.372646,NaturalEarth_10m_admin1
+GB,isle-of-wight,nuts3,Isle of Wight,50.671728,-1.296517,NUTS_2021
 GB,kent,admin1,Kent,51.218104,0.669272,NUTS_2021
 GB,lancashire,admin1,Lancashire,53.848973,-2.572225,NUTS_2021
+GB,leicestershire,admin1,Leicestershire,52.491,-1.11707,NaturalEarth_10m_admin1
+GB,lincolnshire,admin1,Lincolnshire,53.095296,-0.266676,NUTS_2021
+GB,london,admin1,London,51.414943,-0.098294,NUTS_2021
+GB,london-borough-of-harrow,admin1,Harrow,51.5894,-0.333295,NaturalEarth_10m_admin1
+GB,monmouthshire,admin1,Monmouthshire,51.7744,-2.90226,NaturalEarth_10m_admin1
 GB,norfolk,admin2,Norfolk,52.6602,0.953164,NaturalEarth_10m_admin1
+GB,north-yorkshire,admin1,North Yorkshire,54.181998,-1.415311,NUTS_2021
 GB,northern-ireland,admin1,Northern Ireland,54.63055,-6.625297,NUTS_2021
+GB,nottinghamshire,admin2,Nottinghamshire,53.1186,-0.983216,NaturalEarth_10m_admin1
 GB,oxfordshire,nuts3,Oxfordshire,51.7749,-1.340338,NUTS_2021
 GB,powys,nuts3,Powys,52.322317,-3.415741,NUTS_2021
+GB,scotland,admin1,Scotland,56.548404,-4.026466,NUTS_2021
 GB,shropshire,admin2,Shropshire,52.6167,-2.72133,NaturalEarth_10m_admin1
+GB,slough,admin1,Slough,51.4769,-0.547994,NaturalEarth_10m_admin1
 GB,somerset,nuts3,Somerset,51.120793,-2.647002,NUTS_2021
+GB,south-gloucestershire,admin1,South Gloucestershire,51.5239,-2.462,NaturalEarth_10m_admin1
+GB,south-yorkshire,admin1,South Yorkshire,53.454567,-1.34373,NUTS_2021
+GB,staffordshire,admin2,Staffordshire,52.9024,-2.01517,NaturalEarth_10m_admin1
+GB,stockport,admin1,Stockport,53.3787,-2.1408,NaturalEarth_10m_admin1
 GB,suffolk,nuts3,Suffolk,52.223975,1.039414,NUTS_2021
+GB,surrey,admin2,Surrey,51.2608,-0.388084,NaturalEarth_10m_admin1
 GB,ukc11,nuts3,Hartlepool and Stockton-on-Tees,54.591191,-1.321709,NUTS_2021
 GB,ukc13,nuts3,Darlington,54.54666,-1.535563,NUTS_2021
 GB,ukc14,nuts3,Durham CC,54.699492,-1.822792,NUTS_2021
@@ -741,13 +1043,37 @@ GB,ukm78,nuts3,West Lothian,55.882404,-3.573275,NUTS_2021
 GB,ukm92,nuts3,Dumfries & Galloway,55.089253,-3.933475,NUTS_2021
 GB,ukn06,nuts3,Belfast,54.603706,-5.932455,NUTS_2021
 GB,ukn0d,nuts3,Antrim and Newtownabbey,54.694314,-6.200551,NUTS_2021
+GB,wales,admin1,Wales,52.301459,-3.694159,NUTS_2021
+GB,warwickshire,nuts3,Warwickshire,52.204808,-1.536432,NUTS_2021
+GB,west-berkshire,admin1,West Berkshire,51.4529,-1.2949,NaturalEarth_10m_admin1
+GB,west-sussex,admin2,West Sussex,50.9489,-0.457938,NaturalEarth_10m_admin1
+GB,west-yorkshire,admin1,West Yorkshire,53.728318,-1.705324,NUTS_2021
 GB,wiltshire,admin2,Wiltshire,51.3289,-1.91891,NaturalEarth_10m_admin1
+GB,wrexham,admin1,Wrexham,53.017,-3.0538,NaturalEarth_10m_admin1
+GB,york,nuts3,York,53.949304,-1.026674,NUTS_2021
+GE,samtskhe-javakheti,admin1,Samtskhe-Javakheti,41.5149,43.2296,NaturalEarth_10m_admin1
 GI,gibraltar,admin1,Gibraltar,36.1291,-5.34595,NaturalEarth_10m_admin1
+GM,banjul,admin1,Banjul,13.4063,-16.6831,NaturalEarth_10m_admin1
+GN,boke,admin1,Koundara,12.3537,-13.1823,NaturalEarth_10m_admin1
+GN,conakry,admin1,Conakry,9.5392,-13.6847,NaturalEarth_10m_admin1
 GN,faranah,admin1,Faranah,9.98517,-10.881,NaturalEarth_10m_admin1
+GN,gueckedou,admin1,Guéckédou,8.70329,-10.2232,NaturalEarth_10m_admin1
+GN,kankan,admin1,Kankan,10.1319,-9.12624,NaturalEarth_10m_admin1
+GN,kindia,admin1,Kindia,10.0552,-12.7298,NaturalEarth_10m_admin1
+GN,mamou,admin1,Mamou,10.3442,-11.8934,NaturalEarth_10m_admin1
+GN,mamou-prefecture,admin1,Mamou,10.3442,-11.8934,NaturalEarth_10m_admin1
+GN,nzerekore,admin1,Guéckédou,8.70329,-10.2232,NaturalEarth_10m_admin1
 GR,aitoloakarnania,nuts3,Αιτωλοακαρνανία,38.684922,21.383354,NUTS_2021
+GR,anatoliki-attiki,nuts3,Ανατολική Αττική,37.895922,23.94065,NUTS_2021
+GR,arta-preveza,nuts3,"Άρτα, Πρέβεζα",39.237277,20.966288,NUTS_2021
 GR,attica,admin1,Attiki,38.0626,23.7997,NaturalEarth_10m_admin1
+GR,attiki,admin1,Αττική,38.054808,23.81141,NUTS_2021
+GR,central-macedonia,admin1,Kentriki Makedonia,40.8836,22.8519,NaturalEarth_10m_admin1
 GR,chalkidiki,nuts3,Χαλκιδική,40.412786,23.432379,NUTS_2021
 GR,chios,nuts3,Χίος,38.407743,26.026478,NUTS_2021
+GR,drama,nuts3,Δράμα,41.312813,24.203984,NUTS_2021
+GR,dytiki-attiki,nuts3,Δυτική Αττική,38.085846,23.396523,NUTS_2021
+GR,dytikos-tomeas-athinon,nuts3,Δυτικός Τομέας Αθηνών,38.019185,23.674222,NUTS_2021
 GR,el301,nuts3,Βόρειος Τομέας Αθηνών,38.045063,23.801218,NUTS_2021
 GR,el302,nuts3,Δυτικός Τομέας Αθηνών,38.019185,23.674222,NUTS_2021
 GR,el303,nuts3,Κεντρικός Τομέας Αθηνών,37.979136,23.756618,NUTS_2021
@@ -772,6 +1098,7 @@ GR,el521,nuts3,Ημαθία,40.55397,22.26058,NUTS_2021
 GR,el522,nuts3,Θεσσαλονίκη,40.694999,23.125228,NUTS_2021
 GR,el523,nuts3,Κιλκίς,41.052717,22.797787,NUTS_2021
 GR,el524,nuts3,Πέλλα,40.890532,22.131251,NUTS_2021
+GR,el525,nuts3,Πιερία,40.269119,22.428165,NUTS_2021
 GR,el526,nuts3,Σέρρες,41.085563,23.537599,NUTS_2021
 GR,el527,nuts3,Χαλκιδική,40.412786,23.432379,NUTS_2021
 GR,el531,nuts3,"Γρεβενά, Κοζάνη",40.20232,21.612594,NUTS_2021
@@ -797,20 +1124,36 @@ GR,el651,nuts3,"Αργολίδα, Αρκαδία",37.539753,22.496288,NUTS_2021
 GR,el652,nuts3,Κορινθία,37.917717,22.704442,NUTS_2021
 GR,el653,nuts3,"Λακωνία, Μεσσηνία",37.039601,22.312417,NUTS_2021
 GR,evros,nuts3,Έβρος,41.203617,26.153782,NUTS_2021
+GR,evvoia,nuts3,Εύβοια,38.532375,23.741006,NUTS_2021
+GR,florina,nuts3,Φλώρινα,40.754089,21.429882,NUTS_2021
 GR,fokida,nuts3,Φωκίδα,38.543884,22.237083,NUTS_2021
 GR,fthiotida,nuts3,Φθιώτιδα,39.019796,22.250294,NUTS_2021
 GR,imathia,nuts3,Ημαθία,40.55397,22.26058,NUTS_2021
+GR,irakleio,nuts3,Ηράκλειο,35.146945,25.133656,NUTS_2021
+GR,karditsa-trikala,nuts3,"Καρδίτσα, Τρίκαλα",39.500763,21.705657,NUTS_2021
 GR,kastoria,nuts3,Καστοριά,40.464734,21.148533,NUTS_2021
+GR,kentrikos-tomeas-athinon,nuts3,Κεντρικός Τομέας Αθηνών,37.979136,23.756618,NUTS_2021
 GR,kilkis,nuts3,Κιλκίς,41.052717,22.797787,NUTS_2021
+GR,lakonia-messinia,nuts3,"Λακωνία, Μεσσηνία",37.039601,22.312417,NUTS_2021
+GR,larisa,nuts3,Λάρισα,39.694298,22.405504,NUTS_2021
+GR,lefkada,nuts3,Λευκάδα,38.712788,20.649415,NUTS_2021
+GR,notios-tomeas-athinon,nuts3,Νότιος Τομέας Αθηνών,37.901639,23.739509,NUTS_2021
+GR,peiraias-nisoi,nuts3,"Πειραιάς, Νήσοι",36.244311,22.982361,NUTS_2021
+GR,pella,nuts3,Πέλλα,40.890532,22.131251,NUTS_2021
 GR,pieria,nuts3,Πιερία,40.269119,22.428165,NUTS_2021
+GR,rethymni,nuts3,Ρέθυμνο,35.263774,24.599262,NUTS_2021
 GR,rodopi,nuts3,Ροδόπη,41.110173,25.503795,NUTS_2021
 GR,serres,nuts3,Σέρρες,41.085563,23.537599,NUTS_2021
 GR,sterea-ellada,admin1,Στερεά Ελλάδα,38.557981,22.724738,NUTS_2021
 GR,thessaloniki,nuts3,Θεσσαλονίκη,40.694999,23.125228,NUTS_2021
 GR,thessaly,admin1,Thessalia,39.5322,22.1914,NaturalEarth_10m_admin1
+GR,voiotia,nuts3,Βοιωτία,38.368419,23.090732,NUTS_2021
+GR,voreios-tomeas-athinon,nuts3,Βόρειος Τομέας Αθηνών,38.045063,23.801218,NUTS_2021
 GR,xanthi,nuts3,Ξάνθη,41.158563,24.892349,NUTS_2021
 HN,cortes,admin1,Cortés,15.5336,-88.0359,NaturalEarth_10m_admin1
 HN,francisco-morazan,admin1,Francisco Morazán,14.3474,-87.1815,NaturalEarth_10m_admin1
+HR,bjelovarsko-bilogorska-zupanija,nuts3,Bjelovarsko-bilogorska županija,45.736222,16.978916,NUTS_2021
+HR,grad-zagreb,admin1,Grad Zagreb,45.59144,17.007644,NUTS_2021
 HR,hr021,nuts3,Bjelovarsko-bilogorska županija,45.736222,16.978916,NUTS_2021
 HR,hr022,nuts3,Virovitičko-podravska županija,45.733238,17.585895,NUTS_2021
 HR,hr023,nuts3,Požeško-slavonska županija,45.419623,17.539241,NUTS_2021
@@ -829,23 +1172,43 @@ HR,hr062,nuts3,Varaždinska županija,46.240521,16.315984,NUTS_2021
 HR,hr063,nuts3,Koprivničko-križevačka županija,46.178443,16.817905,NUTS_2021
 HR,hr064,nuts3,Krapinsko-zagorska županija,46.082852,15.930216,NUTS_2021
 HR,hr065,nuts3,Zagrebačka županija,45.825883,16.359471,NUTS_2021
+HR,koprivnicko-krizevacka-zupanija,nuts3,Koprivničko-križevačka županija,46.178443,16.817905,NUTS_2021
+HR,krapinsko-zagorska-zupanija,nuts3,Krapinsko-zagorska županija,46.082852,15.930216,NUTS_2021
 HR,osijek-baranja,admin2,Osjecko-Baranjska,45.4948,18.506,NaturalEarth_10m_admin1
+HR,osjecko-baranjska-zupanija,nuts3,Osječko-baranjska županija,45.562055,18.455595,NUTS_2021
+HR,pozesko-slavonska-zupanija,nuts3,Požeško-slavonska županija,45.419623,17.539241,NUTS_2021
+HR,sibenik,admin2,Šibensko-Kninska,43.7911,16.0356,NaturalEarth_10m_admin1
+HR,sisacko-moslavacka-zupanija,nuts3,Sisačko-moslavačka županija,45.35982,16.450352,NUTS_2021
 HR,varazdin,admin2,Varaždinska,46.1918,16.3267,NaturalEarth_10m_admin1
 HR,vukovar-srijem,admin2,Vukovarsko-Srijemska,45.1467,18.9549,NaturalEarth_10m_admin1
+HR,vukovarsko-srijemska-zupanija,nuts3,Vukovarsko-srijemska županija,45.174929,18.880389,NUTS_2021
 HR,zagreb,admin2,Zagrebacka,45.7203,15.5948,NaturalEarth_10m_admin1
+HR,zagrebacka-zupanija,nuts3,Zagrebačka županija,45.825883,16.359471,NUTS_2021
+HU,bacs-kiskun,nuts3,Bács-Kiskun,46.551272,19.374299,NUTS_2021
+HU,baranya,nuts3,Baranya,46.048132,18.208368,NUTS_2021
 HU,bekescsaba,admin2,Békéscsaba,46.7499,21.0968,NaturalEarth_10m_admin1
 HU,budapest,admin1,Budapest,47.481934,19.102347,NUTS_2021
+HU,csongrad-csanad,admin2,Csongrád,46.5997,20.1413,NaturalEarth_10m_admin1
 HU,debrecen,admin2,Debrecen,47.5252,21.6192,NaturalEarth_10m_admin1
 HU,dunaujvaros,admin2,Dunaújváros,46.9489,18.8971,NaturalEarth_10m_admin1
 HU,gyor,admin2,Gyôr,47.6621,17.6657,NaturalEarth_10m_admin1
+HU,hodmezovasarhely,admin2,Hódmezôvásárhely,46.3767,20.3919,NaturalEarth_10m_admin1
 HU,hu110,nuts3,Budapest,47.481934,19.102347,NUTS_2021
+HU,hu120,nuts3,Pest,47.199522,19.039997,NUTS_2021
 HU,hu221,nuts3,Győr-Moson-Sopron,47.64478,17.295843,NUTS_2021
 HU,hu222,nuts3,Vas,47.14966,16.725577,NUTS_2021
 HU,hu231,nuts3,Baranya,46.048132,18.208368,NUTS_2021
+HU,hu331,nuts3,Bács-Kiskun,46.551272,19.374299,NUTS_2021
+HU,hu333,nuts3,Csongrád,46.421202,20.244551,NUTS_2021
 HU,kaposvar,admin2,Kaposvár,46.356,17.7984,NaturalEarth_10m_admin1
 HU,kecskemet,admin2,Kecskemét,46.9282,19.6684,NaturalEarth_10m_admin1
+HU,nagykanizsa,admin2,Nagykanizsa,46.4513,16.9898,NaturalEarth_10m_admin1
 HU,nyiregyhaza,admin2,Nyíregyháza,47.9357,21.7602,NaturalEarth_10m_admin1
+HU,pest,admin1,Pest,47.199522,19.039997,NUTS_2021
+HU,somogy,nuts3,Somogy,46.446231,17.614954,NUTS_2021
 HU,szeged,admin2,Szeged,46.2689,20.1431,NaturalEarth_10m_admin1
+HU,szekesfehervar,admin2,Székesfehérvár,47.1977,18.4618,NaturalEarth_10m_admin1
+HU,szolnok,admin2,Szolnok,47.206,20.168,NaturalEarth_10m_admin1
 HU,zalaegerszeg,admin2,Zalaegerszeg,46.8452,16.8447,NaturalEarth_10m_admin1
 ID,aceh,admin2,Aceh,4.41533,96.9956,NaturalEarth_10m_admin1
 ID,bali,admin2,Bali,-8.3412,115.179,NaturalEarth_10m_admin1
@@ -855,51 +1218,99 @@ ID,central-java,admin2,Jawa Tengah,-7.2901,109.896,NaturalEarth_10m_admin1
 ID,central-kalimantan,admin2,Kalimantan Tengah,-1.84217,113.286,NaturalEarth_10m_admin1
 ID,jakarta,admin1,Jakarta Raya,-6.22462,106.837,NaturalEarth_10m_admin1
 ID,jambi,admin2,Jambi,-1.65497,102.823,NaturalEarth_10m_admin1
+ID,lampung,admin2,Lampung,-4.919,105.059,NaturalEarth_10m_admin1
 ID,maluku,admin2,Maluku,-8.24814,128.161,NaturalEarth_10m_admin1
 ID,north-maluku,admin2,Maluku Utara,-2.28945,125.976,NaturalEarth_10m_admin1
+ID,north-sulawesi,admin2,Sulawesi Utara,0.853039,124.446,NaturalEarth_10m_admin1
 ID,papua,admin2,Papua,-4.10825,138.689,NaturalEarth_10m_admin1
 ID,riau,admin2,Riau,0.396892,101.745,NaturalEarth_10m_admin1
 ID,southeast-sulawesi,admin2,Sulawesi Tenggara,-4.0746,122.119,NaturalEarth_10m_admin1
 ID,west-java,admin2,Jawa Barat,-6.90763,107.638,NaturalEarth_10m_admin1
 ID,west-papua,admin2,Papua Barat,-1.32525,132.825,NaturalEarth_10m_admin1
 ID,yogyakarta,admin1,Yogyakarta,-7.83533,110.443,NaturalEarth_10m_admin1
+IE,cork,admin2,Cork,51.9396,-8.83835,NaturalEarth_10m_admin1
+IE,wexford,admin2,Wexford,52.4423,-6.58517,NaturalEarth_10m_admin1
 IL,haifa,admin1,Haifa,32.5523,34.9727,NaturalEarth_10m_admin1
+IM,isle-of-man,admin1,Isle of Man,54.2274,-4.53251,NaturalEarth_10m_admin1
 IN,andhra-pradesh,admin1,Andhra Pradesh,16.4854,79.208,NaturalEarth_10m_admin1
 IN,ap,admin1,Andhra Pradesh,16.4854,79.208,NaturalEarth_10m_admin1
 IN,arunachal-pradesh,admin1,Arunachal Pradesh,28.4056,94.4673,NaturalEarth_10m_admin1
 IN,assam,admin1,Assam,26.3302,92.9929,NaturalEarth_10m_admin1
+IN,bihar,admin1,Bihar,25.6853,85.8134,NaturalEarth_10m_admin1
+IN,chandigarh,admin1,Chandigarh,30.7452,76.7605,NaturalEarth_10m_admin1
 IN,delhi,admin1,Delhi,28.69,77.0856,NaturalEarth_10m_admin1
+IN,goa,admin1,Goa,15.3133,73.9951,NaturalEarth_10m_admin1
 IN,gujarat,admin1,Gujarat,22.7501,71.3013,NaturalEarth_10m_admin1
 IN,haryana,admin1,Haryana,29.1003,76.271,NaturalEarth_10m_admin1
+IN,jharkhand,admin1,Jharkhand,23.5221,85.0584,NaturalEarth_10m_admin1
+IN,ka,admin1,Karnataka,14.3681,75.667,NaturalEarth_10m_admin1
 IN,karnataka,admin1,Karnataka,14.3681,75.667,NaturalEarth_10m_admin1
 IN,kerala,admin1,Kerala,10.3666,76.5237,NaturalEarth_10m_admin1
 IN,madhya-pradesh,admin1,Madhya Pradesh,22.9404,78.4214,NaturalEarth_10m_admin1
 IN,maharashtra,admin1,Maharashtra,19.4723,75.4647,NaturalEarth_10m_admin1
 IN,manipur,admin1,Manipur,24.7442,93.8457,NaturalEarth_10m_admin1
+IN,meghalaya,admin1,Meghalaya,25.4804,91.3031,NaturalEarth_10m_admin1
+IN,nagaland,admin1,Nagaland,26.1094,94.5664,NaturalEarth_10m_admin1
 IN,odisha,admin1,Odisha,20.625,84.4341,NaturalEarth_10m_admin1
 IN,orissa,admin1,Odisha,20.625,84.4341,NaturalEarth_10m_admin1
 IN,pondicherry,admin1,Puducherry,10.9224,79.7758,NaturalEarth_10m_admin1
 IN,puducherry,admin1,Puducherry,10.9224,79.7758,NaturalEarth_10m_admin1
+IN,punjab,admin1,Punjab,31.0245,75.3762,NaturalEarth_10m_admin1
 IN,rajasthan,admin1,Rajasthan,26.7468,73.8556,NaturalEarth_10m_admin1
 IN,tamil-nadu,admin1,Tamil Nadu,11.0159,78.2704,NaturalEarth_10m_admin1
 IN,telangana,admin1,Telangana,17.427313,78.468441,NaturalEarth_10m_admin1
+IN,tn,admin1,Tamil Nadu,11.0159,78.2704,NaturalEarth_10m_admin1
+IN,tripura,admin1,Tripura,23.8519,91.7031,NaturalEarth_10m_admin1
+IN,up,admin1,Uttar Pradesh,26.7201,80.9966,NaturalEarth_10m_admin1
 IN,uttar-pradesh,admin1,Uttar Pradesh,26.7201,80.9966,NaturalEarth_10m_admin1
 IN,uttarakhand,admin1,Uttarakhand,30.0576,79.2841,NaturalEarth_10m_admin1
 IN,west-bengal,admin1,West Bengal,23.0523,87.7289,NaturalEarth_10m_admin1
 IQ,baghdad,admin2,Baghdad,33.306,44.3827,NaturalEarth_10m_admin1
+IQ,diyala,admin2,Diyala,33.9882,45.1046,NaturalEarth_10m_admin1
 IQ,mosul,admin2,Ninawa,35.9228,42.7469,NaturalEarth_10m_admin1
 IR,khuzestan,admin2,Khuzestan,31.3484,48.7558,NaturalEarth_10m_admin1
+IT,abruzzi,admin2,Teramo,42.6705,13.7294,NaturalEarth_10m_admin1
 IT,abruzzo,admin1,Abruzzo,42.234136,13.871362,NUTS_2021
+IT,alessandria,nuts3,Alessandria,44.824222,8.643798,NUTS_2021
 IT,ancona,nuts3,Ancona,43.578061,13.204777,NUTS_2021
 IT,apulia,admin1,Puglia,41.004292,16.584673,NUTS_2021
+IT,arezzo,nuts3,Arezzo,43.544461,11.843478,NUTS_2021
+IT,ascoli-piceno,nuts3,Ascoli Piceno,42.884808,13.556184,NUTS_2021
+IT,asti,nuts3,Asti,44.858425,8.192237,NUTS_2021
+IT,avellino,nuts3,Avellino,40.99585,15.066218,NUTS_2021
+IT,bari,nuts3,Bari,40.927467,16.754472,NUTS_2021
+IT,barletta-andria-trani,nuts3,Barletta-Andria-Trani,41.182318,16.17916,NUTS_2021
+IT,basilicata,admin1,Basilicata,40.515693,16.079424,NUTS_2021
+IT,belluno,nuts3,Belluno,46.3127,12.172403,NUTS_2021
+IT,bergamo,nuts3,Bergamo,45.785997,9.77816,NUTS_2021
+IT,biella,nuts3,Biella,45.585654,8.082777,NUTS_2021
 IT,bologna,nuts3,Bologna,44.409527,11.333756,NUTS_2021
+IT,brescia,nuts3,Brescia,45.687111,10.32893,NUTS_2021
+IT,brindisi,nuts3,Brindisi,40.618465,17.715086,NUTS_2021
 IT,calabria,admin1,Calabria,39.160409,16.382188,NUTS_2021
 IT,campania,admin1,Campania,41.038691,14.737276,NUTS_2021
+IT,campobasso,nuts3,Campobasso,41.70867,14.773491,NUTS_2021
+IT,caserta,nuts3,Caserta,41.210689,14.153436,NUTS_2021
+IT,catanzaro,nuts3,Catanzaro,38.891964,16.487351,NUTS_2021
+IT,chieti,nuts3,Chieti,42.09351,14.397832,NUTS_2021
+IT,como,nuts3,Como,45.932246,9.15495,NUTS_2021
+IT,cosenza,nuts3,Cosenza,39.560473,16.318355,NUTS_2021
+IT,cremona,nuts3,Cremona,45.22617,9.974752,NUTS_2021
+IT,crotone,nuts3,Crotone,39.191383,16.921044,NUTS_2021
+IT,cuneo,nuts3,Cuneo,44.477455,7.590172,NUTS_2021
 IT,emilia-romagna,admin1,Emilia-Romagna,44.522416,11.029625,NUTS_2021
 IT,emiliaromagna,admin1,Emilia-Romagna,44.522416,11.029625,NUTS_2021
+IT,fermo,nuts3,Fermo,43.099826,13.621341,NUTS_2021
 IT,ferrara,nuts3,Ferrara,44.780383,11.82746,NUTS_2021
+IT,firenze,nuts3,Firenze,43.811696,11.293017,NUTS_2021
+IT,foggia,nuts3,Foggia,41.537753,15.544648,NUTS_2021
+IT,forli-cesena,nuts3,Forlì-Cesena,44.037279,12.043244,NUTS_2021
 IT,friuli-venezia-giulia,admin1,Friuli-Venezia Giulia,46.166479,13.049533,NUTS_2021
+IT,frosinone,nuts3,Frosinone,41.629817,13.544264,NUTS_2021
+IT,genova,nuts3,Genova,44.457972,9.145651,NUTS_2021
 IT,go,admin2,Gorizia,45.8602,13.4936,NaturalEarth_10m_admin1
+IT,grosseto,nuts3,Grosseto,42.802919,11.224018,NUTS_2021
+IT,isernia,nuts3,Isernia,41.64333,14.236667,NUTS_2021
 IT,itc11,nuts3,Torino,45.141101,7.44703,NUTS_2021
 IT,itc12,nuts3,Vercelli,45.31185,8.205937,NUTS_2021
 IT,itc13,nuts3,Biella,45.585654,8.082777,NUTS_2021
@@ -912,22 +1323,36 @@ IT,itc20,nuts3,Valle d’Aosta/Vallée d’Aoste,45.728149,7.392457,NUTS_2021
 IT,itc31,nuts3,Imperia,43.9545,7.820523,NUTS_2021
 IT,itc32,nuts3,Savona,44.28738,8.295932,NUTS_2021
 IT,itc33,nuts3,Genova,44.457972,9.145651,NUTS_2021
+IT,itc41,nuts3,Varese,45.78397,8.77334,NUTS_2021
 IT,itc42,nuts3,Como,45.932246,9.15495,NUTS_2021
 IT,itc43,nuts3,Lecco,45.90192,9.394505,NUTS_2021
 IT,itc44,nuts3,Sondrio,46.209004,9.935339,NUTS_2021
 IT,itc46,nuts3,Bergamo,45.785997,9.77816,NUTS_2021
 IT,itc47,nuts3,Brescia,45.687111,10.32893,NUTS_2021
 IT,itc48,nuts3,Pavia,45.115595,9.034976,NUTS_2021
+IT,itc49,nuts3,Lodi,45.244245,9.5673,NUTS_2021
+IT,itc4a,nuts3,Cremona,45.22617,9.974752,NUTS_2021
+IT,itc4b,nuts3,Mantova,45.114656,10.775096,NUTS_2021
 IT,itc4c,nuts3,Milano,45.475684,9.128752,NUTS_2021
 IT,itc4d,nuts3,Monza e della Brianza,45.63597,9.264349,NUTS_2021
+IT,itf11,nuts3,L’Aquila,42.107877,13.618763,NUTS_2021
 IT,itf12,nuts3,Teramo,42.649371,13.747314,NUTS_2021
+IT,itf13,nuts3,Pescara,42.356547,14.010983,NUTS_2021
+IT,itf14,nuts3,Chieti,42.09351,14.397832,NUTS_2021
+IT,itf22,nuts3,Campobasso,41.70867,14.773491,NUTS_2021
+IT,itf31,nuts3,Caserta,41.210689,14.153436,NUTS_2021
 IT,itf33,nuts3,Napoli,40.872758,14.389378,NUTS_2021
+IT,itf34,nuts3,Avellino,40.99585,15.066218,NUTS_2021
+IT,itf35,nuts3,Salerno,40.46222,15.20978,NUTS_2021
+IT,itf43,nuts3,Taranto,40.585968,17.261702,NUTS_2021
 IT,itf44,nuts3,Brindisi,40.618465,17.715086,NUTS_2021
 IT,itf45,nuts3,Lecce,40.200421,18.138157,NUTS_2021
 IT,itf46,nuts3,Foggia,41.537753,15.544648,NUTS_2021
 IT,itf47,nuts3,Bari,40.927467,16.754472,NUTS_2021
+IT,itf48,nuts3,Barletta-Andria-Trani,41.182318,16.17916,NUTS_2021
 IT,itf52,nuts3,Matera,40.465869,16.474104,NUTS_2021
 IT,itf61,nuts3,Cosenza,39.560473,16.318355,NUTS_2021
+IT,itf62,nuts3,Crotone,39.191383,16.921044,NUTS_2021
 IT,itf65,nuts3,Reggio di Calabria,38.279553,16.042517,NUTS_2021
 IT,itg13,nuts3,Messina,38.01451,15.053257,NUTS_2021
 IT,itg14,nuts3,Agrigento,37.463384,13.487785,NUTS_2021
@@ -950,10 +1375,15 @@ IT,ith41,nuts3,Pordenone,46.092994,12.692972,NUTS_2021
 IT,ith42,nuts3,Udine,46.239419,13.15694,NUTS_2021
 IT,ith43,nuts3,Gorizia,45.862491,13.496735,NUTS_2021
 IT,ith44,nuts3,Trieste,45.650583,13.818733,NUTS_2021
+IT,ith51,nuts3,Piacenza,44.860723,9.609627,NUTS_2021
+IT,ith52,nuts3,Parma,44.675517,10.02643,NUTS_2021
+IT,ith53,nuts3,Reggio nell’Emilia,44.59745,10.525566,NUTS_2021
 IT,ith54,nuts3,Modena,44.538533,10.8875,NUTS_2021
 IT,ith55,nuts3,Bologna,44.409527,11.333756,NUTS_2021
+IT,ith56,nuts3,Ferrara,44.780383,11.82746,NUTS_2021
 IT,ith57,nuts3,Ravenna,44.409199,11.954621,NUTS_2021
 IT,ith58,nuts3,Forlì-Cesena,44.037279,12.043244,NUTS_2021
+IT,ith59,nuts3,Rimini,43.997553,12.58988,NUTS_2021
 IT,iti11,nuts3,Massa-Carrara,44.254482,10.011252,NUTS_2021
 IT,iti12,nuts3,Lucca,44.005944,10.426521,NUTS_2021
 IT,iti13,nuts3,Pistoia,43.965152,10.852004,NUTS_2021
@@ -966,6 +1396,8 @@ IT,iti19,nuts3,Siena,43.187989,11.466099,NUTS_2021
 IT,iti1a,nuts3,Grosseto,42.802919,11.224018,NUTS_2021
 IT,iti21,nuts3,Perugia,43.072899,12.5266,NUTS_2021
 IT,iti22,nuts3,Terni,42.587802,12.39567,NUTS_2021
+IT,iti32,nuts3,Ancona,43.578061,13.204777,NUTS_2021
+IT,iti33,nuts3,Macerata,43.180383,13.264284,NUTS_2021
 IT,iti34,nuts3,Ascoli Piceno,42.884808,13.556184,NUTS_2021
 IT,iti35,nuts3,Fermo,43.099826,13.621341,NUTS_2021
 IT,iti41,nuts3,Viterbo,42.42431,11.986428,NUTS_2021
@@ -973,87 +1405,190 @@ IT,iti42,nuts3,Rieti,42.396193,12.959138,NUTS_2021
 IT,iti43,nuts3,Roma,41.73528,12.515072,NUTS_2021
 IT,iti44,nuts3,Latina,41.469004,13.048421,NUTS_2021
 IT,iti45,nuts3,Frosinone,41.629817,13.544264,NUTS_2021
+IT,l-aquila,nuts3,L’Aquila,42.107877,13.618763,NUTS_2021
+IT,laquila,admin2,L'Aquila,42.0575,13.6034,NaturalEarth_10m_admin1
+IT,latina,nuts3,Latina,41.469004,13.048421,NUTS_2021
 IT,latium,admin2,Imperia,44.011,7.81935,NaturalEarth_10m_admin1
 IT,lazio,admin1,Lazio,41.98984,12.750062,NUTS_2021
+IT,lecce,nuts3,Lecce,40.200421,18.138157,NUTS_2021
+IT,lecco,nuts3,Lecco,45.90192,9.394505,NUTS_2021
+IT,livorno,nuts3,Livorno,43.18613,10.612927,NUTS_2021
+IT,lodi,nuts3,Lodi,45.244245,9.5673,NUTS_2021
 IT,lombardia,admin1,Lombardia,45.612749,9.772972,NUTS_2021
 IT,lombardy,admin1,Lombardia,45.612749,9.772972,NUTS_2021
 IT,macerata,nuts3,Macerata,43.180383,13.264284,NUTS_2021
+IT,mantova,nuts3,Mantova,45.114656,10.775096,NUTS_2021
 IT,marche,admin1,Marche,43.347679,13.153043,NUTS_2021
+IT,matera,nuts3,Matera,40.465869,16.474104,NUTS_2021
+IT,milano,nuts3,Milano,45.475684,9.128752,NUTS_2021
 IT,modena,nuts3,Modena,44.538533,10.8875,NUTS_2021
+IT,molise,admin1,Molise,41.59489,14.539608,NUTS_2021
+IT,monza-e-della-brianza,nuts3,Monza e della Brianza,45.63597,9.264349,NUTS_2021
+IT,napoli,nuts3,Napoli,40.872758,14.389378,NUTS_2021
+IT,novara,nuts3,Novara,45.5598,8.568769,NUTS_2021
+IT,nuoro,nuts3,Nuoro,40.397208,9.474321,NUTS_2021
+IT,ogliastra,admin2,Ogliastra,39.8913,9.52093,NaturalEarth_10m_admin1
+IT,oristano,nuts3,Oristano,40.000556,8.72979,NUTS_2021
 IT,padova,nuts3,Padova,45.349928,11.797606,NUTS_2021
 IT,padua,admin2,Padova,45.361,11.8371,NaturalEarth_10m_admin1
+IT,parma,nuts3,Parma,44.675517,10.02643,NUTS_2021
+IT,pavia,nuts3,Pavia,45.115595,9.034976,NUTS_2021
 IT,pd,admin2,Padova,45.361,11.8371,NaturalEarth_10m_admin1
+IT,perugia,nuts3,Perugia,43.072899,12.5266,NUTS_2021
+IT,pescara,nuts3,Pescara,42.356547,14.010983,NUTS_2021
+IT,piacenza,nuts3,Piacenza,44.860723,9.609627,NUTS_2021
 IT,piedmont,admin1,Piemonte,45.063351,7.918921,NUTS_2021
 IT,piemonte,admin1,Piemonte,45.063351,7.918921,NUTS_2021
+IT,pistoia,nuts3,Pistoia,43.965152,10.852004,NUTS_2021
 IT,pn,admin2,Pordenone,46.2122,12.6981,NaturalEarth_10m_admin1
+IT,pordenone,nuts3,Pordenone,46.092994,12.692972,NUTS_2021
 IT,puglia,admin1,Puglia,41.004292,16.584673,NUTS_2021
+IT,ravenna,nuts3,Ravenna,44.409199,11.954621,NUTS_2021
+IT,reggio-calabria,admin2,Reggio Calabria,38.2363,16.0152,NaturalEarth_10m_admin1
+IT,reggio-nell-emilia,nuts3,Reggio nell’Emilia,44.59745,10.525566,NUTS_2021
+IT,rieti,nuts3,Rieti,42.396193,12.959138,NUTS_2021
+IT,rimini,nuts3,Rimini,43.997553,12.58988,NUTS_2021
 IT,ro,admin2,Rovigo,45.0532,11.8695,NaturalEarth_10m_admin1
+IT,roma,nuts3,Roma,41.73528,12.515072,NUTS_2021
 IT,rome,admin2,Roma,41.965,12.7308,NaturalEarth_10m_admin1
 IT,rovigo,nuts3,Rovigo,45.044169,11.817923,NUTS_2021
+IT,salerno,nuts3,Salerno,40.46222,15.20978,NUTS_2021
 IT,sardegna,admin1,Sardegna,40.077517,9.034773,NUTS_2021
 IT,sardinia,admin1,Sardegna,40.077517,9.034773,NUTS_2021
+IT,sassari,nuts3,Sassari,40.610226,8.708366,NUTS_2021
 IT,sicilia,admin1,Sicilia,37.570448,14.165849,NUTS_2021
 IT,sicily,admin1,Sicilia,37.570448,14.165849,NUTS_2021
+IT,siena,nuts3,Siena,43.187989,11.466099,NUTS_2021
+IT,siracusa,nuts3,Siracusa,37.058976,15.031309,NUTS_2021
+IT,sondrio,nuts3,Sondrio,46.209004,9.935339,NUTS_2021
+IT,sud-sardegna,nuts3,Sud Sardegna,39.506438,8.69813,NUTS_2021
+IT,taranto,nuts3,Taranto,40.585968,17.261702,NUTS_2021
+IT,teramo,nuts3,Teramo,42.649371,13.747314,NUTS_2021
+IT,terni,nuts3,Terni,42.587802,12.39567,NUTS_2021
 IT,tn,admin2,Trento,46.0415,10.9947,NaturalEarth_10m_admin1
+IT,torino,nuts3,Torino,45.141101,7.44703,NUTS_2021
 IT,toscana,admin1,Toscana,43.479422,11.130621,NUTS_2021
+IT,trapani,nuts3,Trapani,37.814492,12.79285,NUTS_2021
+IT,trentino,admin2,Trento,46.0415,10.9947,NaturalEarth_10m_admin1
 IT,trento,nuts3,Trento,46.131328,10.858988,NUTS_2021
+IT,treviso,nuts3,Treviso,45.794905,12.209062,NUTS_2021
+IT,trieste,nuts3,Trieste,45.650583,13.818733,NUTS_2021
+IT,turin,admin2,Turin,45.1609,7.47211,NaturalEarth_10m_admin1
 IT,tuscany,admin1,Toscana,43.479422,11.130621,NUTS_2021
 IT,tv,admin2,Treviso,45.8092,12.2313,NaturalEarth_10m_admin1
 IT,ud,admin2,Udine,46.0839,13.1961,NaturalEarth_10m_admin1
+IT,udine,nuts3,Udine,46.239419,13.15694,NUTS_2021
 IT,umbria,admin1,Umbria,42.971674,12.489322,NUTS_2021
+IT,valle-d-aosta-vallee-d-aoste,admin1,Valle d’Aosta/Vallée d’Aoste,45.728149,7.392457,NUTS_2021
+IT,varese,nuts3,Varese,45.78397,8.77334,NUTS_2021
 IT,ve,admin2,Venezia,45.4591,12.1647,NaturalEarth_10m_admin1
 IT,veneto,admin1,Veneto,45.661041,11.854564,NUTS_2021
+IT,venezia,nuts3,Venezia,45.695711,12.831388,NUTS_2021
+IT,verbano-cusio-ossola,nuts3,Verbano-Cusio-Ossola,46.078248,8.349371,NUTS_2021
+IT,vercelli,nuts3,Vercelli,45.31185,8.205937,NUTS_2021
+IT,verona,nuts3,Verona,45.419126,11.048424,NUTS_2021
 IT,vi,admin2,Vicenza,45.712,11.4753,NaturalEarth_10m_admin1
+IT,vicenza,nuts3,Vicenza,45.655805,11.505555,NUTS_2021
 IT,viterbo,nuts3,Viterbo,42.42431,11.986428,NUTS_2021
 IT,vr,admin2,Verona,45.4528,11.0433,NaturalEarth_10m_admin1
+JE,jersey,admin1,Jersey,49.2298,-2.12454,NaturalEarth_10m_admin1
 JP,aichi,admin1,Aichi,34.9973,137.214,NaturalEarth_10m_admin1
 JP,chiba,admin1,Chiba,35.489,140.318,NaturalEarth_10m_admin1
+JP,ehime,admin1,Ehime,33.8141,132.916,NaturalEarth_10m_admin1
+JP,fukui,admin1,Fukui,35.9297,136.316,NaturalEarth_10m_admin1
 JP,fukuoka,admin1,Fukuoka,33.4906,130.616,NaturalEarth_10m_admin1
 JP,gunma,admin1,Gunma,36.5592,139.025,NaturalEarth_10m_admin1
+JP,hiroshima,admin1,Hiroshima,34.6067,132.853,NaturalEarth_10m_admin1
 JP,hokkaido,admin1,Hokkaidō,43.37,142.805,NaturalEarth_10m_admin1
 JP,hyogo,admin1,Hyōgo,35.063,134.837,NaturalEarth_10m_admin1
 JP,ibaraki,admin1,Ibaraki,36.2773,140.257,NaturalEarth_10m_admin1
+JP,ishikawa,admin1,Ishikawa,36.5654,136.677,NaturalEarth_10m_admin1
+JP,kagawa,admin1,Kagawa,34.2162,134.001,NaturalEarth_10m_admin1
 JP,kagoshima,admin1,Kagoshima,29.4572,129.601,NaturalEarth_10m_admin1
 JP,kanagawa,admin1,Kanagawa,35.4378,139.344,NaturalEarth_10m_admin1
+JP,kochi,admin1,Kōchi,33.6129,133.442,NaturalEarth_10m_admin1
+JP,kochi-prefecture,admin1,Kōchi,33.6129,133.442,NaturalEarth_10m_admin1
 JP,kumamoto,admin1,Kumamoto,32.588,130.834,NaturalEarth_10m_admin1
 JP,kyoto,admin1,Kyōto,35.2117,135.451,NaturalEarth_10m_admin1
+JP,mie,admin1,Mie,34.5679,136.386,NaturalEarth_10m_admin1
 JP,miyazaki,admin1,Miyazaki,32.0981,131.286,NaturalEarth_10m_admin1
 JP,nagasaki,admin1,Nagasaki,32.6745,128.755,NaturalEarth_10m_admin1
+JP,nagasaki-prefecture,admin1,Nagasaki,32.6745,128.755,NaturalEarth_10m_admin1
+JP,oita,admin1,Ōita,33.2006,131.449,NaturalEarth_10m_admin1
 JP,okayama,admin1,Okayama,34.8521,133.831,NaturalEarth_10m_admin1
 JP,okinawa,admin1,Okinawa,24.3349,123.802,NaturalEarth_10m_admin1
 JP,osaka,admin1,Ōsaka,34.5993,135.519,NaturalEarth_10m_admin1
+JP,saga,admin1,Saga,33.0097,130.147,NaturalEarth_10m_admin1
 JP,shimane,admin1,Shimane,35.0972,132.603,NaturalEarth_10m_admin1
+JP,shimane-prefecture,admin1,Shimane,35.0972,132.603,NaturalEarth_10m_admin1
 JP,shizuoka,admin1,Shizuoka,35.0359,138.306,NaturalEarth_10m_admin1
 JP,tochigi,admin1,Tochigi,36.6593,139.786,NaturalEarth_10m_admin1
 JP,tokyo,admin1,Tokyo,35.6578,139.407,NaturalEarth_10m_admin1
+JP,tottori,admin1,Tottori,35.3657,133.819,NaturalEarth_10m_admin1
+JP,toyama,admin1,Toyama,36.596,137.246,NaturalEarth_10m_admin1
+JP,yamaguchi,admin1,Yamaguchi,34.2154,131.645,NaturalEarth_10m_admin1
+KE,central-province,admin2,Central,-0.709986,36.8463,NaturalEarth_10m_admin1
+KE,coast-province,admin2,Coast,-2.51514,39.5816,NaturalEarth_10m_admin1
+KE,eastern-province,admin1,Eastern,2.60695,37.7915,NaturalEarth_10m_admin1
+KE,nairobi,admin1,Nairobi,-1.29384,36.9039,NaturalEarth_10m_admin1
 KE,nairobi-district,admin1,Eastern,2.60695,37.7915,NaturalEarth_10m_admin1
 KE,north-eastern-province,admin2,North-Eastern,1.01482,40.2748,NaturalEarth_10m_admin1
+KE,rift-valley,admin2,Rift Valley,1.15655,36.0169,NaturalEarth_10m_admin1
 KE,rift-valley-province,admin2,Rift Valley,1.15655,36.0169,NaturalEarth_10m_admin1
+KE,western,admin2,Western,0.537049,34.5306,NaturalEarth_10m_admin1
 KH,kampong-cham,admin2,Kâmpóng Cham,12.1206,105.629,NaturalEarth_10m_admin1
 KH,kampong-speu,admin2,Kâmpóng Spœ,11.5221,104.282,NaturalEarth_10m_admin1
 KH,mondulkiri,admin2,Môndól Kiri,12.6284,106.961,NaturalEarth_10m_admin1
 KH,phnom-penh,admin1,Phnom Penh,11.5733,104.874,NaturalEarth_10m_admin1
 KH,prey-veng,admin2,Prey Vêng,11.3561,105.473,NaturalEarth_10m_admin1
 KH,takeo,admin2,Takêv,10.9346,104.751,NaturalEarth_10m_admin1
+KM,anjouan,admin1,Andjouân,-12.226,44.4518,NaturalEarth_10m_admin1
+KM,grande-comore,admin1,Andjazîdja,-11.6952,43.3378,NaturalEarth_10m_admin1
+KM,moheli,admin1,Moûhîlî,-12.3178,43.7462,NaturalEarth_10m_admin1
+KM,ngazidja,admin1,Andjazîdja,-11.6952,43.3378,NaturalEarth_10m_admin1
+KR,busan,admin1,Busan,35.1928,129.082,NaturalEarth_10m_admin1
+KR,chungcheongbuk-do,admin2,North Chungcheong,36.7476,127.668,NaturalEarth_10m_admin1
+KR,gangwon,admin2,Gangwon,37.7951,128.22,NaturalEarth_10m_admin1
+KR,gyeongsangnam-do,admin2,South Gyeongsang,35.3192,128.217,NaturalEarth_10m_admin1
+KR,jeju,admin2,Jeju,33.3741,126.557,NaturalEarth_10m_admin1
+KR,jeollabuk-do,admin2,North Jeolla,35.679,127.081,NaturalEarth_10m_admin1
+KR,jeollanam-do,admin1,South Jeolla,34.8166,126.884,NaturalEarth_10m_admin1
+KR,north-chungcheong,admin2,North Chungcheong,36.7476,127.668,NaturalEarth_10m_admin1
+KR,north-jeolla,admin2,North Jeolla,35.679,127.081,NaturalEarth_10m_admin1
+KR,south-chungcheong,admin2,South Chungcheong,36.4602,126.874,NaturalEarth_10m_admin1
+KR,south-jeolla,admin1,South Jeolla,34.8166,126.884,NaturalEarth_10m_admin1
 KZ,akmola,admin1,Aqmola,51.928,69.8519,NaturalEarth_10m_admin1
 KZ,kyzylorda,admin1,Qyzylorda,44.6012,63.6151,NaturalEarth_10m_admin1
 KZ,south-kazakhstan,admin1,South Kazakhstan,42.7187,68.7533,NaturalEarth_10m_admin1
 KZ,west-kazakhstan,admin1,West Kazakhstan,49.8909,50.5145,NaturalEarth_10m_admin1
+KZ,zhambyl,admin1,Zhambyl,44.3152,72.4888,NaturalEarth_10m_admin1
 LA,attapeu,admin2,Attapu,14.7848,106.866,NaturalEarth_10m_admin1
+LA,bokeo,admin2,Bokeo,20.3044,100.672,NaturalEarth_10m_admin1
 LA,bolikhamxay,admin2,Bolikhamxai,18.538,104.039,NaturalEarth_10m_admin1
 LA,champasak,admin2,Champasak,14.1093,106.003,NaturalEarth_10m_admin1
 LA,champassak,admin2,Champasak,14.1093,106.003,NaturalEarth_10m_admin1
+LA,huaphanh,admin2,Houaphan,20.3729,104.039,NaturalEarth_10m_admin1
+LA,khammouan,admin2,Khammouan,17.6151,105.343,NaturalEarth_10m_admin1
 LA,khong,admin2,Champasak,14.1093,106.003,NaturalEarth_10m_admin1
 LA,luang-namtha,admin2,Louang Namtha,20.9099,101.148,NaturalEarth_10m_admin1
 LA,luang-prabang,admin2,Louangphrabang,20.0788,102.549,NaturalEarth_10m_admin1
+LA,luangnamtha,admin2,Louang Namtha,20.9099,101.148,NaturalEarth_10m_admin1
 LA,oudomxay,admin2,Oudômxai,20.161,101.548,NaturalEarth_10m_admin1
 LA,pakse,admin2,Champasak,14.1093,106.003,NaturalEarth_10m_admin1
+LA,phongsaly,admin2,Phôngsali,21.6153,102.245,NaturalEarth_10m_admin1
 LA,salavan,admin2,Saravan,15.7614,106.248,NaturalEarth_10m_admin1
+LA,saravan,admin2,Saravan,15.7614,106.248,NaturalEarth_10m_admin1
 LA,saravane,admin2,Saravan,15.7614,106.248,NaturalEarth_10m_admin1
 LA,savannakhet,admin2,Savannakhét,16.4937,105.771,NaturalEarth_10m_admin1
+LA,sekong,admin2,Xékong,15.6414,106.982,NaturalEarth_10m_admin1
 LA,vientiane,admin1,Vientiane [prefecture],18.103,102.563,NaturalEarth_10m_admin1
+LA,xiengkhuang,admin2,Xiangkhoang,19.5113,103.46,NaturalEarth_10m_admin1
 LI,li000,nuts3,Liechtenstein,47.138334,9.55335,NUTS_2021
+LK,anuradhapura,admin1,Anurādhapura,8.29198,80.4711,NaturalEarth_10m_admin1
+LK,colombo,admin1,Kŏḷamba,6.85989,80.0349,NaturalEarth_10m_admin1
+LK,jaffna,admin1,Yāpanaya,9.50669,79.6933,NaturalEarth_10m_admin1
 LK,kandy,admin1,Mahanuvara,7.30186,80.718,NaturalEarth_10m_admin1
+LK,ratnapura,admin1,Ratnapura,6.57933,80.5623,NaturalEarth_10m_admin1
 LT,alytus,admin2,Alytaus,54.2544,24.167,NaturalEarth_10m_admin1
 LT,kaunas,admin2,Kauno,55.0673,23.9879,NaturalEarth_10m_admin1
 LT,lt011,nuts3,Vilniaus apskritis,54.816637,25.228936,NUTS_2021
@@ -1075,8 +1610,51 @@ LU,lu,admin1,Luxembourg,49.771044,6.09428,NUTS_2021
 LV,lv003,nuts3,Kurzeme,56.926962,22.002598,NUTS_2021
 LV,lv005,nuts3,Latgale,56.393125,27.170495,NUTS_2021
 LV,lv009,nuts3,Zemgale,56.459956,25.663608,NUTS_2021
+MD,chisinau,admin1,Chişinău,47.0348,28.822,NaturalEarth_10m_admin1
+ME,bijelo-polje,admin1,Bijelo Polje,43.0174,19.7579,NaturalEarth_10m_admin1
+ME,budva,admin1,Budva,42.3039,18.8929,NaturalEarth_10m_admin1
+ME,cetinje,admin1,Cetinje,42.4993,18.8954,NaturalEarth_10m_admin1
+ME,danilovgrad,admin1,Danilovgrad,42.5936,19.1191,NaturalEarth_10m_admin1
+ME,herceg-novi,admin1,Herceg Novi,42.4041,18.6027,NaturalEarth_10m_admin1
+ME,kolasin,admin1,Kolašin,42.7889,19.4394,NaturalEarth_10m_admin1
+ME,kotor,admin1,Kotor,42.5415,18.65,NaturalEarth_10m_admin1
+ME,mojkovac,admin1,Mojkovac,42.971,19.515,NaturalEarth_10m_admin1
+ME,niksic,admin1,Nikšic,42.8341,18.8259,NaturalEarth_10m_admin1
+ME,plav,admin1,Plav,42.5985,19.9168,NaturalEarth_10m_admin1
+ME,pljevlja,admin1,Pljevlja,43.3019,19.2264,NaturalEarth_10m_admin1
+ME,pluzine,admin1,Plužine,43.1483,18.8229,NaturalEarth_10m_admin1
+ME,podgorica,admin1,Podgorica,42.4462,19.3069,NaturalEarth_10m_admin1
+ME,savnik,admin1,Šavnik,42.9571,19.1516,NaturalEarth_10m_admin1
+ME,tivat,admin1,Tivat,42.3897,18.6898,NaturalEarth_10m_admin1
+ME,zabljak,admin1,Žabljak,43.1148,19.2003,NaturalEarth_10m_admin1
+MG,alaotra-mangoro,admin2,Alaotra-Mangoro,-17.8014,48.3868,NaturalEarth_10m_admin1
+MG,analamanga,admin2,Analamanga,-18.4743,47.481,NaturalEarth_10m_admin1
+MG,anosy,admin2,Anosy,-24.22,46.2904,NaturalEarth_10m_admin1
 MG,antananarivo,admin2,Analamanga,-18.4743,47.481,NaturalEarth_10m_admin1
+MG,antsiranana,admin2,Diana,-13.5916,49.08,NaturalEarth_10m_admin1
 MG,fianarantsoa,admin2,Vatovavy-Fitovinany,-21.399,47.921,NaturalEarth_10m_admin1
+MG,itasy,admin2,Itasy,-18.9938,46.7662,NaturalEarth_10m_admin1
+MG,mahajanga,admin2,Boeny,-16.3187,46.3149,NaturalEarth_10m_admin1
+MG,toamasina,admin2,Analanjirofo,-16.5763,49.5586,NaturalEarth_10m_admin1
+MG,toliary,admin2,Anosy,-24.22,46.2904,NaturalEarth_10m_admin1
+MG,vakinankaratra,admin2,Vakinankaratra,-19.7425,46.8857,NaturalEarth_10m_admin1
+MK,aracinovo,admin1,Aračinovo,42.0185,21.5862,NaturalEarth_10m_admin1
+MK,berovo,admin1,Berovo,41.6344,22.8027,NaturalEarth_10m_admin1
+MK,bogdanci,admin1,Bogdanci,41.1772,22.5841,NaturalEarth_10m_admin1
+MK,bosilovo,admin1,Bosilovo,41.4665,22.7665,NaturalEarth_10m_admin1
+MK,caska,admin1,Čaška,41.5807,21.5939,NaturalEarth_10m_admin1
+MK,demir-hisar,admin1,Demir Hisar,41.2587,21.1238,NaturalEarth_10m_admin1
+MK,demir-kapija,admin1,Demir Kapija,41.3739,22.2161,NaturalEarth_10m_admin1
+MK,dojran,admin1,Dojran,41.2492,22.6539,NaturalEarth_10m_admin1
+MK,gazi-baba,admin1,Gazi Baba,42.0259,21.5136,NaturalEarth_10m_admin1
+MK,gevgelija,admin1,Gevgelija,41.243,22.3973,NaturalEarth_10m_admin1
+MK,kicevo,admin1,Kičevo,41.517,20.9511,NaturalEarth_10m_admin1
+MK,konce,admin1,Konče,41.5123,22.384,NaturalEarth_10m_admin1
+MK,kratovo,admin1,Kratovo,42.0592,22.138,NaturalEarth_10m_admin1
+MK,kriva-palanka,admin1,Kriva Palanka,42.2421,22.2641,NaturalEarth_10m_admin1
+MK,lipkovo,admin1,Lipkovo,42.1401,21.579,NaturalEarth_10m_admin1
+MK,lozovo,admin1,Lozovo,41.7258,21.915,NaturalEarth_10m_admin1
+MK,makedonska-kamenica,admin1,Makedonska Kamenica,42.0394,22.5221,NaturalEarth_10m_admin1
 MK,mk001,nuts3,Вардарски,41.563697,21.893044,NUTS_2021
 MK,mk002,nuts3,Источен,41.961311,22.501887,NUTS_2021
 MK,mk003,nuts3,Југозападен,41.252123,20.724618,NUTS_2021
@@ -1085,17 +1663,56 @@ MK,mk005,nuts3,Пелагониски,41.164524,21.422119,NUTS_2021
 MK,mk006,nuts3,Полошки,41.867954,20.883502,NUTS_2021
 MK,mk007,nuts3,Североисточен,42.162871,21.989676,NUTS_2021
 MK,mk008,nuts3,Скопски,41.968764,21.43369,NUTS_2021
+MK,negotino,admin1,Negotino,41.3722,22.1394,NaturalEarth_10m_admin1
+MK,novo-selo,admin1,Novo Selo,41.4278,22.8701,NaturalEarth_10m_admin1
+MK,pehcevo,admin1,Pehčevo,41.7917,22.8833,NaturalEarth_10m_admin1
+MK,pelagoniski,nuts3,Пелагониски,41.164524,21.422119,NUTS_2021
+MK,plasnica,admin1,Plasnica,41.4424,21.1173,NaturalEarth_10m_admin1
+MK,poloski,nuts3,Полошки,41.867954,20.883502,NUTS_2021
+MK,radovis,admin1,Radoviš,41.6365,22.4679,NaturalEarth_10m_admin1
+MK,rankovce,admin1,Rankovce,42.1895,22.1049,NaturalEarth_10m_admin1
+MK,resen,admin1,Resen,41.027,21.0472,NaturalEarth_10m_admin1
+MK,rosoman,admin1,Rosoman,41.477,21.8972,NaturalEarth_10m_admin1
+MK,severoistocen,nuts3,Североисточен,42.162871,21.989676,NUTS_2021
+MK,skopski,nuts3,Скопски,41.968764,21.43369,NUTS_2021
+MK,strumica,admin1,Strumitsa,41.3841,22.6211,NaturalEarth_10m_admin1
+MK,suto-orizari,admin1,Šuto Orizari,42.0341,21.4069,NaturalEarth_10m_admin1
+MK,valandovo,admin1,Valandovo,41.2911,22.5432,NaturalEarth_10m_admin1
+MK,vardarski,nuts3,Вардарски,41.563697,21.893044,NUTS_2021
+MK,vasilevo,admin1,Vasilevo,41.5436,22.6159,NaturalEarth_10m_admin1
+MK,vevcani,admin1,Vevčani,41.2362,20.5689,NaturalEarth_10m_admin1
+MK,vinica,admin1,Vinica,41.8652,22.5742,NaturalEarth_10m_admin1
+MK,vranestica,admin1,Vraneštica,41.4746,21.015,NaturalEarth_10m_admin1
+MK,zajas,admin1,Zajas,41.6012,20.8849,NaturalEarth_10m_admin1
+ML,bamako,admin1,Bamako,12.643,-8.01917,NaturalEarth_10m_admin1
+ML,kayes,admin1,Kayes,13.7959,-10.1984,NaturalEarth_10m_admin1
 MM,mandalay,admin1,Mandalay,20.6284,96.0614,NaturalEarth_10m_admin1
 MM,sagaing,admin1,Sagaing,23.7031,95.1821,NaturalEarth_10m_admin1
 MM,yangon,admin1,Yangon,17.1117,96.111,NaturalEarth_10m_admin1
 MN,bulgan,admin2,Bulgan,49.0014,103.196,NaturalEarth_10m_admin1
+MN,dornogovi,admin2,Dornogovi,44.4088,109.825,NaturalEarth_10m_admin1
 MN,erdenet,admin1,Orhon,49.0077,104.286,NaturalEarth_10m_admin1
+MN,selenge,admin2,Selenge,48.8536,106.46,NaturalEarth_10m_admin1
+MR,adrar,admin1,Adrar,20.7634,-10.3339,NaturalEarth_10m_admin1
+MR,assaba,admin1,Assaba,16.5835,-11.7106,NaturalEarth_10m_admin1
+MR,brakna,admin1,Brakna,17.0824,-13.6298,NaturalEarth_10m_admin1
+MR,gorgol,admin1,Gorgol,16.0296,-12.8565,NaturalEarth_10m_admin1
+MR,hodh-el-gharbi,admin1,Hodh el Gharbi,16.4832,-9.69143,NaturalEarth_10m_admin1
+MR,nouakchott,admin1,Nouakchott,18.139,-15.92,NaturalEarth_10m_admin1
+MR,tagant,admin1,Tagant,18.6165,-10.3284,NaturalEarth_10m_admin1
+MR,trarza,admin1,Trarza,17.9339,-14.6057,NaturalEarth_10m_admin1
 MT,mt001,nuts3,Malta,35.886038,14.431195,NUTS_2021
+MV,male,admin1,Malé,4.17219,73.5188,NaturalEarth_10m_admin1
+MX,aguascalientes,admin1,Aguascalientes,22.0375,-102.351,NaturalEarth_10m_admin1
+MX,baja-california,admin1,Baja California,30.3399,-115.209,NaturalEarth_10m_admin1
 MX,baja-california-sur,admin1,Baja California Sur,25.0656,-111.452,NaturalEarth_10m_admin1
 MX,campeche,admin1,Campeche,18.6624,-90.2807,NaturalEarth_10m_admin1
 MX,chiapas,admin1,Chiapas,16.527,-92.581,NaturalEarth_10m_admin1
 MX,chihuahua,admin1,Chihuahua,28.973,-106.232,NaturalEarth_10m_admin1
+MX,coahuila,admin1,Coahuila,27.4473,-101.885,NaturalEarth_10m_admin1
+MX,colima,admin1,Colima,19.1325,-103.915,NaturalEarth_10m_admin1
 MX,distrito-federal,admin1,Distrito Federal,19.3266,-99.1369,NaturalEarth_10m_admin1
+MX,durango,admin1,Durango,24.566,-104.808,NaturalEarth_10m_admin1
 MX,estado-de-mexico,admin1,México,19.3275,-99.7416,NaturalEarth_10m_admin1
 MX,guanajuato,admin1,Guanajuato,20.8141,-100.904,NaturalEarth_10m_admin1
 MX,guerrero,admin1,Guerrero,17.7608,-100.091,NaturalEarth_10m_admin1
@@ -1109,6 +1726,7 @@ MX,oaxaca,admin1,Oaxaca,16.94,-96.2087,NaturalEarth_10m_admin1
 MX,puebla,admin1,Puebla,18.549,-97.8889,NaturalEarth_10m_admin1
 MX,queretaro,admin1,Querétaro,20.7392,-99.9663,NaturalEarth_10m_admin1
 MX,quintana-roo,admin1,Quintana Roo,19.3861,-88.344,NaturalEarth_10m_admin1
+MX,san-luis-potosi,admin1,San Luis Potosí,22.4465,-100.324,NaturalEarth_10m_admin1
 MX,sinaloa,admin1,Sinaloa,25.6041,-108.001,NaturalEarth_10m_admin1
 MX,sonora,admin1,Sonora,29.5293,-110.485,NaturalEarth_10m_admin1
 MX,tabasco,admin1,Tabasco,18.1252,-92.8274,NaturalEarth_10m_admin1
@@ -1124,10 +1742,16 @@ MY,perak,admin1,Perak,4.74737,101.059,NaturalEarth_10m_admin1
 MY,sabah,admin1,Sabah,5.31115,117.095,NaturalEarth_10m_admin1
 MY,sarawak,admin1,Sarawak,2.44952,113.344,NaturalEarth_10m_admin1
 MY,selangor,admin1,Selangor,3.3078,101.428,NaturalEarth_10m_admin1
+MZ,maputo,admin2,Maputo,-25.5571,32.3209,NaturalEarth_10m_admin1
 MZ,nampula,admin2,Nampula,-14.9497,38.7815,NaturalEarth_10m_admin1
+MZ,zambezia,admin2,Zambezia,-16.4213,37.1305,NaturalEarth_10m_admin1
 NG,anambra-state,admin1,Anambra,6.30827,6.98472,NaturalEarth_10m_admin1
 NG,benue-state,admin1,Benue,7.48719,8.70736,NaturalEarth_10m_admin1
+NG,borno,admin1,Borno,12.0019,13.1533,NaturalEarth_10m_admin1
 NG,borno-state,admin1,Borno,12.0019,13.1533,NaturalEarth_10m_admin1
+NG,ebonyi,admin1,Ebonyi,6.32648,7.98254,NaturalEarth_10m_admin1
+NG,edo,admin1,Edo,6.52416,5.84934,NaturalEarth_10m_admin1
+NG,ondo,admin1,Ondo,7.1444,5.19165,NaturalEarth_10m_admin1
 NG,oyo,admin1,Oyo,8.18969,3.61681,NaturalEarth_10m_admin1
 NG,sokoto,admin1,Sokoto,13.0603,5.4366,NaturalEarth_10m_admin1
 NI,boaco,admin1,Boaco,12.524,-85.4734,NaturalEarth_10m_admin1
@@ -1142,8 +1766,21 @@ NI,matagalpa,admin1,Matagalpa,13.0242,-85.4926,NaturalEarth_10m_admin1
 NI,nueva-segovia,admin1,Nueva Segovia,13.7183,-86.2589,NaturalEarth_10m_admin1
 NI,rio-san-juan,admin1,Rio San Juan,11.1691,-84.5184,NaturalEarth_10m_admin1
 NI,rivas,admin1,Rivas,11.3524,-85.7633,NaturalEarth_10m_admin1
+NL,agglomeratie-leiden-en-bollenstreek,nuts3,Agglomeratie Leiden en Bollenstreek,52.206639,4.461518,NUTS_2021
+NL,agglomeratie-s-gravenhage,nuts3,Agglomeratie ’s-Gravenhage,52.076784,4.382048,NUTS_2021
+NL,arnhem-nijmegen,nuts3,Arnhem/Nijmegen,51.904513,5.88092,NUTS_2021
+NL,delft-en-westland,nuts3,Delft en Westland,51.989331,4.25715,NUTS_2021
+NL,drenthe,admin1,Drenthe,52.863813,6.629196,NUTS_2021
+NL,flevoland,admin1,Flevoland,52.543755,5.481713,NUTS_2021
+NL,friesland,admin2,Friesland,53.0792,5.77345,NaturalEarth_10m_admin1
+NL,gelderland,admin1,Gelderland,52.067218,5.937825,NUTS_2021
 NL,groningen,admin1,Groningen,53.267532,6.692876,NUTS_2021
+NL,groot-amsterdam,nuts3,Groot-Amsterdam,52.330907,4.845422,NUTS_2021
+NL,groot-rijnmond,nuts3,Groot-Rijnmond,51.799239,4.229752,NUTS_2021
+NL,het-gooi-en-vechtstreek,nuts3,Het Gooi en Vechtstreek,52.286407,5.138435,NUTS_2021
+NL,ijmond,nuts3,IJmond,52.49764,4.651668,NUTS_2021
 NL,limburg,admin2,Limburg,51.2248,5.93161,NaturalEarth_10m_admin1
+NL,midden-noord-brabant,nuts3,Midden-Noord-Brabant,51.608852,5.01642,NUTS_2021
 NL,nl111,nuts3,Oost-Groningen,53.093004,7.032251,NUTS_2021
 NL,nl113,nuts3,Overig Groningen,53.264546,6.51661,NUTS_2021
 NL,nl124,nuts3,Noord-Friesland,53.23665,5.872694,NUTS_2021
@@ -1173,14 +1810,32 @@ NL,nl337,nuts3,Agglomeratie Leiden en Bollenstreek,52.206639,4.461518,NUTS_2021
 NL,nl33a,nuts3,Zuidoost-Zuid-Holland,51.855417,4.832792,NUTS_2021
 NL,nl33b,nuts3,Oost-Zuid-Holland,52.054605,4.719987,NUTS_2021
 NL,nl33c,nuts3,Groot-Rijnmond,51.799239,4.229752,NUTS_2021
+NL,nl342,nuts3,Overig Zeeland,51.484118,3.983499,NUTS_2021
 NL,nl411,nuts3,West-Noord-Brabant,51.569842,4.532543,NUTS_2021
 NL,nl412,nuts3,Midden-Noord-Brabant,51.608852,5.01642,NUTS_2021
 NL,nl413,nuts3,Noordoost-Noord-Brabant,51.677457,5.521551,NUTS_2021
 NL,nl414,nuts3,Zuidoost-Noord-Brabant,51.415599,5.507749,NUTS_2021
 NL,nl421,nuts3,Noord-Limburg,51.437354,6.024346,NUTS_2021
 NL,nl423,nuts3,Zuid-Limburg,50.884423,5.874281,NUTS_2021
+NL,noord-brabant,admin1,Noord-Brabant,51.546073,5.459503,NUTS_2021
+NL,noord-holland,admin1,Noord-Holland,52.594534,4.912283,NUTS_2021
+NL,noord-overijssel,nuts3,Noord-Overijssel,52.563038,6.257972,NUTS_2021
+NL,noordoost-noord-brabant,nuts3,Noordoost-Noord-Brabant,51.677457,5.521551,NUTS_2021
 NL,north-brabant,admin2,Noord-Brabant,51.6008,5.16122,NaturalEarth_10m_admin1
+NL,north-holland,admin2,Noord-Holland,52.5748,4.89736,NaturalEarth_10m_admin1
+NL,oost-zuid-holland,nuts3,Oost-Zuid-Holland,52.054605,4.719987,NUTS_2021
+NL,overig-zeeland,nuts3,Overig Zeeland,51.484118,3.983499,NUTS_2021
+NL,overijssel,admin1,Overijssel,52.445203,6.43966,NUTS_2021
+NL,south-holland,admin2,Zuid-Holland,52.0075,4.52252,NaturalEarth_10m_admin1
 NL,utrecht,admin1,Utrecht,52.074862,5.200268,NUTS_2021
+NL,veluwe,nuts3,Veluwe,52.232537,5.808271,NUTS_2021
+NL,zeeland,admin1,Zeeland,51.307268,3.78829,NUTS_2021
+NL,zuid-holland,admin1,Zuid-Holland,51.938836,4.48669,NUTS_2021
+NL,zuidoost-noord-brabant,nuts3,Zuidoost-Noord-Brabant,51.415599,5.507749,NUTS_2021
+NL,zuidoost-zuid-holland,nuts3,Zuidoost-Zuid-Holland,51.855417,4.832792,NUTS_2021
+NL,zuidwest-gelderland,nuts3,Zuidwest-Gelderland,51.859234,5.313417,NUTS_2021
+NL,zuidwest-overijssel,nuts3,Zuidwest-Overijssel,52.342078,6.243827,NUTS_2021
+NO,aust-agder,admin2,Aust-Agder,58.6698,8.14878,NaturalEarth_10m_admin1
 NO,no060,nuts3,Trøndelag,63.149519,11.241193,NUTS_2021
 NO,no071,nuts3,Nordland,66.694373,14.78253,NUTS_2021
 NO,no074,nuts3,Troms og Finnmark,69.703589,24.155435,NUTS_2021
@@ -1188,7 +1843,22 @@ NO,no082,nuts3,Viken,60.0875,9.905136,NUTS_2021
 NO,no092,nuts3,Agder,58.702516,7.618276,NUTS_2021
 NO,no0a1,nuts3,Rogaland,58.586368,6.218346,NUTS_2021
 NO,no0b1,nuts3,Jan Mayen,71.070821,-8.248788,NUTS_2021
+NP,bagmati,admin1,Bagmati,27.8491,85.3494,NaturalEarth_10m_admin1
+NP,lumbini,admin1,Lumbini,27.695,83.55,NaturalEarth_10m_admin1
+OM,al-batinah-south,admin1,Al Batnah South,23.4299,57.6472,NaturalEarth_10m_admin1
+PA,cocle,admin2,Coclé,8.57708,-80.4314,NaturalEarth_10m_admin1
+PA,panama,admin2,Panama,9.08628,-78.9283,NaturalEarth_10m_admin1
+PE,ancash,admin1,Áncash,-9.53996,-77.6571,NaturalEarth_10m_admin1
+PE,apurimac,admin1,Apurímac,-14.0317,-72.9662,NaturalEarth_10m_admin1
+PE,arequipa,admin1,Arequipa,-15.8757,-72.4209,NaturalEarth_10m_admin1
+PE,cajamarca,admin1,Cajamarca,-6.81775,-78.6091,NaturalEarth_10m_admin1
+PE,callao,admin1,Puno,-15.1677,-69.9802,NaturalEarth_10m_admin1
+PE,huancavelica,admin1,Huancavelica,-13.0523,-75.0416,NaturalEarth_10m_admin1
+PE,huanuco,admin1,Huánuco,-9.59203,-75.9161,NaturalEarth_10m_admin1
+PE,ica,admin1,Ica,-14.2257,-75.6773,NaturalEarth_10m_admin1
 PE,junin,admin1,Junín,-11.3744,-74.9642,NaturalEarth_10m_admin1
+PE,lambayeque,admin1,Lambayeque,-6.2514,-79.8994,NaturalEarth_10m_admin1
+PE,lima,admin1,Lima,-11.0602,-77.0756,NaturalEarth_10m_admin1
 PE,loreto,admin1,Loreto,-4.27471,-73.8868,NaturalEarth_10m_admin1
 PE,madre-de-dios,admin1,Madre de Dios,-11.8726,-70.6831,NaturalEarth_10m_admin1
 PE,piura,admin1,Piura,-5.09955,-80.2868,NaturalEarth_10m_admin1
@@ -1198,7 +1868,14 @@ PF,marquesas-islands,admin1,Marquesas Islands,-9.75565,-139.037,NaturalEarth_10m
 PG,madang,admin2,Madang,-5.08973,145.086,NaturalEarth_10m_admin1
 PG,sandaun-province,admin2,Sandaun,-3.45778,141.741,NaturalEarth_10m_admin1
 PG,western-province,admin2,Western,-7.48919,142.01,NaturalEarth_10m_admin1
+PH,agusan-del-norte,admin2,Agusan del Norte,9.17346,125.56,NaturalEarth_10m_admin1
 PH,iloilo-city,admin1,Iloilo,10.7447,122.541,NaturalEarth_10m_admin1
+PH,manila,admin1,Manila,14.5931,120.989,NaturalEarth_10m_admin1
+PH,tarlac,admin2,Tarlac,15.4733,120.463,NaturalEarth_10m_admin1
+PK,balochistan,admin2,Baluchistan,27.5194,65.5512,NaturalEarth_10m_admin1
+PK,islamabad,admin1,F.C.T.,33.7011,73.0628,NaturalEarth_10m_admin1
+PK,punjab,admin2,Punjab,31.3589,72.3449,NaturalEarth_10m_admin1
+PK,sindh,admin2,Sind,26.3734,68.8685,NaturalEarth_10m_admin1
 PL,pl213,nuts3,Miasto Kraków,50.050682,19.962731,NUTS_2021
 PL,pl214,nuts3,Krakowski,49.991433,20.410791,NUTS_2021
 PL,pl21a,nuts3,Oświęcimski,50.016505,19.455818,NUTS_2021
@@ -1241,7 +1918,12 @@ PL,pl911,nuts3,Miasto Warszawa,52.240589,21.028379,NUTS_2021
 PL,pl924,nuts3,Ostrołęcki,52.992504,21.438035,NUTS_2021
 PL,podlaskie,admin1,Podlaskie,53.266902,22.944622,NUTS_2021
 PR,puerto-rico,admin1,Puerto Rico,18.2448,-66.4441,NaturalEarth_10m_admin1
+PT,alto-alentejo,nuts3,Alto Alentejo,39.286789,-7.624405,NUTS_2021
+PT,braganca,admin1,Bragança,41.5188,-6.81935,NaturalEarth_10m_admin1
+PT,faro,admin1,Faro,37.1704,-7.93895,NaturalEarth_10m_admin1
+PT,leziria-do-tejo,nuts3,Lezíria do Tejo,39.115215,-8.615762,NUTS_2021
 PT,madeira,admin1,Madeira,32.7427,-16.9465,NaturalEarth_10m_admin1
+PT,portalegre,admin1,Portalegre,39.2822,-7.65389,NaturalEarth_10m_admin1
 PT,pt111,nuts3,Alto Minho,41.87048,-8.505193,NUTS_2021
 PT,pt11a,nuts3,Área Metropolitana do Porto,41.106165,-8.488176,NUTS_2021
 PT,pt11b,nuts3,Alto Tâmega,41.664194,-7.630175,NUTS_2021
@@ -1263,13 +1945,39 @@ PT,pt187,nuts3,Alentejo Central,38.598735,-7.856809,NUTS_2021
 PT,pt300,nuts3,Região Autónoma da Madeira,32.732613,-16.950253,NUTS_2021
 PY,alto-parana,admin1,Alto Paraná,-25.3757,-54.9426,NaturalEarth_10m_admin1
 PY,asuncion,admin1,Asunción,-25.3096,-57.5735,NaturalEarth_10m_admin1
+PY,boqueron,admin1,Boquerón,-22.0943,-60.9776,NaturalEarth_10m_admin1
 PY,caaguazu,admin1,Caaguazú,-25.2234,-55.8821,NaturalEarth_10m_admin1
 PY,caazapa,admin1,Caazapá,-26.2005,-56.0049,NaturalEarth_10m_admin1
+PY,central,admin1,Central,-25.6711,-57.5265,NaturalEarth_10m_admin1
 PY,concepcion,admin1,Concepción,-22.8458,-57.0543,NaturalEarth_10m_admin1
+PY,cordillera,admin1,Cordillera,-25.2506,-56.9747,NaturalEarth_10m_admin1
+PY,guaira,admin1,Guairá,-25.8137,-56.1486,NaturalEarth_10m_admin1
 PY,itapua,admin1,Itapúa,-26.8545,-55.6773,NaturalEarth_10m_admin1
+PY,neembucu,admin1,Ñeembucú,-26.6639,-57.9275,NaturalEarth_10m_admin1
 PY,paraguari,admin1,Paraguarí,-25.9805,-57.146,NaturalEarth_10m_admin1
+PY,presidente-hayes,admin1,Presidente Hayes,-23.4234,-58.9417,NaturalEarth_10m_admin1
+PY,san-pedro,admin1,San Pedro,-24.2001,-56.6053,NaturalEarth_10m_admin1
+RO,arges,nuts3,Argeş,45.0267,24.877163,NUTS_2021
+RO,bihor,nuts3,Bihor,46.946052,22.206464,NUTS_2021
+RO,botosani,nuts3,Botoşani,47.844824,26.754268,NUTS_2021
+RO,braila,nuts3,Brăila,45.088592,27.679429,NUTS_2021
+RO,brasov,nuts3,Braşov,45.759041,25.320004,NUTS_2021
 RO,bucharest,admin1,Bucharest,44.467,26.0999,NaturalEarth_10m_admin1
+RO,bucuresti,nuts3,Bucureşti,44.441857,26.089473,NUTS_2021
+RO,buzau,nuts3,Buzău,45.250977,26.750232,NUTS_2021
+RO,calarasi,nuts3,Călăraşi,44.292389,26.95569,NUTS_2021
+RO,cluj,nuts3,Cluj,46.811295,23.545814,NUTS_2021
+RO,constanta,nuts3,Constanţa,44.262801,28.262086,NUTS_2021
+RO,dambovita,nuts3,Dâmboviţa,44.862064,25.500603,NUTS_2021
+RO,dolj,nuts3,Dolj,44.138623,23.631586,NUTS_2021
+RO,galati,nuts3,Galaţi,45.787319,27.777578,NUTS_2021
+RO,giurgiu,nuts3,Giurgiu,44.129241,25.882613,NUTS_2021
 RO,ialomita,nuts3,Ialomiţa,44.632711,27.21512,NUTS_2021
+RO,iasi,nuts3,Iaşi,47.204057,27.285622,NUTS_2021
+RO,ilfov,nuts3,Ilfov,44.546147,26.159845,NUTS_2021
+RO,mures,nuts3,Mureş,46.606563,24.69493,NUTS_2021
+RO,olt,nuts3,Olt,44.245829,24.439211,NUTS_2021
+RO,prahova,nuts3,Prahova,45.114655,26.017547,NUTS_2021
 RO,ro111,nuts3,Bihor,46.946052,22.206464,NUTS_2021
 RO,ro112,nuts3,Bistriţa-Năsăud,47.236055,24.527115,NUTS_2021
 RO,ro113,nuts3,Cluj,46.811295,23.545814,NUTS_2021
@@ -1283,16 +1991,20 @@ RO,ro124,nuts3,Harghita,46.551441,25.557574,NUTS_2021
 RO,ro125,nuts3,Mureş,46.606563,24.69493,NUTS_2021
 RO,ro126,nuts3,Sibiu,45.851767,24.259897,NUTS_2021
 RO,ro211,nuts3,Bacău,46.417329,26.782047,NUTS_2021
+RO,ro212,nuts3,Botoşani,47.844824,26.754268,NUTS_2021
 RO,ro213,nuts3,Iaşi,47.204057,27.285622,NUTS_2021
 RO,ro214,nuts3,Neamţ,46.975906,26.367779,NUTS_2021
+RO,ro215,nuts3,Suceava,47.615347,25.823836,NUTS_2021
 RO,ro216,nuts3,Vaslui,46.518689,27.763413,NUTS_2021
 RO,ro221,nuts3,Brăila,45.088592,27.679429,NUTS_2021
 RO,ro222,nuts3,Buzău,45.250977,26.750232,NUTS_2021
 RO,ro223,nuts3,Constanţa,44.262801,28.262086,NUTS_2021
 RO,ro224,nuts3,Galaţi,45.787319,27.777578,NUTS_2021
 RO,ro225,nuts3,Tulcea,44.987761,28.855079,NUTS_2021
+RO,ro226,nuts3,Vrancea,45.782339,26.975343,NUTS_2021
 RO,ro311,nuts3,Argeş,45.0267,24.877163,NUTS_2021
 RO,ro312,nuts3,Călăraşi,44.292389,26.95569,NUTS_2021
+RO,ro313,nuts3,Dâmboviţa,44.862064,25.500603,NUTS_2021
 RO,ro314,nuts3,Giurgiu,44.129241,25.882613,NUTS_2021
 RO,ro315,nuts3,Ialomiţa,44.632711,27.21512,NUTS_2021
 RO,ro316,nuts3,Prahova,45.114655,26.017547,NUTS_2021
@@ -1301,12 +2013,46 @@ RO,ro321,nuts3,Bucureşti,44.441857,26.089473,NUTS_2021
 RO,ro322,nuts3,Ilfov,44.546147,26.159845,NUTS_2021
 RO,ro411,nuts3,Dolj,44.138623,23.631586,NUTS_2021
 RO,ro413,nuts3,Mehedinţi,44.590247,22.813962,NUTS_2021
+RO,ro414,nuts3,Olt,44.245829,24.439211,NUTS_2021
 RO,ro421,nuts3,Arad,46.262233,21.754042,NUTS_2021
 RO,ro422,nuts3,Caraş-Severin,45.145848,22.027985,NUTS_2021
 RO,ro423,nuts3,Hunedoara,45.736156,22.938507,NUTS_2021
 RO,ro424,nuts3,Timiş,45.746915,21.355155,NUTS_2021
+RO,satu-mare,nuts3,Satu Mare,47.704278,22.873344,NUTS_2021
 RO,sibiu,nuts3,Sibiu,45.851767,24.259897,NUTS_2021
+RO,suceava,nuts3,Suceava,47.615347,25.823836,NUTS_2021
+RO,teleorman,nuts3,Teleorman,44.016724,25.191096,NUTS_2021
+RO,tulcea,nuts3,Tulcea,44.987761,28.855079,NUTS_2021
+RO,vaslui,nuts3,Vaslui,46.518689,27.763413,NUTS_2021
+RO,vrancea,nuts3,Vrancea,45.782339,26.975343,NUTS_2021
 RS,belgrade,admin1,Grad Beograd,44.6408,20.4001,NaturalEarth_10m_admin1
+RS,bor,admin1,Borski,44.3824,22.2686,NaturalEarth_10m_admin1
+RS,branicevo,admin1,Branicevski,44.4632,21.5363,NaturalEarth_10m_admin1
+RS,city-of-belgrade,admin1,Београдски регион,44.659323,20.427028,NUTS_2021
+RS,juznobacka-oblast,nuts3,Јужнобачка област,45.402014,19.734298,NUTS_2021
+RS,juznobanatska-oblast,nuts3,Јужнобанатска област,45.004928,20.984598,NUTS_2021
+RS,nisavska-oblast,nuts3,Нишавска област,43.346935,21.907532,NUTS_2021
+RS,pirot,admin1,Pirotski,43.1029,22.5488,NaturalEarth_10m_admin1
+RS,pomoravska-oblast,nuts3,Поморавска област,43.990356,21.368355,NUTS_2021
+RS,rasinska-oblast,nuts3,Расинска област,43.51657,21.158345,NUTS_2021
+RS,raska-oblast,nuts3,Рашка област,43.36676,20.55629,NUTS_2021
+RS,rs110,nuts3,Београдска област,44.659323,20.427028,NUTS_2021
+RS,rs121,nuts3,Западнобачка област,45.713156,19.219749,NUTS_2021
+RS,rs122,nuts3,Јужнобанатска област,45.004928,20.984598,NUTS_2021
+RS,rs123,nuts3,Јужнобачка област,45.402014,19.734298,NUTS_2021
+RS,rs124,nuts3,Севернобанатска област,45.926495,20.170747,NUTS_2021
+RS,rs126,nuts3,Средњобанатска област,45.440987,20.517124,NUTS_2021
+RS,rs215,nuts3,Поморавска област,43.990356,21.368355,NUTS_2021
+RS,rs216,nuts3,Расинска област,43.51657,21.158345,NUTS_2021
+RS,rs217,nuts3,Рашка област,43.36676,20.55629,NUTS_2021
+RS,rs218,nuts3,Шумадијска област,44.123478,20.772999,NUTS_2021
+RS,rs225,nuts3,Нишавска област,43.346935,21.907532,NUTS_2021
+RS,severno-backi,admin1,Severno-Backi,45.9326,19.5801,NaturalEarth_10m_admin1
+RS,severnobanatska-oblast,nuts3,Севернобанатска област,45.926495,20.170747,NUTS_2021
+RS,srednjobanatska-oblast,nuts3,Средњобанатска област,45.440987,20.517124,NUTS_2021
+RS,sumadijska-oblast,nuts3,Шумадијска област,44.123478,20.772999,NUTS_2021
+RS,zapadnobacka-oblast,nuts3,Западнобачка област,45.713156,19.219749,NUTS_2021
+RS,zlatiborski,admin1,Zlatiborski,43.6263,19.7284,NaturalEarth_10m_admin1
 RU,altai,admin1,Gorno-Altay,50.9782,86.937,NaturalEarth_10m_admin1
 RU,altay,admin1,Altay,52.4268,82.8667,NaturalEarth_10m_admin1
 RU,amur,admin1,Amur,52.9236,128.354,NaturalEarth_10m_admin1
@@ -1335,13 +2081,17 @@ RU,leningrad,admin1,Leningrad,59.9905,32.7736,NaturalEarth_10m_admin1
 RU,moscow,admin1,Moskovskaya,55.1508,38.671,NaturalEarth_10m_admin1
 RU,novosibirsk,admin1,Novosibirsk,55.3139,80.0832,NaturalEarth_10m_admin1
 RU,omsk,admin1,Omsk,56.0471,73.3995,NaturalEarth_10m_admin1
+RU,oryol,admin1,Orel,52.8778,36.4166,NaturalEarth_10m_admin1
 RU,perm,admin1,Perm',58.8735,56.5878,NaturalEarth_10m_admin1
 RU,primorskiy-kray,admin1,Primor'ye,44.8622,134.594,NaturalEarth_10m_admin1
 RU,primorsky-krai,admin1,Primor'ye,44.8622,134.594,NaturalEarth_10m_admin1
 RU,republic-of-buryatia,admin1,Buryat,52.9061,109.341,NaturalEarth_10m_admin1
 RU,republic-of-karelia,admin1,Karelia,63.5295,33.1446,NaturalEarth_10m_admin1
+RU,republic-of-khakassia,admin1,Khakass,53.3643,89.8405,NaturalEarth_10m_admin1
+RU,republic-of-tatarstan,admin1,Tatarstan,55.374,50.7364,NaturalEarth_10m_admin1
 RU,republic-of-tuva,admin1,Tuva,51.6051,93.9927,NaturalEarth_10m_admin1
 RU,rostov,admin1,Rostov,47.9913,41.2613,NaturalEarth_10m_admin1
+RU,rostovskaya-oblast,admin1,Rostov,47.9913,41.2613,NaturalEarth_10m_admin1
 RU,saratov,admin1,Saratov,51.6742,46.6368,NaturalEarth_10m_admin1
 RU,stavropol,admin1,Stavropol',44.981,43.2791,NaturalEarth_10m_admin1
 RU,sverdlovsk,admin1,Sverdlovsk,58.8952,61.7078,NaturalEarth_10m_admin1
@@ -1349,18 +2099,35 @@ RU,tatarstan,admin1,Tatarstan,55.374,50.7364,NaturalEarth_10m_admin1
 RU,tomsk,admin1,Tomsk,58.4467,82.2299,NaturalEarth_10m_admin1
 RU,transbaikalia,admin1,Chita,52.159,116.559,NaturalEarth_10m_admin1
 RU,tyumen,admin1,Tyumen',57.2639,68.5186,NaturalEarth_10m_admin1
+RU,udmurt-republic,admin1,Udmurt,57.3433,52.7957,NaturalEarth_10m_admin1
+RU,ulyanovsk,admin1,Ul'yanovsk,53.9248,47.3773,NaturalEarth_10m_admin1
 RU,volgograd,admin1,Volgograd,49.5014,44.4488,NaturalEarth_10m_admin1
+RU,volgogradskaya-oblast,admin1,Volgograd,49.5014,44.4488,NaturalEarth_10m_admin1
 RU,vologda,admin1,Vologda,59.6397,40.9333,NaturalEarth_10m_admin1
 RU,voronezh,admin1,Voronezh,50.7774,40.5223,NaturalEarth_10m_admin1
 RU,yaroslavl,admin1,Yaroslavl',57.7329,39.2547,NaturalEarth_10m_admin1
 RU,yekaterinburg,admin1,Sverdlovsk,58.8952,61.7078,NaturalEarth_10m_admin1
+RU,zabaykalsky-krai,admin1,Chita,52.159,116.559,NaturalEarth_10m_admin1
+SA,al-jawf,admin1,Al Jawf,29.5589,38.3651,NaturalEarth_10m_admin1
+SA,asir,admin1,`Asir,19.3484,42.9503,NaturalEarth_10m_admin1
+SA,eastern,admin1,Ash Sharqiyah,22.9875,50.1714,NaturalEarth_10m_admin1
+SA,jizan,admin1,Jizan,17.3028,42.726,NaturalEarth_10m_admin1
+SA,najran,admin1,Najran,18.2931,45.6917,NaturalEarth_10m_admin1
 SB,guadalcanal,admin2,Guadalcanal,-9.61695,160.209,NaturalEarth_10m_admin1
 SB,malaita,admin2,Malaita,-9.75831,161.956,NaturalEarth_10m_admin1
 SB,western-province,admin2,Western,-8.72999,157.551,NaturalEarth_10m_admin1
 SD,gezira,admin1,Gezira,14.6771,33.3362,NaturalEarth_10m_admin1
+SD,kassala,admin1,Kassala,15.6265,35.5979,NaturalEarth_10m_admin1
 SD,kassala-state,admin1,Kassala,15.6265,35.5979,NaturalEarth_10m_admin1
+SD,khartoum,admin1,Khartoum,15.7338,32.9823,NaturalEarth_10m_admin1
 SD,khartoum-state,admin1,Khartoum,15.7338,32.9823,NaturalEarth_10m_admin1
+SD,nile,admin1,River Nile,17.558,33.7623,NaturalEarth_10m_admin1
+SD,sennar,admin1,Sennar,13.21,34.252,NaturalEarth_10m_admin1
+SD,southern-kordofan,admin1,South Kordufan,11.4504,29.83,NaturalEarth_10m_admin1
+SD,white-nile,admin1,White Nile,13.5951,32.3633,NaturalEarth_10m_admin1
 SD,white-nile-state,admin1,White Nile,13.5951,32.3633,NaturalEarth_10m_admin1
+SE,halland,admin2,Halland,56.9745,12.8007,NaturalEarth_10m_admin1
+SE,orebro,admin2,Orebro,59.3913,15.0594,NaturalEarth_10m_admin1
 SE,se121,nuts3,Uppsala län,60.041219,17.545938,NUTS_2021
 SE,se123,nuts3,Östergötlands län,58.364154,15.651713,NUTS_2021
 SE,se125,nuts3,Västmanlands län,59.745432,16.171915,NUTS_2021
@@ -1373,9 +2140,22 @@ SE,se224,nuts3,Skåne län,55.961781,13.62794,NUTS_2021
 SE,se231,nuts3,Hallands län,56.939601,12.873348,NUTS_2021
 SE,se232,nuts3,Västra Götalands län,57.988552,12.9933,NUTS_2021
 SE,se311,nuts3,Värmlands län,59.786069,13.169137,NUTS_2021
+SE,varmland,admin2,Värmland,59.8068,13.0764,NaturalEarth_10m_admin1
 SE,vasterbotten,admin2,Västerbotten,64.7048,18.3726,NaturalEarth_10m_admin1
+SI,hrpelje-kozina,admin1,Hrpelje-Kozina,45.5679,13.9929,NaturalEarth_10m_admin1
+SI,ilirska-bistrica,admin1,Ilirska Bistrica,45.5678,14.2891,NaturalEarth_10m_admin1
 SI,kamnik,admin1,Kamnik,46.2285,14.733,NaturalEarth_10m_admin1
+SI,kocevje,admin1,Kocevje,45.6418,14.9161,NaturalEarth_10m_admin1
+SI,komen,admin1,Komen,45.8225,13.7382,NaturalEarth_10m_admin1
+SI,koper,admin1,Koper,45.5076,13.8237,NaturalEarth_10m_admin1
+SI,kuzma,admin1,Kuzma,46.8461,16.0916,NaturalEarth_10m_admin1
+SI,ljubljana,admin1,Ljubljana,46.0616,14.5799,NaturalEarth_10m_admin1
+SI,logatec,admin1,Logatec,45.9399,14.1998,NaturalEarth_10m_admin1
 SI,mozirje,admin1,Mozirje,46.3593,14.9377,NaturalEarth_10m_admin1
+SI,osrednjeslovenska,nuts3,Osrednjeslovenska,46.039464,14.548504,NUTS_2021
+SI,pivka,admin1,Pivka,45.6834,14.2444,NaturalEarth_10m_admin1
+SI,podravska,nuts3,Podravska,46.480408,15.761377,NUTS_2021
+SI,savinjska,nuts3,Savinjska,46.27671,15.188581,NUTS_2021
 SI,si031,nuts3,Pomurska,46.664184,16.195272,NUTS_2021
 SI,si032,nuts3,Podravska,46.480408,15.761377,NUTS_2021
 SI,si033,nuts3,Koroška,46.548871,15.096711,NUTS_2021
@@ -1388,21 +2168,43 @@ SI,si041,nuts3,Osrednjeslovenska,46.039464,14.548504,NUTS_2021
 SI,si042,nuts3,Gorenjska,46.315331,14.129516,NUTS_2021
 SI,si043,nuts3,Goriška,46.066049,13.795382,NUTS_2021
 SI,si044,nuts3,Obalno-kraška,45.529822,13.85722,NUTS_2021
+SK,banska-bystrica,admin1,Banskobystrický,48.5213,19.477,NaturalEarth_10m_admin1
+SK,bratislava,admin1,Bratislavský,48.2935,17.1882,NaturalEarth_10m_admin1
+SK,nitra,admin1,Nitriansky,48.1443,18.3966,NaturalEarth_10m_admin1
 SK,sk010,nuts3,Bratislavský kraj,48.299761,17.160738,NUTS_2021
+SK,sk021,nuts3,Trnavský kraj,48.31709,17.56918,NUTS_2021
 SK,sk031,nuts3,Žilinský kraj,49.177208,19.168347,NUTS_2021
 SK,sk032,nuts3,Banskobystrický kraj,48.502294,19.512763,NUTS_2021
 SK,sk041,nuts3,Prešovský kraj,49.184233,21.225385,NUTS_2021
 SK,sk042,nuts3,Košický kraj,48.778871,20.796292,NUTS_2021
+SK,trnava,admin1,Trnavský,48.3422,17.6989,NaturalEarth_10m_admin1
+SK,trnavsky-kraj,nuts3,Trnavský kraj,48.31709,17.56918,NUTS_2021
+SK,zilina,admin1,Žilinský,49.1656,19.2076,NaturalEarth_10m_admin1
+SN,dakar,admin1,Dakar,14.7835,-17.3327,NaturalEarth_10m_admin1
+SN,diourbel,admin1,Diourbel,14.7509,-16.1895,NaturalEarth_10m_admin1
+SN,fatick,admin1,Fatick,13.8699,-16.4165,NaturalEarth_10m_admin1
+SN,kaolack,admin1,Kaffrine,14.2364,-15.2014,NaturalEarth_10m_admin1
 SN,kedougou,admin1,Kédougou,12.842,-12.1903,NaturalEarth_10m_admin1
 SN,kolda,admin1,Kolda,12.9574,-14.422,NaturalEarth_10m_admin1
+SN,louga,admin1,Louga,15.4183,-15.5162,NaturalEarth_10m_admin1
+SN,matam,admin1,Saint-Louis,16.3051,-14.9945,NaturalEarth_10m_admin1
+SN,saint-louis,admin1,Saint-Louis,16.3051,-14.9945,NaturalEarth_10m_admin1
+SN,thies,admin1,Thiès,14.6931,-16.8671,NaturalEarth_10m_admin1
+SZ,manzini,admin1,Manzini,-26.6342,31.2402,NaturalEarth_10m_admin1
+TD,lac,admin1,Lac,13.431,14.6744,NaturalEarth_10m_admin1
+TG,kara,admin1,Kara,9.58879,0.821351,NaturalEarth_10m_admin1
+TG,plateaux,admin1,Plateaux,7.38285,1.05973,NaturalEarth_10m_admin1
+TG,savanes,admin1,Savanes,10.5136,0.415303,NaturalEarth_10m_admin1
 TH,bangkok,admin2,Bangkok Metropolis,13.793,100.626,NaturalEarth_10m_admin1
 TH,bueng-kan,admin2,Bueng Kan,18.1565,103.752,NaturalEarth_10m_admin1
+TH,chaiyaphum,admin2,Chaiyaphum,16.0138,101.877,NaturalEarth_10m_admin1
 TH,chanthaburi,admin2,Chanthaburi,12.8117,102.139,NaturalEarth_10m_admin1
 TH,chiang-mai,admin2,Chiang Mai,18.8368,98.6967,NaturalEarth_10m_admin1
 TH,chon-buri,admin2,Chon Buri,13.2988,101.278,NaturalEarth_10m_admin1
 TH,kalasin,admin2,Kalasin,16.6224,103.679,NaturalEarth_10m_admin1
 TH,kamphaeng-phet,admin2,Kamphaeng Phet,16.4009,99.5098,NaturalEarth_10m_admin1
 TH,khon-kaen,admin2,Khon Kaen,16.5762,102.683,NaturalEarth_10m_admin1
+TH,lampang,admin2,Lampang,18.6296,99.5707,NaturalEarth_10m_admin1
 TH,lop-buri,admin2,Lop Buri,15.1147,100.944,NaturalEarth_10m_admin1
 TH,nakhon-pathom,admin2,Nakhon Pathom,13.917,100.072,NaturalEarth_10m_admin1
 TH,nakhon-ratchasima,admin2,Nakhon Ratchasima,14.8923,102.103,NaturalEarth_10m_admin1
@@ -1416,19 +2218,32 @@ TH,phitsanulok,admin2,Phitsanulok,16.9748,100.49,NaturalEarth_10m_admin1
 TH,ranong,admin2,Ranong,9.51717,98.58,NaturalEarth_10m_admin1
 TH,ratchaburi,admin2,Ratchaburi,13.4964,99.6128,NaturalEarth_10m_admin1
 TH,rayong,admin2,Rayong,12.8125,101.402,NaturalEarth_10m_admin1
+TH,roi-et,admin2,Roi Et,15.9601,103.827,NaturalEarth_10m_admin1
 TH,samut-prakan,admin2,Samut Prakan,13.606,100.704,NaturalEarth_10m_admin1
 TH,samut-sakhon,admin2,Samut Sakhon,13.5655,100.225,NaturalEarth_10m_admin1
 TH,songkhla,admin2,Songkhla,6.81212,100.568,NaturalEarth_10m_admin1
+TH,surat-thani,admin2,Surat Thani,9.0048,99.0107,NaturalEarth_10m_admin1
 TH,tak,admin2,Tak,17.0043,98.8441,NaturalEarth_10m_admin1
 TH,udon-thani,admin2,Udon Thani,17.4511,102.882,NaturalEarth_10m_admin1
 TH,yala,admin2,Yala,6.14264,101.218,NaturalEarth_10m_admin1
+TN,bizerte,admin1,Bizerte,37.1109,9.67332,NaturalEarth_10m_admin1
 TN,gafsa,admin1,Gafsa,34.4233,8.79521,NaturalEarth_10m_admin1
 TN,gouvernorat-de-nabeul,admin1,Nabeul,36.6794,10.7319,NaturalEarth_10m_admin1
+TN,jendouba,admin1,Jendouba,36.6155,8.62064,NaturalEarth_10m_admin1
+TN,siliana,admin1,Siliana,35.5597,9.33745,NaturalEarth_10m_admin1
+TN,tozeur,admin1,Tozeur,33.9476,8.07434,NaturalEarth_10m_admin1
+TN,tunis,admin1,Tunis,36.7791,10.1724,NaturalEarth_10m_admin1
 TR,amasya,nuts3,Amasya,40.719471,35.691879,NUTS_2021
+TR,ankara,admin1,Ankara,39.792744,32.595201,NUTS_2021
 TR,aydin,admin2,Aydin,37.7292,27.9573,NaturalEarth_10m_admin1
+TR,corum,nuts3,Çorum,40.571781,34.647542,NUTS_2021
+TR,giresun,nuts3,Giresun,40.59408,38.598879,NUTS_2021
 TR,istanbul,admin1,İstanbul,41.218636,28.437204,NUTS_2021
 TR,kirklareli,admin2,Kirklareli,41.6201,27.4916,NaturalEarth_10m_admin1
 TR,manisa,nuts3,Manisa,38.761542,28.136592,NUTS_2021
+TR,samsun,nuts3,Samsun,41.231326,35.997102,NUTS_2021
+TR,sivas,nuts3,Sivas,39.569795,37.306325,NUTS_2021
+TR,tokat,nuts3,Tokat,40.385846,36.571526,NUTS_2021
 TR,tr100,nuts3,İstanbul,41.218636,28.437204,NUTS_2021
 TR,tr211,nuts3,Tekirdağ,40.977306,27.125799,NUTS_2021
 TR,tr212,nuts3,Edirne,40.984245,26.490993,NUTS_2021
@@ -1481,20 +2296,55 @@ TR,trb14,nuts3,Tunceli,39.19899,39.468584,NUTS_2021
 TR,trb21,nuts3,Van,38.468234,43.601333,NUTS_2021
 TR,trc33,nuts3,Şırnak,37.457035,42.539229,NUTS_2021
 TR,trc34,nuts3,Siirt,37.890587,42.122787,NUTS_2021
+TR,yozgat,nuts3,Yozgat,39.660409,35.226866,NUTS_2021
 TT,tobago,admin1,Eastern Tobago,11.2899,-60.6001,NaturalEarth_10m_admin1
+TW,jiayi,admin2,Chiayi,23.4465,120.26,NaturalEarth_10m_admin1
 TW,kaohsiung,admin1,Kaohsiung City,23.0157,120.609,NaturalEarth_10m_admin1
 TW,pingtung-county,admin2,Pingtung,22.5344,120.661,NaturalEarth_10m_admin1
 TW,taichung-city,admin1,Taichung City,24.238,120.966,NaturalEarth_10m_admin1
 TW,tainan,admin1,Tainan City,23.0464,120.182,NaturalEarth_10m_admin1
 TW,tainan-city,admin1,Tainan City,23.0464,120.182,NaturalEarth_10m_admin1
 TW,yunlin,admin2,Yunlin,23.7253,120.427,NaturalEarth_10m_admin1
+TZ,arusha,admin1,Arusha,-3.02634,36.0865,NaturalEarth_10m_admin1
 TZ,dar-es-salaam,admin1,Dar-Es-Salaam,-6.89289,39.2857,NaturalEarth_10m_admin1
+TZ,dodoma,admin1,Dodoma,-5.73233,35.9608,NaturalEarth_10m_admin1
+TZ,iringa,admin1,Njombe,-9.39902,34.8871,NaturalEarth_10m_admin1
+TZ,lindi-region,admin1,Lindi,-9.44338,38.4234,NaturalEarth_10m_admin1
+TZ,manyara,admin1,Manyara,-4.88783,36.4591,NaturalEarth_10m_admin1
+TZ,mbeya-region,admin1,Mbeya,-8.29695,33.5281,NaturalEarth_10m_admin1
+TZ,morogoro,admin1,Morogoro,-8.69673,36.922,NaturalEarth_10m_admin1
+TZ,mtwara-region,admin1,Mtwara,-10.814,39.2212,NaturalEarth_10m_admin1
+TZ,mwanza-region,admin1,Mwanza,-2.67284,32.6685,NaturalEarth_10m_admin1
+TZ,njombe,admin1,Njombe,-9.39902,34.8871,NaturalEarth_10m_admin1
+TZ,tanga,admin1,Tanga,-5.18525,38.1412,NaturalEarth_10m_admin1
+TZ,tanga-region,admin1,Tanga,-5.18525,38.1412,NaturalEarth_10m_admin1
+UA,kharkiv,admin1,Kharkiv,49.4655,36.4612,NaturalEarth_10m_admin1
 UA,kherson,admin1,Kherson,46.6964,33.5787,NaturalEarth_10m_admin1
 UA,lviv,admin1,L'viv,49.8152,24.0372,NaturalEarth_10m_admin1
 UA,odessa,admin1,Odessa,46.0315,29.7568,NaturalEarth_10m_admin1
 UA,zhitomir,admin1,Zhytomyr,50.6898,28.4643,NaturalEarth_10m_admin1
+UG,buikwe,admin1,Buikwe,0.187461,33.0039,NaturalEarth_10m_admin1
+UG,bushenyi-district,admin1,Bushenyi,-0.471119,30.1245,NaturalEarth_10m_admin1
+UG,ibanda,admin2,Ibanda,-0.075077,30.4693,NaturalEarth_10m_admin1
+UG,isingiro,admin2,Isingiro,-0.848191,30.8706,NaturalEarth_10m_admin1
+UG,isingiro-district,admin2,Isingiro,-0.848191,30.8706,NaturalEarth_10m_admin1
 UG,jinja,admin1,Jinja,0.492867,33.3074,NaturalEarth_10m_admin1
+UG,kabale,admin1,Kabale,-1.23122,30.0088,NaturalEarth_10m_admin1
+UG,kabale-district,admin1,Kabale,-1.23122,30.0088,NaturalEarth_10m_admin1
 UG,kampala,admin1,Kampala,0.360019,32.6048,NaturalEarth_10m_admin1
+UG,lyantonde,admin1,Lyantonde,-0.269997,31.1783,NaturalEarth_10m_admin1
+UG,masaka,admin1,Lwengo,-0.421045,31.433,NaturalEarth_10m_admin1
+UG,mbarara,admin2,Mbarara,-0.534736,30.5341,NaturalEarth_10m_admin1
+UG,mityana,admin2,Mityana,0.42844,32.0449,NaturalEarth_10m_admin1
+UG,mpigi,admin1,Mpigi,-0.008257,32.0899,NaturalEarth_10m_admin1
+UG,mubende,admin1,Mubende,0.58882,31.4889,NaturalEarth_10m_admin1
+UG,nakaseke,admin1,Nakaseke,1.10855,32.1561,NaturalEarth_10m_admin1
+UG,nakasongola,admin1,Nakasongola,1.36245,32.3765,NaturalEarth_10m_admin1
+UG,ntoroko,admin1,Ntoroko,1.02038,30.3756,NaturalEarth_10m_admin1
+UG,ntungamo,admin1,Ntungamo,-0.976405,30.3139,NaturalEarth_10m_admin1
+UG,sembabule,admin1,Sembabule,0.02467,31.3783,NaturalEarth_10m_admin1
+UG,sheema-district,admin1,Sheema,-0.636828,30.3454,NaturalEarth_10m_admin1
+UG,ssembabule,admin1,Sembabule,0.02467,31.3783,NaturalEarth_10m_admin1
 US,alabama,admin1,Alabama,32.8551,-86.7184,NaturalEarth_10m_admin1
 US,ar,admin1,Arkansas,34.7563,-92.1428,NaturalEarth_10m_admin1
 US,arizona,admin1,Arizona,34.3046,-111.935,NaturalEarth_10m_admin1
@@ -1512,41 +2362,68 @@ US,florida,admin1,Florida,28.1568,-81.6228,NaturalEarth_10m_admin1
 US,ga,admin1,Georgia,32.8547,-83.4078,NaturalEarth_10m_admin1
 US,georgia,admin1,Georgia,32.8547,-83.4078,NaturalEarth_10m_admin1
 US,hawaii,admin1,Hawaii,21.4919,-157.999,NaturalEarth_10m_admin1
+US,ia,admin1,Iowa,42.0423,-93.3891,NaturalEarth_10m_admin1
 US,id,admin1,Idaho,43.7825,-114.133,NaturalEarth_10m_admin1
 US,idaho,admin1,Idaho,43.7825,-114.133,NaturalEarth_10m_admin1
 US,il,admin1,Illinois,39.946,-89.1991,NaturalEarth_10m_admin1
 US,illinois,admin1,Illinois,39.946,-89.1991,NaturalEarth_10m_admin1
 US,in,admin1,Indiana,39.8874,-86.1396,NaturalEarth_10m_admin1
+US,indiana,admin1,Indiana,39.8874,-86.1396,NaturalEarth_10m_admin1
 US,iowa,admin1,Iowa,42.0423,-93.3891,NaturalEarth_10m_admin1
 US,kansas,admin1,Kansas,38.5,-98.3309,NaturalEarth_10m_admin1
+US,ks,admin1,Kansas,38.5,-98.3309,NaturalEarth_10m_admin1
+US,ky,admin1,Kentucky,37.3994,-85.5729,NaturalEarth_10m_admin1
 US,la,admin1,Louisiana,30.5274,-91.9991,NaturalEarth_10m_admin1
 US,louisiana,admin1,Louisiana,30.5274,-91.9991,NaturalEarth_10m_admin1
 US,ma,admin1,Massachusetts,42.3739,-71.9993,NaturalEarth_10m_admin1
 US,maryland,admin1,Maryland,39.3874,-77.0454,NaturalEarth_10m_admin1
+US,massachusetts,admin1,Massachusetts,42.3739,-71.9993,NaturalEarth_10m_admin1
 US,md,admin1,Maryland,39.3874,-77.0454,NaturalEarth_10m_admin1
+US,mi,admin1,Michigan,43.4343,-84.9479,NaturalEarth_10m_admin1
+US,michigan,admin1,Michigan,43.4343,-84.9479,NaturalEarth_10m_admin1
+US,minnesota,admin1,Minnesota,46.0592,-93.364,NaturalEarth_10m_admin1
 US,mississippi,admin1,Mississippi,32.8657,-89.7189,NaturalEarth_10m_admin1
 US,missouri,admin1,Missouri,38.5487,-92.446,NaturalEarth_10m_admin1
+US,mn,admin1,Minnesota,46.0592,-93.364,NaturalEarth_10m_admin1
+US,mo,admin1,Missouri,38.5487,-92.446,NaturalEarth_10m_admin1
 US,ms,admin1,Mississippi,32.8657,-89.7189,NaturalEarth_10m_admin1
+US,mt,admin1,Montana,46.9965,-110.044,NaturalEarth_10m_admin1
+US,nc,admin1,North Carolina,35.6152,-78.866,NaturalEarth_10m_admin1
 US,nd,admin1,North Dakota,47.4675,-100.302,NaturalEarth_10m_admin1
 US,ne,admin1,Nebraska,41.5002,-99.6855,NaturalEarth_10m_admin1
+US,nebraska,admin1,Nebraska,41.5002,-99.6855,NaturalEarth_10m_admin1
+US,new-hampshire,admin1,New Hampshire,43.5993,-71.6301,NaturalEarth_10m_admin1
 US,new-jersey,admin1,New Jersey,40.0449,-74.4653,NaturalEarth_10m_admin1
 US,new-mexico,admin1,New Mexico,34.5002,-106.024,NaturalEarth_10m_admin1
 US,new-york,admin1,New York,43.1988,-75.3242,NaturalEarth_10m_admin1
+US,nj,admin1,New Jersey,40.0449,-74.4653,NaturalEarth_10m_admin1
 US,nm,admin1,New Mexico,34.5002,-106.024,NaturalEarth_10m_admin1
 US,north-carolina,admin1,North Carolina,35.6152,-78.866,NaturalEarth_10m_admin1
 US,north-dakota,admin1,North Dakota,47.4675,-100.302,NaturalEarth_10m_admin1
 US,nv,admin1,Nevada,39.4299,-117.02,NaturalEarth_10m_admin1
 US,ny,admin1,New York,43.1988,-75.3242,NaturalEarth_10m_admin1
 US,oh,admin1,Ohio,40.0924,-82.6719,NaturalEarth_10m_admin1
+US,ohio,admin1,Ohio,40.0924,-82.6719,NaturalEarth_10m_admin1
+US,oregon,admin1,Oregon,43.8333,-120.386,NaturalEarth_10m_admin1
+US,pa,admin1,Pennsylvania,40.8601,-77.6094,NaturalEarth_10m_admin1
 US,puerto-rico,admin1,Puerto Rico,18.2448,-66.4441,NaturalEarth_10m_admin1
+US,ri,admin1,Rhode Island,41.6242,-71.5082,NaturalEarth_10m_admin1
 US,sd,admin1,South Dakota,44.4711,-100.255,NaturalEarth_10m_admin1
+US,south-carolina,admin1,South Carolina,33.8578,-80.6471,NaturalEarth_10m_admin1
 US,south-dakota,admin1,South Dakota,44.4711,-100.255,NaturalEarth_10m_admin1
+US,tennessee,admin1,Tennessee,35.7514,-86.3415,NaturalEarth_10m_admin1
 US,texas,admin1,Texas,31.131,-98.7607,NaturalEarth_10m_admin1
+US,tn,admin1,Tennessee,35.7514,-86.3415,NaturalEarth_10m_admin1
 US,tx,admin1,Texas,31.131,-98.7607,NaturalEarth_10m_admin1
 US,ut,admin1,Utah,39.5007,-111.544,NaturalEarth_10m_admin1
+US,utah,admin1,Utah,39.5007,-111.544,NaturalEarth_10m_admin1
 US,va,admin1,Virginia,37.7403,-78.2431,NaturalEarth_10m_admin1
+US,virginia,admin1,Virginia,37.7403,-78.2431,NaturalEarth_10m_admin1
+US,wa,admin1,Washington,47.4865,-120.361,NaturalEarth_10m_admin1
 US,washington,admin1,Washington,47.4865,-120.361,NaturalEarth_10m_admin1
+US,west-virginia,admin1,West Virginia,38.6422,-80.7128,NaturalEarth_10m_admin1
 US,wisconsin,admin1,Wisconsin,44.3709,-89.5831,NaturalEarth_10m_admin1
+US,wv,admin1,West Virginia,38.6422,-80.7128,NaturalEarth_10m_admin1
 US,wy,admin1,Wyoming,42.9999,-107.552,NaturalEarth_10m_admin1
 US,wyoming,admin1,Wyoming,42.9999,-107.552,NaturalEarth_10m_admin1
 UY,canelones,admin1,Canelones,-34.5473,-55.9228,NaturalEarth_10m_admin1
@@ -1554,20 +2431,35 @@ UY,maldonado,admin1,Maldonado,-34.6885,-54.9671,NaturalEarth_10m_admin1
 UY,montevideo,admin1,Montevideo,-34.8267,-56.2283,NaturalEarth_10m_admin1
 UY,paysandu,admin1,Paysandú,-32.0933,-57.224,NaturalEarth_10m_admin1
 UY,rio-negro,admin1,Río Negro,-32.7441,-57.4891,NaturalEarth_10m_admin1
+UY,rocha,admin1,Rocha,-33.9106,-53.9584,NaturalEarth_10m_admin1
 UY,salto,admin1,Salto,-31.4398,-57.0428,NaturalEarth_10m_admin1
+UY,soriano,admin1,Soriano,-33.4821,-57.7585,NaturalEarth_10m_admin1
+VE,apure,admin1,Apure,7.0405,-68.55,NaturalEarth_10m_admin1
 VE,aragua,admin1,Aragua,10.1618,-67.3252,NaturalEarth_10m_admin1
+VE,barinas,admin1,Barinas,8.22379,-69.9798,NaturalEarth_10m_admin1
 VE,carabobo,admin1,Carabobo,10.1548,-67.9745,NaturalEarth_10m_admin1
+VE,guarico,admin1,Guárico,8.7237,-66.4794,NaturalEarth_10m_admin1
 VE,merida,admin1,Mérida,8.49098,-71.2398,NaturalEarth_10m_admin1
+VE,monagas,admin1,Monagas,9.50395,-63.0869,NaturalEarth_10m_admin1
+VE,portuguesa,admin1,Portuguesa,9.15625,-69.3776,NaturalEarth_10m_admin1
 VI,saint-croix,admin1,Saint Croix,17.735,-64.7798,NaturalEarth_10m_admin1
 VI,saint-john,admin1,Saint John,18.3422,-64.7461,NaturalEarth_10m_admin1
 VI,saint-thomas,admin1,Saint Thomas,18.3543,-64.9263,NaturalEarth_10m_admin1
 VN,binh-duong,admin2,Bình Dương,11.1382,106.659,NaturalEarth_10m_admin1
 VN,dak-lak,admin1,Đắk Lắk,12.7691,108.133,NaturalEarth_10m_admin1
 VN,hai-phong,admin2,Hải Phòng,20.79,106.635,NaturalEarth_10m_admin1
+VN,hanoi,admin2,Ha Noi,21.1306,105.872,NaturalEarth_10m_admin1
 VN,ho-chi-minh,admin1,Hồ Chí Minh city,10.409,106.926,NaturalEarth_10m_admin1
 VN,ho-chi-minh-city,admin1,Hồ Chí Minh city,10.409,106.926,NaturalEarth_10m_admin1
+VN,kon-tum,admin2,Kon Tum,14.7451,107.969,NaturalEarth_10m_admin1
 VN,long-an,admin2,Long An,10.6869,106.134,NaturalEarth_10m_admin1
+VN,phu-tho,admin2,Phú Thọ,21.3127,105.143,NaturalEarth_10m_admin1
+VN,tay-ninh,admin2,Tây Ninh,11.4121,106.14,NaturalEarth_10m_admin1
+VN,thai-binh,admin2,Thái Bình,20.5303,106.371,NaturalEarth_10m_admin1
+VN,thanh-hoa,admin2,Thanh Hóa,20.0917,105.215,NaturalEarth_10m_admin1
 XK,prizren,admin1,Dragaš,41.9926,20.6774,NaturalEarth_10m_admin1
+YE,al-hudaydah,admin1,Al Hudaydah,14.928,43.2214,NaturalEarth_10m_admin1
+YE,hajjah,admin1,Hajjah,16.1813,43.1804,NaturalEarth_10m_admin1
 ZA,eastern-cape,admin2,Eastern Cape,-32.0622,26.6417,NaturalEarth_10m_admin1
 ZA,free-state,admin2,Free State,-28.5815,26.4914,NaturalEarth_10m_admin1
 ZA,gauteng,admin2,Gauteng,-26.1682,28.2074,NaturalEarth_10m_admin1
@@ -1578,3 +2470,4 @@ ZA,north-west,admin2,North West,-26.3999,25.7403,NaturalEarth_10m_admin1
 ZA,northern-cape,admin2,Northern Cape,-29.7437,20.9961,NaturalEarth_10m_admin1
 ZA,transvaal,admin2,Gauteng,-26.1682,28.2074,NaturalEarth_10m_admin1
 ZA,western-cape,admin2,Western Cape,-33.5035,20.9745,NaturalEarth_10m_admin1
+ZW,manicaland,admin2,Manicaland,-18.9399,32.1206,NaturalEarth_10m_admin1

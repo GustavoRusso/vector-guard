@@ -55,7 +55,7 @@ CV,Cabo Verde,Cape Verde|Republic of Cabo Verde,0,0
 CW,Curaçao,Curacao,0,0
 CX,Christmas Island,,0,0
 CY,Cyprus,Republic of Cyprus,1,1
-CZ,Czechia,Czech Republic,1,1
+CZ,Czechia,Czech Republic|Czechoslovakia,1,1
 DE,Germany,Federal Republic of Germany,1,1
 DJ,Djibouti,Republic of Djibouti,0,0
 DK,Denmark,Kingdom of Denmark,1,1
@@ -76,7 +76,7 @@ FM,"Micronesia, Federated States of",Federated States of Micronesia|Micronesia,0
 FO,Faroe Islands,,0,0
 FR,France,French Republic,1,1
 GA,Gabon,Gabonese Republic,0,0
-GB,United Kingdom,United Kingdom of Great Britain and Northern Ireland,1,1
+GB,United Kingdom,United Kingdom of Great Britain and Northern Ireland|the United Kingdom of Great Britain and Northern Ireland,1,1
 GD,Grenada,,0,0
 GE,Georgia,,1,1
 GF,French Guiana,,0,0
@@ -94,7 +94,7 @@ GT,Guatemala,Republic of Guatemala,0,0
 GU,Guam,,0,0
 GW,Guinea-Bissau,Republic of Guinea-Bissau,0,0
 GY,Guyana,Republic of Guyana,0,0
-HK,Hong Kong,Hong Kong Special Administrative Region of China,0,0
+HK,Hong Kong,"China, Hong Kong Special Administrative Region|Hong Kong Special Administrative Region of China",0,0
 HM,Heard Island and McDonald Islands,,0,0
 HN,Honduras,Republic of Honduras,0,0
 HR,Croatia,Republic of Croatia,1,1
@@ -121,7 +121,7 @@ KI,Kiribati,Republic of Kiribati,0,0
 KM,Comoros,Union of the Comoros,0,0
 KN,Saint Kitts and Nevis,,0,0
 KP,North Korea,"Democratic People's Republic of Korea|Korea, Democratic People's Republic of",0,0
-KR,South Korea,"Korea, Republic of",0,0
+KR,South Korea,"Korea|Korea, Republic of|Republic of Korea",0,0
 KW,Kuwait,State of Kuwait,0,0
 KY,Cayman Islands,,0,0
 KZ,Kazakhstan,Republic of Kazakhstan,0,0
@@ -164,8 +164,8 @@ NC,New Caledonia,,0,0
 NE,Niger,Republic of the Niger,0,0
 NF,Norfolk Island,,0,0
 NG,Nigeria,Federal Republic of Nigeria,0,0
-NI,Nicaragua,Republic of Nicaragua,0,0
-NL,Netherlands,Kingdom of the Netherlands,1,1
+NI,Nicaragua,505 [Nicaragua]|Republic of Nicaragua,0,0
+NL,Netherlands,Kingdom of the Netherlands|Netherlands (Kingdom of the),1,1
 NO,Norway,Kingdom of Norway,1,1
 NP,Nepal,Federal Democratic Republic of Nepal,0,0
 NR,Nauru,Republic of Nauru,0,0
@@ -210,9 +210,9 @@ SR,Suriname,Republic of Suriname,0,0
 SS,South Sudan,Republic of South Sudan,0,0
 ST,Sao Tome and Principe,Democratic Republic of Sao Tome and Principe,0,0
 SV,El Salvador,Republic of El Salvador,0,0
-SX,Sint Maarten (Dutch part),,0,0
+SX,Sint Maarten (Dutch part),Sint Maarten,0,0
 SY,Syria,Syrian Arab Republic,1,1
-SZ,Eswatini,Kingdom of Eswatini,0,0
+SZ,Eswatini,Kingdom of Eswatini|Swaziland,0,0
 TC,Turks and Caicos Islands,,0,0
 TD,Chad,Republic of Chad,0,0
 TF,French Southern Territories,,0,0
@@ -227,7 +227,7 @@ TO,Tonga,Kingdom of Tonga,0,0
 TR,Türkiye,Republic of Türkiye|Turkey,1,1
 TT,Trinidad and Tobago,Republic of Trinidad and Tobago,0,0
 TV,Tuvalu,,0,0
-TW,Taiwan,"Taiwan, Province of China",0,0
+TW,Taiwan,"Taiwan (Province of China)|Taiwan, Province of China",0,0
 TZ,Tanzania,"Tanzania, United Republic of|United Republic of Tanzania",0,0
 UA,Ukraine,,1,1
 UG,Uganda,Republic of Uganda,0,0
@@ -244,7 +244,7 @@ VN,Vietnam,Socialist Republic of Viet Nam|Viet Nam,0,0
 VU,Vanuatu,Republic of Vanuatu,0,0
 WF,Wallis and Futuna,,0,0
 WS,Samoa,Independent State of Samoa,0,0
-XK,Kosovo,"Kosovo|Kosovo, Republic of",1,1
+XK,Kosovo,"Kosovo|Kosovo*|Kosovo, Republic of",1,1
 YE,Yemen,Republic of Yemen,0,0
 YT,Mayotte,,0,0
 ZA,South Africa,Republic of South Africa,0,0
