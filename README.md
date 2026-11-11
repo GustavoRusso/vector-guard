@@ -38,10 +38,10 @@ flowchart LR
   model --> api
 ```
 
-1. **Build two datasets** (both sources selected — see [Data](#data)):
-   - **Vector detections** — taxon/species, geographic location, detection time
-   - **Virus detections** — pathogen, geographic location, detection time
-2. **Resolve and join** onto common keys using reference data (ISO-2 countries, vector_group maps) and Uber H3 where coordinates exist, with ISO-2 country fallback; temporal grain **`year` × `month`** — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md).
+1. **Build two datasets** (sources selected — see [Data](#data)):
+   - **Vector detections** — taxon/species, geographic location, detection time (VectorNet)
+   - **Virus detections** — pathogen, geographic location, detection time (multi-source extract; v1 ENA `sequence` live, upgrade Planned)
+2. **Resolve and join** onto common keys using reference data (ISO-2 countries, subnational / NUTS3 centroids, vector_group maps). Tier 1 uses Uber H3 from exact GPS **or** curated admin centroids; Tier 2 falls back to ISO-2 country. Temporal grain **`year` × `month`** — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md).
 3. **Merge** cleaned sides into one modelling panel under `data/processed/` (training units require VectorNet coverage).
 4. **EDA** — missing values, spatial and temporal coverage, target distribution, and feature importance (on the panel for modelling).
 5. **Model selection** — train multiple models (linear and tree-based), tune hyperparameters, and select the best performer.
@@ -54,20 +54,20 @@ Decision records for source selection, join design, and the panel pipeline live 
 | Spec | Topic |
 |------|-------|
 | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) | VectorNet DwC-A selection and discarded alternatives |
-| [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | ENA / INSDC selection, candidate comparison, target taxonomy |
-| [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 Tier 1 + ISO-2 Tier 2 join design |
-| [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) | Reference data, resolve steps, merge → modelling panel |
+| [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | Multi-source virus strategy, unified schema, expanded taxonomy |
+| [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 Tier 1 (GPS or subnational centroids) + ISO-2 Tier 2 |
+| [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids), resolve steps, merge → modelling panel |
 
 Data layout (ladder):
 
 | Path | Role |
 |------|------|
-| `data/raw/` | Source extracts (VectorNet, ENA); not committed; refresh via extract notebooks |
-| `data/reference/` | Master/lookup tables (countries, vector taxon → group); committed when built |
+| `data/raw/` | Source extracts (VectorNet, multi-source virus TSV); not committed; refresh via extract notebooks |
+| `data/reference/` | Master/lookup tables (`countries.csv`, `subnational_locations.csv`, vector taxon → group); committed when built |
 | `data/interim/` | Normalized per-side detection tables after cleaning |
 | `data/processed/` | Merged **modelling panel** used by `notebook.ipynb` / `train.py` |
 
-H3 cell IDs are computed from lat/lon at a resolution chosen in a density-check notebook (not a downloaded world H3 dump).
+H3 cell IDs are computed from lat/lon (exact GPS or curated subnational / NUTS3 centroids) at a resolution chosen in a density-check notebook (not a downloaded world H3 dump).
 
 ### Vector detections — VectorNet observations (selected)
 
@@ -97,19 +97,18 @@ from vector_guard.data import load_vector_detections
 df = load_vector_detections()
 ```
 
-### Virus detections — ENA / INSDC (selected)
+### Virus detections — multi-source strategy (selected)
 
 | Field | Value |
 |-------|-------|
-| Dataset | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) (INSDC: ENA + GenBank + DDBJ) |
-| Search endpoint | `https://www.ebi.ac.uk/ena/portal/api/search` |
-| Result type | `result=sequence` (`tax_tree` per target pathogen) |
-| Format | TSV metadata extract |
-| License / terms | [EMBL-EBI Terms of Use](https://www.ebi.ac.uk/about/terms-of-use/) (no account required) |
+| Strategy | Unified multi-source extract into `virus_detections.tsv` — see [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+| v1 (live) | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) `result=sequence` (`tax_tree` per target pathogen) |
+| Planned feeds | ENA `read_run` + `sample` (coord/date backfill); [BV-BRC](https://www.bv-brc.org/api/genome/); Pathoplexus LAPIS; FAO EMPRES-i; ECDC NUTS3 / seasonal tables |
+| Format | Unified TSV metadata extract |
 | Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
 | Decision | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
 
-Twelve vector-borne pathogens are fetched (mosquito-, tick-, biting-midge-, and sandfly-borne), tagged with `pathogen_name` and `vector_group`. Taxonomy and ENA tax IDs are listed in the virus dataset spec and in `VIRUS_VECTOR_TAXON_MAP` in [`src/vector_guard/data.py`](src/vector_guard/data.py).
+**v1 taxonomy:** twelve vector-borne pathogens (mosquito-, tick-, biting-midge-, and sandfly-borne), tagged with `pathogen_name` and `vector_group`. **Planned:** expand `VIRUS_VECTOR_TAXON_MAP` (e.g. EHDV, Batai, Tahyna, Louping ill, broader *Phlebovirus`) as listed in the virus dataset spec. Tax IDs live in [`src/vector_guard/data.py`](src/vector_guard/data.py).
 
 Refresh the local raw copy (wipes and replaces `data/raw/virus/`):
 
@@ -117,7 +116,7 @@ Refresh the local raw copy (wipes and replaces `data/raw/virus/`):
 jupyter notebook notebooks/03_extract_viruses.ipynb
 ```
 
-Then run all cells. The notebook writes `virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation).
+Then run all cells. The notebook currently writes ENA `sequence` rows to `virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation). The Planned upgrade adds the other feeds, expanded taxa, per-source manifest counts, and the unified schema in spec `02`.
 
 Downstream notebooks load the table with the shared helper:
 
@@ -127,7 +126,7 @@ from vector_guard.data import load_virus_detections
 df = load_virus_detections()
 ```
 
-Initial exploratory analysis: [`notebooks/04_eda_viruses.ipynb`](notebooks/04_eda_viruses.ipynb).
+Initial exploratory analysis: [`notebooks/04_eda_viruses.ipynb`](notebooks/04_eda_viruses.ipynb) (extend after the multi-source upgrade for per-source and geo-precision coverage).
 
 ## Roadmap
 
@@ -140,9 +139,9 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `src/vector_guard/` | Shared helpers (`load_vector_detections`, `load_virus_detections`, `VIRUS_VECTOR_TAXON_MAP`) |
 | `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet observations DwC-A and overwrite `data/raw/vector/` |
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
-| `notebooks/03_extract_viruses.ipynb` | Fetch ENA / INSDC virus metadata into `data/raw/virus/` |
+| `notebooks/03_extract_viruses.ipynb` | Virus extract into `data/raw/virus/` (v1 ENA `sequence`; multi-source upgrade Planned) |
 | `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |
-| `notebooks/05`–`10` (planned) | Reference tables, H3 density check, clean both sides, merge modelling panel — see spec `04` |
+| `notebooks/05`–`10` (planned) | Reference tables (`countries`, `subnational_locations`, vector groups), H3 density check (exact vs centroid), clean both sides, merge modelling panel — see spec `04` |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |
