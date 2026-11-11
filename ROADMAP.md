@@ -31,10 +31,13 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 |-----------------------|--------|-------|
 | Select and document vector detection source(s) | Done | VectorNet observations DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
 | Select and document virus detection source(s) | Done | ENA / INSDC — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| Build vector dataset (geo + time) | Planned | Raw extract Done via `01_extract_vectors.ipynb`; cleaning / schema still open |
-| Build virus dataset (geo + time) | Planned | Raw extract Done via `03_extract_viruses.ipynb` + `load_virus_detections`; cleaning still open |
-| Join / aggregate to common spatial-temporal units | Next | Design: H3 Tier 1 + country Tier 2 — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
-| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README |
+| Document reference data + panel pipeline | Done | Countries, vector_group maps, H3 selection process, merge contract — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Build vector dataset (geo + time) | Planned | Raw extract Done via `01_extract_vectors.ipynb`; clean/normalize in planned `08_clean_vectors.ipynb` → `data/interim/` |
+| Build virus dataset (geo + time) | Planned | Raw extract Done via `03_extract_viruses.ipynb` + `load_virus_detections`; clean/normalize in planned `09_clean_viruses.ipynb` → `data/interim/` |
+| Build reference data (countries, vector taxon groups) | Next | Planned `05_reference_countries.ipynb`, `06_reference_vector_groups.ipynb` → `data/reference/` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Choose H3 resolution (density check) | Planned | Planned `07_h3_resolution_density.ipynb`; candidates res 4–5; record chosen value in spec `04` |
+| Merge modelling panel (vector + virus) | Planned | Planned `10_merge_modelling_panel.ipynb` → `data/processed/modelling_panel.*`; grain `year×month`; training units require VectorNet coverage — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md), [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README; reference CSVs to be committed when built |
 
 ---
 

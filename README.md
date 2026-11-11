@@ -41,20 +41,33 @@ flowchart LR
 1. **Build two datasets** (both sources selected — see [Data](#data)):
    - **Vector detections** — taxon/species, geographic location, detection time
    - **Virus detections** — pathogen, geographic location, detection time
-2. **Join and aggregate** records to a common geographic-temporal unit (primarily Uber H3 cells, with ISO-2 country fallback — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md)).
-3. **EDA** — missing values, spatial and temporal coverage, target distribution, and feature importance.
-4. **Model selection** — train multiple models (linear and tree-based), tune hyperparameters, and select the best performer.
-5. **Deploy** — export training to a script, serve the final model via a web API, and run it locally in Docker (cloud deployment optional).
+2. **Resolve and join** onto common keys using reference data (ISO-2 countries, vector_group maps) and Uber H3 where coordinates exist, with ISO-2 country fallback; temporal grain **`year` × `month`** — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md).
+3. **Merge** cleaned sides into one modelling panel under `data/processed/` (training units require VectorNet coverage).
+4. **EDA** — missing values, spatial and temporal coverage, target distribution, and feature importance (on the panel for modelling).
+5. **Model selection** — train multiple models (linear and tree-based), tune hyperparameters, and select the best performer.
+6. **Deploy** — export training to a script, serve the final model via a web API, and run it locally in Docker (cloud deployment optional).
 
 ## Data
 
-Decision records for source selection and join design live under [`specs/`](specs/):
+Decision records for source selection, join design, and the panel pipeline live under [`specs/`](specs/):
 
 | Spec | Topic |
 |------|-------|
 | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) | VectorNet DwC-A selection and discarded alternatives |
 | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | ENA / INSDC selection, candidate comparison, target taxonomy |
-| [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 + country join design (not implemented yet) |
+| [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 Tier 1 + ISO-2 Tier 2 join design |
+| [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) | Reference data, resolve steps, merge → modelling panel |
+
+Data layout (ladder):
+
+| Path | Role |
+|------|------|
+| `data/raw/` | Source extracts (VectorNet, ENA); not committed; refresh via extract notebooks |
+| `data/reference/` | Master/lookup tables (countries, vector taxon → group); committed when built |
+| `data/interim/` | Normalized per-side detection tables after cleaning |
+| `data/processed/` | Merged **modelling panel** used by `notebook.ipynb` / `train.py` |
+
+H3 cell IDs are computed from lat/lon at a resolution chosen in a density-check notebook (not a downloaded world H3 dump).
 
 ### Vector detections — VectorNet observations (selected)
 
@@ -129,8 +142,10 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
 | `notebooks/03_extract_viruses.ipynb` | Fetch ENA / INSDC virus metadata into `data/raw/virus/` |
 | `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |
-| `specs/` | Decision records (dataset selection, matching strategy) |
-| `notebook.ipynb` | Model comparison and tuning (after EDA) |
+| `notebooks/05`–`10` (planned) | Reference tables, H3 density check, clean both sides, merge modelling panel — see spec `04` |
+| `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
+| `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
+| `notebook.ipynb` | Model comparison and tuning (after panel build) |
 | `train.py` | Train the final model and save it to disk |
 | `predict.py` | Load the model and serve predictions via a web service |
 | Dependency file (`requirements.txt`, `Pipfile`, or `pyproject.toml`) | Environment and package versions |

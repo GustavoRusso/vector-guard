@@ -1,0 +1,274 @@
+# Reference data and modelling-panel pipeline
+
+Decision record for **reference / master data**, how each side is **resolved** onto join keys, and the **merge** step that produces the final modelling panel used for analysis and training.
+
+| Field | Value |
+|-------|-------|
+| Status | Design documented — **not implemented** (no reference CSVs, interim tables, or merge notebook yet) |
+| Decision date | 2026-11 |
+| Spec order | `04` (after spatial-temporal matching strategy) |
+| Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
+
+## Locked pipeline decisions
+
+| Decision | Choice |
+|----------|--------|
+| Geographic keys | Worldwide join keys allowed (H3 / ISO-2) |
+| Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit; virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
+| Temporal grain | **`year` × `month`** |
+| H3 resolution | Chosen later in a density-check notebook; document the process here; record the chosen integer when selected |
+| This iteration | Documentation only — no code, notebooks, or data files created yet |
+
+Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
+
+## Data ladder
+
+```text
+data/
+  raw/           # extracts only (gitignored); notebooks 01, 03
+  reference/     # committed master/lookup tables; notebooks 05, 06
+  interim/       # normalized vector / virus row tables; notebooks 08, 09
+  processed/     # modelling panel + merge manifest; notebook 10
+```
+
+| Layer | Contents | Commit? |
+|-------|----------|---------|
+| `raw/` | VectorNet DwC-A, ENA `virus_detections.tsv` | No (re-fetch documented in README) |
+| `reference/` | Countries, vector taxon → group maps (small) | Yes |
+| `interim/` | Per-side normalized detections | Usually no (rebuildable) |
+| `processed/` | Aggregated modelling panel | Prefer commit if small; else document rebuild |
+
+## What counts as reference data
+
+**Uber H3 is not a downloaded master table.** Cell IDs are computed from `(lat, lon)` with the `h3` library at a fixed resolution. Do not store a worldwide H3 geometry dump for the join.
+
+**ISO-2 countries, name aliases, and vector_group maps are reference data** and live under `data/reference/`.
+
+| Artifact | Nature | Path (when implemented) | How generated | Used to resolve |
+|----------|--------|-------------------------|---------------|-----------------|
+| Countries + aliases + scope flags | Static reference CSV | `data/reference/countries.csv` | Curated from ISO 3166-1 + ENA / VectorNet name aliases observed in EDA | ENA `country` → `country_iso2`; validate VectorNet ISO-2; QA / scope flags |
+| Pathogen ↔ `vector_group` | Project config (code) | [`src/vector_guard/data.py`](../src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`; optional mirror `data/reference/pathogen_vector_group.csv` | From [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Tag virus rows; ecological join filter |
+| Vector taxon → `vector_group` | Static reference CSV | `data/reference/vector_taxon_groups.csv` | Curated from VectorNet `scientificName` inventory (EDA) | Tag VectorNet rows before aggregate / join |
+| H3 resolution choice | Decision + code constant | Recorded in this spec (when chosen) and a future `H3_RESOLUTION` constant | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
+| Modelling panel schema | Output contract | `data/processed/modelling_panel.*` | Merge notebook `10_merge_modelling_panel.ipynb` | Course EDA / `notebook.ipynb` / `train.py` |
+
+**Out of reference scope (v1):** NUTS geometry or lookup builds (optional Europe enrichment only in spec `03`); geocoders for fuzzy ENA locality text; committing raw extracts.
+
+### `countries.csv` — generation rules
+
+Planned columns (minimum):
+
+| Column | Meaning |
+|--------|---------|
+| `iso2` | ISO 3166-1 alpha-2 code |
+| `name` | Canonical English short name |
+| `name_aliases` | Pipe- or semicolon-separated alternate spellings seen in ENA / sources (e.g. `Czech Republic` / `Czechia`, `Russia` / `Russian Federation`) |
+| `in_vectornet_scope` | Boolean / `0|1` — country appears (or is expected) in VectorNet Europe / Mediterranean coverage; used for QA and optional filters, **not** as the sole training gate |
+| `europe_med` | Boolean / `0|1` — Europe / Mediterranean basin flag for descriptive splits (replaces hardcoded notebook sets) |
+
+Generation process (notebook `05_reference_countries.ipynb`):
+
+1. Start from a complete ISO 3166-1 alpha-2 list (library or authoritative public table).
+2. Add aliases from unmatched ENA `country` tokens (after stripping `Country: region…`) found in `04_eda_viruses`.
+3. Mark `in_vectornet_scope` / `europe_med` from VectorNet country inventory (`02_eda_vectors`) plus the known VectorNet geographic remit.
+4. Write `data/reference/countries.csv` and note row count / alias coverage in a short cell or sidecar note (optional `manifest` fields later).
+
+### `vector_taxon_groups.csv` — generation rules
+
+Planned columns (minimum):
+
+| Column | Meaning |
+|--------|---------|
+| `scientific_name` | Exact or normalized VectorNet `scientificName` string |
+| `vector_group` | One of `mosquito`, `tick`, `biting_midge`, `sandfly` |
+| `notes` | Optional (genus-level rule, uncertain taxa) |
+
+Generation process (notebook `06_reference_vector_groups.ipynb`):
+
+1. Inventory distinct `scientificName` values from VectorNet.
+2. Map each name (or genus rule) into the four `vector_group` values used by the virus taxonomy table.
+3. Leave unmapped taxa out of the ecological join (or flag for manual review); do not invent a fifth group for v1.
+4. Write `data/reference/vector_taxon_groups.csv`.
+
+Pathogen → `vector_group` stays authoritative in `VIRUS_VECTOR_TAXON_MAP` / spec `02`. An optional CSV mirror is for transparency only and must not drift from the code map without an explicit update.
+
+### H3 resolution — selection process (not a static dump)
+
+Notebook `07_h3_resolution_density.ipynb` chooses one integer resolution and records it; it does **not** ship a global H3 cell list.
+
+**Candidates:** start with resolutions **4 and 5** (indicative ~50–150 km edge scale per spec `03`); optionally probe one coarser/finer neighbor if metrics are ambiguous.
+
+**Metrics to compare (both sides with usable lat/lon):**
+
+| Metric | Intent |
+|--------|--------|
+| Share of detections assignable to an H3 cell | Tier 1 eligibility |
+| Cells with ≥1 VectorNet detection | Vector coverage density |
+| Cells with ≥1 ENA detection (among coord rows) | Virus Tier 1 density |
+| Share of virus coord rows whose H3 cell also has VectorNet in the same `year`×`month`×`vector_group` | Empty-join / co-occurrence pressure |
+| Median detections per occupied cell | Over-fragmentation vs lumping |
+
+**Selection rule:** pick the finest resolution that still yields a usable Tier 1 co-occurrence rate and stable cell occupancy for modelling; prefer interpretability over micro-cells with almost no overlaps. Record the chosen `H3_RESOLUTION` in this spec (update when decided), in ROADMAP notes, and in the merge panel manifest.
+
+## Pipeline ownership
+
+```mermaid
+flowchart TD
+  extractV["01_extract_vectors"]
+  extractU["03_extract_viruses"]
+  edaV["02_eda_vectors"]
+  edaU["04_eda_viruses"]
+  refCountries["05_reference_countries"]
+  refTaxa["06_reference_vector_groups"]
+  h3Density["07_h3_resolution_density"]
+  cleanV["08_clean_vectors"]
+  cleanU["09_clean_viruses"]
+  merge["10_merge_modelling_panel"]
+  courseNb["notebook.ipynb"]
+
+  extractV --> edaV
+  extractU --> edaU
+  edaV --> refCountries
+  edaU --> refCountries
+  edaV --> refTaxa
+  edaV --> h3Density
+  edaU --> h3Density
+  refCountries --> cleanV
+  refCountries --> cleanU
+  refTaxa --> cleanV
+  h3Density --> cleanV
+  h3Density --> cleanU
+  cleanV --> merge
+  cleanU --> merge
+  merge --> courseNb
+```
+
+| Step | Notebook (planned) | Writes | Reads |
+|------|--------------------|--------|-------|
+| Extract vectors | `01_extract_vectors.ipynb` (exists) | `data/raw/vector/` | VectorNet DwC-A URL |
+| Extract viruses | `03_extract_viruses.ipynb` (exists) | `data/raw/virus/` | ENA Portal API |
+| Source EDA vectors | `02_eda_vectors.ipynb` (exists) | Insights / cleaning rules only | raw vectors |
+| Source EDA viruses | `04_eda_viruses.ipynb` (exists) | Insights / cleaning rules only | raw viruses |
+| Country reference | `05_reference_countries.ipynb` | `data/reference/countries.csv` | ISO list + alias needs from EDA |
+| Vector group map | `06_reference_vector_groups.ipynb` | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
+| H3 density check | `07_h3_resolution_density.ipynb` | Decision in specs/ROADMAP (+ later code constant); no world H3 dump | lat/lon samples from both sides |
+| Clean vectors | `08_clean_vectors.ipynb` | `data/interim/vectors_normalized.parquet` (or CSV) | raw + `countries` + `vector_taxon_groups` + `H3_RESOLUTION` |
+| Clean viruses | `09_clean_viruses.ipynb` | `data/interim/viruses_normalized.parquet` (or CSV) | raw + `countries` + taxon map + `H3_RESOLUTION` |
+| **Merge panel** | `10_merge_modelling_panel.ipynb` | `data/processed/modelling_panel.parquet` (+ tier mix / manifest summary) | both interim tables |
+| Course EDA + models | `notebook.ipynb` (later) | model artifacts | modelling panel |
+
+Source EDA notebooks (`02`, `04`) diagnose quality and relevance; they do **not** own the final modelling table. Cleaning notebooks apply documented rules; the merge notebook owns the panel contract.
+
+## Resolve rules (before merge)
+
+Apply these when building interim normalized tables.
+
+### Country → `country_iso2`
+
+| Side | Rule |
+|------|------|
+| VectorNet | Prefer published `countryCode` when present; else derive ISO-2 from the first two characters of `higherGeographyID` (as in `02_eda_vectors`). Validate against `countries.csv`. |
+| ENA | Parse the country token before `:` in `country` (e.g. `Italy: Tuscany` → `Italy`). Map via `name` / `name_aliases` → `iso2`. |
+| Unmapped | Flag; exclude from modelling keys until resolved (do not invent ISO codes). |
+
+### Coordinates → `h3_cell`
+
+| Rule | Detail |
+|------|--------|
+| Valid lat/lon | Assign `h3_cell` at the chosen `H3_RESOLUTION`. |
+| Missing / invalid coords | Leave `h3_cell` null → **Tier 2 only** (`country_iso2`). |
+| Precision | Do not geocode fuzzy ENA locality text in v1. |
+
+### Time → `year`, `month`
+
+| Rule | Detail |
+|------|--------|
+| Grain | Modelling keys use **`year` × `month`**. |
+| Required | Rows without a usable `year` and `month` are excluded from the modelling panel. |
+| VectorNet intervals | `eventDate` often has start/end; use a **documented, consistent** rule (prefer interval midpoint’s year-month, or start year-month if midpoint is undefined) and record it in `08_clean_vectors`. |
+| ENA | Parse `collection_date` to year-month; partial dates that lack month drop out of the panel (may remain in descriptive EDA). |
+
+### Ecology → `vector_group`
+
+| Side | Rule |
+|------|------|
+| Viruses | From `VIRUS_VECTOR_TAXON_MAP` / extract tags (`pathogen_name`, `vector_group`). |
+| Vectors | Join / map `scientificName` via `vector_taxon_groups.csv`. |
+| Merge | Aggregate and join **only within the same** `vector_group`. |
+
+## Merge step — modelling panel
+
+**Goal:** one final dataset for model analysis and generation (`notebook.ipynb`, later `train.py`).
+
+### Unit definition
+
+Panel rows are **spatial–temporal units**, not raw detection rows.
+
+| Tier | Key | When |
+|------|-----|------|
+| Tier 1 | `(h3_cell, year, month, vector_group)` | Unit has usable H3 on the vector side (and virus features/labels attached when virus rows share that cell-window) |
+| Tier 2 | `(country_iso2, year, month, vector_group)` | Fallback when H3 cannot be used for that unit |
+
+Prefer Tier 1 when the vector side supports it; attach virus aggregates at the same key. Do not invent H3 precision for country-only virus rows—those contribute at Tier 2 only.
+
+### Training filter
+
+- **Include** units with **VectorNet coverage** (vector feature present for that key).
+- Virus detection in the unit-window becomes the **label / target** (e.g. binary any sequenced detection and/or count).
+- Virus-only units (no VectorNet in that key) may be exported for descriptive EDA but are **excluded from the supervised training panel**.
+- Caveats from spec `03` still apply: virus zero ≠ true absence; no VectorNet traps ≠ true vector absence; sequences ≠ clinical cases.
+
+### Aggregation (indicative columns)
+
+**Vector features (examples):** detection count or presence; optional `individualCount` summaries; sampling-effort proxies when usable.
+
+**Virus labels (examples):** `virus_detected` (0/1); `virus_detection_count`; optional later pathogen-specific columns.
+
+**Required identity / meta columns:**
+
+| Column | Meaning |
+|--------|---------|
+| `spatial_tier` | `h3` or `country` |
+| `h3_cell` | Set when `spatial_tier == h3`; else null |
+| `country_iso2` | Always preferred when known (Tier 2 key; also useful metadata on Tier 1) |
+| `year`, `month` | Temporal grain |
+| `vector_group` | Ecological link |
+| Vector feature columns | As implemented in merge |
+| Virus label columns | As implemented in merge |
+
+### Outputs
+
+| Path | Role |
+|------|------|
+| `data/processed/modelling_panel.parquet` (or `.csv`) | Modelling handoff table |
+| Merge summary / manifest fields | `H3_RESOLUTION`, row counts by `spatial_tier`, date range, training filter rules, source raw manifests’ SHA-256 when available |
+
+Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (load panel or rebuild via the same pipeline).
+
+## Non-goals (this spec / v1 pipeline)
+
+- Building NUTS reference datasets
+- Geocoding ENA free-text localities to fake precision
+- Committing `data/raw/` extracts
+- Choosing the numeric H3 resolution in this documentation pass
+- Implementing notebooks `05`–`10` or loader code in this pass
+- Defining the final ML feature set beyond the panel contract above
+
+## Implementation checklist (future)
+
+1. Add `data/reference/` (and `.gitkeep` / committed CSVs) via notebooks `05` and `06`.
+2. Run `07_h3_resolution_density.ipynb`; update this spec with the chosen `H3_RESOLUTION`.
+3. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/`.
+4. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary.
+5. Point `notebook.ipynb` / `train.py` at the panel.
+6. Mark corresponding ROADMAP rows Done.
+
+## Related project files
+
+| Path | Role |
+|------|------|
+| [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) | Tier geometry, H3 vs country, ecological link principles |
+| [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | VectorNet source |
+| [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | ENA source + pathogen ↔ vector_group |
+| [`README.md`](../README.md) | Data ladder and intended approach |
+| [`ROADMAP.md`](../ROADMAP.md) | Build status for reference / clean / merge steps |

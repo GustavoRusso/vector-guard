@@ -1,5 +1,5 @@
 {
-  "name": "ML Zoomcamp",
+  "name": "vector-guard",
   "build": {
     "dockerfile": "Dockerfile"
   },
