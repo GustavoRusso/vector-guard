@@ -4,8 +4,8 @@ Decision record for the **virus detections** sources used by Vector Guard (patho
 
 | Field | Value |
 |-------|-------|
-| Status | **Multi-source strategy decided** — v1 ENA `result=sequence` extract is implemented; multi-source upgrade + expanded taxonomy are **Planned** (document this path; do not implement in this pass) |
-| Decision date | 2026-11 (initial ENA selection); 2026-11 (multi-source expansion) |
+| Status | **Implemented** — multi-source extract (6 feeds), 26-pathogen taxonomy, unified 19-column TSV |
+| Decision date | 2026-11 (initial ENA selection); 2026-11 (multi-source expansion implemented) |
 | Spec order | `02` (after vector dataset selection; before spatial-temporal matching) |
 
 ## Decision
@@ -16,16 +16,16 @@ Use a **multi-source programmatic virus detection strategy** written into a sing
 |-------|-------|
 | Primary sequence warehouse | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) (INSDC: ENA + GenBank + DDBJ) |
 | ENA search endpoint | `https://www.ebi.ac.uk/ena/portal/api/search` |
-| ENA result types (target) | `result=sequence`, `result=read_run`, and `result=sample` (coordinate / date backfill) |
+| ENA result types | `result=sequence`, `result=read_run`, and `result=sample` (coordinate / date backfill) |
 | Curated sequence enrichment | [BV-BRC Genome REST API](https://www.bv-brc.org/api/genome/); [Pathoplexus LAPIS](https://pathoplexus.org/) |
-| Outbreak / admin surveillance | FAO EMPRES-i (point outbreaks); ECDC Surveillance Atlas / seasonal tables (NUTS3 / GAUL) |
+| Outbreak / admin surveillance | FAO EMPRES-i BigQuery CSV; ECDC WNV weekly/monthly NUTS3 reports |
 | Format | Unified TSV metadata extract (`virus_detections.tsv`) |
 | Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
-| Extract notebook | [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) (upgrade Planned) |
-| Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_virus_detections()`, `VIRUS_VECTOR_TAXON_MAP` (taxonomy expansion Planned) |
+| Extract notebook | [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) |
+| Loader / helpers | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_virus_detections()`, `VIRUS_VECTOR_TAXON_MAP`; [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) — `VIRUS_RAW_COLUMNS`, normalize / dedupe |
 | EDA notebook | [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) |
 
-**Why multi-source (not replace ENA):** ENA `result=sequence` alone yields many rows but sparse exact coordinates (≈2.6% overall; ≈0.8% in Europe/Med in the current extract EDA) and drops sequences that lack both `country` and `collection_date` on the sequence flatfile. Read runs, BioSamples, curated INSDC portals, and outbreak feeds densify **geolocation** and add non-sequenced Europe detections without abandoning a free, reproducible download path.
+**Why multi-source (not replace ENA):** ENA `result=sequence` alone yields many rows but sparse exact coordinates and drops sequences that lack both `country` and `collection_date` on the sequence flatfile. Read runs, BioSamples, curated INSDC portals, and outbreak feeds densify **geolocation** and add non-sequenced Europe detections without abandoning a free, reproducible download path.
 
 ## Requirements that drove the choice
 
@@ -46,50 +46,57 @@ Virus records must be joinable later to VectorNet on space and time (join design
 | **ENA / INSDC `sequence` + `read_run` + `sample`** | Europe + worldwide | Free HTTP API, no account | `country`, `location` / lat–lon, BioSample checklist coords, `collection_date`, `host`, `tax_id` | **Core INSDC warehouse** (assembled seq + runs + sample backfill) |
 | **BV-BRC Genome API** | Europe + worldwide | Free REST API | Curated / text-mined lat–lon, geographic location, collection year | **INSDC enrichment** for missing coords / place strings |
 | **Pathoplexus (LAPIS)** | Europe + worldwide | Free LAPIS CSV/JSON API | Country, division (admin1), location, date, host for listed arboviruses | **Curated arbovirus feed**; merge by INSDC accession where present |
-| **FAO EMPRES-i** | Global (strong Europe/Med vet coverage) | Programmatic / open outbreak extracts where available | Point lat–lon + observation / reporting dates for zoonotic & veterinary arboviruses | **Outbreak point detections** (non-sequence Tier 1 densifier) |
-| **ECDC Surveillance Atlas / seasonal reports** | EU/EEA (NUTS / country) | Free; prefer stable programmatic or documented CSV where available | Aggregate cases by NUTS3/GAUL and period | **Admin-unit Europe labels** aligned with VectorNet `higherGeographyID` |
+| **FAO EMPRES-i** | Global (strong Europe/Med vet coverage) | Programmatic BigQuery CSV API | Point lat–lon + observation / reporting dates for zoonotic & veterinary arboviruses | **Outbreak point detections** (non-sequence Tier 1 densifier) |
+| **ECDC seasonal WNV NUTS3 reports** | EU/EEA (NUTS / GAUL) | Free HTML-embedded base64 CSV downloads | Aggregate cases by NUTS3/GAUL and period | **Admin-unit Europe labels** aligned with VectorNet `higherGeographyID` |
 | NCBI Virus / Datasets | Europe + worldwide | Free; CLI or Datasets REST API | Country / region / date / host | Overlaps INSDC; **not** a required extract path (ENA + BV-BRC cover the need) |
 | VectorByte (`VecDyn` / `VecTraits`) | Global, uneven | Free / open ecosystem | Vector traits and dynamics | Auxiliary ecology features only |
 | ArboNET (US CDC) | Primarily United States | Public maps / reports | Human, animal, mosquito arbovirus surveillance | Discarded for Europe-first VectorNet pairing |
 
-### Feed definitions (locked for the upgrade)
+### Feed definitions (implemented)
 
 #### 1. ENA Portal — `result=sequence` (assembled INSDC)
 
 - **What:** EMBL-EBI European Nucleotide Archive Portal search over assembled sequence records (ENA + GenBank + DDBJ).
+- **Endpoint:** `https://www.ebi.ac.uk/ena/portal/api/search` (`result=sequence`, `tax_tree(<tax_id>)`).
 - **Role:** Baseline pathogen + country + date table for all taxa in [Target virus taxonomy](#target-virus-taxonomy).
 - **License / terms:** [EMBL-EBI Terms of Use](https://www.ebi.ac.uk/about/terms-of-use/) (public open data; no account required).
-- **v1 status:** Implemented in [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) (`tax_tree(<tax_id>)`, keep non-empty `country` or `collection_date`, dedupe by `accession`).
+- **Status:** Implemented (`source=ena_sequence`).
 
 #### 2. ENA Portal — `result=read_run` + `result=sample`
 
 - **What:** Raw sequencing runs (SRA/ENA) and BioSample metadata for the same `tax_tree(...)` targets.
-- **Role:** Capture modern genomic-surveillance submissions that never land as assembled `sequence` records; use BioSample checklist fields to supply `lat`/`lon` and `collection_date`, and **backfill** missing coordinates onto sequence rows via `sample_accession`.
-- **Why required:** Sequence flatfiles often omit place/time that exist on the linked sample; runs add extra detections without leaving INSDC.
-- **Implementation status:** Planned in the extract notebook upgrade (same endpoint family as today).
+- **Endpoint:** same Portal search URL (`result=read_run`; batched `POST` `includeAccessions` for `result=sample`).
+- **Role:** Capture modern genomic-surveillance submissions that never land as assembled `sequence` records; use BioSample checklist fields to supply `lat`/`lon` and `collection_date`, and **backfill** missing coordinates onto sequence / run rows via `sample_accession` (`coord_source=sample_backfill`).
+- **Status:** Implemented (`source=ena_read_run` + sample backfill onto both ENA sources).
 
 #### 3. BV-BRC Genome REST API
 
-- **What:** [BV-BRC](https://www.bv-brc.org/) curated viral genome metadata (`https://www.bv-brc.org/api/genome/`), largely over INSDC accessions.
-- **Role:** Enrichment of lat/lon and place strings via curated / text-mined fields (`latitude`, `longitude`, `geographic_location`, `collection_year`) that are blank on raw ENA `location`.
-- **Merge key:** Normalized INSDC accession (and sample accession when present).
-- **Implementation status:** Planned secondary feed in the extract notebook upgrade.
+- **What:** [BV-BRC](https://www.bv-brc.org/) curated viral genome metadata.
+- **Endpoint:** `https://www.bv-brc.org/api/genome/` (`Accept: text/tsv`, `in(taxon_lineage_ids,(...))`, `limit(25000, offset)`).
+- **Role:** Enrichment of lat/lon and place strings via curated / text-mined fields; merge by normalized INSDC accession (and sample accession when present).
+- **Status:** Implemented (`source=bvbrc`).
 
 #### 4. Pathoplexus (LAPIS)
 
-- **What:** Open pathogen sequence sharing platform with per-organism LAPIS CSV/JSON APIs (e.g. West Nile, dengue, chikungunya, Zika, CCHF, yellow fever).
-- **Role:** Curated arbovirus metadata with standardized `country`, `division` (first-level admin region), and `location`; merge by INSDC accession when available.
-- **Why not sole source:** Organism list is curated and incomplete vs the full VectorNet-linked pathogen set (e.g. Usutu, Sindbis, Schmallenberg, Toscana / Naples, bluetongue, EHDV).
-- **Implementation status:** Planned secondary feed for listed organisms.
+- **What:** Open pathogen sequence sharing platform with per-organism LAPIS TSV APIs.
+- **Endpoint:** `https://lapis.pathoplexus.org/{slug}/sample/details?dataFormat=tsv` for `west-nile`, `dengue`, `chikungunya`, `zika`, `cchf`, `yellow-fever`.
+- **Role:** Curated arbovirus metadata with standardized country / admin1 / location / date; merge by INSDC accession when available.
+- **Status:** Implemented (`source=pathoplexus`) for the listed organisms.
 
-#### 5. FAO EMPRES-i and ECDC NUTS3 / seasonal surveillance
+#### 5. FAO EMPRES-i+ BigQuery CSV
 
-- **What:**
-  - **FAO EMPRES-i** (Global Animal Disease Information System) / related WOAH outbreak feeds: point-level veterinary and zoonotic outbreak events with latitude, longitude, and observation/reporting dates (e.g. West Nile, bluetongue, Rift Valley fever, CCHF, Schmallenberg, Usutu, EHDV).
-  - **ECDC Surveillance Atlas** and seasonal arbovirus tables: EU/EEA human (and related) surveillance aggregates at **NUTS3 / GAUL** codes and periods—aligned with VectorNet `higherGeographyID`.
-- **Role:** Geolocalized **non-sequence** detections that densify Europe/Med Tier 1 (exact GPS) and Tier 1 via NUTS3 centroids (see [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md)).
-- **Caveat:** Clinical/outbreak aggregates ≠ sequenced isolates; keep `source` distinct and treat as complementary labels, not a replacement for sequence bias documentation.
-- **Implementation status:** Planned secondary feeds; prefer reproducible programmatic or checksummed CSV downloads over one-off UI clicks.
+- **What:** Point-level veterinary and zoonotic outbreak events.
+- **Endpoint:** `https://api.data.apps.fao.org/api/v2/bigquery` with FAO `animal-major-disease-parameterized-query.sql` (no authentication).
+- **Diseases queried:** West Nile Fever, Bluetongue, Rift Valley fever, Schmallenberg, African horse sickness, Japanese Encephalitis (`2000-01-01` → current date); exclude `diagnosis_status == "Denied"`.
+- **Role:** Geolocalized **non-sequence** detections that densify Tier 1 GPS.
+- **Status:** Implemented (`source=empres_i`).
+
+#### 6. ECDC seasonal WNV NUTS3 reports
+
+- **What:** EU/EEA West Nile virus seasonal surveillance at NUTS3 / GAUL with onset dates and human / equid / bird case flags.
+- **Endpoints:** `https://wnv-weekly.ecdc.europa.eu/` and `https://wnv-monthly.ecdc.europa.eu/` (embedded `data:text/csv;base64,...` tables). Note: `atlas.ecdc.europa.eu` has no public API and is **not** used.
+- **Role:** Admin-unit Europe labels aligned with VectorNet `higherGeographyID` (`nuts_id`).
+- **Status:** Implemented (`source=ecdc_atlas`; West Nile virus only for this feed).
 
 ### Discarded or non-required as extract paths
 
@@ -116,13 +123,13 @@ Virus records must be joinable later to VectorNet on space and time (join design
 
 ## Unified raw schema and deduplication
 
-Target output of the upgraded extract: `data/raw/virus/virus_detections.tsv` plus `manifest.json` (fetch time, per-source and per-pathogen counts, SHA-256, citations).
+Output of the extract: `data/raw/virus/virus_detections.tsv` plus `manifest.json` (fetch time, per-source and per-pathogen counts, SHA-256, citations, `coord_source_counts`).
 
-### Canonical columns
+### Canonical columns (`VIRUS_RAW_COLUMNS`)
 
 | Column | Meaning |
 |--------|---------|
-| `record_id` | Stable unique id within the unified extract (e.g. `{source}:{native_id}`) |
+| `record_id` | Stable unique id within the unified extract (`{source}:{native_id}`) |
 | `source` | One of `ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`, `empres_i`, `ecdc_atlas` |
 | `accession` | INSDC sequence / genome accession when applicable; empty for pure outbreak rows |
 | `sample_accession` | BioSample / sample accession when known |
@@ -142,75 +149,85 @@ Target output of the upgraded extract: `data/raw/virus/virus_detections.tsv` plu
 | `host` | Host organism when available |
 | `isolation_source` | Isolation / specimen source when available |
 
-### Deduplication rules (Planned)
+### Deduplication rules (implemented)
 
 **INSDC-backed sources** (`ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`):
 
 1. Normalize accession strings (trim; consistent case) and group by `accession` when present.
-2. Else group by `sample_accession` when present (especially for runs / samples without a sequence accession).
+2. Else group by `sample_accession` when present (especially for runs / samples without a sequence accession), keyed with pathogen when multi-virus.
 3. Within a group, **merge to the richest non-null metadata**: prefer non-null `lat`/`lon`, then `subnational_region`, then `collection_date`, then `host` / `isolation_source`. Prefer `coord_source=exact_gps` over `sample_backfill` over `none`.
 4. Retain a deterministic primary `source` for the merged row (prefer `ena_sequence` when a sequence accession exists; else `ena_read_run`; else `bvbrc` / `pathoplexus` in that order unless another source alone provides coordinates).
 
 **Outbreak / surveillance sources** (`empres_i`, `ecdc_atlas`):
 
 1. Do **not** collapse into INSDC accession groups.
-2. Key by native outbreak / event id when published; else by `(source, pathogen_name, nuts_id | lat/lon rounded consistently, collection_date)`.
+2. Key by native outbreak / event id when published; else by `(source, pathogen_name, nuts_id | lat/lon, collection_date)`.
 3. Keep them as separate detection rows so sequence bias and clinical/outbreak reporting remain distinguishable via `source`.
 
-**Keep filter (all sources):** retain rows with usable place and/or time after source-specific parsing (at minimum non-empty `country` / `nuts_id` / `(lat,lon)` **or** `collection_date`), then apply the merge rules above.
+**Keep filter (all sources):** retain rows with usable place and/or time after source-specific parsing (non-empty `country` / `nuts_id` / `(lat,lon)` **or** `collection_date`), with ENA sample backfill applied **before** the keep filter, then apply the merge rules above.
 
 ## Target virus taxonomy
 
-Each target taxon is mapped to a VectorNet vector group so features can relate mosquito / tick / midge / sandfly presence to the matching pathogens. NCBI Taxonomy IDs are intended for ENA `tax_tree(...)` (and analogous BV-BRC / Pathoplexus filters). Some IDs may need re-verification against live ENA trees at implementation time (empty trees → replace with a verified sibling / species ID, as done for CCHFV / Toscana in v1).
+Each target taxon is mapped to a VectorNet vector group so features can relate mosquito / tick / midge / sandfly presence to the matching pathogens. NCBI Taxonomy IDs were **live-verified** against ENA Portal `tax_tree(...)` counts (2026-11). Prefer ICTV binomial species nodes in `tax_ids` (supersets of legacy common-name IDs); keep `legacy_tax_ids` for BV-BRC lineage recall.
 
-### Currently implemented (v1 extract)
+Authoritative code: [`src/vector_guard/data.py`](../src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP` (**26** pathogens).
 
-| Pathogen (canonical name) | NCBI tax ID(s) used in extract | VectorNet vector group | Primary vector genera (indicative) |
-|---------------------------|--------------------------------|------------------------|------------------------------------|
-| West Nile virus | `11082` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
-| Usutu virus | `64286` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
-| Dengue virus | `12637` | Mosquito (`Culicidae`) | `Aedes` |
-| Chikungunya virus | `37124` | Mosquito (`Culicidae`) | `Aedes` |
-| Zika virus | `64320` | Mosquito (`Culicidae`) | `Aedes` |
-| Sindbis virus | `11034` | Mosquito (`Culicidae`) | `Culex`, `Aedes` |
-| Rift Valley fever virus | `11588` | Mosquito (`Culicidae`) | `Aedes`, `Culex` |
-| Tick-borne encephalitis virus | `11084` | Tick (`Ixodida`) | `Ixodes`, `Dermacentor`, `Haemaphysalis` |
-| Crimean-Congo hemorrhagic fever virus | `3052518` (`Orthonairovirus haemorrhagiae`) | Tick (`Ixodida`) | `Hyalomma` |
-| Bluetongue virus | `40051` | Biting midge (`Ceratopogonidae`) | `Culicoides` |
-| Schmallenberg virus | `1133363` | Biting midge (`Ceratopogonidae`) | `Culicoides` |
-| Sandfly fever Naples phlebovirus / Toscana virus | `11590`, `206160`, `1933189` | Sandfly (`Phlebotominae`) | `Phlebotomus` |
+### Implemented taxonomy (verified tax IDs)
 
-### Planned additions to `VIRUS_VECTOR_TAXON_MAP`
+| Pathogen (canonical name) | `tax_ids` (ENA / ICTV) | `legacy_tax_ids` | Vector group |
+|---------------------------|------------------------|------------------|--------------|
+| West Nile virus | `3048448` | `11082` | mosquito |
+| Usutu virus | `3048443` | `64286` | mosquito |
+| Dengue virus | `3052464` | `12637` | mosquito |
+| Chikungunya virus | `3426298` | `37124` | mosquito |
+| Zika virus | `3048459` | `64320` | mosquito |
+| Sindbis virus | `3426318` | `11034` | mosquito |
+| Rift Valley fever virus | `3052676` | `11588` | mosquito |
+| Batai orthobunyavirus | `3052371` | `80942` | mosquito |
+| Tahyna / California encephalitis orthobunyavirus | `3052445`, `35305`, `178787` | `45270` | mosquito |
+| Inkoo orthobunyavirus | `45269` | — | mosquito |
+| Japanese encephalitis virus | `3048158` | `11072` | mosquito |
+| Yellow fever virus | `3046277` | `11089` | mosquito |
+| Tick-borne encephalitis virus | `3052465` | `11084` | tick |
+| Crimean-Congo hemorrhagic fever virus | `3052518` | — | tick |
+| Louping ill virus | `3048184` | `11086` | tick |
+| Omsk hemorrhagic fever virus | `3048233` | `12542` | tick |
+| Thogoto / Bourbon thogotovirus | `11569`, `2956523` | `1618189` | tick |
+| Jingmen tick virus | `1172985` | — | tick |
+| Alongshan virus | `2269360` | — | tick |
+| Bluetongue virus | `3431240` | `40051` | biting_midge |
+| Schmallenberg virus | `3052437` | `1133363` | biting_midge |
+| Epizootic hemorrhagic disease virus | `40054` | — | biting_midge |
+| African horse sickness virus | `40050` | — | biting_midge |
+| Akabane orthobunyavirus | `1933178` | `70566` | biting_midge |
+| Sandfly fever Naples phlebovirus / Toscana virus | `3052686`, `3052666`, `1933189` | `11590`, `206160` | sandfly |
+| Phlebovirus (Mediterranean sandfly fever complex) | `3052681`, `3052661`, `3052675`, `904668` | `28292` | sandfly |
 
-Add Europe / Mediterranean–relevant pathogens (and broaden sandfly coverage) when upgrading the extract and `VIRUS_VECTOR_TAXON_MAP` in [`src/vector_guard/data.py`](../src/vector_guard/data.py):
+### Tax ID corrections vs early indicative IDs
 
-| Pathogen (canonical name) | NCBI tax ID(s) (indicative) | VectorNet vector group | Notes |
-|---------------------------|-----------------------------|------------------------|-------|
-| Batai orthobunyavirus | `11574` | Mosquito (`Culicidae`) | Europe mosquito orthobunyavirus |
-| Tahyna / California encephalitis orthobunyavirus | `11577` | Mosquito (`Culicidae`) | Confirm ENA tree coverage for Tahyna vs parent |
-| Inkoo orthobunyavirus | `11576` | Mosquito (`Culicidae`) | Northern Europe |
-| Japanese encephalitis virus | `11072` | Mosquito (`Culicidae`) | Travel / imported + worldwide context |
-| Yellow fever virus | `11089` | Mosquito (`Culicidae`) | Pathoplexus overlap; travel / imported context |
-| Louping ill virus | `11086` | Tick (`Ixodida`) | UK / Europe tick flavivirus |
-| Omsk hemorrhagic fever virus | `11083` | Tick (`Ixodida`) | Tick flavivirus |
-| Thogoto / Bourbon thogotovirus | `11320`, `3052728` | Tick (`Ixodida`) | Verify live tax IDs at extract time |
-| Jingmen tick virus | `1559366` | Tick (`Ixodida`) | Emerging tick-associated virus |
-| Alongshan virus | `2026119` | Tick (`Ixodida`) | Emerging tick-associated virus |
-| Epizootic hemorrhagic disease virus (EHDV) | `40050` | Biting midge (`Ceratopogonidae`) | Recent Europe outbreaks; EMPRES-i relevance |
-| African horse sickness virus | `40052` | Biting midge (`Ceratopogonidae`) | Mediterranean / Africa veterinary |
-| Akabane orthobunyavirus | `11572` | Biting midge (`Ceratopogonidae`) | Culicoides-borne Simbu group |
-| Phlebovirus (Mediterranean sandfly fever complex) | `11584` (+ species as needed) | Sandfly (`Phlebotominae`) | Broaden beyond Naples/Toscana; include Sandfly fever Sicilian, Massilia, Granada, Punique as verified |
+Early draft IDs in this spec pointed at wrong or obsolete taxa; the live-verified replacements are:
+
+| Pathogen | Indicative (wrong / obsolete) | Verified |
+|----------|-------------------------------|----------|
+| Thogoto / Bourbon | `11320` (Influenza A, ~1.69M seq) | `11569`, `2956523` (+ legacy Bourbon `1618189`) |
+| Batai | `11574` (Germiston) | `3052371` (+ legacy `80942`) |
+| Tahyna | `11577` (La Crosse) | `3052445` (+ California complex) |
+| Omsk | `11083` (Powassan) | `3048233` (+ legacy `12542`) |
+| EHDV | `40050` (African horse sickness) | `40054` (EHDV); AHSV kept as `40050` |
+| Akabane | `11572` (genus-level) | `1933178` (+ legacy `70566`) |
+| Mediterranean phlebovirus broaden | `11584` (genus; includes mosquito-borne RVFV) | species-level Sicilian / Massilia / Punique / Granada IDs |
 
 Keep tagging outbreak rows (`empres_i`, `ecdc_atlas`) with the same `pathogen_name` / `vector_group` vocabulary even when no NCBI tax ID is present on the source row.
 
-### Current ENA extract (v1 — still live)
+### Extract implementation
 
-[`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) currently implements:
+[`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb):
 
-- `result=sequence` with `tax_tree(<tax_id>)` for each **v1** tax ID above (`limit=0`)
-- Keep rows with non-empty `country` or `collection_date`; dedupe by `accession`
-- Tag rows with `pathogen_name` and `vector_group`
-- Write `data/raw/virus/virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation)
+1. Wipe `data/raw/virus/` (preserve `.gitkeep`).
+2. Fetch all six feeds; normalize into `VIRUS_RAW_COLUMNS`.
+3. Apply INSDC + outbreak dedupe; assign stable `record_id`.
+4. Write `virus_detections.tsv` + `manifest.json` (per-source / per-pathogen counts, citations, `coord_source_counts`).
+5. Smoke-check via `load_virus_detections`.
 
 Load in other notebooks:
 
@@ -219,15 +236,6 @@ from vector_guard.data import load_virus_detections
 
 df = load_virus_detections()
 ```
-
-### Planned extract upgrade (do not implement in the docs-only pass)
-
-When implementing later, [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) should:
-
-1. Expand `VIRUS_VECTOR_TAXON_MAP` to the planned taxa (verify ENA `tax_tree` counts first).
-2. Fetch ENA `sequence`, `read_run`, and linked `sample` metadata; apply sample coordinate / date backfill.
-3. Fetch BV-BRC and Pathoplexus for overlapping taxa; fetch EMPRES-i and ECDC NUTS3 / seasonal tables for listed pathogens.
-4. Normalize into the [unified raw schema](#unified-raw-schema-and-deduplication), apply dedupe rules, write `virus_detections.tsv` + `manifest.json` with **per-source** and per-pathogen counts.
 
 Cleaning, ISO-2, subnational centroid → H3, and panel merge remain owned by specs [`03`](03-spatial-temporal-matching-strategy.md) and [`04`](04-reference-data-and-panel-pipeline.md) (`09_clean_viruses`, `10_merge_modelling_panel`).
 
@@ -238,7 +246,6 @@ VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g.
 ## Out of scope for this decision
 
 - Spatial-temporal join implementation and subnational centroid promotion (design in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md))
-- Implementing the multi-source extract notebook, loader schema changes, or taxonomy code updates in this documentation pass
 - Clinical diagnosis or exact introduction-date prediction
 
 ## Related project files
@@ -249,7 +256,8 @@ VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g.
 | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) | Join design (H3 + country; subnational Tier 1 path) |
 | [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference tables, virus clean/resolve, modelling panel |
 | [`README.md`](../README.md) | Published virus data table and refresh steps |
-| [`ROADMAP.md`](../ROADMAP.md) | Build status for multi-source extract / taxonomy expansion |
-| [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) | Virus extract (v1 ENA sequence; upgrade Planned) |
-| [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) | Initial virus EDA |
+| [`ROADMAP.md`](../ROADMAP.md) | Build status for multi-source extract / taxonomy |
+| [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) | Multi-source virus extract |
+| [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) | Virus EDA (per-source, coord_source, NUTS3) |
 | [`src/vector_guard/data.py`](../src/vector_guard/data.py) | `VIRUS_VECTOR_TAXON_MAP`, `load_virus_detections()` |
+| [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) | Unified schema + dedupe helpers |

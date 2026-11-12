@@ -40,7 +40,7 @@ flowchart LR
 
 1. **Build two datasets** (sources selected — see [Data](#data)):
    - **Vector detections** — taxon/species, geographic location, detection time (VectorNet)
-   - **Virus detections** — pathogen, geographic location, detection time (multi-source extract; v1 ENA `sequence` live, upgrade Planned)
+   - **Virus detections** — pathogen, geographic location, detection time (multi-source extract: ENA, BV-BRC, Pathoplexus, EMPRES-i, ECDC)
 2. **Resolve and join** onto common keys using reference data (ISO-2 countries, subnational / NUTS3 centroids, vector_group maps). Tier 1 uses Uber H3 from exact GPS **or** curated admin centroids; Tier 2 falls back to ISO-2 country. Temporal grain **`year` × `month`** — see [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md).
 3. **Merge** cleaned sides into one modelling panel under `data/processed/` (training units require VectorNet coverage).
 4. **EDA** — missing values, spatial and temporal coverage, target distribution, and feature importance (on the panel for modelling).
@@ -97,18 +97,17 @@ from vector_guard.data import load_vector_detections
 df = load_vector_detections()
 ```
 
-### Virus detections — multi-source strategy (selected)
+### Virus detections — multi-source extract (implemented)
 
 | Field | Value |
 |-------|-------|
 | Strategy | Unified multi-source extract into `virus_detections.tsv` — see [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| v1 (live) | [ENA Portal API](https://www.ebi.ac.uk/ena/portal/api/) `result=sequence` (`tax_tree` per target pathogen) |
-| Planned feeds | ENA `read_run` + `sample` (coord/date backfill); [BV-BRC](https://www.bv-brc.org/api/genome/); Pathoplexus LAPIS; FAO EMPRES-i; ECDC NUTS3 / seasonal tables |
-| Format | Unified TSV metadata extract |
+| Feeds | [ENA Portal](https://www.ebi.ac.uk/ena/portal/api/) `sequence` + `read_run` + `sample` backfill; [BV-BRC Genome API](https://www.bv-brc.org/api/genome/); [Pathoplexus LAPIS](https://lapis.pathoplexus.org/); FAO EMPRES-i BigQuery CSV; ECDC WNV weekly/monthly NUTS3 |
+| Format | Unified 19-column TSV metadata extract |
 | Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
 | Decision | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
 
-**v1 taxonomy:** twelve vector-borne pathogens (mosquito-, tick-, biting-midge-, and sandfly-borne), tagged with `pathogen_name` and `vector_group`. **Planned:** expand `VIRUS_VECTOR_TAXON_MAP` (e.g. EHDV, Batai, Tahyna, Louping ill, broader *Phlebovirus`) as listed in the virus dataset spec. Tax IDs live in [`src/vector_guard/data.py`](src/vector_guard/data.py).
+**Taxonomy:** twenty-six vector-borne pathogens (mosquito-, tick-, biting-midge-, and sandfly-borne), tagged with `pathogen_name` and `vector_group`. Live-verified NCBI / ICTV tax IDs live in [`src/vector_guard/data.py`](src/vector_guard/data.py) (`VIRUS_VECTOR_TAXON_MAP`).
 
 Refresh the local raw copy (wipes and replaces `data/raw/virus/`):
 
@@ -116,7 +115,7 @@ Refresh the local raw copy (wipes and replaces `data/raw/virus/`):
 jupyter notebook notebooks/03_extract_viruses.ipynb
 ```
 
-Then run all cells. The notebook currently writes ENA `sequence` rows to `virus_detections.tsv` and `manifest.json` (fetch time, per-pathogen counts, SHA-256, citation). The Planned upgrade adds the other feeds, expanded taxa, per-source manifest counts, and the unified schema in spec `02`.
+Then run all cells. The notebook writes the unified `virus_detections.tsv` and `manifest.json` (fetch time, per-source and per-pathogen counts, SHA-256, citations, `coord_source_counts`).
 
 Downstream notebooks load the table with the shared helper:
 
@@ -126,7 +125,7 @@ from vector_guard.data import load_virus_detections
 df = load_virus_detections()
 ```
 
-Initial exploratory analysis: [`notebooks/04_eda_viruses.ipynb`](notebooks/04_eda_viruses.ipynb) (extend after the multi-source upgrade for per-source and geo-precision coverage).
+Exploratory analysis: [`notebooks/04_eda_viruses.ipynb`](notebooks/04_eda_viruses.ipynb) (per-source mix, `coord_source`, NUTS3 / Europe–Med coverage).
 
 ## Roadmap
 
@@ -139,9 +138,9 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `src/vector_guard/` | Shared helpers (`load_vector_detections`, `load_virus_detections`, `VIRUS_VECTOR_TAXON_MAP`) |
 | `notebooks/01_extract_vectors.ipynb` | Download latest VectorNet observations DwC-A and overwrite `data/raw/vector/` |
 | `notebooks/02_eda_vectors.ipynb` | Exploratory analysis of the vector detections dataset |
-| `notebooks/03_extract_viruses.ipynb` | Virus extract into `data/raw/virus/` (v1 ENA `sequence`; multi-source upgrade Planned) |
-| `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the virus detections dataset |
-| `notebooks/05_reference_countries.ipynb` | Build `countries.csv` + `subnational_locations.csv` |
+| `notebooks/03_extract_viruses.ipynb` | Multi-source virus extract into `data/raw/virus/` |
+| `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the multi-source virus detections dataset |
+| `notebooks/05_reference_countries.ipynb` | Build `countries.csv` + `subnational_locations.csv` (multi-source aliases / NUTS) |
 | `notebooks/06_reference_vector_groups.ipynb` | Build `vector_taxon_groups.csv` |
 | `notebooks/07`–`10` (planned) | H3 density check, clean both sides, merge modelling panel — see spec `04` |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |

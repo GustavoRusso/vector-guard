@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Reference CSVs implemented (`05`, `06`); H3 density / clean / merge still open |
+| Status | Multi-source virus extract + reference CSVs implemented (`03`, `05`, `06`); H3 density / clean / merge still open |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -18,8 +18,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit; virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
 | Temporal grain | **`year` × `month`** |
 | H3 resolution | Chosen later in a density-check notebook; document the process here; record the chosen integer when selected |
-| Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Planned** |
-| This iteration | Reference tables Done (`05`, `06`); remaining pipeline steps still Planned |
+| Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Done** |
+| This iteration | Virus extract + reference tables Done (`03`, `04` EDA, `05`, `06`); remaining pipeline steps (H3 / clean / merge) still Planned |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
 
@@ -72,7 +72,7 @@ Planned columns (minimum):
 Generation process (notebook `05_reference_countries.ipynb`):
 
 1. Start from a complete ISO 3166-1 alpha-2 list (library or authoritative public table).
-2. Add aliases from unmatched virus `country` tokens (after stripping `Country: region…`) found in `04_eda_viruses` and, after the multi-source upgrade, from BV-BRC / Pathoplexus / EMPRES-i / ECDC country strings.
+2. Add aliases from unmatched virus `country` tokens (after stripping `Country: region…`) found across all multi-source feeds (ENA, BV-BRC, Pathoplexus, EMPRES-i, ECDC).
 3. Mark `in_vectornet_scope` / `europe_med` from VectorNet country inventory (`02_eda_vectors`) plus the known VectorNet geographic remit.
 4. Write `data/reference/countries.csv` and note row count / alias coverage in a short cell or sidecar note (optional `manifest` fields later).
 
@@ -171,10 +171,10 @@ flowchart TD
 | Step | Notebook (planned) | Writes | Reads |
 |------|--------------------|--------|-------|
 | Extract vectors | `01_extract_vectors.ipynb` (exists) | `data/raw/vector/` | VectorNet DwC-A URL |
-| Extract viruses | `03_extract_viruses.ipynb` (exists; **multi-source upgrade Planned**) | `data/raw/virus/virus_detections.tsv` + `manifest.json` | ENA Portal (`sequence`, `read_run`, `sample`); BV-BRC; Pathoplexus; FAO EMPRES-i; ECDC NUTS3 / seasonal tables — see [Virus extract contract](#virus-extract-contract-notebook-03) |
+| Extract viruses | `03_extract_viruses.ipynb` (**multi-source Done**) | `data/raw/virus/virus_detections.tsv` + `manifest.json` | ENA Portal (`sequence`, `read_run`, `sample`); BV-BRC; Pathoplexus; FAO EMPRES-i; ECDC NUTS3 / seasonal tables — see [Virus extract contract](#virus-extract-contract-notebook-03) |
 | Source EDA vectors | `02_eda_vectors.ipynb` (exists) | Insights / cleaning rules only | raw vectors |
-| Source EDA viruses | `04_eda_viruses.ipynb` (exists; extend after upgrade) | Insights / cleaning rules only | raw viruses |
-| Country + subnational reference | `05_reference_countries.ipynb` (exists) | `data/reference/countries.csv`, `data/reference/subnational_locations.csv` | ISO list + alias / region / NUTS needs from EDA |
+| Source EDA viruses | `04_eda_viruses.ipynb` (multi-source EDA Done) | Insights / cleaning rules only | raw viruses |
+| Country + subnational reference | `05_reference_countries.ipynb` (multi-source aliases / `subnational_region` / `nuts_id` Done) | `data/reference/countries.csv`, `data/reference/subnational_locations.csv` | ISO list + alias / region / NUTS needs from multi-source extract |
 | Vector group map | `06_reference_vector_groups.ipynb` (exists) | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
 | H3 density check | `07_h3_resolution_density.ipynb` | Decision in specs/ROADMAP (+ later code constant); no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `08_clean_vectors.ipynb` | `data/interim/vectors_normalized.parquet` (or CSV) | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
@@ -186,21 +186,21 @@ Source EDA notebooks (`02`, `04`) diagnose quality and relevance; they do **not*
 
 ### Virus extract contract (notebook `03`)
 
-Aligned with [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md). **v1 (live today):** ENA `result=sequence` only for the twelve implemented taxa. **Upgrade (Planned):**
+Aligned with [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md). **Implemented:**
 
-1. Expand `VIRUS_VECTOR_TAXON_MAP` (planned taxa in spec `02`); verify ENA `tax_tree` counts before locking IDs.
+1. `VIRUS_VECTOR_TAXON_MAP` covers **26** live-verified taxa (ICTV `tax_ids` + `legacy_tax_ids`).
 2. Fetch and normalize feeds into one table:
    - ENA `result=sequence`
    - ENA `result=read_run` + `result=sample` (coordinate / date backfill via `sample_accession`)
-   - BV-BRC Genome API
-   - Pathoplexus LAPIS (listed arboviruses)
-   - FAO EMPRES-i (and related open outbreak extracts where reproducible)
-   - ECDC Surveillance Atlas / seasonal NUTS3 tables
-3. Write unified `data/raw/virus/virus_detections.tsv` using the canonical columns in spec `02` (`record_id`, `source`, accessions, pathogen tags, `country`, `subnational_region`, `nuts_id`, `lat`, `lon`, `coord_source`, `collection_date`, host fields, …).
-4. Apply INSDC vs outbreak dedupe rules from spec `02`.
-5. Write `manifest.json` with fetch time, citations, SHA-256, **per-source** counts, and per-pathogen counts.
+   - BV-BRC Genome API (`https://www.bv-brc.org/api/genome/`)
+   - Pathoplexus LAPIS (`https://lapis.pathoplexus.org/{slug}/sample/details?dataFormat=tsv`)
+   - FAO EMPRES-i BigQuery CSV (`https://api.data.apps.fao.org/api/v2/bigquery`)
+   - ECDC WNV weekly/monthly NUTS3 CSVs (`https://wnv-weekly.ecdc.europa.eu/`, `https://wnv-monthly.ecdc.europa.eu/`)
+3. Write unified `data/raw/virus/virus_detections.tsv` using the canonical 19 columns in spec `02` (`VIRUS_RAW_COLUMNS`).
+4. Apply INSDC vs outbreak dedupe rules from spec `02` (`vector_guard.virus_extract`).
+5. Write `manifest.json` with fetch time, citations, SHA-256, **per-source** counts, per-pathogen counts, and `coord_source_counts`.
 
-`load_virus_detections()` continues to load the unified TSV; schema-tolerant updates land with the extract upgrade (not in this docs-only pass).
+`load_virus_detections()` loads the unified TSV as a string-typed DataFrame.
 
 ## Resolve rules (before merge)
 
@@ -302,18 +302,17 @@ Optional panel QA fields (recommended): share of contributing virus rows with `g
 
 Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (load panel or rebuild via the same pipeline).
 
-## Non-goals (this spec / docs-only pass)
+## Non-goals (remaining pipeline)
 
-- Implementing notebooks `05`–`10`, extract upgrade code, or loader schema changes in this documentation pass
-- Committing `data/raw/` extracts
-- Choosing the numeric H3 resolution in this documentation pass
+- Choosing the numeric H3 resolution before notebook `07`
 - Shipping full NUTS polygon dumps or calling live geocoders for unmatched free-text
+- Committing `data/raw/` extracts
 - Defining the final ML feature set beyond the panel contract above
 
-## Implementation checklist (future)
+## Implementation checklist
 
-1. Upgrade `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` to the multi-source contract (spec `02`); refresh `04_eda_viruses` for per-source / geo coverage.
-2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv`. **Done (files written; commit when ready).**
+1. Upgrade `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` to the multi-source contract (spec `02`); refresh `04_eda_viruses` for per-source / geo coverage. **Done.**
+2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv` (multi-source aliases + `subnational_region` / `nuts_id`). **Done (files written; commit when ready).**
 3. Add `vector_taxon_groups.csv` via notebook `06`. **Done (224 taxa mapped; commit when ready).**
 4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`.
 5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`.

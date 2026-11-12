@@ -30,12 +30,12 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | Select and document vector detection source(s) | Done | VectorNet observations DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
-| Select and document virus detection source(s) | Done | Multi-source strategy decided (v1 ENA `sequence` implemented; upgrade Planned) — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+| Select and document virus detection source(s) | Done | Multi-source strategy implemented (6 feeds, 26 pathogens, 19-col TSV) — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
 | Document spatial join (H3 + subnational centroids) | Done | Path A GPS / Path B curated centroids → Tier 1; country Tier 2 — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
 | Document reference data + panel pipeline | Done | Countries, `subnational_locations.csv`, vector_group maps, coord priority ladder, H3 selection, merge contract — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Build vector dataset (geo + time) | Planned | Raw extract Done via `01_extract_vectors.ipynb`; clean/normalize in planned `08_clean_vectors.ipynb` → `data/interim/` |
-| Upgrade virus raw extract (multi-source + taxonomy) | Next | Expand `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP`: ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC; unified schema + per-source manifest — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| Build virus dataset (geo + time, clean) | Planned | After upgrade: `09_clean_viruses.ipynb` → `data/interim/` with ISO-2, coord ladder, `geo_precision`, H3 |
+| Upgrade virus raw extract (multi-source + taxonomy) | Done | `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` (26 taxa): ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC; unified 19-col schema + per-source manifest; EDA `04` + reference `05` refreshed — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+| Build virus dataset (geo + time, clean) | Next | `09_clean_viruses.ipynb` → `data/interim/` with ISO-2, coord ladder, `geo_precision`, H3 |
 | Build reference data (countries, subnational centroids, vector taxon groups) | Done | `05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Choose H3 resolution (density check) | Planned | Planned `07_h3_resolution_density.ipynb`; candidates res 4–5; compare exact-only vs exact+centroid; record chosen value in spec `04` |
 | Merge modelling panel (vector + virus) | Planned | Planned `10_merge_modelling_panel.ipynb` → `data/processed/modelling_panel.*`; grain `year×month`; training units require VectorNet coverage — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md), [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
@@ -49,7 +49,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (coverage / completeness first look); re-run / extend after multi-source virus upgrade |
+| Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (multi-source per-source / `coord_source` / NUTS3 coverage) |
 | Data cleaning and preparation in `notebook.ipynb` | Planned | Missing values, outliers, geo/time filters |
 | Distribution and range analysis of features | Planned | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
@@ -148,8 +148,8 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-1. Lock data sources and publish reproducible download steps (vector + virus strategy selected; v1 raw extracts in place; reference CSVs Done)
-2. Upgrade virus extract; clean both sides; choose H3 (exact vs centroid); merge modelling panel
+1. Lock data sources and publish reproducible download steps (vector + multi-source virus extracts in place; reference CSVs Done)
+2. Clean both sides; choose H3 (exact vs centroid); merge modelling panel
 3. Deepen EDA on the panel; train, compare, and tune multiple models; pick one
 4. Export `train.py` and ship `predict.py` API
 5. Finish environment docs, Docker, and README run instructions
