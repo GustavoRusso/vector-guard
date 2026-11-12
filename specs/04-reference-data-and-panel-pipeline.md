@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Multi-source virus extract + reference CSVs Done (`03`, `05`, `06`); `H3_RESOLUTION=4` locked via `07`; vector clean Done (`08`); virus clean / merge still open |
+| Status | Multi-source virus extract + reference CSVs Done (`03`, `05`, `06`); `H3_RESOLUTION=4` locked via `07`; clean both sides Done (`08`, `09`); merge still open |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -19,7 +19,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Temporal grain | **`year` × `month`** |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Done** |
-| This iteration | Virus extract + reference tables Done (`03`, `04` EDA, `05`, `06`); H3 density Done (`07`, res **4**); vector clean Done (`08`); virus clean / merge still Planned |
+| This iteration | Virus extract + reference tables Done (`03`, `04` EDA, `05`, `06`); H3 density Done (`07`, res **4**); clean both sides Done (`08`, `09`); merge still Planned |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
 
@@ -180,7 +180,7 @@ flowchart TD
 | Vector group map | `06_reference_vector_groups.ipynb` (exists) | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
 | H3 density check | `07_h3_resolution_density.ipynb` (**Done**, `H3_RESOLUTION=4`) | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `08_clean_vectors.ipynb` (**Done**) | `data/interim/vectors_normalized.parquet` | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
-| Clean viruses | `09_clean_viruses.ipynb` | `data/interim/viruses_normalized.parquet` (or CSV) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
+| Clean viruses | `09_clean_viruses.ipynb` (**Done**) | `data/interim/viruses_normalized.parquet` | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
 | **Merge panel** | `10_merge_modelling_panel.ipynb` | `data/processed/modelling_panel.parquet` (+ tier mix / manifest summary) | both interim tables |
 | Course EDA + models | `notebook.ipynb` (later) | model artifacts | modelling panel |
 
@@ -317,7 +317,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv` (multi-source aliases + `subnational_region` / `nuts_id`). **Done (files written; commit when ready).**
 3. Add `vector_taxon_groups.csv` via notebook `06`. **Done (224 taxa mapped; commit when ready).**
 4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`. **Done — `H3_RESOLUTION=4`.**
-5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`. **`08` Done;** `09` still open.
+5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`. **Done (`08`, `09`).**
 6. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary.
 7. Point `notebook.ipynb` / `train.py` at the panel.
 8. Mark corresponding ROADMAP rows Done.
