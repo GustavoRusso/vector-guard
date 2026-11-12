@@ -41,10 +41,10 @@
     "tick"
   ],
   "virus_geo_precision_mix": {
-    "mean_share_centroid_on_positive_tier1": 0.06666666666666665,
-    "mean_share_exact_coords_on_positive_tier1": 0.9333333333333332,
-    "tier1_units_with_virus": 35
+    "mean_share_centroid_on_positive_tier1": 0.2296296296296296,
+    "mean_share_exact_coords_on_positive_tier1": 0.7703703703703704,
+    "tier1_units_with_virus": 45
   },
-  "virus_positive_rate": 0.0026933435936898806,
-  "virus_positive_units": 35
+  "virus_positive_rate": 0.0034628703347441324,
+  "virus_positive_units": 45
 }

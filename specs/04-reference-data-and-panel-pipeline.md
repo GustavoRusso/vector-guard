@@ -5,7 +5,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Field | Value |
 |-------|-------|
 | Status | Pipeline through modelling panel Done (`03`–`10`); `H3_RESOLUTION=4`; interim + `data/processed/modelling_panel.parquet`; course `notebook.ipynb` panel prep Done |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases) |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -148,7 +148,22 @@ Notebook `07_h3_resolution_density.ipynb` chooses one integer resolution and rec
 | Unmatched region keys (rebuildable) | display-only in `09` | [`data/interim/virus_unmatched_regions.csv`](../data/interim/virus_unmatched_regions.csv) — 1,875 keys (628 VectorNet-scope) |
 | Modelling panel rows / `virus_detected=1` | 12,995 / **35** | 12,995 / **35** (unchanged) |
 
-Panel positives stay GPS-dominated (~93% exact share on positive units) because year-month + VectorNet co-occurrence still gate supervised rows; richer Path B mainly grows interim Tier 1 coverage and future panel candidates.
+At the Path B rebuild, panel positives stayed GPS-dominated (~93% exact share on positive units) because year-month + VectorNet co-occurrence still gated supervised rows; richer Path B mainly grew interim Tier 1 coverage. Month parsing (below) later raised centroid contribution on positives without changing absolute positive-unit count much.
+
+**Virus date-format completeness (2026-11):** `parse_collection_sort_key` / `parse_year_month_virus` in [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) and [`src/vector_guard/resolve.py`](../src/vector_guard/resolve.py) accept ISO `YYYY-MM(-DD)`, ENA `dd-Mon-yyyy` / `Mon-yyyy`, and ISO week `YYYY-Www` (Monday of that week → calendar month). Bare years still lack month and stay panel-excluded (grain remains `year × month`; season fallback deferred). Rebuild of `09`→`10`:
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Interim `year_month_share` (n=168,277) | 33.6% | **65.5%** (110,239 ready) |
+| Month share — `exact_coords` | 86.1% | **95.3%** |
+| Month share — `subnational_centroid` | 28.7% | **72.4%** |
+| Month share — `country_only` | 15.2% | **50.6%** |
+| `ena_sequence` month share | ~12% | **~57%** |
+| `ecdc_atlas` month share | ~77% | **100%** (ISO-week → month) |
+| Modelling panel rows / `virus_detected=1` | 12,995 / 45 | 12,995 / **45** |
+| Mean exact / centroid share on positive Tier 1 | ~93% / ~7% | **77.0% / 23.0%** |
+
+Month completeness was the larger panel bottleneck vs more centroids: recovering ENA month tokens roughly doubled virus-ready rows. Absolute positive units stay sparse under the VectorNet-coverage filter; centroid share among positives rose as more Path B rows cleared the year-month gate.
 
 **Locate a cell on a map:** paste any panel / interim `h3_cell` ID into the [H3 Viewer](https://clupasq.github.io/h3-viewer/) to inspect its hexagon on a basemap.
 
@@ -258,7 +273,9 @@ Then:
 | Grain | Modelling keys use **`year` × `month`**. |
 | Required | Rows without a usable `year` and `month` are excluded from the modelling panel. |
 | VectorNet intervals | `eventDate` often has start/end; use a **documented, consistent** rule (prefer interval midpoint’s year-month, or start year-month if midpoint is undefined) and record it in `08_clean_vectors`. |
-| Virus (all sources) | Parse `collection_date` (or outbreak observation / reporting date) to year-month; partial dates that lack month drop out of the panel (may remain in descriptive EDA). |
+| Virus (all sources) | Parse `collection_date` (or outbreak observation / reporting date) via `parse_year_month_virus` → `parse_collection_sort_key`. |
+| Virus accepted forms | ISO `YYYY-MM` / `YYYY-MM-DD`; ENA / GenBank `dd-Mon-yyyy` and `Mon-yyyy`; ISO week `YYYY-Www` mapped to the Monday of that week’s calendar month. |
+| Virus excluded | Year-only (`YYYY`), empty / unparseable, and other strings without a recoverable calendar month — drop from the panel (may remain in descriptive EDA). Do **not** invent a month for bare years. |
 
 ### Ecology → `vector_group`
 
@@ -332,8 +349,8 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv` (multi-source aliases + `subnational_region` / `nuts_id`). **Done (files written; commit when ready).**
 3. Add `vector_taxon_groups.csv` via notebook `06`. **Done (224 taxa mapped; commit when ready).**
 4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`. **Done — `H3_RESOLUTION=4`.**
-5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`. **Done (`08`, `09`; unmatched regions CSV + Path B lookup parity Done).**
-6. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary. **Done** (rebuilt after Path B lookup parity; panel `virus_detected` units unchanged at 35).
+5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`. **Done (`08`, `09`; unmatched regions CSV + Path B lookup parity + ENA/ISO-week date parsing Done).**
+6. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary. **Done** (rebuilt after virus date-format completeness; panel rows 12,995 / `virus_detected=1` units 45; interim `year_month_share` 65.5%).
 7. Point `notebook.ipynb` / `train.py` at the panel. **Done for `notebook.ipynb`** (panel load + prep handoff); `train.py` still later.
 8. Mark corresponding ROADMAP rows Done. **Done for reference / H3 / clean / merge.**
 
