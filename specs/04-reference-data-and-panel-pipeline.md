@@ -307,25 +307,28 @@ Prefer Tier 1 when the vector side supports it; attach virus aggregates at the s
 - Virus-only units (no VectorNet in that key) may be exported for descriptive EDA but are **excluded from the supervised training panel**.
 - Caveats from spec `03` still apply: virus zero ≠ true absence; no VectorNet traps ≠ true vector absence; sequences ≠ clinical cases; centroid Tier 1 ≠ point GPS precision.
 
-### Aggregation (indicative columns)
+### Panel columns
 
-**Vector features (examples):** detection count or presence; optional `individualCount` summaries; sampling-effort proxies when usable.
-
-**Virus labels (examples):** `virus_detected` (0/1); `virus_detection_count`; optional later pathogen-specific columns; optional counts split by `source` family.
-
-**Required identity / meta columns:**
+Authoritative schema for `data/processed/modelling_panel.*` (column order as written by `10_merge_modelling_panel.ipynb`). This table is the single source of truth for field meanings; the merge notebook implements it.
 
 | Column | Meaning |
 |--------|---------|
-| `spatial_tier` | `h3` or `country` |
-| `h3_cell` | Set when `spatial_tier == h3`; else null |
-| `country_iso2` | Always preferred when known (Tier 2 key; also useful metadata on Tier 1) |
-| `year`, `month` | Temporal grain |
-| `vector_group` | Ecological link |
-| Vector feature columns | As implemented in merge |
-| Virus label columns | As implemented in merge |
-
-Optional panel QA fields (recommended): share of contributing virus rows with `geo_precision=exact_coords` vs `subnational_centroid` for Tier 1 units.
+| `spatial_tier` | `h3` (Tier 1) or `country` (Tier 2) |
+| `h3_cell` | H3 cell ID when `spatial_tier == h3`; null on Tier 2 |
+| `country_iso2` | ISO 3166-1 alpha-2; Tier 2 join key, and metadata on Tier 1 when known |
+| `year` | Calendar year of the unit window |
+| `month` | Calendar month (1–12) of the unit window |
+| `vector_group` | Ecological class: `mosquito`, `tick`, `biting_midge`, or `sandfly`. Part of the join key — vectors and viruses merge only within the same group |
+| `vector_present` | Always `1` in this supervised panel (VectorNet-left join; virus-only units are excluded) |
+| `vector_detection_count` | Number of VectorNet records in the unit (`count` of `record_id`) |
+| `individual_count_sum` | Sum of parsed VectorNet `individualCount` over those records (unparseable / missing contribute 0 to the sum) |
+| `individual_count_mean` | Mean of parsed `individualCount` over records with a parseable value |
+| `virus_detected` | Binary label: `1` if `virus_detection_count > 0`, else `0`. Zero means no reported detection in the merged virus feeds for that unit-window — **not** proven absence |
+| `virus_detection_count` | Number of virus records in the unit (`count` of `record_id`); filled with `0` when no virus rows match |
+| `virus_source_n_sequence` | Count of virus rows whose `source` is an INSDC / sequence feed (`ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`); `0` when none |
+| `virus_source_n_outbreak` | Count of virus rows whose `source` is an outbreak feed (`empres_i`, `ecdc_atlas`); `0` when none |
+| `share_virus_exact_coords` | Among virus rows in the unit, fraction with `geo_precision == exact_coords`. Set on Tier 1 positives; `NA` on Tier 2 or when no virus rows |
+| `share_virus_subnational_centroid` | Among virus rows in the unit, fraction with `geo_precision == subnational_centroid`. Set on Tier 1 positives; `NA` on Tier 2 or when no virus rows |
 
 ### Outputs
 

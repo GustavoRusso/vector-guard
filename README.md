@@ -56,7 +56,7 @@ Decision records for source selection, join design, and the panel pipeline live 
 | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) | VectorNet DwC-A selection and discarded alternatives |
 | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) | Multi-source virus strategy, unified schema, expanded taxonomy |
 | [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) | H3 Tier 1 (GPS or subnational centroids) + ISO-2 Tier 2 |
-| [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids), resolve steps, merge → modelling panel |
+| [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids), resolve steps, merge → modelling panel ([Panel columns](specs/04-reference-data-and-panel-pipeline.md#panel-columns) dictionary) |
 
 Data layout (ladder):
 
@@ -147,7 +147,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/07_h3_resolution_density.ipynb` | H3 density check → **`H3_RESOLUTION=4`** |
 | `notebooks/08_clean_vectors.ipynb` | Normalize VectorNet → `data/interim/vectors_normalized.parquet` |
 | `notebooks/09_clean_viruses.ipynb` | Normalize multi-source viruses → `data/interim/viruses_normalized.parquet` |
-| `notebooks/10_merge_modelling_panel.ipynb` | Merge → `data/processed/modelling_panel.parquet` + manifest |
+| `notebooks/10_merge_modelling_panel.ipynb` | Merge → `data/processed/modelling_panel.parquet` + manifest; field meanings in [`specs/04` Panel columns](specs/04-reference-data-and-panel-pipeline.md#panel-columns) |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |
