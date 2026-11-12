@@ -38,7 +38,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Build virus dataset (geo + time, clean) | Done | `09_clean_viruses.ipynb` → `data/interim/viruses_normalized.parquet` (ISO-2, coord ladder, `geo_precision`, H3@4) |
 | Build reference data (countries, subnational centroids, vector taxon groups) | Done | `05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Choose H3 resolution (density check) | Done | `07_h3_resolution_density.ipynb` → **`H3_RESOLUTION=4`** (exact+centroid production path; res 5 over-fragments co-occurrence); constant in `vector_guard.resolve` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Merge modelling panel (vector + virus) | Next | `10_merge_modelling_panel.ipynb` → `data/processed/modelling_panel.*`; grain `year×month`; training units require VectorNet coverage — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md), [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Merge modelling panel (vector + virus) | Done | `10_merge_modelling_panel.ipynb` → `data/processed/modelling_panel.parquet` + `modelling_panel_manifest.json`; grain `year×month`; VectorNet coverage required — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README; reference CSVs to be committed when built |
 
 ---
@@ -50,7 +50,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (multi-source per-source / `coord_source` / NUTS3 coverage) |
-| Data cleaning and preparation in `notebook.ipynb` | Planned | Missing values, outliers, geo/time filters |
+| Data cleaning and preparation in `notebook.ipynb` | Next | Panel-level EDA / prep on `data/processed/modelling_panel.parquet`; missing values, outliers, geo/time filters |
 | Distribution and range analysis of features | Planned | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
 | Feature importance analysis | Planned | e.g. correlation, model-based importance |
@@ -149,7 +149,7 @@ flowchart TD
 ```
 
 1. Lock data sources and publish reproducible download steps (vector + multi-source virus extracts in place; reference CSVs Done)
-2. Clean both sides; choose H3 (exact vs centroid); merge modelling panel
+2. Clean both sides; choose H3 (exact vs centroid); merge modelling panel — **Done** (`07`–`10`, `H3_RESOLUTION=4`)
 3. Deepen EDA on the panel; train, compare, and tune multiple models; pick one
 4. Export `train.py` and ship `predict.py` API
 5. Finish environment docs, Docker, and README run instructions

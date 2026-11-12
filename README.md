@@ -145,7 +145,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/07_h3_resolution_density.ipynb` | H3 density check → **`H3_RESOLUTION=4`** |
 | `notebooks/08_clean_vectors.ipynb` | Normalize VectorNet → `data/interim/vectors_normalized.parquet` |
 | `notebooks/09_clean_viruses.ipynb` | Normalize multi-source viruses → `data/interim/viruses_normalized.parquet` |
-| `notebooks/10` (planned) | Merge modelling panel — see spec `04` |
+| `notebooks/10_merge_modelling_panel.ipynb` | Merge → `data/processed/modelling_panel.parquet` + manifest |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |

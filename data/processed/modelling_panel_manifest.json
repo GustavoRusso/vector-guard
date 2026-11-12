@@ -1,0 +1,50 @@
+{
+  "H3_RESOLUTION": 4,
+  "date_range": {
+    "max": "2025-04",
+    "min": "1957-09"
+  },
+  "inputs": {
+    "vectors_normalized": "data/interim/vectors_normalized.parquet",
+    "viruses_normalized": "data/interim/viruses_normalized.parquet"
+  },
+  "outputs": {
+    "manifest": "data/processed/modelling_panel_manifest.json",
+    "panel": "data/processed/modelling_panel.parquet"
+  },
+  "panel_rows": 12995,
+  "rows_by_spatial_tier": {
+    "h3": 12995
+  },
+  "source_manifest_sha256": {
+    "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
+    "virus_manifest.json": "9ea599ec4b940982973c5e8563d34c5f02e29ae89fdcba5b073329c48e1034c0"
+  },
+  "temporal_grain": "year x month",
+  "tier1_key": [
+    "h3_cell",
+    "year",
+    "month",
+    "vector_group"
+  ],
+  "tier2_key": [
+    "country_iso2",
+    "year",
+    "month",
+    "vector_group"
+  ],
+  "training_filter": "Supervised panel includes only units with VectorNet coverage; virus-only units are excluded. Virus zeros mean no reported detection in the merged feeds for that unit-window.",
+  "vector_groups": [
+    "biting_midge",
+    "mosquito",
+    "sandfly",
+    "tick"
+  ],
+  "virus_geo_precision_mix": {
+    "mean_share_centroid_on_positive_tier1": 0.06666666666666665,
+    "mean_share_exact_coords_on_positive_tier1": 0.9333333333333332,
+    "tier1_units_with_virus": 35
+  },
+  "virus_positive_rate": 0.0026933435936898806,
+  "virus_positive_units": 35
+}

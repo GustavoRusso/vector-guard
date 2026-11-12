@@ -4,7 +4,7 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design locked; `H3_RESOLUTION=4` chosen in `07`; clean / merge notebooks still open |
+| Status | Design locked and implemented through merge (`07`–`10`); `H3_RESOLUTION=4` |
 | Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
