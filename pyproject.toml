@@ -3,9 +3,11 @@ name = "vector-guard"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+  "h3>=4.1.0",
   "jupyter",
   "numpy",
   "pandas",
+  "pyarrow>=14.0.0",
   "pycountry>=26.2.16",
   "pyshp>=3.1.8",
   "scikit-learn",
