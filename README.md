@@ -143,7 +143,8 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/05_reference_countries.ipynb` | Build `countries.csv` + `subnational_locations.csv` (multi-source aliases / NUTS) |
 | `notebooks/06_reference_vector_groups.ipynb` | Build `vector_taxon_groups.csv` |
 | `notebooks/07_h3_resolution_density.ipynb` | H3 density check → **`H3_RESOLUTION=4`** |
-| `notebooks/08`–`10` (planned) | Clean both sides, merge modelling panel — see spec `04` |
+| `notebooks/08_clean_vectors.ipynb` | Normalize VectorNet → `data/interim/vectors_normalized.parquet` |
+| `notebooks/09`–`10` (planned) | Clean viruses, merge modelling panel — see spec `04` |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |
