@@ -50,8 +50,8 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (multi-source per-source / `coord_source` / NUTS3 coverage) |
-| Data cleaning and preparation in `notebook.ipynb` | Next | Panel-level EDA / prep on `data/processed/modelling_panel.parquet`; missing values, outliers, geo/time filters |
-| Distribution and range analysis of features | Planned | Including spatial/temporal coverage |
+| Data cleaning and preparation in `notebook.ipynb` | Done | `notebook.ipynb`: load panel + manifest; missingness; winsorize counts; year≥2010 geo/time filters; `panel_prep` / `X`/`y` handoff |
+| Distribution and range analysis of features | Next | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
 | Feature importance analysis | Planned | e.g. correlation, model-based importance |
 | Spatial / temporal exploratory plots | Planned | Maps and time-series views of vector vs virus |
@@ -150,7 +150,7 @@ flowchart TD
 
 1. Lock data sources and publish reproducible download steps (vector + multi-source virus extracts in place; reference CSVs Done)
 2. Clean both sides; choose H3 (exact vs centroid); merge modelling panel — **Done** (`07`–`10`, `H3_RESOLUTION=4`)
-3. Deepen EDA on the panel; train, compare, and tune multiple models; pick one
+3. Deepen EDA on the panel (prep Done in `notebook.ipynb`; distributions / target / importance Next); train, compare, and tune multiple models; pick one
 4. Export `train.py` and ship `predict.py` API
 5. Finish environment docs, Docker, and README run instructions
 6. Optionally deploy to the cloud and add proof of the live service

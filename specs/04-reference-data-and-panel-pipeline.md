@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Pipeline through modelling panel Done (`03`–`10`); `H3_RESOLUTION=4`; interim + `data/processed/modelling_panel.parquet` |
+| Status | Pipeline through modelling panel Done (`03`–`10`); `H3_RESOLUTION=4`; interim + `data/processed/modelling_panel.parquet`; course `notebook.ipynb` panel prep Done |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -319,7 +319,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`. **Done — `H3_RESOLUTION=4`.**
 5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`. **Done (`08`, `09`).**
 6. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary. **Done.**
-7. Point `notebook.ipynb` / `train.py` at the panel.
+7. Point `notebook.ipynb` / `train.py` at the panel. **Done for `notebook.ipynb`** (panel load + prep handoff); `train.py` still later.
 8. Mark corresponding ROADMAP rows Done. **Done for reference / H3 / clean / merge.**
 
 ## Related project files
