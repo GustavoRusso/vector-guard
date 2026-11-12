@@ -69,6 +69,8 @@ Data layout (ladder):
 
 H3 cell IDs are computed from lat/lon (exact GPS or curated subnational / NUTS3 centroids) at **`H3_RESOLUTION=4`** (chosen in `notebooks/07_h3_resolution_density.ipynb`; not a downloaded world H3 dump).
 
+To locate an `h3_cell` value on a map manually, paste the cell ID into the [H3 Viewer](https://clupasq.github.io/h3-viewer/).
+
 ### Vector detections — VectorNet observations (selected)
 
 | Field | Value |

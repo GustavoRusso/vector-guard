@@ -137,6 +137,8 @@ Notebook `07_h3_resolution_density.ipynb` chooses one integer resolution and rec
 
 **Decision (2026-11):** `H3_RESOLUTION = 4`. Under `exact_plus_centroid`, res 4 retains ~3× the hex×month×`vector_group` co-occurring virus rows of res 5 (~128 vs ~45) with stable median occupancy (~3–4 virus detections per occupied cell). Res 5 over-fragments relative to VectorNet coverage. Res 3 was probed as a coarser neighbor (~335 co-occurring rows) but is outside the primary candidate band; production stays at 4. Centroid promotion is material (~44% of Tier 1 virus rows). Absolute co-occurrence remains sparse (VectorNet Europe/Med vs worldwide virus extract); the VectorNet-coverage training filter still applies at merge. Details: [`notebooks/07_h3_resolution_density.ipynb`](../notebooks/07_h3_resolution_density.ipynb).
 
+**Locate a cell on a map:** paste any panel / interim `h3_cell` ID into the [H3 Viewer](https://clupasq.github.io/h3-viewer/) to inspect its hexagon on a basemap.
+
 ## Pipeline ownership
 
 ```mermaid

@@ -157,6 +157,8 @@ Pick one working resolution after a density check on VectorNet + virus coordinat
 
 **Selection process (locked):** choose the integer resolution in `07_h3_resolution_density.ipynb` using the metrics in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Do not ship a worldwide H3 geometry dump—assign `h3_cell` from lat/lon via the `h3` library. Record the chosen resolution in spec `04`, the merge panel manifest, and a code constant; keep it fixed for a given modelling panel.
 
+To inspect an `h3_cell` ID on a map manually, use the [H3 Viewer](https://clupasq.github.io/h3-viewer/).
+
 **Chosen value:** **`H3_RESOLUTION = 4`** (`vector_guard.resolve.H3_RESOLUTION`). Res 4 beats res 5 on Tier 1 co-occurrence under the exact+centroid production path; see notebook `07` and spec `04` for metrics.
 
 ### Geographic scope notes
