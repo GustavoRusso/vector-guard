@@ -411,7 +411,9 @@ def assign_h3(
 def parse_year_month_virus(collection_date: object) -> tuple[int, int] | None:
     """Parse virus ``collection_date`` to ``(year, month)`` when month is known.
 
-    Year-only and ISO-week-only values return ``None`` (panel grain requires month).
+    Accepts ISO ``YYYY-MM(-DD)``, ENA ``dd-Mon-yyyy`` / ``Mon-yyyy``, and ISO
+    week ``YYYY-Www`` (Monday of that week). Year-only values return ``None``
+    (panel grain requires month).
     """
     precision, year, month, _day = parse_collection_sort_key(collection_date)
     # precision 0 = day, 1 = month; 2+ lack a calendar month.

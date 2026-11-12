@@ -7,6 +7,7 @@ raw schema and merge rules from ``specs/02-virus-dataset-selection.md``.
 from __future__ import annotations
 
 import re
+from datetime import date
 from typing import Iterable
 
 import pandas as pd
@@ -74,6 +75,30 @@ _ISO_DATE_RE = re.compile(
     r"(?P<year>(?:19|20)\d{2})(?:-(?P<month>\d{2})(?:-(?P<day>\d{2}))?)?"
 )
 _ISO_WEEK_RE = re.compile(r"(?P<year>(?:19|20)\d{2})-W(?P<week>\d{1,2})", re.IGNORECASE)
+_ENA_DAY_RE = re.compile(
+    r"(?P<day>\d{1,2})-(?P<mon>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+    r"-(?P<year>(?:19|20)\d{2})",
+    re.IGNORECASE,
+)
+_ENA_MONTH_RE = re.compile(
+    r"(?P<mon>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+    r"-(?P<year>(?:19|20)\d{2})",
+    re.IGNORECASE,
+)
+_MONTH_ABBR_TO_NUM: dict[str, int] = {
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "may": 5,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
+}
 
 
 def lineage_tax_ids(target: VirusTaxonTarget) -> tuple[int, ...]:
@@ -412,16 +437,42 @@ def _round_coord(value: str, digits: int = 4) -> str:
 def parse_collection_sort_key(value: object) -> tuple[int, int, int, int]:
     """Return a sortable ``(precision, year, month, day)`` key for outbreak dates.
 
-    Lower precision ranks are preferred (day < month < year < ISO-week < unknown)
-    so the earliest *specific* onset wins when deduplicating ECDC rows.
+    Lower precision ranks are preferred (day < month < year < unknown) so the
+    earliest *specific* onset wins when deduplicating ECDC rows.
+
+    Recognized forms: ISO ``YYYY-MM(-DD)``, ENA ``dd-Mon-yyyy`` / ``Mon-yyyy``,
+    and ISO week ``YYYY-Www`` (mapped to the Monday of that week’s calendar
+    month at month precision). Bare years remain year-only.
     """
     text = _clean_text(value)
     if not text:
         return (9, 9999, 99, 99)
 
+    # ENA / GenBank month names must win over ISO year scrapes inside the same
+    # string (e.g. ``02-Aug-2005`` would otherwise match as year-only ``2005``).
+    ena_day = _ENA_DAY_RE.search(text)
+    if ena_day:
+        year = int(ena_day.group("year"))
+        month = _MONTH_ABBR_TO_NUM[ena_day.group("mon").lower()]
+        day = int(ena_day.group("day"))
+        if 1 <= day <= 31:
+            return (0, year, month, day)
+
+    ena_month = _ENA_MONTH_RE.search(text)
+    if ena_month:
+        year = int(ena_month.group("year"))
+        month = _MONTH_ABBR_TO_NUM[ena_month.group("mon").lower()]
+        return (1, year, month, 99)
+
     week = _ISO_WEEK_RE.search(text)
     if week:
-        return (3, int(week.group("year")), int(week.group("week")), 0)
+        iso_year = int(week.group("year"))
+        iso_week = int(week.group("week"))
+        try:
+            monday = date.fromisocalendar(iso_year, iso_week, 1)
+        except ValueError:
+            return (9, 9999, 99, 99)
+        return (1, monday.year, monday.month, 99)
 
     match = _ISO_DATE_RE.search(text)
     if not match:
