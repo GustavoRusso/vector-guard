@@ -1,0 +1,1876 @@
+country_iso2,region_key,subnational_region,nuts_id,source,rows,in_vectornet_scope
+VN,south,South,,ena_sequence,1216,0
+CN,guangzhou,Guangzhou,,ena_sequence,674,0
+VN,nha-trang,Nha Trang,,ena_sequence,562,0
+CN,xi-shuang-ban-na,Xi Shuang Ban Na,,ena_sequence,259,0
+VN,south,south,,ena_sequence,240,0
+CN,hangzhou,Hangzhou,,ena_sequence,171,0
+KE,mombasa,Mombasa,,ena_sequence,126,0
+ID,surabaya,Surabaya,,ena_sequence,120,0
+KH,kch,KCH,,ena_sequence,118,0
+SA,jeddah,Jeddah,,ena_sequence,104,0
+PF,tahiti,Tahiti,,ena_sequence,99,0
+KE,mombasa-likoni,"Mombasa, Likoni",,ena_sequence,91,0
+CN,hainan-hk,Hainan HK,,ena_sequence,88,0
+KE,baringo-county,Baringo County,,bvbrc,86,0
+CN,nanchang,Nanchang,,ena_sequence,83,0
+ID,makassar,Makassar,,ena_sequence,80,0
+TH,kampheang-phet,Kampheang-Phet,,ena_sequence,78,0
+BF,ouaga,OUAGA,,ena_read_run,78,0
+MY,klang-valley,Klang valley,,ena_sequence,71,0
+CL,easter-island,Easter Island,,ena_sequence,71,0
+LA,vientiane-capital,Vientiane Capital,,ena_sequence,68,0
+TH,kampheange-phet,Kampheange Phet,,ena_sequence,67,0
+MY,johor-bahru,Johor Bahru,,ena_sequence,66,0
+TG,grand-lome,Grand Lome,,ena_read_run,63,0
+VN,mekong-delta,Mekong Delta,,ena_sequence,57,0
+PK,karachi,Karachi,,ena_sequence,45,0
+BF,bobo-dioulasso,BOBO DIOULASSO,,ena_read_run,45,0
+TH,pathumthani,Pathumthani,,ena_sequence,42,0
+LA,vientiane-capital,Vientiane Capital,,bvbrc,42,0
+NP,kathmandu,Kathmandu,,ena_read_run,40,0
+BT,phuntsholing,Phuntsholing,,ena_sequence,39,0
+CO,barranquilla,Barranquilla,,ena_sequence,39,0
+SO,mogadishu,Mogadishu,,ena_sequence,38,0
+TH,songkha,Songkha,,ena_sequence,38,0
+BR,sao-jose-do-rio-preto,Sao Jose do Rio Preto,,ena_read_run,38,0
+CO,barranquilla,Barranquilla,,ena_read_run,38,0
+KE,isiolo,Isiolo,,bvbrc,38,0
+BR,campo-grande,Campo Grande,,ena_sequence,37,0
+CN,fuyu-village-beihai-township-yunan,"Fuyu village, Beihai township, Yunan",,ena_sequence,37,0
+IN,kolkata,Kolkata,,ena_sequence,36,0
+GF,kourou,Kourou,,ena_sequence,34,0
+BR,porto-alegre-rs,Porto Alegre RS,,ena_sequence,33,0
+EC,machala,Machala,,ena_sequence,33,0
+GR,rhodes,Rhodes,,ena_sequence,33,1
+ID,salatiga,Salatiga,,ena_sequence,32,0
+BR,ribeirao-preto,Ribeirao Preto,,ena_sequence,30,0
+VN,binhdinh,Binhdinh,,ena_sequence,30,0
+MA,azrou,Azrou,,ena_sequence,30,1
+RS,tutin,Tutin,,ena_sequence,30,1
+TN,ghardimaou,Ghardimaou,,ena_sequence,30,1
+IL,jordan-valley,Jordan Valley,,ena_sequence,30,1
+US,conneticut-stamford,"Conneticut, Stamford",,ena_sequence,29,0
+BF,ouagadougou,Ouagadougou,,ena_sequence,29,0
+BR,northern,Northern,,ena_sequence,27,0
+LA,champasack,Champasack,,ena_sequence,27,0
+BR,minasgerais,MinasGerais,,ena_sequence,26,0
+CN,ningbo,Ningbo,,ena_sequence,25,0
+KE,lamu-lamu-west,"Lamu, Lamu West",,ena_sequence,25,0
+US,dallas-co-tx,Dallas Co. TX,,ena_sequence,23,0
+KH,php,PHP,,ena_sequence,23,0
+TH,kamphaengphet,Kamphaengphet,,ena_sequence,23,0
+KE,mandera,Mandera,,ena_sequence,23,0
+LA,champasack-mounlapamok,"Champasack, Mounlapamok",,ena_sequence,23,0
+SN,barkedji,Barkedji,,ena_sequence,23,0
+AT,vienna-international-airport,Vienna International Airport,,ena_sequence,22,1
+ID,jember,Jember,,ena_sequence,22,0
+GF,cayenne,Cayenne,,ena_sequence,22,0
+PY,coronel-oviedo,Coronel Oviedo,,ena_sequence,22,0
+KE,wajir,Wajir,,ena_sequence,22,0
+CO,medellin,Medellin,,ena_sequence,21,0
+BR,manaus,Manaus,,ena_sequence,21,0
+IN,vellore,Vellore,,ena_sequence,21,0
+XK,malisheve,Malisheve,,ena_sequence,21,1
+IL,yokneam,Yokneam,,ena_sequence,21,1
+CO,norte-de-santander-ocana,Norte de Santander Ocana,,ena_sequence,20,0
+PT,imported-unknown-origin,"imported, unknown origin",,ena_sequence,20,1
+GF,remire-montjoly,Remire-Montjoly,,ena_sequence,20,0
+MM,burma,Burma,,ena_sequence,20,0
+PE,iquitos,Iquitos,,ena_sequence,20,0
+GR,aghia-paraskevi-lesvos,Aghia Paraskevi-Lesvos,,ena_sequence,20,1
+MA,fes,Fes,,ena_sequence,20,1
+CY,cyprus,Cyprus,,ena_sequence,20,1
+MA,marrakesh,Marrakesh,,ena_sequence,20,1
+DZ,berrouaghia-media,Berrouaghia-Media,,ena_sequence,20,1
+TN,tunisia,Tunisia,,ena_sequence,20,1
+GR,madamados-lesvos,Madamados-Lesvos,,ena_sequence,20,1
+EC,alluriquin,Alluriquin,,ena_sequence,20,0
+RS,novi-pazar,Novi Pazar,,ena_sequence,20,1
+VN,daklak,DakLak,,ena_sequence,19,0
+XK,malisheve,Malisheve,,pathoplexus,19,1
+SN,barkedji-region,Barkedji region,,ena_sequence,18,0
+TH,nakornratchasrima,Nakornratchasrima,,ena_sequence,18,0
+PF,moorea,Moorea,,ena_sequence,18,0
+ID,maumere,Maumere,,ena_sequence,18,0
+IN,port-blair-andaman-islands,"Port Blair, Andaman Islands",,ena_sequence,18,0
+KE,kiambu,Kiambu,,ena_sequence,18,0
+SE,saringe,Saringe,,ena_sequence,18,1
+US,galveston,Galveston,,ena_read_run,18,0
+VE,df-caracas,DF/Caracas,,ena_sequence,17,0
+PK,peshawer,Peshawer,,ena_sequence,17,0
+CI,abidjan-cocody-bingerville,"Abidjan,Cocody-Bingerville",,ena_sequence,17,0
+MY,klang-valley,Klang Valley,,ena_sequence,17,0
+ID,kupang,Kupang,,ena_sequence,17,0
+PK,peshawar,Peshawar,,ena_sequence,17,0
+BR,southeast-rj-state,Southeast-RJ state (Rio de Janeiro city),,ena_sequence,17,0
+LA,vientiane-capital-saythany,"Vientiane Capital, Saythany",,ena_sequence,16,0
+ID,manado,Manado,,ena_sequence,16,0
+ID,malinau,Malinau,,ena_sequence,16,0
+CN,zhongshan,Zhongshan,,ena_sequence,16,0
+KE,kisumu,Kisumu,,ena_sequence,16,0
+BR,recife,Recife,,ena_sequence,16,0
+BR,belo-horizonte,Belo Horizonte,,ena_sequence,16,0
+TT,trinidad,Trinidad,,ena_sequence,16,0
+ID,purwokerto,Purwokerto,,ena_sequence,16,0
+KE,baringo,Baringo,,ena_sequence,16,0
+KE,maragua-district,Maragua district,,ena_sequence,16,0
+US,southern-california,southern California,,ena_sequence,16,0
+CN,sichuan-wolong,Sichuan Wolong,,bvbrc,16,0
+CU,la-habana,La Habana,,ena_sequence,15,0
+PF,raiatea,Raiatea,,ena_sequence,15,0
+MM,mandalay-city,Mandalay city,,ena_sequence,15,0
+CN,yongzhou,Yongzhou,,ena_sequence,15,0
+KZ,tekeli-region,Tekeli region,,ena_sequence,15,0
+CN,xinjiang-uygur-autonomous-region,Xinjiang Uygur Autonomous Region,,ena_sequence,15,0
+RW,nyarugenge,Nyarugenge,,ena_read_run,15,0
+AE,al-ain,Al Ain,,bvbrc,15,0
+KE,malindi,Malindi,,bvbrc,15,0
+KE,wajir,Wajir,,bvbrc,15,0
+CN,xinjiang-uygur-autonomous-region,Xinjiang Uygur Autonomous Region,,pathoplexus,15,0
+KE,kilifi,Kilifi,,ena_sequence,14,0
+PF,bora-bora,Bora Bora,,ena_sequence,14,0
+BR,feira-de-santana,Feira de Santana,,ena_sequence,14,0
+IN,new-delhi,New Delhi,,ena_sequence,14,0
+ID,timika,Timika,,ena_sequence,14,0
+KH,btb,BTB,,ena_sequence,14,0
+BR,barreiras,Barreiras,,ena_sequence,14,0
+CF,bozo,Bozo,,ena_sequence,14,0
+ID,kapuk-java,"Kapuk, Java",,ena_sequence,14,0
+DE,lingen,Lingen,,bvbrc,14,1
+EC,guayaquil,Guayaquil,,ena_sequence,13,0
+PY,capitan-bado,Capitan Bado,,ena_sequence,13,0
+NC,noumea,Noumea,,ena_sequence,13,0
+LA,vientiane-capital-saysettha,"Vientiane Capital, Saysettha",,ena_sequence,13,0
+PY,san-lorenzo,San Lorenzo,,ena_sequence,13,0
+GF,st-laurent-du-maroni,St Laurent du Maroni,,ena_sequence,13,0
+CN,jinghong-city,Jinghong city,,ena_sequence,13,0
+US,osceola-county,Osceola County,,ena_sequence,13,0
+BF,koudougou,KOUDOUGOU,,ena_read_run,13,0
+CN,guangzhou,Guangzhou,,ena_read_run,13,0
+KE,west-pokot,West Pokot,,bvbrc,13,0
+US,denton-co-tx,Denton Co. TX,,ena_sequence,12,0
+US,bismark-nd,Bismark ND,,ena_sequence,12,0
+ID,semarang,Semarang,,ena_sequence,12,0
+GA,lambarene,Lambarene,,ena_sequence,12,0
+BR,uberaba,Uberaba,,ena_sequence,12,0
+ID,tarakan,Tarakan,,ena_sequence,12,0
+CN,zhengzhou,Zhengzhou,,ena_sequence,12,0
+KE,ukunda,Ukunda,,ena_sequence,12,0
+BR,goiania,Goiania,,ena_sequence,12,0
+GF,matoury,Matoury,,ena_sequence,12,0
+MM,mandalay-city,Mandalay City,,ena_sequence,12,0
+PT,imported-from-brazil,imported from Brazil,,ena_sequence,12,1
+KE,chulaimbo,Chulaimbo,,ena_sequence,12,0
+TH,narathiwas,Narathiwas,,ena_sequence,12,0
+BR,goiania-goais,"Goiania, Goais",,ena_sequence,12,0
+MR,hodh-el-garbi,Hodh El Garbi,,ena_sequence,12,0
+KE,meru-south-district,Meru South district,,ena_sequence,12,0
+JP,okinawa-island,Okinawa Island,,ena_sequence,12,0
+IN,tamilnadu,Tamilnadu,,ena_sequence,12,0
+FR,martinique-island,Martinique Island,,ena_sequence,12,1
+US,osceola-county,Osceola county,,ena_read_run,12,0
+US,albuquerque-nm,Albuquerque NM,,ena_sequence,11,0
+IN,northern,northern,,ena_sequence,11,0
+CO,turbo,Turbo,,ena_sequence,11,0
+PK,lahore,Lahore,,ena_sequence,11,0
+NG,benin-city,Benin City,,ena_sequence,11,0
+PY,luque,Luque,,ena_sequence,11,0
+KE,garissa-district,Garissa district,,ena_sequence,11,0
+KZ,talgar-region,Talgar region,,ena_sequence,11,0
+CZ,czechia,Czechia,,ena_sequence,11,1
+KE,kilifi,Kilifi,,bvbrc,11,0
+US,tempe-az,Tempe AZ,,ena_sequence,10,0
+US,montgomery-co-tx,Montgomery Co. TX,,ena_sequence,10,0
+NL,province-of-utrecht-haarzuilens,"Province of Utrecht, Haarzuilens",,ena_sequence,10,1
+PT,serpa,Serpa,,ena_sequence,10,1
+IN,tirupur,Tirupur,,ena_sequence,10,0
+PT,imported-from-angola,imported from Angola,,ena_sequence,10,1
+BI,kobero,Kobero,,ena_sequence,10,0
+CZ,zdar-kaplice-south-bohemia,"Zdar Kaplice, South Bohemia",,ena_sequence,10,1
+MN,selenge-soum-bugant,"Selenge soum, Bugant",,ena_sequence,10,0
+XK,prishtine,Prishtine,,ena_sequence,10,1
+IN,hisar,Hisar,,ena_sequence,10,0
+FR,beyrie-en-b-arn-pyrenees,Beyrie-en-B_arn- Pyrenees,,ena_sequence,10,1
+GR,potamia-paramithia-thesprotia,Potamia-Paramithia-Thesprotia,,ena_sequence,10,1
+MA,guenfouda-oujda,Guenfouda-Oujda,,ena_sequence,10,1
+IT,novara-di-sicilia-sicily,Novara di Sicilia-Sicily,,ena_sequence,10,1
+GR,keramidi-magnesia,Keramidi-Magnesia,,ena_sequence,10,1
+GR,afandou-rhodes,Afandou-Rhodes,,ena_sequence,10,1
+XK,sadovine-viti-pristina,Sadovine-Viti-Pristina,,ena_sequence,10,1
+GR,kavala,Kavala,,ena_sequence,10,1
+ES,cadiz-vejer-de-la-frontera-barbate,Cadiz-Vejer de la Frontera -Barbate,,ena_sequence,10,1
+XK,sllatina-podujevo-pristina,Sllatina-Podujevo-Pristina,,ena_sequence,10,1
+SD,nyala,Nyala,,ena_sequence,10,0
+IL,rosh-ha-nikra,Rosh ha-nikra,,ena_sequence,10,1
+TR,seferihisar-ismir,Seferihisar-Ismir,,ena_sequence,10,1
+ES,pias-vasco,Pias Vasco,,ena_sequence,10,1
+GR,mandriko-rhodes,Mandriko-Rhodes,,ena_sequence,10,1
+MA,el-kebir,El Kebir,,ena_sequence,10,1
+PL,sokolka-poviat,Sokolka poviat,,ena_sequence,10,1
+FR,pouylebon-gascony-midi-pyrenees,Pouylebon-Gascony-Midi-Pyrenees,,ena_sequence,10,1
+SD,sudan,Sudan,,ena_sequence,10,0
+FR,bieujac-gironde-aquitaine,Bieujac-Gironde-Aquitaine,,ena_sequence,10,1
+MA,settat,Settat,,ena_sequence,10,1
+GB,baylham-ipswich-suffolk,Baylham-Ipswich-Suffolk,,ena_sequence,10,1
+BA,milici-vlasenica-srpska,Milici-Vlasenica-Srpska,,ena_sequence,10,1
+CY,athalassa,Athalassa,,ena_sequence,10,1
+ES,cadiz-jimena-de-la-frontera,Cadiz-Jimena de la Frontera,,ena_sequence,10,1
+FR,romestaing-lot-et-garonne-aquitaine,Romestaing-Lot et Garonne- Aquitaine,,ena_sequence,10,1
+FR,camaret-sur-mer-finistere-brittany,Camaret sur mer-Finistere-Brittany,,ena_sequence,10,1
+MA,khouribga,Khouribga,,ena_sequence,10,1
+DZ,laghouat-dakhla,Laghouat-Dakhla,,ena_sequence,10,1
+DE,imported-goat-from-italy,imported goat from Italy,,ena_sequence,10,1
+XK,vushtrri,Vushtrri,,ena_sequence,10,1
+IT,s-angelo-di-brolo-sicily,S.Angelo di Brolo-Sicily,,ena_sequence,10,1
+GR,damatria-rhodes,Damatria-Rhodes,,ena_sequence,10,1
+IT,nissoria-enna-sicily,Nissoria-Enna-Sicily,,ena_sequence,10,1
+GR,smiksi-grevena,Smiksi-Grevena,,ena_sequence,10,1
+GR,agiasos-achladeri-lesvos,Agiasos-Achladeri-Lesvos,,ena_sequence,10,1
+IL,elyakim,Elyakim,,ena_sequence,10,1
+GR,ierissos-chalkidiki,Ierissos-Chalkidiki,,ena_sequence,10,1
+CN,shangri-la-yunnan,Shangri-La Yunnan,,ena_sequence,10,0
+NL,staphorst-region,Staphorst region,,ena_sequence,10,1
+GB,west-suffolk,West Suffolk,,ena_sequence,10,1
+IL,yachini,Yachini,,ena_sequence,10,1
+IL,zde-eliahu,Zde Eliahu,,ena_sequence,10,1
+CM,cameroon,Cameroon,,ena_sequence,10,0
+LU,redange-colpach,"Redange, Colpach",,ena_sequence,10,1
+KZ,tole-bi-distr-turkestan-oblast,"Tole Bi distr., Turkestan oblast",,ena_sequence,10,0
+MA,kenitra,Kenitra,,ena_sequence,10,1
+IL,ein-kamonim,Ein Kamonim,,ena_sequence,10,1
+RU,smolensk-galloway,Smolensk-Galloway,,ena_sequence,10,1
+LY,green-mountain,Green Mountain,,ena_sequence,10,1
+ZA,natal,Natal,,ena_sequence,10,0
+SD,shambat,Shambat,,ena_sequence,10,0
+CY,amochostos-achna,Amochostos-Achna,,ena_sequence,10,1
+ZA,rsa,RSA,,ena_sequence,10,0
+ES,cow-imported-from-lithuania,cow imported from Lithuania,,ena_sequence,10,1
+EC,cotundo,Cotundo,,ena_sequence,10,0
+PK,hazara-west-pakistan,"Hazara, West Pakistan",,ena_sequence,10,0
+CN,shantou-district-of-gangdong-province,Shantou district of Gangdong province,,ena_sequence,10,0
+FR,faurilles-dordogne-aquitaine,Faurilles-Dordogne-Aquitaine,,ena_sequence,10,1
+MA,rabat,Rabat,,ena_sequence,10,1
+NL,staphorst,Staphorst,,ena_sequence,10,1
+FR,pinderes-lot-et-garonne-aquitaine,Pinderes-Lot et Garonne-Aquitaine,,ena_sequence,10,1
+BE,grammene,Grammene,,ena_sequence,10,1
+FR,mayotte-island,Mayotte Island,,ena_sequence,10,1
+IN,tippanapalli-village-wyra-mandal-khammam,Tippanapalli village Wyra mandal Khammam,,ena_sequence,10,0
+LU,echternach-waldbillig,"Echternach, Waldbillig",,ena_sequence,10,1
+GB,newcastle,Newcastle,,ena_sequence,10,1
+TN,jelma,Jelma,,ena_sequence,10,1
+TN,thala,Thala,,ena_sequence,10,1
+TN,sidi-el-heni,Sidi El Heni,,ena_sequence,10,1
+TN,nebeur,Nebeur,,ena_sequence,10,1
+ZA,malmesbury,Malmesbury,,ena_sequence,10,0
+XK,prishtine,Prishtine,,pathoplexus,10,1
+US,tampa-fl,Tampa FL,,ena_sequence,9,0
+SK,komarno-velky-lel,"Komarno, Velky Lel",,ena_sequence,9,1
+VN,north,north,,ena_sequence,9,0
+CM,douala,Douala,,ena_sequence,9,0
+CN,shenzhen,Shenzhen,,ena_sequence,9,0
+ID,sumatra,Sumatra,,ena_sequence,9,0
+IN,hyderabad,Hyderabad,,ena_sequence,9,0
+CN,foshan,Foshan,,ena_sequence,9,0
+LA,luangprabang,Luangprabang,,ena_sequence,9,0
+CN,gdfs,GDfs,,ena_sequence,9,0
+US,dade-county,Dade County,,ena_sequence,9,0
+BR,macapa-ap,Macapa-AP,,ena_sequence,9,0
+US,palm-beach-county,Palm Beach County,,ena_sequence,9,0
+KE,isiolo,Isiolo,,ena_sequence,9,0
+ZW,salisbury,Salisbury,,ena_sequence,9,0
+MG,andohasahalava-fkt-arana-ii,"Andohasahalava, Fkt Arana II",,ena_sequence,9,0
+ZA,jacobsdal,Jacobsdal,,ena_sequence,9,0
+DE,south-east-germany-haselmuehl,"South-East Germany, Haselmuehl",,ena_sequence,9,1
+TJ,tursunzade-region,Tursunzade region,,ena_sequence,9,0
+FR,lagruere-lot-et-garonne-aquitaine,Lagruere-Lot et Garonne- Aquitaine,,ena_sequence,9,1
+US,dade-county,Dade county,,ena_read_run,9,0
+US,palm-beach-county,Palm Beach county,,ena_read_run,9,0
+TJ,tursunzade-region,Tursunzade region,,pathoplexus,9,0
+US,grand-junction-co,Grand Junction CO,,ena_sequence,8,0
+US,fort-bend-co-tx,Fort Bend Co. TX,,ena_sequence,8,0
+US,oklahoma-city-ok,Oklahoma City OK,,ena_sequence,8,0
+IT,verbania,Verbania,,ena_sequence,8,1
+KH,tak,TAK,,ena_sequence,8,0
+IN,bhopal,Bhopal,,ena_sequence,8,0
+GF,camp-du-tigre,Camp du Tigre,,ena_sequence,8,0
+CO,apartado,Apartado,,ena_sequence,8,0
+CO,san-andres,San Andres,,ena_sequence,8,0
+NC,dumbea,Dumbea,,ena_sequence,8,0
+IN,andaman,Andaman,,ena_sequence,8,0
+IN,gorakhpur,GORAKHPUR,,ena_sequence,8,0
+PT,madeira-island,Madeira Island,,ena_sequence,8,1
+PY,limpio,Limpio,,ena_sequence,8,0
+IN,gwalior,Gwalior,,ena_sequence,8,0
+BF,kaya,Kaya,,ena_sequence,8,0
+KE,lamu,Lamu,,ena_sequence,8,0
+PY,capiata,Capiata,,ena_sequence,8,0
+SN,diawara,Diawara,,ena_sequence,8,0
+MR,guimi,Guimi,,ena_sequence,8,0
+RU,yakutsk-district,Yakutsk district,,ena_sequence,8,1
+DE,haselmuehl-south-east-germany,"Haselmuehl, South East Germany",,ena_sequence,8,1
+RU,ural-ekaterinburg,"Ural, Ekaterinburg",,ena_sequence,8,1
+SD,al-fulah-city-western-kordufan-province,"Al-Fulah City, Western Kordufan Province",,ena_sequence,8,0
+XK,kline,Kline,,ena_sequence,8,1
+KZ,maktaaral-district,Maktaaral district,,ena_sequence,8,0
+KZ,turkestan-region,Turkestan region,,ena_sequence,8,0
+ZM,lundazi,Lundazi,,ena_sequence,8,0
+FR,southern-france,southern France,,ena_sequence,8,1
+CN,guangzhou,Guangzhou,,bvbrc,8,0
+US,amarillo-tx,Amarillo TX,,ena_sequence,7,0
+MX,baja-calfornia-norte,Baja Calfornia Norte,,ena_sequence,7,0
+KE,kwale,Kwale,,ena_sequence,7,0
+SK,velky-krtis-lesenice,"Velky Krtis, Lesenice",,ena_sequence,7,1
+ID,madura,Madura,,ena_sequence,7,0
+IN,kanpur,Kanpur,,ena_sequence,7,0
+LA,vientiane-capital-sisattanark,"Vientiane Capital, Sisattanark",,ena_sequence,7,0
+IN,chennai,Chennai,,ena_sequence,7,0
+KH,srp,SRP,,ena_sequence,7,0
+CM,ngaoundere,Ngaoundere,,ena_sequence,7,0
+US,orange-county,Orange County,,ena_sequence,7,0
+BR,itabuna,Itabuna,,ena_sequence,7,0
+BO,santa-cruz-de-la-sierra,Santa Cruz de la Sierra,,ena_sequence,7,0
+CZ,potepli-central-bohemia,"Potepli, Central Bohemia",,ena_sequence,7,1
+DE,odenwald-hills,Odenwald hills,,ena_sequence,7,1
+RU,ural,Ural,,ena_sequence,7,1
+RU,khanty-mansiysky-avtonomny-okrug,Khanty-Mansiysky avtonomny okrug,,ena_sequence,7,1
+KZ,sairam-district,Sairam district,,ena_sequence,7,0
+ZA,ondersterpoort,Ondersterpoort,,ena_sequence,7,0
+FR,guadeloupe-island,Guadeloupe Island,,ena_sequence,7,1
+RO,bucharest-metropolitan-area,Bucharest metropolitan area,,ena_sequence,7,1
+PT,arrabida,Arrabida,,ena_sequence,7,1
+NI,len,Len,,ena_read_run,7,0
+CM,africa,Africa,,ena_read_run,7,0
+US,georgetown-university,Georgetown University,,ena_read_run,7,0
+US,orange-county,Orange county,,ena_read_run,7,0
+RW,muhanga,Muhanga,,ena_read_run,7,0
+KZ,maktaaral-district,Maktaaral district,,pathoplexus,7,0
+KZ,sairam-district,Sairam district,,pathoplexus,7,0
+KE,baringo-county,Baringo County,,pathoplexus,7,0
+US,el-paso-co-tx,El Paso Co. TX,,ena_sequence,6,0
+US,new-orleans-la,New Orleans LA,,ena_sequence,6,0
+AU,mt-isa,Mt Isa,,ena_sequence,6,0
+US,collin-co-tx,Collin Co. TX,,ena_sequence,6,0
+FR,paca,PACA,,ena_sequence,6,1
+SK,senec-hruby-sur,"Senec, Hruby Sur",,ena_sequence,6,1
+CN,xishuangbanna,XiShuangbanna,,ena_sequence,6,0
+BT,duksum-outbreak,Duksum Outbreak,,ena_sequence,6,0
+IN,coimbatore,Coimbatore,,ena_sequence,6,0
+VE,district-federal-caracas,District Federal Caracas,,ena_sequence,6,0
+BR,coracao-de-maria,Coracao de Maria,,ena_sequence,6,0
+BR,caldas-novas,Caldas Novas,,ena_sequence,6,0
+PY,villarrica,Villarrica,,ena_sequence,6,0
+PF,maupiti,Maupiti,,ena_sequence,6,0
+VN,gialai,GiaLai,,ena_sequence,6,0
+GF,maripasoula,Maripasoula,,ena_sequence,6,0
+GF,sinnamary,Sinnamary,,ena_sequence,6,0
+GF,tonate-macouria,Tonate-Macouria,,ena_sequence,6,0
+IN,gorakhpur,Gorakhpur,,ena_sequence,6,0
+BR,uberlandia,Uberlandia,,ena_sequence,6,0
+PY,pedro-juan-caballero,Pedro Juan Caballero,,ena_sequence,6,0
+IN,noida,Noida,,ena_sequence,6,0
+US,polk-county,Polk County,,ena_sequence,6,0
+US,duval-county,Duval County,,ena_sequence,6,0
+BR,southeast-rj-state-duque-de-caxias,Southeast-RJ state (Duque de Caxias,,ena_sequence,6,0
+FJ,suva,Suva,,ena_sequence,6,0
+PY,yaguaron,Yaguaron,,ena_sequence,6,0
+US,broward-county,Broward County,,ena_sequence,6,0
+HN,roatan,Roatan,,ena_sequence,6,0
+BR,aparecida-de-goiania-goais,"Aparecida de Goiania, Goais",,ena_sequence,6,0
+ZW,sinoia,Sinoia,,ena_sequence,6,0
+KE,meru-central-district,Meru Central district,,ena_sequence,6,0
+MG,antanifotsy-fianarantsoa-i,"Antanifotsy, Fianarantsoa I",,ena_sequence,6,0
+KE,nakuru-district,Nakuru district,,ena_sequence,6,0
+MG,manjakandriana,Manjakandriana,,ena_sequence,6,0
+KE,marsabit,Marsabit,,ena_sequence,6,0
+KE,thika-district,Thika district,,ena_sequence,6,0
+KR,yeoju,Yeoju,,ena_sequence,6,0
+DE,south-east-germany-burglengenfeld,"South-East Germany, Burglengenfeld",,ena_sequence,6,1
+RU,kalmykia,Kalmykia,,ena_sequence,6,1
+FR,roquevaire,Roquevaire,,ena_sequence,6,1
+BF,pouytenga,POUYTENGA,,ena_read_run,6,0
+US,broward-county,Broward county,,ena_read_run,6,0
+US,polk-county,Polk county,,ena_read_run,6,0
+US,duval-county,Duval county,,ena_read_run,6,0
+RW,gicumbi,Gicumbi,,ena_read_run,6,0
+XK,kline,Kline,,pathoplexus,6,1
+US,tyler-tx,Tyler TX,,ena_sequence,5,0
+HU,mezotur,Mezotur,,ena_sequence,5,1
+US,san-antonio-tx,San Antonio TX,,ena_sequence,5,0
+PF,ua-pou,Ua Pou,,ena_sequence,5,0
+PY,lambare,Lambare,,ena_sequence,5,0
+ER,massawa,Massawa,,ena_sequence,5,0
+PK,lower-dir,Lower Dir,,ena_sequence,5,0
+PK,rawalpendi,Rawalpendi,,ena_sequence,5,0
+ID,denpasar,Denpasar,,ena_sequence,5,0
+TW,sanmin-chu-kaoshiung-city,Sanmin Ch'u/Kaoshiung City,,ena_sequence,5,0
+GF,mana,Mana,,ena_sequence,5,0
+PF,tahaa,Taha'a,,ena_sequence,5,0
+KH,ksp,KSP,,ena_sequence,5,0
+ID,lombok,Lombok,,ena_sequence,5,0
+BR,rio-verde,Rio Verde,,ena_sequence,5,0
+PY,mariano-roque-alonso,Mariano Roque Alonso,,ena_sequence,5,0
+CV,cidade-da-praia,Cidade da Praia,,ena_sequence,5,0
+CM,yaounde,Yaounde,,ena_sequence,5,0
+BR,rj-nova-iguacu,RJ Nova iguacu,,ena_sequence,5,0
+QA,wakrah,Wakrah,,ena_sequence,5,0
+BT,samdrupjongkhar,Samdrupjongkhar,,ena_sequence,5,0
+LA,xayabouly,Xayabouly,,ena_sequence,5,0
+CI,cocody-bingerville,Cocody-Bingerville,,ena_sequence,5,0
+BR,belo-horizonte-mg,Belo Horizonte-MG,,ena_sequence,5,0
+IN,taluk-hospital-adoor,"Taluk Hospital, Adoor",,ena_sequence,5,0
+BR,feira-de-santana-ba,Feira de Santana-BA,,ena_sequence,5,0
+CF,bouar,Bouar,,ena_sequence,5,0
+BR,recife-pe,Recife-PE,,ena_sequence,5,0
+PG,balimo,Balimo,,ena_sequence,5,0
+SD,northern-sudan,northern Sudan,,ena_sequence,5,0
+MR,rosso,Rosso,,ena_sequence,5,0
+AU,torres-strait-badu-island,"Torres Strait, Badu island",,ena_sequence,5,0
+RU,ekaterinburg,Ekaterinburg,,ena_sequence,5,1
+RU,vladivostok,Vladivostok,,ena_sequence,5,1
+CZ,neznabohy-north-bohemia,"Neznabohy, North Bohemia",,ena_sequence,5,1
+CZ,borovany-south-bohemia,"Borovany, South Bohemia",,ena_sequence,5,1
+RU,mountain-altay,Mountain Altay,,ena_sequence,5,1
+DE,south-east-germany-heselbach,"South-East Germany, Heselbach",,ena_sequence,5,1
+IT,carona-bg,Carona (BG,,ena_sequence,5,1
+MN,selenge-aimag,Selenge aimag,,ena_sequence,5,0
+RU,khanty-mansi-autonomous-okrug-yugra,Khanty-Mansi Autonomous Okrug-Yugra,,ena_sequence,5,1
+PL,warmia-masuria,Warmia Masuria,,ena_sequence,5,1
+RW,kamonyi,Kamonyi,,ena_read_run,5,0
+KE,kiambu,Kiambu,,ena_read_run,5,0
+KE,baringo,Baringo,,ena_read_run,5,0
+SD,al-fulah-city-western-kordufan-province,"Al-Fulah City, Western Kordufan Province",,pathoplexus,5,0
+AE,al-ain,Al Ain,,pathoplexus,5,0
+HU,algyo,Algyo,,ena_sequence,4,1
+US,milwalkee-wi,Milwalkee WI,,ena_sequence,4,0
+US,el-paso-tx,El Paso TX,,ena_sequence,4,0
+HU,doc,Doc,,ena_sequence,4,1
+HU,pilis,Pilis,,ena_sequence,4,1
+HU,hajdunanas,Hajdunanas,,ena_sequence,4,1
+HU,tapiosag,Tapiosag,,ena_sequence,4,1
+US,conneticut-milford,"Conneticut, Milford",,ena_sequence,4,0
+US,lubbock-tx,Lubbock TX,,ena_sequence,4,0
+AU,normanton-qld-gulf,Normanton QLD Gulf,,ena_sequence,4,0
+US,conneticut-greenwich,"Conneticut, Greenwich",,ena_sequence,4,0
+CZ,brno-zoo,Brno Zoo,,ena_sequence,4,1
+CZ,ostrava-zoo,Ostrava Zoo,,ena_sequence,4,1
+CL,eastern-island,Eastern Island,,ena_sequence,4,0
+PY,pilar,Pilar,,ena_sequence,4,0
+BR,nioaque,Nioaque,,ena_sequence,4,0
+IN,imphal,Imphal,,ena_sequence,4,0
+PG,ncd,NCD,,ena_sequence,4,0
+PF,nuku-hiva,Nuku Hiva,,ena_sequence,4,0
+BR,am-manaus,AM-Manaus,,ena_sequence,4,0
+LA,vientiane-capital-chanthabury,"Vientiane Capital, Chanthabury",,ena_sequence,4,0
+FR,reunion-island,Reunion Island,,ena_sequence,4,1
+VN,kontum,KonTum,,ena_sequence,4,0
+PY,nemby,Nemby,,ena_sequence,4,0
+KE,msambweni,Msambweni,,ena_sequence,4,0
+IN,pune,Pune,,ena_sequence,4,0
+HT,port-a-piment,Port-a-Piment,,ena_sequence,4,0
+BF,dedougou,Dedougou,,ena_sequence,4,0
+LK,western-province,Western Province,,ena_sequence,4,0
+NC,mt-dore,Mt Dore,,ena_sequence,4,0
+ID,medan,Medan,,ena_sequence,4,0
+PF,tahaa,Tahaa,,ena_sequence,4,0
+LA,vientiane-capital-sisattanak,"Vientiane Capital, Sisattanak",,ena_sequence,4,0
+FR,nice,Nice,,ena_sequence,4,1
+PY,encarnacion,Encarnacion,,ena_sequence,4,0
+CF,sebokele,Sebokele,,ena_sequence,4,0
+IN,medical-college-alappuzha,"Medical College, Alappuzha",,ena_sequence,4,0
+BR,itajuipe,Itajuipe,,ena_sequence,4,0
+KE,lamu-lamu-east,"Lamu, Lamu East",,ena_sequence,4,0
+PY,fernando-de-la-mora,Fernando de la Mora,,ena_sequence,4,0
+MY,bagan-panchor,Bagan Panchor,,ena_sequence,4,0
+US,hillsborough-county,Hillsborough County,,ena_sequence,4,0
+CF,batalimo,Batalimo,,ena_sequence,4,0
+ZM,mongu,Mongu,,ena_sequence,4,0
+MR,ayoun-el-atrouss,Ayoun El Atrouss,,ena_sequence,4,0
+UG,kiruhura,Kiruhura,,ena_sequence,4,0
+MR,matar-lajar,Matar Lajar,,ena_sequence,4,0
+MR,lazaret,Lazaret,,ena_sequence,4,0
+CN,zhejiang-dinghai,Zhejiang/Dinghai,,ena_sequence,4,0
+CH,thun,Thun,,ena_sequence,4,1
+CZ,chlum-decina-north-bohemia,"Chlum/Decina, North Bohemia",,ena_sequence,4,1
+RU,eastern-siberia-transbaikal-region,"Eastern Siberia, Transbaikal region",,ena_sequence,4,1
+KZ,yenbekshikazakh-region,Yenbekshikazakh region,,ena_sequence,4,0
+IT,province-of-trento,province of Trento,,ena_sequence,4,1
+UG,kibale-national-park,Kibale National Park,,ena_sequence,4,0
+PL,podlasie,Podlasie,,ena_sequence,4,1
+KZ,akzhar-turkestan-oblast,"Akzhar, Turkestan oblast",,ena_sequence,4,0
+GR,lesvos,Lesvos,,ena_sequence,4,1
+LI,bendern,Bendern,,ena_sequence,4,1
+SN,barkedji,Barkedji,,ena_read_run,4,0
+BF,fada,FADA,,ena_read_run,4,0
+US,hillsborough-county,Hillsborough county,,ena_read_run,4,0
+CN,jinhua,Jinhua,,ena_read_run,4,0
+BI,kobero,Kobero,,ena_read_run,4,0
+KE,kilifi,Kilifi,,ena_read_run,4,0
+CN,jinshan-district-shanghai-municipality,"Jinshan District, Shanghai Municipality",,bvbrc,4,0
+KE,lamu,Lamu,,bvbrc,4,0
+KZ,turkestan-region,Turkestan region,,pathoplexus,4,0
+US,conneticut-norwalk,"Conneticut, Norwalk",,ena_sequence,3,0
+US,travis-co-tx,Travis Co. TX,,ena_sequence,3,0
+US,new-york-ny,New York NY,,ena_sequence,3,0
+US,minneapolis-mn,Minneapolis MN,,ena_sequence,3,0
+US,los-angeles-ca,Los Angeles CA,,ena_sequence,3,0
+US,kansas-city-mo,Kansas City MO,,ena_sequence,3,0
+US,lincoln-ne,Lincoln NE,,ena_sequence,3,0
+HU,egyek,Egyek,,ena_sequence,3,1
+HR,osijek,Osijek,,ena_sequence,3,1
+GR,messenia,Messenia,,ena_sequence,3,1
+DJ,djibouti-city,Djibouti City,,ena_sequence,3,0
+SK,velky-biel,Velky Biel,,ena_sequence,3,1
+RU,kalmikia,Kalmikia,,ena_sequence,3,1
+US,indianapolis-in,Indianapolis IN,,ena_sequence,3,0
+US,sioux-falls-sd,Sioux Falls SD,,ena_sequence,3,0
+US,south-bend-in,South Bend IN,,ena_sequence,3,0
+RS,subotica,Subotica,,ena_sequence,3,1
+US,gainsville-fl,Gainsville FL,,ena_sequence,3,0
+GR,arcadia,Arcadia,,ena_sequence,3,1
+HU,hajdudorog,Hajdudorog,,ena_sequence,3,1
+HU,nyarlorinc,Nyarlorinc,,ena_sequence,3,1
+HU,hajduboszormeny,Hajduboszormeny,,ena_sequence,3,1
+HR,beli-manastir,Beli Manastir,,ena_sequence,3,1
+NL,bloemendaal,Bloemendaal,,ena_sequence,3,1
+NL,oss,Oss,,ena_sequence,3,1
+NL,enschede,Enschede,,ena_sequence,3,1
+NL,almere,Almere,,ena_sequence,3,1
+SK,prievidza-bojnice,"Prievidza, Bojnice",,ena_sequence,3,1
+KH,kan,KAN,,ena_sequence,3,0
+BJ,cotonou,Cotonou,,ena_sequence,3,0
+IN,faridabad,Faridabad,,ena_sequence,3,0
+PF,hao,Hao,,ena_sequence,3,0
+CI,abidjan-adjame-plateau-attecoube,"Abidjan, Adjame-Plateau-Attecoube",,ena_sequence,3,0
+PF,mahina-tahiti,"Mahina, Tahiti",,ena_sequence,3,0
+GP,baie-mahault,Baie-Mahault,,ena_sequence,3,0
+IN,bangalore,Bangalore,,ena_sequence,3,0
+PF,rurutu,Rurutu,,ena_sequence,3,0
+ID,java,Java,,ena_sequence,3,0
+KH,prv,PRV,,ena_sequence,3,0
+PF,tubuai,Tubuai,,ena_sequence,3,0
+PY,ita,Ita,,ena_sequence,3,0
+PT,imported-from-tailand,imported from Tailand,,ena_sequence,3,1
+BR,sao-paulo-city,Sao Paulo city,,ena_sequence,3,0
+BR,capinopolis,Capinopolis,,ena_sequence,3,0
+BR,aparecida-de-goiania,Aparecida de Goiania,,ena_sequence,3,0
+KH,battambong,Battambong,,ena_sequence,3,0
+BR,ituiutaba,Ituiutaba,,ena_sequence,3,0
+PY,santa-rosa-del-aguaray,Santa Rosa Del Aguaray,,ena_sequence,3,0
+GF,grand-santi,Grand-Santi,,ena_sequence,3,0
+BT,lhamoizingkha-bhu,Lhamoizingkha BHU,,ena_sequence,3,0
+HT,les-anglais,Les Anglais,,ena_sequence,3,0
+CO,norte-de-santander-convencion,Norte de Santander Convencion,,ena_sequence,3,0
+IN,dharapuram,Dharapuram,,ena_sequence,3,0
+BR,corumba,Corumba,,ena_sequence,3,0
+PF,huahine,Huahine,,ena_sequence,3,0
+BR,brasilia,Brasilia,,ena_sequence,3,0
+BR,valparaiso,Valparaiso,,ena_sequence,3,0
+PH,mindanao,Mindanao,,ena_sequence,3,0
+BF,fada,Fada,,ena_sequence,3,0
+TW,linyuan-hsiang-kaoshiung-county,Linyuan Hsiang/Kaoshiung County,,ena_sequence,3,0
+NP,kathmandu,Kathmandu,,ena_sequence,3,0
+CI,abidjan-abobo-est,"Abidjan, Abobo-Est",,ena_sequence,3,0
+BR,vitoria-da-conquista,Vitoria Da Conquista,,ena_sequence,3,0
+CO,ovejas,Ovejas (Sucre),,ena_sequence,3,0
+TH,satool,Satool,,ena_sequence,3,0
+NI,tipitapa,Tipitapa,,ena_sequence,3,0
+ID,magelang,Magelang,,ena_sequence,3,0
+NI,nuevo-segovia,Nuevo Segovia,,ena_sequence,3,0
+ID,tomohon-sulawesi,"Tomohon, Sulawesi",,ena_sequence,3,0
+CG,diosso,Diosso,,ena_sequence,3,0
+BR,condeuba,Condeuba,,ena_sequence,3,0
+MY,tangkak,Tangkak,,ena_sequence,3,0
+KM,grande-island,Grande Island,,ena_sequence,3,0
+US,seminole-county,Seminole County,,ena_sequence,3,0
+TH,samut-sakorn,Samut Sakorn,,ena_sequence,3,0
+CF,bayanga,Bayanga,,ena_sequence,3,0
+NG,ibadan,Ibadan,,ena_sequence,3,0
+KE,west-pokot,West Pokot,,ena_sequence,3,0
+KE,nyandarua,Nyandarua,,ena_sequence,3,0
+ZA,randfontein,Randfontein,,ena_sequence,3,0
+KE,mbeere-district,Mbeere district,,ena_sequence,3,0
+KE,kajaido-district,Kajaido district,,ena_sequence,3,0
+CF,boali,Boali,,ena_sequence,3,0
+ZW,beatrice,Beatrice,,ena_sequence,3,0
+KE,garissa-disrict,Garissa disrict,,ena_sequence,3,0
+CF,loko,Loko,,ena_sequence,3,0
+KE,baringo-district,Baringo district,,ena_sequence,3,0
+MG,taolagnaro,Taolagnaro,,ena_sequence,3,0
+MG,anjozorobe,Anjozorobe,,ena_sequence,3,0
+MG,ankazobe,Ankazobe,,ena_sequence,3,0
+MG,antsirabe,Antsirabe,,ena_sequence,3,0
+KE,kamsuma,Kamsuma,,ena_sequence,3,0
+KE,kiambu-district,Kiambu district,,ena_sequence,3,0
+KE,bura,Bura,,ena_sequence,3,0
+KE,magadi,Magadi,,ena_sequence,3,0
+MG,miarinarivo,Miarinarivo,,ena_sequence,3,0
+MR,ayoun-el-atross,Ayoun El Atross,,ena_sequence,3,0
+KE,baringo-marigat-sintaan,"Baringo, Marigat, Sintaan",,ena_sequence,3,0
+BI,ruyaga,Ruyaga,,ena_sequence,3,0
+ZA,boshof,Boshof,,ena_sequence,3,0
+KE,mombassa-district,Mombassa district,,ena_sequence,3,0
+KE,muranga-district,Muranga district,,ena_sequence,3,0
+RU,krasnoyarsk-district,Krasnoyarsk district,,ena_sequence,3,1
+RU,ivanovo-district,Ivanovo district,,ena_sequence,3,1
+RU,tyumen-district,Tyumen district,,ena_sequence,3,1
+AU,badu-island-torres-strait,"Badu Island, Torres Strait",,ena_sequence,3,0
+RU,far-east-khabarovsk-territory,"Far East, Khabarovsk territory",,ena_sequence,3,1
+UA,crimea,Crimea,,ena_sequence,3,1
+RU,eastern-siberia,Eastern Siberia,,ena_sequence,3,1
+RU,western-siberia,Western Siberia,,ena_sequence,3,1
+SA,al-khurma,Al-Khurma,,ena_sequence,3,0
+PK,lakkimarwat-kpk,LakkiMarwat-KPK,,ena_sequence,3,0
+KZ,zhalagash,Zhalagash,,ena_sequence,3,0
+SD,dunkop-village-abyei-district-western,"Dunkop Village, Abyei District, Western",,ena_sequence,3,0
+SD,darfur,Darfur,,ena_sequence,3,0
+PK,punjab-chakwal,Punjab-Chakwal,,ena_sequence,3,0
+TJ,rudaki-region,Rudaki region,,ena_sequence,3,0
+MX,buctzotz-yuc,"Buctzotz, Yuc.",,ena_sequence,3,0
+PT,grandola,Grandola,,ena_sequence,3,1
+PT,barrancos,Barrancos,,ena_sequence,3,1
+PT,alandroal,Alandroal,,ena_sequence,3,1
+SE,kristianstad,Kristianstad,,ena_sequence,3,1
+MA,sefrou,Sefrou,,ena_sequence,3,1
+FR,garlaban,Garlaban,,ena_sequence,3,1
+FR,montpellier,Montpellier,,ena_sequence,3,1
+FR,corte-corsica,Corte/Corsica,,ena_sequence,3,1
+FR,marseilles,Marseilles,,ena_sequence,3,1
+BF,kongoussi,KONGOUSSI,,ena_read_run,3,0
+SN,bobo-dioulasso,BOBO DIOULASSO,,ena_read_run,3,0
+US,seminole-county,Seminole county,,ena_read_run,3,0
+NI,nuevo-segovia,Nuevo Segovia,,ena_read_run,3,0
+UG,zika-forest,Zika forest,,ena_read_run,3,0
+KE,west-pokot,West Pokot,,ena_read_run,3,0
+KE,isiolo,Isiolo,,ena_read_run,3,0
+PT,arrabida,Arrabida,,bvbrc,3,1
+FR,marseilles,Marseilles,,bvbrc,3,1
+TJ,rudaki-region,Rudaki region,,pathoplexus,3,0
+SA,al-khurma,Al-Khurma,,pathoplexus,3,0
+KZ,zhalagash,Zhalagash,,pathoplexus,3,0
+PK,peshawar,Peshawar,,pathoplexus,3,0
+US,conneticut-north-stonington,"Conneticut, North Stonington",,ena_sequence,2,0
+US,conneticut-meriden,"Conneticut, Meriden",,ena_sequence,2,0
+US,jackson-tn,Jackson TN,,ena_sequence,2,0
+US,sioux-city-ia,Sioux City IA,,ena_sequence,2,0
+RS,novi-sad,Novi Sad,,ena_sequence,2,1
+HU,hajduszoboszlo,Hajduszoboszlo,,ena_sequence,2,1
+HR,sisak,Sisak,,ena_sequence,2,1
+CZ,south-moravia-mlynsky-fishpond-at,"South Moravia, Mlynsky fishpond at",,ena_sequence,2,1
+HR,cepin,Cepin,,ena_sequence,2,1
+HU,jaszbereny,Jaszbereny,,ena_sequence,2,1
+US,cheyenne-wy,Cheyenne WY,,ena_sequence,2,0
+US,penrose-co,Penrose CO,,ena_sequence,2,0
+US,las-vegas-nv,Las Vegas NV,,ena_sequence,2,0
+GR,corinthia,Corinthia,,ena_sequence,2,1
+HU,esztergom,Esztergom,,ena_sequence,2,1
+US,conneticut-enfield,"Conneticut, Enfield",,ena_sequence,2,0
+US,glenview-il,Glenview IL,,ena_sequence,2,0
+HU,balaton,Balaton,,ena_sequence,2,1
+HU,torvaj,Torvaj,,ena_sequence,2,1
+GR,argolida-peloponnesus,"Argolida, Peloponnesus",,ena_sequence,2,1
+HU,per,Per,,ena_sequence,2,1
+HR,cakovec,Cakovec,,ena_sequence,2,1
+SN,thille-boubacar-region,Thille Boubacar region,,ena_sequence,2,0
+US,williamson-co-tx,Williamson Co. TX,,ena_sequence,2,0
+NL,province-of-utrecht-vleuten,"Province of Utrecht, Vleuten",,ena_sequence,2,1
+HU,balkany,Balkany,,ena_sequence,2,1
+HU,rakoczifalva,Rakoczifalva,,ena_sequence,2,1
+US,conneticut-cheshire,"Conneticut, Cheshire",,ena_sequence,2,0
+US,shreveport-la,Shreveport LA,,ena_sequence,2,0
+PT,southern-portugal,southern Portugal,,ena_sequence,2,1
+US,dallas-tx,Dallas TX,,ena_sequence,2,0
+IT,mombello-monferrato,Mombello Monferrato (AL),,ena_sequence,2,1
+NL,hilversum,Hilversum,,ena_sequence,2,1
+IT,casale-monferrato,Casale Monferrato (AL),,ena_sequence,2,1
+IT,senigallia,Senigallia,,ena_sequence,2,1
+IT,osimo,Osimo,,ena_sequence,2,1
+NL,lierop,Lierop,,ena_sequence,2,1
+NL,bilthoven,Bilthoven,,ena_sequence,2,1
+NL,lelystad,Lelystad,,ena_sequence,2,1
+AT,linz,Linz,,ena_sequence,2,1
+NL,province-of-gelderland-berg-en-dal,"Province of Gelderland, Berg en Dal",,ena_sequence,2,1
+IT,giarole,Giarole (AL),,ena_sequence,2,1
+NL,best,Best,,ena_sequence,2,1
+NL,zutphen,Zutphen,,ena_sequence,2,1
+AT,sankt-poelten,Sankt Poelten,,ena_sequence,2,1
+DE,nuremberg,Nuremberg,,ena_sequence,2,1
+NL,venlo,Venlo,,ena_sequence,2,1
+NL,tytsjerksteradiel,Tytsjerksteradiel,,ena_sequence,2,1
+IT,pesaro-urbino,Pesaro/Urbino,,ena_sequence,2,1
+NL,andelst,Andelst,,ena_sequence,2,1
+NL,ermelo,Ermelo,,ena_sequence,2,1
+NL,restricted-access,restricted access,,ena_sequence,2,1
+NL,haarzuilens,Haarzuilens,,ena_sequence,2,1
+NL,naarden,Naarden,,ena_sequence,2,1
+DE,halle,Halle (Saale),,ena_sequence,2,1
+NL,middelburg,Middelburg,,ena_sequence,2,1
+SK,rimavska-sobota-mojin,"Rimavska Sobota, Mojin",,ena_sequence,2,1
+AT,ragnitz,Ragnitz,,ena_sequence,2,1
+GF,saint-georges,Saint Georges,,ena_sequence,2,0
+PF,raivavae,Raivavae,,ena_sequence,2,0
+VN,central-vietnam,Central Vietnam,,ena_sequence,2,0
+PG,lihir,Lihir,,ena_sequence,2,0
+LA,dongmakhai-saythany,"Dongmakhai, Saythany",,ena_sequence,2,0
+BR,jaraguari,Jaraguari,,ena_sequence,2,0
+SA,al-sharafyia-jeddah,"Al-Sharafyia, Jeddah",,ena_sequence,2,0
+BR,prata,Prata,,ena_sequence,2,0
+PY,itaugua,Itaugua,,ena_sequence,2,0
+GP,pointe-a-pitre,Pointe-a-Pitre,,ena_sequence,2,0
+AU,torres-strait,Torres Strait,,ena_sequence,2,0
+PE,ucayali-city,Ucayali City,,ena_sequence,2,0
+AG,antigua,Antigua,,ena_sequence,2,0
+PY,hernandarias,Hernandarias,,ena_sequence,2,0
+CN,changsha,Changsha,,ena_sequence,2,0
+PK,karachi-eastern-mediterranean,"Karachi, Eastern Mediterranean",,ena_sequence,2,0
+TW,yenchen-chu-kaoshiung-city,Yenchen Ch'u/Kaoshiung City,,ena_sequence,2,0
+TW,linya-chu-kaoshiung-city,Linya Ch'u/Kaoshiung City,,ena_sequence,2,0
+PY,ypane,Ypane,,ena_sequence,2,0
+IN,kolkata-west-bengol,"Kolkata, West Bengol",,ena_sequence,2,0
+BR,janauba,Janauba,,ena_sequence,2,0
+BR,firminopolis,Firminopolis,,ena_sequence,2,0
+CN,hainan-wn,Hainan WN,,ena_sequence,2,0
+PG,ncd-hohola,"NCD, Hohola",,ena_sequence,2,0
+LA,vientiane-capital-hadsayfong,"Vientiane Capital, Hadsayfong",,ena_sequence,2,0
+CI,abidjan,Abidjan,,ena_sequence,2,0
+BR,patrocinio,Patrocinio,,ena_sequence,2,0
+PT,imported-from-costa-rica,imported from Costa Rica,,ena_sequence,2,1
+TW,hengchun-pingtung-county,Hengchun/PingTung County,,ena_sequence,2,0
+PY,benjamin-aceval,Benjamin Aceval,,ena_sequence,2,0
+NC,kone,Kone,,ena_sequence,2,0
+LA,latsavang,Latsavang,,ena_sequence,2,0
+BR,varzelandia,Varzelandia,,ena_sequence,2,0
+BR,dois-irmaos-do-buriti,Dois Irmaos do Buriti,,ena_sequence,2,0
+BR,unai,Unai,,ena_sequence,2,0
+CN,hainan-ls,Hainan LS,,ena_sequence,2,0
+BR,custodia,Custodia,,ena_sequence,2,0
+PY,salto-del-guaira,Salto del Guaira,,ena_sequence,2,0
+GP,les-abymes,Les Abymes,,ena_sequence,2,0
+GF,apatou,Apatou,,ena_sequence,2,0
+GF,montsinery-tonnegrande,Montsinery-Tonnegrande,,ena_sequence,2,0
+PT,imported-from-indonesia,imported from Indonesia,,ena_sequence,2,1
+PY,aregua,Aregua,,ena_sequence,2,0
+GP,le-gosier,Le Gosier,,ena_sequence,2,0
+GF,saint-georges,Saint-Georges,,ena_sequence,2,0
+CI,niakaramadougou,Niakaramadougou,,ena_sequence,2,0
+PK,mardan,Mardan,,ena_sequence,2,0
+PY,virgendelrosario,VirgenDelRosario,,ena_sequence,2,0
+VN,danang,Danang,,ena_sequence,2,0
+TW,hsinhsing-chu-kaoshiung-city,Hsinhsing Ch'u/Kaoshiung City,,ena_sequence,2,0
+IN,jaipur,Jaipur,,ena_sequence,2,0
+LA,vientiane-capital-sikhotabong,"Vientiane Capital, sikhotabong",,ena_sequence,2,0
+IN,west-delhi,West Delhi,,ena_sequence,2,0
+BR,montes-claros,Montes Claros,,ena_sequence,2,0
+BR,turvania,Turvania,,ena_sequence,2,0
+BR,jaboatao-dos-guararapes,Jaboatao dos Guararapes,,ena_sequence,2,0
+BD,coxs-bazar,Cox's Bazar,,ena_sequence,2,0
+CI,abidjan-port-bouet-vridi,"Abidjan,Port-Bouet-Vridi",,ena_sequence,2,0
+BR,ribeirao-das-neves,Ribeirao das Neves,,ena_sequence,2,0
+PY,guarambare,Guarambare,,ena_sequence,2,0
+TW,west-chu-taichung-city,West Ch'u/Taichung City,,ena_sequence,2,0
+AN,curacao,Curacao,,ena_sequence,2,0
+BR,ribeirao-preto,Ribeirao Preto (Sao Paulo),,ena_sequence,2,0
+BR,maracaju,Maracaju,,ena_sequence,2,0
+PF,tubuai-austral,"Tubuai, Austral",,ena_sequence,2,0
+BR,porto-velho,Porto Velho,,ena_sequence,2,0
+PE,yurimaguas,Yurimaguas,,ena_sequence,2,0
+VN,northern-vietnam,Northern Vietnam,,ena_sequence,2,0
+BR,israelandia,Israelandia,,ena_sequence,2,0
+BR,northeast,northeast (AL),,ena_sequence,2,0
+MQ,les-trois-ilets,Les Trois-Ilets,,ena_sequence,2,0
+KE,machakos,Machakos,,ena_sequence,2,0
+BR,salvador,Salvador,,ena_sequence,2,0
+VE,maracay,Maracay,,ena_sequence,2,0
+LA,vientiane-capital-sikhotabong,"Vientiane Capital, Sikhotabong",,ena_sequence,2,0
+BR,fortaleza,Fortaleza,,ena_sequence,2,0
+PE,puerto-maldonado,Puerto Maldonado,,ena_sequence,2,0
+PY,villahayes,VillaHayes,,ena_sequence,2,0
+BR,chapadao-do-sul,Chapadao Do Sul,,ena_sequence,2,0
+LA,xayaboury,Xayaboury,,ena_sequence,2,0
+CI,yopougon-ouest-songon,Yopougon Ouest-Songon,,ena_sequence,2,0
+PY,carapegua,Carapegua,,ena_sequence,2,0
+IN,thane,Thane,,ena_sequence,2,0
+CN,gdzh,GDzh,,ena_sequence,2,0
+PK,rawalpindi,Rawalpindi,,ena_sequence,2,0
+KH,bmc,BMC,,ena_sequence,2,0
+PF,rangiroa,Rangiroa,,ena_sequence,2,0
+CN,hainan-dz,Hainan DZ,,ena_sequence,2,0
+TH,ko-samui,Ko Samui,,ena_sequence,2,0
+FM,yap-island,Yap Island,,ena_sequence,2,0
+KH,kso,KSO,,ena_sequence,2,0
+PE,sullana-city,Sullana City,,ena_sequence,2,0
+KN,saint-kitts,Saint Kitts,,ena_sequence,2,0
+IN,south-delhi,South Delhi,,ena_sequence,2,0
+BF,tenkodogo,Tenkodogo,,ena_sequence,2,0
+CN,xishuangbanna,Xishuangbanna,,ena_sequence,2,0
+TH,pattalung,Pattalung,,ena_sequence,2,0
+WS,apia,Apia,,ena_sequence,2,0
+MY,serdang,Serdang,,ena_sequence,2,0
+MX,merida,Merida,,ena_sequence,2,0
+CM,mvog-betsi,Mvog-Betsi,,ena_sequence,2,0
+TH,kampheang-phet,Kampheang Phet,,ena_sequence,2,0
+CO,sincelejo,Sincelejo,,ena_sequence,2,0
+CF,yombo,Yombo,,ena_sequence,2,0
+PY,bella-vista-norte,Bella Vista Norte,,ena_sequence,2,0
+CF,bombabia,Bombabia,,ena_sequence,2,0
+LA,champasack-pathoumphone,"Champasack, Pathoumphone",,ena_sequence,2,0
+FJ,nadi,Nadi,,ena_sequence,2,0
+BR,guaratinga,Guaratinga,,ena_sequence,2,0
+IN,kovai,Kovai,,ena_sequence,2,0
+KE,mombasa-kisauni,"Mombasa, Kisauni",,ena_sequence,2,0
+IN,thudumaladinne-village-kadapa-andhra,"Thudumaladinne village, Kadapa, Andhra",,ena_sequence,2,0
+TH,northeast-thailand,Northeast Thailand,,ena_sequence,2,0
+BR,ilheus,Ilheus,,ena_sequence,2,0
+CF,bouboui,Bouboui,,ena_sequence,2,0
+IN,peddaputha-village-valluru-kadapa-andhra,"Peddaputha Village, Valluru, Kadapa, Andhra",,ena_sequence,2,0
+GA,ndjole,Ndjole,,ena_sequence,2,0
+UG,entebbe,Entebbe,,ena_sequence,2,0
+CV,fogo,Fogo,,ena_sequence,2,0
+BR,goiatuba-goais,"Goiatuba, Goais",,ena_sequence,2,0
+IL,south-yotveta,South Yotveta,,ena_sequence,2,1
+KE,boni-forest,Boni forest,,ena_sequence,2,0
+ZA,kyalami,Kyalami,,ena_sequence,2,0
+KE,ruiru,Ruiru,,ena_sequence,2,0
+MR,hseytine,Hseytine,,ena_sequence,2,0
+MR,dar-naim,Dar Naim,,ena_sequence,2,0
+MR,aoujeft-lemsayddi,"Aoujeft, Lemsayddi",,ena_sequence,2,0
+MR,kiffa,Kiffa,,ena_sequence,2,0
+GA,grand-itoumbi,Grand Itoumbi,,ena_sequence,2,0
+MR,terg,Terg,,ena_sequence,2,0
+MR,keur-macene,Keur Macene,,ena_sequence,2,0
+MR,tegmaline,Tegmaline,,ena_sequence,2,0
+MR,nkick,Nkick,,ena_sequence,2,0
+MR,garack,Garack,,ena_sequence,2,0
+MR,tijiga,Tijiga,,ena_sequence,2,0
+RU,moscow-district,Moscow district,,ena_sequence,2,1
+RU,belgorod-district,Belgorod district,,ena_sequence,2,1
+KR,gyeongsan-si,Gyeongsan-si,,ena_sequence,2,0
+VN,ha-tay-cat-que,"Ha Tay, Cat Que",,ena_sequence,2,0
+AU,badu-island,Badu Island,,ena_sequence,2,0
+KR,ansan,Ansan,,ena_sequence,2,0
+AU,torres-strait-badu-island,"Torres Strait, Badu Island",,ena_sequence,2,0
+IN,jalpaiguri,Jalpaiguri,,ena_sequence,2,0
+AU,torres-strait-mabuiag-island,"Torres Strait, Mabuiag Island",,ena_sequence,2,0
+KR,haman-gun,Haman-gun,,ena_sequence,2,0
+KR,camp-hamphreys,Camp Hamphreys,,ena_sequence,2,0
+RU,khabarovski-krai-obluchensky-district,"Khabarovski krai, Obluchensky district",,ena_sequence,2,1
+RU,far-east-the-jewish-autonomous-region,"Far East, the Jewish Autonomous Region",,ena_sequence,2,1
+RU,bashkiria,Bashkiria,,ena_sequence,2,1
+SK,malacky,Malacky,,ena_sequence,2,1
+RU,buryatia,Buryatia,,ena_sequence,2,1
+MN,selenge-soum-altanbulag,"Selenge soum, Altanbulag",,ena_sequence,2,0
+RU,northwestern-region-volkhov,"northwestern region, Volkhov",,ena_sequence,2,1
+CZ,libava-north-moravia,"Libava, North Moravia",,ena_sequence,2,1
+RU,tumen-region-tumen-locality,"Tumen region, Tumen locality",,ena_sequence,2,1
+CH,agiez,Agiez (Vaud),,ena_sequence,2,1
+DE,south-east-germany-passau,"South-East Germany, Passau",,ena_sequence,2,1
+SK,plastovce,Plastovce,,ena_sequence,2,1
+JP,sapporo,Sapporo,,ena_sequence,2,0
+EE,tallinn,Tallinn,,ena_sequence,2,1
+CN,mudanjiang,Mudanjiang,,ena_sequence,2,0
+DE,burglengenfeld-south-east-germany,"Burglengenfeld, South East Germany",,ena_sequence,2,1
+CZ,stechovice-central-bohemia,"Stechovice, Central Bohemia",,ena_sequence,2,1
+SK,zahorska-ves,Zahorska Ves,,ena_sequence,2,1
+KZ,shymkent,Shymkent,,ena_sequence,2,0
+TR,kastomonu,Kastomonu,,ena_sequence,2,1
+RU,uzbekistan,Uzbekistan,,ena_sequence,2,1
+RU,tadjikistan,Tadjikistan,,ena_sequence,2,1
+KZ,shyiely,Shyiely,,ena_sequence,2,0
+UG,kikuube-district,Kikuube district,,ena_sequence,2,0
+KE,kakamega,Kakamega,,ena_sequence,2,0
+TR,aktas,Aktas,,ena_sequence,2,1
+KZ,turkestan-arys,"Turkestan, Arys",,ena_sequence,2,0
+DZ,aflou,Aflou,,ena_sequence,2,1
+RU,the-republic-of-karelia,The Republic of Karelia,,ena_sequence,2,1
+ZM,kasama,Kasama,,ena_sequence,2,0
+KZ,kusak-zhambil-oblast,"Kusak, Zhambil oblast",,ena_sequence,2,0
+GR,evia,Evia,,ena_sequence,2,1
+ZM,namwala,Namwala,,ena_sequence,2,0
+KZ,sarysay-turkestan-oblast,"Sarysay, Turkestan oblast",,ena_sequence,2,0
+ZM,mbala,Mbala,,ena_sequence,2,0
+KZ,zhasorken-zhambil-oblast,"Zhasorken, Zhambil oblast",,ena_sequence,2,0
+KZ,abay-zhambil-oblast,"Abay, Zhambil oblast",,ena_sequence,2,0
+GR,rhodes-island,Rhodes island,,ena_sequence,2,1
+IN,umred-nagpur,"Umred, Nagpur",,ena_sequence,2,0
+KZ,shybyt-turkestan-oblast,"Shybyt, Turkestan oblast",,ena_sequence,2,0
+KZ,sarykemer-zhambil-oblast,"Sarykemer, Zhambil oblast",,ena_sequence,2,0
+GR,lesbos,Lesbos,,ena_sequence,2,1
+ZM,mpika,Mpika,,ena_sequence,2,0
+KZ,turkestan-oblast,Turkestan oblast,,ena_sequence,2,0
+KZ,birlik-turkestan-oblast,"Birlik, Turkestan oblast",,ena_sequence,2,0
+GB,swwales,SWWales,,ena_sequence,2,1
+GB,newales,NEWales,,ena_sequence,2,1
+GB,warickshire,Warickshire,,ena_sequence,2,1
+GB,isleofwight,IsleofWight,,ena_sequence,2,1
+GB,eastsussex,EastSussex,,ena_sequence,2,1
+SE,varberg,Varberg,,ena_sequence,2,1
+NL,hilvarenbeek,Hilvarenbeek,,ena_sequence,2,1
+GB,yorkshire,Yorkshire,,ena_sequence,2,1
+SE,knutby,Knutby,,ena_sequence,2,1
+DZ,kherrata,Kherrata,,ena_sequence,2,1
+US,san-diego,San Diego,,ena_read_run,2,0
+MX,yucatan-3,Yucatan 3,,ena_read_run,2,0
+MX,yucatan-2,Yucatan 2,,ena_read_run,2,0
+MX,yucatan-1,Yucatan 1,,ena_read_run,2,0
+MX,veracruz-6,Veracruz 6,,ena_read_run,2,0
+MX,veracruz-7,Veracruz 7,,ena_read_run,2,0
+MX,veracruz-5,Veracruz 5,,ena_read_run,2,0
+MX,colima-1,Colima 1,,ena_read_run,2,0
+MX,veracruz-8,Veracruz 8,,ena_read_run,2,0
+MX,veracruz-4,Veracruz 4,,ena_read_run,2,0
+MX,veracruz-3,Veracruz 3,,ena_read_run,2,0
+MX,veracruz-2,Veracruz 2,,ena_read_run,2,0
+MX,colima-2,Colima 2,,ena_read_run,2,0
+MX,baja-california-sur-4,Baja California Sur 4,,ena_read_run,2,0
+MX,veracruz-10,Veracruz 10,,ena_read_run,2,0
+MX,veracruz-1,Veracruz 1,,ena_read_run,2,0
+BF,gorom-gorom,GOROM-GOROM,,ena_read_run,2,0
+MX,quintana-roo-2,Quintana Roo 2,,ena_read_run,2,0
+MX,baja-california-sur-3,Baja California Sur 3,,ena_read_run,2,0
+MX,quintana-roo-1,Quintana Roo 1,,ena_read_run,2,0
+MX,baja-california-sur-2,Baja California Sur 2,,ena_read_run,2,0
+BF,gayeri,GAYERI,,ena_read_run,2,0
+SN,mbacke,MBACKE,,ena_read_run,2,0
+MX,baja-california-sur-5,Baja California Sur 5,,ena_read_run,2,0
+MX,veracruz-9,Veracruz 9,,ena_read_run,2,0
+MX,baja-california-sur-1,Baja California Sur 1,,ena_read_run,2,0
+TH,northeast-thailand,Northeast Thailand,,ena_read_run,2,0
+US,unknown,Unknown,,ena_read_run,2,0
+CO,sincelejo,Sincelejo,,ena_read_run,2,0
+UG,entebbe,Entebbe,,ena_read_run,2,0
+US,miami,Miami,,ena_read_run,2,0
+US,davis,Davis,,ena_read_run,2,0
+RW,rulindo,Rulindo,,ena_read_run,2,0
+KE,marsabit,Marsabit,,ena_read_run,2,0
+KE,wajir,Wajir,,ena_read_run,2,0
+IN,bhubaneswar,bhubaneswar,,bvbrc,2,0
+CM,africa,Africa,,bvbrc,2,0
+GH,accra,Accra,,bvbrc,2,0
+LA,bolikhamsay,Bolikhamsay,,bvbrc,2,0
+GH,damongo,Damongo,,bvbrc,2,0
+RU,uzbekistan,Uzbekistan,,pathoplexus,2,1
+RU,tadjikistan,Tadjikistan,,pathoplexus,2,1
+TR,aktas,Aktas,,pathoplexus,2,1
+TR,kastomonu,Kastomonu,,pathoplexus,2,1
+DZ,aflou,Aflou,,pathoplexus,2,1
+RU,kalmykia,Kalmykia,,pathoplexus,2,1
+KE,kakamega,Kakamega,,pathoplexus,2,0
+GH,navrongo,Navrongo,,pathoplexus,2,0
+US,conneticut-glastonbury,"Conneticut, Glastonbury",,ena_sequence,1,0
+US,conneticut-hartford,"Conneticut, Hartford",,ena_sequence,1,0
+US,conneticut-madison,"Conneticut, Madison",,ena_sequence,1,0
+US,conneticut-columbia,"Conneticut, Columbia",,ena_sequence,1,0
+US,conneticut-woodbury,"Conneticut, Woodbury",,ena_sequence,1,0
+RS,zemun,Zemun,,ena_sequence,1,1
+HU,kiskunhalas,Kiskunhalas,,ena_sequence,1,1
+HU,enying,Enying,,ena_sequence,1,1
+HU,matyasdomb,Matyasdomb,,ena_sequence,1,1
+HU,tisza,Tisza,,ena_sequence,1,1
+US,san-francisco-ca,San Francisco CA,,ena_sequence,1,0
+US,tarrant-co-tx,Tarrant Co. TX,,ena_sequence,1,0
+IN,madras-state,Madras state,,ena_sequence,1,0
+US,conneticut-new-london,"Conneticut, New London",,ena_sequence,1,0
+US,houston-tx,Houston TX,,ena_sequence,1,0
+US,rochester-mn,Rochester MN,,ena_sequence,1,0
+HU,kiskunmajsa,Kiskunmajsa,,ena_sequence,1,1
+HU,vertesacsa,Vertesacsa,,ena_sequence,1,1
+HU,lovas,Lovas,,ena_sequence,1,1
+HU,koszeg,Koszeg,,ena_sequence,1,1
+HU,ujudvar,Ujudvar,,ena_sequence,1,1
+HU,karacsond,Karacsond,,ena_sequence,1,1
+GR,heraklion,Heraklion,,ena_sequence,1,1
+HU,ujtelek,Ujtelek,,ena_sequence,1,1
+RO,enisala,Enisala,,ena_sequence,1,1
+HU,vertesecsa,Vertesecsa,,ena_sequence,1,1
+HR,durdevac,Durdevac,,ena_sequence,1,1
+US,conneticut-brooklyn,"Conneticut, Brooklyn",,ena_sequence,1,0
+GR,evia-faros,"Evia, Faros",,ena_sequence,1,1
+GR,crete-herakleion,Crete Herakleion,,ena_sequence,1,1
+GR,east-macedonia-thrace-avdira-xanthi,East Macedonia-Thrace Avdira Xanthi,,ena_sequence,1,1
+RS,karavukovo,Karavukovo,,ena_sequence,1,1
+RS,sombor,Sombor,,ena_sequence,1,1
+RS,opovo,Opovo,,ena_sequence,1,1
+US,goose-creek-sc,Goose Creek SC,,ena_sequence,1,0
+US,bethlehem-pa,Bethlehem PA,,ena_sequence,1,0
+US,conneticut-bristol,"Conneticut, Bristol",,ena_sequence,1,0
+US,conneticut-ledyard,"Conneticut, Ledyard",,ena_sequence,1,0
+US,conneticut-newington,"Conneticut, Newington",,ena_sequence,1,0
+US,conneticut-new-haven,"Conneticut, New Haven",,ena_sequence,1,0
+US,conneticut-fairfield,"Conneticut, Fairfield",,ena_sequence,1,0
+US,conneticut-winstead,"Conneticut, Winstead",,ena_sequence,1,0
+US,davenport-ia,Davenport IA,,ena_sequence,1,0
+AU,qld-gulf,QLD Gulf,,ena_sequence,1,0
+AT,lake-neusiedl,Lake Neusiedl,,ena_sequence,1,1
+CZ,south-moravia-novy-fishpond-at,"South Moravia, Novy fishpond at",,ena_sequence,1,1
+GR,attiki-ilion,Attiki Ilion,,ena_sequence,1,1
+RU,urupinsk,Urupinsk,,ena_sequence,1,1
+HR,belica,Belica,,ena_sequence,1,1
+GR,lakonia-taxiarches,"Lakonia, Taxiarches",,ena_sequence,1,1
+US,conneticut-wilton,"Conneticut, Wilton",,ena_sequence,1,0
+US,conneticut-shelton,"Conneticut, Shelton",,ena_sequence,1,0
+US,conneticut-branford,"Conneticut, Branford",,ena_sequence,1,0
+CZ,south-moravia-nesyt-fishpond-at,"South Moravia, Nesyt fishpond at",,ena_sequence,1,1
+GR,attika-kallithea,Attika Kallithea,,ena_sequence,1,1
+HU,tahitotfalu,Tahitotfalu,,ena_sequence,1,1
+HU,jaszkiser,Jaszkiser,,ena_sequence,1,1
+US,orlando-fl,Orlando FL,,ena_sequence,1,0
+US,conneticut-mystic,"Conneticut, Mystic",,ena_sequence,1,0
+US,new-york-city,New York City,,ena_sequence,1,0
+CO,antioquioa-medellin,"Antioquioa, Medellin",,ena_sequence,1,0
+US,ellis-co-tx,Ellis Co. TX,,ena_sequence,1,0
+SK,secovce,Secovce,,ena_sequence,1,1
+GR,attiki-methana-trizina,Attiki Methana Trizina,,ena_sequence,1,1
+GR,kavala-prefecture,Kavala prefecture,,ena_sequence,1,1
+VG,necker-island,Necker Island,,ena_sequence,1,0
+HU,szentendre,Szentendre,,ena_sequence,1,1
+HU,korosladany,Korosladany,,ena_sequence,1,1
+BE,meise,Meise,,ena_sequence,1,1
+HU,oroshaza,Oroshaza,,ena_sequence,1,1
+RU,vladikavkaz,Vladikavkaz,,ena_sequence,1,1
+US,elyria-oh,Elyria OH,,ena_sequence,1,0
+GR,attika-trizina,Attika Trizina,,ena_sequence,1,1
+HU,cegled,Cegled,,ena_sequence,1,1
+US,washington-dc,Washington DC,,ena_sequence,1,0
+RS,novi-becej,Novi Becej,,ena_sequence,1,1
+RS,besni-fok,Besni Fok,,ena_sequence,1,1
+HU,martfu,Martfu,,ena_sequence,1,1
+HU,tiszaluc,Tiszaluc,,ena_sequence,1,1
+RU,far-eastern-region,Far Eastern Region,,ena_sequence,1,1
+US,nan-virgin-islands,"nan, Virgin Islands",,ena_sequence,1,0
+HU,iregszemcse,Iregszemcse,,ena_sequence,1,1
+US,conneticut-pomfret,"Conneticut, Pomfret",,ena_sequence,1,0
+US,conneticut-orange,"Conneticut, Orange",,ena_sequence,1,0
+MX,florida,Florida,,ena_sequence,1,0
+US,little-rock-ak,Little Rock AK,,ena_sequence,1,0
+RS,mali-idjos,Mali Idjos,,ena_sequence,1,1
+NL,province-of-utrecht,Province of Utrecht,,ena_sequence,1,1
+KE,marsabit-county,Marsabit County,,ena_sequence,1,0
+HU,vamosmikola,Vamosmikola,,ena_sequence,1,1
+HU,izsak,Izsak,,ena_sequence,1,1
+US,conneticut-farmington,"Conneticut, Farmington",,ena_sequence,1,0
+US,la-habra-ca,La Habra CA,,ena_sequence,1,0
+US,san-diego-ca,San Diego CA,,ena_sequence,1,0
+US,sanborn-mn,Sanborn MN,,ena_sequence,1,0
+US,memphis-tn,Memphis TN,,ena_sequence,1,0
+GR,crete-chania-souda,Crete Chania Souda,,ena_sequence,1,1
+GR,macedonia-adendro-thessalonika,"Macedonia, Adendro, Thessalonika",,ena_sequence,1,1
+MG,anjiro,Anjiro,,ena_sequence,1,0
+GR,karditsa,Karditsa,,ena_sequence,1,1
+HR,ilok,Ilok,,ena_sequence,1,1
+HU,nyiradony,Nyiradony,,ena_sequence,1,1
+HR,slavonski-brod,Slavonski Brod,,ena_sequence,1,1
+SK,detva-viglas,"Detva, Viglas",,ena_sequence,1,1
+GR,larissa-koutsohero,"Larissa, Koutsohero",,ena_sequence,1,1
+US,conneticut-east-granby,"Conneticut, East Granby",,ena_sequence,1,0
+US,conneticut-new-milford,"Conneticut, New Milford",,ena_sequence,1,0
+US,conneticut-harwinton,"Conneticut, Harwinton",,ena_sequence,1,0
+RS,curug,Curug,,ena_sequence,1,1
+HU,szentmartonkata,Szentmartonkata,,ena_sequence,1,1
+HU,gyorujfalu,Gyorujfalu,,ena_sequence,1,1
+HU,mesterhaza,Mesterhaza,,ena_sequence,1,1
+XK,prishtina,Prishtina,,ena_sequence,1,1
+RU,shchyolkovo,Shchyolkovo,,ena_sequence,1,1
+HU,szabadbattyan,Szabadbattyan,,ena_sequence,1,1
+HU,magyaralmas,Magyaralmas,,ena_sequence,1,1
+US,conneticut-bloomfield,"Conneticut, Bloomfield",,ena_sequence,1,0
+US,conneticut-new-britain,"Conneticut, New Britain",,ena_sequence,1,0
+US,conneticut-stonington,"Conneticut, Stonington",,ena_sequence,1,0
+US,conneticut-woodbridge,"Conneticut, Woodbridge",,ena_sequence,1,0
+US,conneticut-canterbury,"Conneticut, Canterbury",,ena_sequence,1,0
+US,conneticut-putnam,"Conneticut, Putnam",,ena_sequence,1,0
+US,conneticut-westport,"Conneticut, Westport",,ena_sequence,1,0
+US,ontario-ca,Ontario CA,,ena_sequence,1,0
+RS,temerin,Temerin,,ena_sequence,1,1
+RU,karachay-cherkessia,Karachay-Cherkessia,,ena_sequence,1,1
+IT,friuli,Friuli,,ena_sequence,1,1
+GR,attika-chalandri,Attika Chalandri,,ena_sequence,1,1
+GR,macedonia-kalochori-thessalonika,"Macedonia, Kalochori, Thessalonika",,ena_sequence,1,1
+GR,macedonia-agios-athanasios-thesalonika,"Macedonia, Agios Athanasios, Thesalonika",,ena_sequence,1,1
+GR,evia-fylla,"Evia, Fylla",,ena_sequence,1,1
+ZA,tiegerpoort-pretoria,"Tiegerpoort, Pretoria",,ena_sequence,1,0
+UG,queen-elizabeth-national-park,Queen Elizabeth National Park,,ena_sequence,1,0
+ZM,mongu-district,Mongu district,,ena_sequence,1,0
+CZ,south-moravia-hlohovec-and,"South Moravia, Hlohovec and",,ena_sequence,1,1
+HU,kisujszallas,Kisujszallas,,ena_sequence,1,1
+IT,lombardi-region,Lombardi region,,ena_sequence,1,1
+HU,zakanyszek,Zakanyszek,,ena_sequence,1,1
+HU,mezobereny,Mezobereny,,ena_sequence,1,1
+HU,velence,Velence,,ena_sequence,1,1
+HU,fertoujlak,Fertoujlak,,ena_sequence,1,1
+HR,bilje,Bilje,,ena_sequence,1,1
+NL,rotterdam,Rotterdam,,ena_sequence,1,1
+NL,doetinchem,Doetinchem,,ena_sequence,1,1
+NL,heerenveen,Heerenveen,,ena_sequence,1,1
+DE,karben,Karben,,ena_sequence,1,1
+NL,houten,Houten,,ena_sequence,1,1
+NL,middendrexhe,MiddenDrexhe,,ena_sequence,1,1
+NL,hardinxveldgiessendam,HardinxveldGiessendam,,ena_sequence,1,1
+NL,rijswijk,Rijswijk,,ena_sequence,1,1
+AT,stockerau,Stockerau,,ena_sequence,1,1
+NL,westerveld,Westerveld,,ena_sequence,1,1
+NL,oldenbroek,Oldenbroek,,ena_sequence,1,1
+PT,mertola,Mertola,,ena_sequence,1,1
+AT,fishamend,Fishamend,,ena_sequence,1,1
+AT,breitensee,Breitensee,,ena_sequence,1,1
+DE,wingst,Wingst,,ena_sequence,1,1
+DE,munich,Munich,,ena_sequence,1,1
+DE,wuerzburg,Wuerzburg,,ena_sequence,1,1
+NL,reimerswaal,Reimerswaal,,ena_sequence,1,1
+NL,ijsselstein,Ijsselstein,,ena_sequence,1,1
+NL,lochem,Lochem,,ena_sequence,1,1
+NL,bosch-en-duin,Bosch en Duin,,ena_sequence,1,1
+CZ,ceske-budejovice,Ceske Budejovice,,ena_sequence,1,1
+DE,ruegen,Ruegen,,ena_sequence,1,1
+DE,theene,Theene,,ena_sequence,1,1
+DE,zeitz,Zeitz,,ena_sequence,1,1
+HU,fabianhaza,Fabianhaza,,ena_sequence,1,1
+HU,vac,Vac,,ena_sequence,1,1
+DE,brueggen,Brueggen,,ena_sequence,1,1
+NL,eext,Eext,,ena_sequence,1,1
+DE,prohn,Prohn,,ena_sequence,1,1
+NL,klarenbeek,Klarenbeek,,ena_sequence,1,1
+NL,doetichem,Doetichem,,ena_sequence,1,1
+NL,epe,Epe,,ena_sequence,1,1
+NL,zoeterwoude,Zoeterwoude,,ena_sequence,1,1
+NL,wierden,Wierden,,ena_sequence,1,1
+NL,leiden,Leiden,,ena_sequence,1,1
+NL,tynaarlo,Tynaarlo,,ena_sequence,1,1
+NL,noordoostpolder,Noordoostpolder,,ena_sequence,1,1
+RS,sabac,Sabac,,ena_sequence,1,1
+CZ,olomouc-zoo,Olomouc Zoo,,ena_sequence,1,1
+AT,hof-am-leithaberge,Hof am Leithaberge,,ena_sequence,1,1
+DE,halle,Halle,,ena_sequence,1,1
+NL,province-of-north-brabant-boxmeer,"Province of North Brabant, Boxmeer",,ena_sequence,1,1
+NL,uden,Uden,,ena_sequence,1,1
+NL,terneuzen,Terneuzen,,ena_sequence,1,1
+NL,nederlek,Nederlek,,ena_sequence,1,1
+NL,den-haag,Den Haag,,ena_sequence,1,1
+NL,utrechtse-heuvelrug,Utrechtse Heuvelrug,,ena_sequence,1,1
+LB,nabatieh-governorate-el-wazani,"Nabatieh governorate, El Wazani",,ena_sequence,1,1
+DE,nordhorn,Nordhorn,,ena_sequence,1,1
+NL,raalte,Raalte,,ena_sequence,1,1
+AT,strasshof,Strasshof,,ena_sequence,1,1
+AT,neunkirchen,Neunkirchen,,ena_sequence,1,1
+AT,koenigstetten,Koenigstetten,,ena_sequence,1,1
+DE,puettlingen,Puettlingen,,ena_sequence,1,1
+DE,grevesmuehlen,Grevesmuehlen,,ena_sequence,1,1
+DE,warin,Warin,,ena_sequence,1,1
+DE,gross-dueben,Gross Dueben,,ena_sequence,1,1
+DE,stutensee,Stutensee,,ena_sequence,1,1
+NL,debilt,DeBilt,,ena_sequence,1,1
+NL,westervoort,Westervoort,,ena_sequence,1,1
+NL,derondevenen,DeRondeVenen,,ena_sequence,1,1
+NL,westvoort,Westvoort,,ena_sequence,1,1
+NL,noordosterpolder,Noordosterpolder,,ena_sequence,1,1
+NL,midden-groningen,Midden Groningen,,ena_sequence,1,1
+NL,heerhugowaard,Heerhugowaard,,ena_sequence,1,1
+SK,michalovce-senianske-rybniky,"Michalovce, Senianske rybniky",,ena_sequence,1,1
+NL,kerkrade,Kerkrade,,ena_sequence,1,1
+HU,kunadacs,Kunadacs,,ena_sequence,1,1
+DE,osnabruck,Osnabruck,,ena_sequence,1,1
+NL,reek,Reek,,ena_sequence,1,1
+NL,rosmalen,Rosmalen,,ena_sequence,1,1
+NL,spijk,Spijk,,ena_sequence,1,1
+NL,westland,Westland,,ena_sequence,1,1
+NL,hardenberg,Hardenberg,,ena_sequence,1,1
+IT,eboli,Eboli,,ena_sequence,1,1
+NL,province-of-drenthe-borger,"Province of Drenthe, Borger",,ena_sequence,1,1
+AT,stegersbach,Stegersbach,,ena_sequence,1,1
+AT,klosterneuburg,Klosterneuburg,,ena_sequence,1,1
+FR,sainte-croix,Sainte Croix,,ena_sequence,1,1
+AT,voesendorf,Voesendorf,,ena_sequence,1,1
+AT,bruderndorf,Bruderndorf,,ena_sequence,1,1
+DE,brietlingen,Brietlingen,,ena_sequence,1,1
+DE,lueneburg,Lueneburg,,ena_sequence,1,1
+DE,freigericht,Freigericht,,ena_sequence,1,1
+NL,vlijmen,Vlijmen,,ena_sequence,1,1
+NL,bennekom,Bennekom,,ena_sequence,1,1
+HR,jastrebarsko,Jastrebarsko,,ena_sequence,1,1
+AT,bad-sauerbrunn,Bad Sauerbrunn,,ena_sequence,1,1
+AT,mattersburg,Mattersburg,,ena_sequence,1,1
+NL,ingen,Ingen,,ena_sequence,1,1
+NL,soest,Soest,,ena_sequence,1,1
+NL,oldambt,Oldambt,,ena_sequence,1,1
+IT,monteprandone-ascoli-piceno,Monteprandone-Ascoli Piceno,,ena_sequence,1,1
+AT,haringsee,Haringsee,,ena_sequence,1,1
+DE,doberschuetz,Doberschuetz,,ena_sequence,1,1
+NL,arnhem,Arnhem,,ena_sequence,1,1
+NL,schaik,Schaik,,ena_sequence,1,1
+DE,osterholz-scharnbeck,Osterholz-Scharnbeck,,ena_sequence,1,1
+NL,gelmonde,Gelmonde,,ena_sequence,1,1
+NL,huizen,Huizen,,ena_sequence,1,1
+NL,losser,Losser,,ena_sequence,1,1
+AT,biberbach,Biberbach,,ena_sequence,1,1
+NL,bunnik,Bunnik,,ena_sequence,1,1
+DE,aachen,Aachen,,ena_sequence,1,1
+AT,sollenau,Sollenau,,ena_sequence,1,1
+AT,markgrafneusiedl,Markgrafneusiedl,,ena_sequence,1,1
+DE,aumuehle,Aumuehle,,ena_sequence,1,1
+DE,luebeck,Luebeck,,ena_sequence,1,1
+NL,heino,Heino,,ena_sequence,1,1
+NL,devexer,Devexer,,ena_sequence,1,1
+NL,noordenveld,Noordenveld,,ena_sequence,1,1
+NL,ottersum,Ottersum,,ena_sequence,1,1
+NL,wernhout,Wernhout,,ena_sequence,1,1
+NL,zuidhorn,Zuidhorn,,ena_sequence,1,1
+HU,nagylengyel,Nagylengyel,,ena_sequence,1,1
+HU,lovaszi,Lovaszi,,ena_sequence,1,1
+DE,parchim,Parchim,,ena_sequence,1,1
+DE,dinklage,Dinklage,,ena_sequence,1,1
+DE,brickeln,Brickeln,,ena_sequence,1,1
+NL,st-agatha,St. Agatha,,ena_sequence,1,1
+NL,overdinkel,Overdinkel,,ena_sequence,1,1
+NL,nieuwegein,Nieuwegein,,ena_sequence,1,1
+NL,langbroek,Langbroek,,ena_sequence,1,1
+NL,grenspad,Grenspad,,ena_sequence,1,1
+NL,eastermar,Eastermar,,ena_sequence,1,1
+NL,borger-odoorn,Borger-Odoorn,,ena_sequence,1,1
+NL,gelderland-asperen-nieuwe-hollandse-waterlinie,Gelderland Asperen Nieuwe Hollandse Waterlinie,,ena_sequence,1,1
+AT,sankt-georgen,Sankt Georgen,,ena_sequence,1,1
+HU,kiskunfelegyhaza,Kiskunfelegyhaza,,ena_sequence,1,1
+AT,eggersdorf,Eggersdorf,,ena_sequence,1,1
+AT,pottschach,Pottschach,,ena_sequence,1,1
+DE,gera,Gera,,ena_sequence,1,1
+DE,rosengarten,Rosengarten,,ena_sequence,1,1
+DE,freiburg-im-breisgau,Freiburg im Breisgau,,ena_sequence,1,1
+DE,ranstadt,Ranstadt,,ena_sequence,1,1
+NL,gennep,Gennep,,ena_sequence,1,1
+NL,zevenaar,Zevenaar,,ena_sequence,1,1
+NL,beekendonk,BeekEnDonk,,ena_sequence,1,1
+NL,landgraaf,Landgraaf,,ena_sequence,1,1
+NL,streekdeliemers,streekDeLiemers,,ena_sequence,1,1
+NL,koekange,Koekange,,ena_sequence,1,1
+NL,boekel,Boekel,,ena_sequence,1,1
+HR,nasice,Nasice,,ena_sequence,1,1
+CZ,cernosice,Cernosice,,ena_sequence,1,1
+NL,province-of-groningen-ezinge,"Province of Groningen, Ezinge",,ena_sequence,1,1
+KH,kop,KOP,,ena_sequence,1,0
+TZ,muhimbili-national-hospital-dar-es,"Muhimbili National Hospital, Dar es",,ena_sequence,1,0
+BR,buritis,Buritis,,ena_sequence,1,0
+PG,daru,Daru,,ena_sequence,1,0
+PY,mariscal-estigarribia,Mariscal Estigarribia,,ena_sequence,1,0
+BR,rio-verde-de-mato-grosso-mato-grosso-do,"Rio Verde de Mato Grosso, Mato Grosso do",,ena_sequence,1,0
+PY,san-pedro-de-ycuamamdyju,San Pedro de Ycuamamdyju,,ena_sequence,1,0
+PY,cambyreta,Cambyreta,,ena_sequence,1,0
+BR,patos-de-minas,Patos de Minas,,ena_sequence,1,0
+TW,sanmin-chu-kaoshiung,Sanmin Ch'u/Kaoshiung,,ena_sequence,1,0
+TW,hsiao-liu-chiu-islet-ping-tong,"Hsiao-Liu-Chiu Islet, Ping Tong",,ena_sequence,1,0
+PY,repatriacion,Repatriacion,,ena_sequence,1,0
+CN,ningbo-disease-prevention-and-control,NingBo Disease Prevention and Control,,ena_sequence,1,0
+CN,guangzhou,guangzhou,,ena_sequence,1,0
+PA,san-miguelito,San Miguelito,,ena_sequence,1,0
+NI,raas,RAAS,,ena_sequence,1,0
+TZ,institute-of-finance-management-dar-es,"Institute of Finance Management, Dar es",,ena_sequence,1,0
+PY,ypacarai,Ypacarai,,ena_sequence,1,0
+TW,chienchen-chu-kaoshiung,Chienchen Ch'u/Kaoshiung,,ena_sequence,1,0
+TW,luchow-hsiang-taipei-county,Luchow Hsiang/Taipei County,,ena_sequence,1,0
+PY,trinidad,Trinidad,,ena_sequence,1,0
+MQ,le-vauclin,Le Vauclin,,ena_sequence,1,0
+PF,tahiti-idv,"Tahiti, IDV",,ena_sequence,1,0
+PT,imported-from-india,imported from India,,ena_sequence,1,1
+PR,town-of-moca,town of Moca,,ena_sequence,1,0
+ID,kendari,Kendari,,ena_sequence,1,0
+PF,hiva-oa-marquesas,"Hiva-Oa, Marquesas",,ena_sequence,1,0
+VN,daknong,DakNong,,ena_sequence,1,0
+KH,rat,RAT,,ena_sequence,1,0
+PF,marquesas,Marquesas,,ena_sequence,1,0
+PK,hyderaad,Hyderaad,,ena_sequence,1,0
+LA,vientianeprovince,VientianeProvince,,ena_sequence,1,0
+BR,timbauba,Timbauba,,ena_sequence,1,0
+BR,agua-clara,Agua Clara,,ena_sequence,1,0
+BR,araguari,Araguari,,ena_sequence,1,0
+BR,vassouras,Vassouras,,ena_sequence,1,0
+PT,imported-from-cambodia,imported from Cambodia,,ena_sequence,1,1
+CO,santander-cerrito,Santander Cerrito,,ena_sequence,1,0
+CO,valle-de-cauca-cartago,"Valle de Cauca, Cartago",,ena_sequence,1,0
+AU,rockhampton,Rockhampton,,ena_sequence,1,0
+BR,ipojuca,Ipojuca,,ena_sequence,1,0
+BR,natalandia,Natalandia,,ena_sequence,1,0
+BR,irece,Irece,,ena_sequence,1,0
+BR,luziania,Luziania,,ena_sequence,1,0
+KH,seam-reap,Seam Reap,,ena_sequence,1,0
+PF,cts-tahiti,"CTS, Tahiti",,ena_sequence,1,0
+BR,rj-rio-de-janeiro,RJ Rio de Janeiro,,ena_sequence,1,0
+AO,camama,Camama,,ena_sequence,1,0
+LA,imported-from-malaysia,imported from Malaysia,,ena_sequence,1,0
+LA,northern-laos-not-available,"Northern Laos, Not Available",,ena_sequence,1,0
+PF,fakarava,Fakarava,,ena_sequence,1,0
+NI,ciudad-sandino,Ciudad Sandino,,ena_sequence,1,0
+PF,fakarava-tuamotu,"Fakarava, Tuamotu",,ena_sequence,1,0
+BR,douradina,Douradina,,ena_sequence,1,0
+BR,campos-gerais,Campos Gerais,,ena_sequence,1,0
+BR,porto-velho,Porto Velho (PV),,ena_sequence,1,0
+LA,not-available-not-available,"Not Available, Not Available",,ena_sequence,1,0
+BR,marituba,Marituba (Para),,ena_sequence,1,0
+PF,manihi,Manihi,,ena_sequence,1,0
+FM,chuuk-island,Chuuk Island,,ena_sequence,1,0
+BR,betim,Betim,,ena_sequence,1,0
+VE,capital-district,Capital District,,ena_sequence,1,0
+AO,viana,Viana,,ena_sequence,1,0
+NP,chitwan,Chitwan,,ena_sequence,1,0
+MQ,schoelcher,Schoelcher,,ena_sequence,1,0
+BR,ibia,Ibia,,ena_sequence,1,0
+PY,san-juan-nepomuceno,San Juan Nepomuceno,,ena_sequence,1,0
+PY,obligado,Obligado,,ena_sequence,1,0
+GF,saint-laurent-du-maroni,Saint-Laurent-du-Maroni,,ena_sequence,1,0
+MQ,lamentin,Lamentin,,ena_sequence,1,0
+GH,bomfa,Bomfa,,ena_sequence,1,0
+PY,villaelisa,VillaElisa,,ena_sequence,1,0
+BS,nassau,Nassau,,ena_sequence,1,0
+CI,divo,Divo,,ena_sequence,1,0
+CN,gdcz,GDcz,,ena_sequence,1,0
+TW,luchou-hsiang-taipei-county,Luchou Hsiang/Taipei County,,ena_sequence,1,0
+IN,trichur,Trichur,,ena_sequence,1,0
+MX,tapachula,Tapachula,,ena_sequence,1,0
+NC,poya,Poya,,ena_sequence,1,0
+PY,juan-leon-mallorquin,Juan Leon Mallorquin,,ena_sequence,1,0
+PY,domingo-martinez-de-irala,Domingo Martinez De Irala,,ena_sequence,1,0
+LA,imported-from-thailand,imported from Thailand,,ena_sequence,1,0
+BR,juiz-de-fora,Juiz de Fora,,ena_sequence,1,0
+BR,coracao-de-jesus,Coracao de Jesus,,ena_sequence,1,0
+BR,bom-conselho,Bom Conselho,,ena_sequence,1,0
+BR,camapua,Camapua,,ena_sequence,1,0
+BR,itaquirai,Itaquirai,,ena_sequence,1,0
+BR,sao-luis-de-montes-belos,Sao Luis de Montes Belos,,ena_sequence,1,0
+BR,presidente-dutra,Presidente Dutra,,ena_sequence,1,0
+BR,anapolis,Anapolis,,ena_sequence,1,0
+PY,filadeflia,Filadeflia,,ena_sequence,1,0
+HT,les-cayes,Les Cayes,,ena_sequence,1,0
+HT,ste-anne,Ste Anne,,ena_sequence,1,0
+FR,marseille-ex-comoros,"Marseille, ex-Comoros",,ena_sequence,1,1
+CI,vavoua,Vavoua,,ena_sequence,1,0
+CI,adiake,Adiake,,ena_sequence,1,0
+CN,yurman,Yurman,,ena_sequence,1,0
+CN,gddg,GDdg,,ena_sequence,1,0
+PY,ciudad-del-este,Ciudad del Este,,ena_sequence,1,0
+BF,pouytenga,Pouytenga,,ena_sequence,1,0
+PF,faaa-commune,Faa'a commune,,ena_sequence,1,0
+PY,tte-irala-fernandez,Tte. Irala Fernandez,,ena_sequence,1,0
+CM,mendong,Mendong,,ena_sequence,1,0
+TW,linyuan-hsiang-kaoshiung-city,Linyuan Hsiang/Kaoshiung City,,ena_sequence,1,0
+VC,saint-vincent,Saint Vincent,,ena_sequence,1,0
+LA,vientiane-capital-hatsaifong,"Vientiane Capital, Hatsaifong",,ena_sequence,1,0
+TZ,kilimanjaro-christian-medical-center,Kilimanjaro Christian Medical Center,,ena_sequence,1,0
+BR,juazeiro,Juazeiro,,ena_sequence,1,0
+KH,tbaung-khmom,Tbaung Khmom,,ena_sequence,1,0
+TW,chienchen-chu-kaoshiung-city,Chienchen Ch'u/Kaoshiung City,,ena_sequence,1,0
+CO,san-andres-islas,San Andres Islas,,ena_sequence,1,0
+BR,braganca,Braganca (Para),,ena_sequence,1,0
+BJ,porto-novo,Porto Novo,,ena_sequence,1,0
+PT,imported-from-s-tome-and-principe,imported from S. Tome and Principe,,ena_sequence,1,1
+KH,kra,KRA,,ena_sequence,1,0
+CN,cixi,Cixi,,ena_sequence,1,0
+BR,jaboticatubas,Jaboticatubas,,ena_sequence,1,0
+BR,valparaiso-de-goias,Valparaiso de Goias,,ena_sequence,1,0
+PY,salto-del-guaira,Salto Del Guaira,,ena_sequence,1,0
+PY,pirayu,Pirayu,,ena_sequence,1,0
+GF,imported-from-guadeloupe,imported from Guadeloupe,,ena_sequence,1,0
+BR,sao-luis,Sao Luis (Maranhao),,ena_sequence,1,0
+BR,novo-gama,Novo Gama,,ena_sequence,1,0
+CN,zhejiang-whenzhou,Zhejiang Whenzhou,,ena_sequence,1,0
+ID,bangka,Bangka,,ena_sequence,1,0
+TZ,zanzibar,Zanzibar,,ena_sequence,1,0
+MQ,le-robert,Le Robert,,ena_sequence,1,0
+GF,papaichton,Papaichton,,ena_sequence,1,0
+PA,panama-oeste,Panama Oeste,,ena_sequence,1,0
+PF,north-marquesas,North Marquesas,,ena_sequence,1,0
+LA,phonsinoun-sisattanark,"phonsinoun, Sisattanark",,ena_sequence,1,0
+BD,barguna,Barguna,,ena_sequence,1,0
+BR,pedro-gomes,Pedro Gomes,,ena_sequence,1,0
+BR,ipiacu,Ipiacu,,ena_sequence,1,0
+BR,januaria,Januaria,,ena_sequence,1,0
+BR,goiatuba,Goiatuba,,ena_sequence,1,0
+BR,goianira,Goianira,,ena_sequence,1,0
+CI,dikodougou,Dikodougou,,ena_sequence,1,0
+CI,abidjan-anyama,"Abidjan, Anyama",,ena_sequence,1,0
+CM,simbock,Simbock,,ena_sequence,1,0
+TZ,zanzibar-island,Zanzibar Island,,ena_sequence,1,0
+PT,imported-from-maldivas,imported from Maldivas,,ena_sequence,1,1
+AO,zango,Zango,,ena_sequence,1,0
+GF,roura,Roura,,ena_sequence,1,0
+TW,kaoshiung-city,Kaoshiung City,,ena_sequence,1,0
+CN,gdzs,GDzs,,ena_sequence,1,0
+ID,sulawesi,Sulawesi,,ena_sequence,1,0
+AU,townsville,Townsville,,ena_sequence,1,0
+PF,nuku-hiva-marquesas,"Nuku-Hiva, Marquesas",,ena_sequence,1,0
+PK,muridke,Muridke,,ena_sequence,1,0
+PF,punaauia-tahiti,"Punaauia, Tahiti",,ena_sequence,1,0
+TH,cambodia,Cambodia,,ena_sequence,1,0
+FM,yap-island,Yap island,,ena_sequence,1,0
+MX,tamazunchale,Tamazunchale,,ena_sequence,1,0
+ID,bandung-java,"Bandung, Java",,ena_sequence,1,0
+GT,guatemala-city,Guatemala City,,ena_sequence,1,0
+BR,boa-vista,Boa Vista (Roraima),,ena_sequence,1,0
+BR,mundo-novo,Mundo Novo,,ena_sequence,1,0
+BR,santa-maria-da-boa-vista,Santa Maria da Boa Vista,,ena_sequence,1,0
+TH,samui,Samui,,ena_sequence,1,0
+LA,luagprabang-laugprabang,"Luagprabang, Laugprabang",,ena_sequence,1,0
+BR,cabo-de-santo-agostino,Cabo de Santo Agostino,,ena_sequence,1,0
+BR,sao-francisco,Sao Francisco,,ena_sequence,1,0
+PT,imported-from-venezuela,imported from Venezuela,,ena_sequence,1,1
+PT,imported-from-india-or-maldivas,imported from India or Maldivas,,ena_sequence,1,1
+PY,villa-ygatimi,Villa Ygatimi,,ena_sequence,1,0
+CN,huizhou,Huizhou,,ena_sequence,1,0
+PY,piribebuy,Piribebuy,,ena_sequence,1,0
+PT,traveller-from-cuba,traveller from Cuba,,ena_sequence,1,1
+ID,kalimantan,Kalimantan,,ena_sequence,1,0
+CN,zhejiang-yiwu,Zhejiang Yiwu,,ena_sequence,1,0
+PY,pedro-juan-caballero,Pedro Juan Caballero (Amambay),,ena_sequence,1,0
+NC,yate,Yate,,ena_sequence,1,0
+PF,papeete-tahiti,"Papeete, Tahiti",,ena_sequence,1,0
+LA,dongpholao-hatsaifong,"Dongpholao, Hatsaifong",,ena_sequence,1,0
+IN,dibrugarh-regional-medical-research,"Dibrugarh, Regional Medical Research",,ena_sequence,1,0
+BR,nova-xavantina,Nova Xavantina,,ena_sequence,1,0
+BR,curvelo,Curvelo,,ena_sequence,1,0
+BR,parauna,Parauna,,ena_sequence,1,0
+PT,imported-from-mozambique,imported from Mozambique,,ena_sequence,1,1
+PT,imported-from-angola-or-dubai,imported from Angola or Dubai,,ena_sequence,1,1
+PY,presidente-franco,Presidente Franco,,ena_sequence,1,0
+IN,j-and-k,J&K,,ena_sequence,1,0
+MX,acapulco-guerro,"Acapulco, Guerro",,ena_sequence,1,0
+MX,chinipas,Chinipas,,ena_sequence,1,0
+BR,carpina,Carpina,,ena_sequence,1,0
+BR,passos,Passos,,ena_sequence,1,0
+UY,cerrolargo,CerroLargo,,ena_sequence,1,0
+TW,tungkung-pingtung-county,Tungkung/PingTung County,,ena_sequence,1,0
+ID,palembang-sumatra,"Palembang, Sumatra",,ena_sequence,1,0
+PF,raiatea-islv,"Raiatea, ISLV",,ena_sequence,1,0
+PF,bora-bora-islv,"Bora Bora, ISLV",,ena_sequence,1,0
+BR,north-east,North east,,ena_sequence,1,0
+CN,dongguan,Dongguan,,ena_sequence,1,0
+VE,margarita-island,Margarita Island,,ena_sequence,1,0
+ID,gili-islands,Gili islands,,ena_sequence,1,0
+NG,adamawa-mubi-yola-north-numan,"Adamawa Mubi, Yola North, Numan",,ena_sequence,1,0
+GH,accra,Accra,,ena_sequence,1,0
+HT,port-salut,Port Salut,,ena_sequence,1,0
+BR,cuiaba,Cuiaba,,ena_sequence,1,0
+BR,aparecida-do-taboado,Aparecida do Taboado,,ena_sequence,1,0
+SC,africa,Africa,,ena_sequence,1,0
+PY,filadelfia,Filadelfia,,ena_sequence,1,0
+CO,tumaco,Tumaco,,ena_sequence,1,0
+MQ,les-anses-darlet,Les Anses-d'Arlet,,ena_sequence,1,0
+GF,montsinery,Montsinery,,ena_sequence,1,0
+MQ,fort-de-france,Fort-de-France,,ena_sequence,1,0
+IN,jammu,Jammu,,ena_sequence,1,0
+LA,xaysomboune,Xaysomboune,,ena_sequence,1,0
+KE,mombasa-mombasa-county,"Mombasa, Mombasa County",,ena_sequence,1,0
+CI,agnibilekrou,Agnibilekrou,,ena_sequence,1,0
+PE,mancora,Mancora,,ena_sequence,1,0
+VG,tortola,Tortola,,ena_sequence,1,0
+LA,vientiane-capital-saysettha,"Vientiane Capital, saysettha",,ena_sequence,1,0
+GP,basse-terre,Basse-Terre,,ena_sequence,1,0
+GP,sainte-anne,Sainte-Anne,,ena_sequence,1,0
+BR,porto-velho,Porto Velho (Rondonia),,ena_sequence,1,0
+BR,cuiaba,Cuiaba (Mato Grosso),,ena_sequence,1,0
+PY,marianoroquealonso,MarianoRoqueAlonso,,ena_sequence,1,0
+KH,kampong-cham-hospital,Kampong Cham Hospital,,ena_sequence,1,0
+PF,rimatara,Rimatara,,ena_sequence,1,0
+CI,abidjan-yopougon-est,"Abidjan,Yopougon-Est",,ena_sequence,1,0
+CO,santander-zapatoca,Santander Zapatoca,,ena_sequence,1,0
+NC,ouegoa,Ouegoa,,ena_sequence,1,0
+NC,thio,Thio,,ena_sequence,1,0
+BR,conselheiro-lafaiete,Conselheiro Lafaiete,,ena_sequence,1,0
+BR,buique,Buique,,ena_sequence,1,0
+BR,ivinhema,Ivinhema,,ena_sequence,1,0
+BR,arinos,Arinos,,ena_sequence,1,0
+BR,contagem,Contagem,,ena_sequence,1,0
+ID,bandung,Bandung,,ena_sequence,1,0
+PG,ncd-june-valley,"NCD, June Valley",,ena_sequence,1,0
+BR,rj-paraty,RJ Paraty,,ena_sequence,1,0
+PY,yatytay,Yatytay,,ena_sequence,1,0
+PY,itagua,Itagua,,ena_sequence,1,0
+GF,iracoubo,Iracoubo,,ena_sequence,1,0
+ID,gowa,Gowa,,ena_sequence,1,0
+BF,hauts-bassins,Hauts Bassins,,ena_sequence,1,0
+CI,abidjan-anyama,"Abidjan,Anyama",,ena_sequence,1,0
+CI,daloa,Daloa,,ena_sequence,1,0
+CI,abidjan-yopougon-ouest-songon,"Abidjan,Yopougon-Ouest-Songon",,ena_sequence,1,0
+CI,abidjan-treichville-marcory,"Abidjan,Treichville-Marcory",,ena_sequence,1,0
+CI,dabou,Dabou,,ena_sequence,1,0
+CI,grand-lahou,Grand-Lahou,,ena_sequence,1,0
+PT,imported-to-madeira-island-unknown,"imported to Madeira Island, unknown",,ena_sequence,1,1
+BR,rj-sao-joao-de-meriti,RJ Sao Joao de meriti,,ena_sequence,1,0
+BR,mg-juiz-de-fora,MG Juiz de Fora,,ena_sequence,1,0
+GF,antecum-pata,Antecum Pata,,ena_sequence,1,0
+KE,mombasa-county-kpa-ports,"Mombasa County, KPA Ports",,ena_sequence,1,0
+CI,abobo-est,Abobo est,,ena_sequence,1,0
+IN,calcutta,Calcutta,,ena_sequence,1,0
+TW,tungkang-pingtung-county,TungKang/PingTung County,,ena_sequence,1,0
+BR,central-west,Central west,,ena_sequence,1,0
+BR,northeast,northeast (CE),,ena_sequence,1,0
+CO,santander-lebrija,Santander Lebrija,,ena_sequence,1,0
+TZ,international-school-of-tanganyika-dar,"International School of Tanganyika, Dar",,ena_sequence,1,0
+CN,wuhu,Wuhu,,ena_sequence,1,0
+IN,palani,Palani,,ena_sequence,1,0
+BR,sertania,Sertania,,ena_sequence,1,0
+BR,brasilia-de-minas,Brasilia de Minas,,ena_sequence,1,0
+PT,imported-from-jamaica,imported from Jamaica,,ena_sequence,1,1
+PT,imported-to-madeira-island-from-brazil,imported to Madeira Island from Brazil,,ena_sequence,1,1
+PY,villa-elisa,Villa Elisa,,ena_sequence,1,0
+MY,kl-salaks,KL-SalakS,,ena_sequence,1,0
+BD,dohar,Dohar,,ena_sequence,1,0
+US,volusia-county,Volusia County,,ena_sequence,1,0
+GA,syndara,Syndara,,ena_sequence,1,0
+CK,imported-samoa,imported Samoa,,ena_sequence,1,0
+BD,shibganj,Shibganj,,ena_sequence,1,0
+FJ,lautoka,Lautoka,,ena_sequence,1,0
+IR,sistan-va-baluchestan,Sistan Va Baluchestan,,ena_sequence,1,0
+BR,gongogi,Gongogi,,ena_sequence,1,0
+BR,ibirataia,Ibirataia,,ena_sequence,1,0
+IN,ludhiana,Ludhiana,,ena_sequence,1,0
+CM,eloundem,Eloundem,,ena_sequence,1,0
+IN,dadireddypalli-village-kadapa-andhra,"Dadireddypalli Village, Kadapa, Andhra",,ena_sequence,1,0
+EC,cordero-crespo-esmeralda,"Cordero Crespo, Esmeralda",,ena_sequence,1,0
+VN,hcmc,HCMC,,ena_sequence,1,0
+LA,champasack-soukhoumma,"Champasack, Soukhoumma",,ena_sequence,1,0
+CO,cartagena,Cartagena (Bolivar),,ena_sequence,1,0
+LA,champasack-mounlapamok-nadee,"Champasack, Mounlapamok, Nadee",,ena_sequence,1,0
+BR,eunapolis,Eunapolis,,ena_sequence,1,0
+IN,pune-maharshtra,"Pune, Maharshtra",,ena_sequence,1,0
+MY,negerisembilan-kpilah,NegeriSembilan-Kpilah,,ena_sequence,1,0
+US,collier-county,Collier County,,ena_sequence,1,0
+LA,champasack-pathoumphone-bangliengnai,"Champasack, Pathoumphone, Bangliengnai",,ena_sequence,1,0
+CO,mahates-bolivar,Mahates Bolivar,,ena_sequence,1,0
+CI,abidjan-yopougon-ouest-songon,"Abidjan, Yopougon-Ouest-Songon",,ena_sequence,1,0
+BR,itubera,Itubera,,ena_sequence,1,0
+AU,imported-from-india,imported from India,,ena_sequence,1,0
+BR,cordeiros,Cordeiros,,ena_sequence,1,0
+CO,risaralda-pereira,Risaralda Pereira,,ena_sequence,1,0
+BR,porto-seguro,Porto Seguro,,ena_sequence,1,0
+CM,monti-college,Monti college,,ena_sequence,1,0
+US,pasco-county,Pasco County,,ena_sequence,1,0
+FJ,lautoka-imported,"Lautoka, imported",,ena_sequence,1,0
+KR,chuncheon,Chuncheon,,ena_sequence,1,0
+KE,mombasa-mvita,"Mombasa, Mvita",,ena_sequence,1,0
+KE,mombasa-jomvu,"Mombasa, Jomvu",,ena_sequence,1,0
+LA,champasack-mounlapamok-huiko,"Champasack, Mounlapamok, Huiko",,ena_sequence,1,0
+CO,planeta-rica,Planeta Rica,,ena_sequence,1,0
+YE,al-hodayda-al-khawkha-district,"Al Hodayda, Al Khawkha district",,ena_sequence,1,0
+BR,aracaju-se,Aracaju-SE,,ena_sequence,1,0
+BR,laranjal-do-jari-ap,Laranjal do Jari-AP,,ena_sequence,1,0
+CM,damas,Damas,,ena_sequence,1,0
+LA,champasack-mounlapamok-luangso,"Champasack, Mounlapamok, Luangso",,ena_sequence,1,0
+CO,ovejas,Ovejas,,ena_sequence,1,0
+IN,taluk-hospital-cherthala,"Taluk Hospital, Cherthala",,ena_sequence,1,0
+CO,cartagena,Cartagena,,ena_sequence,1,0
+CO,cali,CALI,,ena_sequence,1,0
+CM,elooundem,Elooundem,,ena_sequence,1,0
+PY,villa-hayes,Villa Hayes,,ena_sequence,1,0
+IN,chennai-urban-limit,"Chennai, urban limit",,ena_sequence,1,0
+BR,caruaru-pe,Caruaru-PE,,ena_sequence,1,0
+BR,camacan,Camacan,,ena_sequence,1,0
+BR,campo-alegre-de-lourdes,Campo Alegre De Lourdes,,ena_sequence,1,0
+MY,segamat,Segamat,,ena_sequence,1,0
+LA,champasack-mounlapamok-salaosong,"Champasack, Mounlapamok, Salaosong",,ena_sequence,1,0
+PY,bella-vista,Bella Vista,,ena_sequence,1,0
+CM,nkolbisson,Nkolbisson,,ena_sequence,1,0
+GF,saint-laurent-du-maroni,Saint-Laurent du Maroni,,ena_sequence,1,0
+BR,teixeira-de-freitas,Teixeira De Freitas,,ena_sequence,1,0
+MY,johor-batupahat,Johor-BatuPahat,,ena_sequence,1,0
+BR,jatai-goais,"Jatai, Goais",,ena_sequence,1,0
+VN,cu-chi,Cu Chi,,ena_sequence,1,0
+TH,nakorn-ratchasrima,Nakorn Ratchasrima,,ena_sequence,1,0
+BR,goianira-goais,"Goianira, Goais",,ena_sequence,1,0
+TH,chonburi,Chonburi,,ena_sequence,1,0
+VE,barquisimeto,Barquisimeto,,ena_sequence,1,0
+CV,santiago,Santiago,,ena_sequence,1,0
+KE,lamu-lamu-west-sub-county-kandahari,"Lamu, Lamu West sub-County, Kandahari",,ena_sequence,1,0
+KE,lamu-lamu-west-sub-county-mkomani,"Lamu, Lamu West sub-County, Mkomani",,ena_sequence,1,0
+CF,mbaiki,Mbaiki,,ena_sequence,1,0
+BR,inhumas-goais,"Inhumas, Goais",,ena_sequence,1,0
+KE,lamu-lamu-west-sub-county-kashmiri,"Lamu, Lamu West sub-County, Kashmiri",,ena_sequence,1,0
+IL,south-shachar,South Shachar,,ena_sequence,1,1
+IL,center-maagan-michael,Center Ma'agan Michael,,ena_sequence,1,1
+RU,altay-krai,Altay krai,,ena_sequence,1,1
+EG,sindbis-village,Sindbis village,,ena_sequence,1,1
+IL,center-lod,Center Lod,,ena_sequence,1,1
+KE,naivasha,Naivasha,,ena_sequence,1,0
+IL,south-eilot,South Eilot,,ena_sequence,1,1
+IL,center-givat-brenner,Center Givat Brenner,,ena_sequence,1,1
+EG,sindibis,Sindibis,,ena_sequence,1,1
+AZ,caspian-sea-kyzyl-agach-bay,"Caspian Sea, Kyzyl-Agach bay",,ena_sequence,1,1
+KE,kakamega-county,Kakamega county,,ena_sequence,1,0
+IL,north-tavor-stream,North Tavor stream,,ena_sequence,1,1
+AU,charleville,Charleville,,ena_sequence,1,0
+IL,north-cabri,North Cabri,,ena_sequence,1,1
+NG,amurum-forest-jos-city,"Amurum Forest, Jos City",,ena_sequence,1,0
+ZA,marakele,Marakele,,ena_sequence,1,0
+IL,south-eilat,South Eilat,,ena_sequence,1,1
+IL,north-hachula-reservation,North Hachula reservation,,ena_sequence,1,1
+KE,budalangi,Budalangi,,ena_sequence,1,0
+IL,south-besor-stream,South Besor stream,,ena_sequence,1,1
+ZA,boschkop,Boschkop,,ena_sequence,1,0
+ZA,phalaborwa,Phalaborwa,,ena_sequence,1,0
+CF,abaki,Abaki,,ena_sequence,1,0
+GA,zoula,Zoula,,ena_sequence,1,0
+SN,garack,Garack,,ena_sequence,1,0
+KE,nyeri-district,Nyeri district,,ena_sequence,1,0
+ZA,bela-bela,Bela Bela,,ena_sequence,1,0
+KE,garissa,Garissa,,ena_sequence,1,0
+MR,echayif-timbedray-hodh-ech-chargui,Echayif Timbedray Hodh Ech Chargui,,ena_sequence,1,0
+KE,kitale,Kitale,,ena_sequence,1,0
+MR,boghe-brakna,Boghe Brakna,,ena_sequence,1,0
+GA,ego-pouma,Ego Pouma,,ena_sequence,1,0
+CF,mbaki,Mbaki,,ena_sequence,1,0
+SN,rosso,Rosso,,ena_sequence,1,0
+RU,krasnodar-dystrict,Krasnodar dystrict,,ena_sequence,1,1
+TH,nakornnayok-province-banna-district,"Nakornnayok province, Banna District",,ena_sequence,1,0
+KR,hoengseong,Hoengseong,,ena_sequence,1,0
+AU,north-queensland-seisia,"North Queensland, Seisia",,ena_sequence,1,0
+PH,santo-cristo,Santo Cristo,,ena_sequence,1,0
+CN,zhejiang-yiwu,Zhejiang/Yiwu,,ena_sequence,1,0
+CN,yunan,Yunan,,ena_sequence,1,0
+KR,hwacheon,Hwacheon,,ena_sequence,1,0
+ID,flores-golok,"Flores, golok",,ena_sequence,1,0
+KR,kyung-kee,Kyung Kee,,ena_sequence,1,0
+IN,bankura,Bankura,,ena_sequence,1,0
+ID,bantul-java,"Bantul, Java",,ena_sequence,1,0
+KR,gunsan-si,Gunsan-si,,ena_sequence,1,0
+CN,sichuan-provence,Sichuan Provence,,ena_sequence,1,0
+KR,incheon-city,Incheon city,,ena_sequence,1,0
+CN,xinjinag,Xinjinag,,ena_sequence,1,0
+AU,badu-island-torres-strait,Badu Island Torres Strait,,ena_sequence,1,0
+TW,liu-chiu-islet,Liu-Chiu islet,,ena_sequence,1,0
+KR,hwasun,Hwasun,,ena_sequence,1,0
+KR,yongsan,Yongsan,,ena_sequence,1,0
+SN,darka,Darka,,ena_sequence,1,0
+BF,fata-ngourma,Fata Ngourma,,ena_sequence,1,0
+CF,batangafo,Batangafo,,ena_sequence,1,0
+GF,aloike,Aloike,,ena_sequence,1,0
+NG,ogbomosho,Ogbomosho,,ena_sequence,1,0
+BR,sao-francisco-de-paula-rio-grande-do,"Sao Francisco de Paula, Rio Grande do",,ena_sequence,1,0
+BR,southeast-region,Southeast region,,ena_sequence,1,0
+BR,sao-fidelis-rj,Sao Fidelis-RJ,,ena_sequence,1,0
+BR,caibate,Caibate,,ena_sequence,1,0
+BR,brasilia-federal-district,"Brasilia, Federal District",,ena_sequence,1,0
+CZ,zlata-koruna-south-bohemia,"Zlata Koruna, South Bohemia",,ena_sequence,1,1
+SK,hradiste,Hradiste,,ena_sequence,1,1
+CZ,celina-central-bohemia,"Celina, Central Bohemia",,ena_sequence,1,1
+CZ,boletice-south-bohemia,"Boletice, South Bohemia",,ena_sequence,1,1
+DE,fuerstenstein-south-east-germany,"Fuerstenstein, South East Germany",,ena_sequence,1,1
+RU,western-siberia-novosbirsk-region,"western Siberia, Novosbirsk region",,ena_sequence,1,1
+AT,kleinsemmering,Kleinsemmering,,ena_sequence,1,1
+RU,habarovsk-region,Habarovsk region,,ena_sequence,1,1
+CZ,nova-rice-south-moravia,"Nova Rice, South Moravia",,ena_sequence,1,1
+DE,south-east-germany-neustadt-waldnaab,"South-East Germany, Neustadt/Waldnaab",,ena_sequence,1,1
+RU,far-east-khabarovsk-territory-lazo,"Far East, Khabarovsk territory, Lazo",,ena_sequence,1,1
+RU,western-siberia-novosibirsk-city-suburbs,"Western Siberia, Novosibirsk city suburbs",,ena_sequence,1,1
+SE,toro,Toro,,ena_sequence,1,1
+KR,jeju-island,Jeju Island,,ena_sequence,1,0
+DE,south-east-germany-hauzenberg,"South-East Germany, Hauzenberg",,ena_sequence,1,1
+UA,crimea-bahchisaray-district,"Crimea, Bahchisaray district",,ena_sequence,1,1
+NO,mandal,Mandal,,ena_sequence,1,1
+RU,kyrgyzstan-issyk-kul-lake,"Kyrgyzstan, Issyk-Kul Lake",,ena_sequence,1,1
+RU,western-siberia-novosibirk-region,"Western Siberia, Novosibirk region",,ena_sequence,1,1
+RU,vologodsk-region,Vologodsk region,,ena_sequence,1,1
+SK,dubove,Dubove,,ena_sequence,1,1
+SK,mestecko,Mestecko,,ena_sequence,1,1
+DE,south-east-germany-poppenricht,"South-East Germany, Poppenricht",,ena_sequence,1,1
+RU,tumen-region-vikulovskii-locality,"Tumen region, Vikulovskii locality",,ena_sequence,1,1
+DE,amberg,Amberg,,ena_sequence,1,1
+SI,rakovnik,Rakovnik,,ena_sequence,1,1
+SI,osolnik,Osolnik,,ena_sequence,1,1
+RU,far-east-primorskii-kray,"Far East, Primorskii Kray",,ena_sequence,1,1
+JP,nanporo,Nanporo,,ena_sequence,1,0
+RU,tumen-region-zavodoukovskii-locality,"Tumen region, Zavodoukovskii locality",,ena_sequence,1,1
+RU,tumen-region-tumen,"Tumen region, Tumen",,ena_sequence,1,1
+RU,tumen-region-tobolskii-locality,"Tumen region, Tobol'skii locality",,ena_sequence,1,1
+RU,tumen-region-yalutorovskii-locality,"Tumen region, Yalutorovskii locality",,ena_sequence,1,1
+CH,liesberg,Liesberg (Basel),,ena_sequence,1,1
+CZ,hnevkovice-central-bohemia,"Hnevkovice, Central Bohemia",,ena_sequence,1,1
+DE,south-east-germany-asbach,"South-East Germany, Asbach",,ena_sequence,1,1
+SE,habo,Habo,,ena_sequence,1,1
+SI,sodraica,Sodra'ica,,ena_sequence,1,1
+CH,montcherand,Montcherand (Vaud),,ena_sequence,1,1
+RU,st-petersburg,St. Petersburg,,ena_sequence,1,1
+RU,bashkiria-region,Bashkiria region,,ena_sequence,1,1
+UA,crimea-belogorsk-district,"Crimea, Belogorsk district",,ena_sequence,1,1
+SI,stefanja-gora,Stefanja gora,,ena_sequence,1,1
+CH,vugelles,Vugelles (Vaud),,ena_sequence,1,1
+CZ,rabyne-central-bohemia,"Rabyne, Central Bohemia",,ena_sequence,1,1
+UA,crimea-simferopol-district,"Crimea, Simferopol district",,ena_sequence,1,1
+RU,tumen-region-ishimskii-locality,"Tumen region, Ishimskii locality",,ena_sequence,1,1
+RU,primorskiy-region,Primorskiy region,,ena_sequence,1,1
+CH,kiesen,Kiesen,,ena_sequence,1,1
+CZ,rimov-south-bohemia,"Rimov, South Bohemia",,ena_sequence,1,1
+RU,tumen-region,Tumen region,,ena_sequence,1,1
+KZ,turkestan-maktaral,"Turkestan, Maktaral",,ena_sequence,1,0
+RS,republic-of-kosovo,Republic of Kosovo,,ena_sequence,1,1
+PK,matin,Matin,,ena_sequence,1,0
+IN,kutch,Kutch,,ena_sequence,1,0
+TR,elicek-village-corum,Elicek Village/Corum,,ena_sequence,1,1
+KZ,turkestan-shardara,"Turkestan, Shardara",,ena_sequence,1,0
+TR,cevrecik,Cevrecik,,ena_sequence,1,1
+KZ,turkestan-region-otyr-district-karakonyr-village,"Turkestan Region, Otyr District, Karakonyr Village",,ena_sequence,1,0
+RU,stavropole-region,Stavropole Region,,ena_sequence,1,1
+XK,gjilan,Gjilan,,ena_sequence,1,1
+ES,outskirts-of-ponferrada-city,outskirts of Ponferrada city,,ena_sequence,1,1
+RU,udmurtia,Udmurtia,,ena_sequence,1,1
+IN,dehradun,Dehradun,,ena_sequence,1,0
+IN,srinagar,Srinagar,,ena_sequence,1,0
+FR,corsica-island,Corsica Island,,ena_sequence,1,1
+IN,rishikesh-uttranchal,"Rishikesh, Uttranchal",,ena_sequence,1,0
+ZA,natal-vryheid,"Natal, Vryheid",,ena_sequence,1,0
+IN,madras,Madras,,ena_sequence,1,0
+FR,lagrueere-lot-et-garonne-aquitaine,Lagrueere-Lot et Garonne- Aquitaine,,ena_sequence,1,1
+GR,magnesia,Magnesia,,ena_sequence,1,1
+EG,mofoya,Mofoya,,ena_sequence,1,1
+FR,la-reunion-island,La Reunion Island,,ena_sequence,1,1
+IN,rahuri,Rahuri,,ena_sequence,1,0
+IN,manakondur-mandal-karim-nagar-dist,"Manakondur mandal, Karim Nagar dist.",,ena_sequence,1,0
+AU,northern-territories-beatrice-hill,"Northern Territories, Beatrice Hill",,ena_sequence,1,0
+RS,kosovo,Kosovo,,ena_sequence,1,1
+IN,maharastra,Maharastra,,ena_sequence,1,0
+IN,mahboobnagar-andhara-pradesh,"Mahboobnagar, Andhara Pradesh",,ena_sequence,1,0
+IN,andhara-pradesh,Andhara Pradesh,,ena_sequence,1,0
+GR,grevena,Grevena,,ena_sequence,1,1
+ZM,livingstone,Livingstone,,ena_sequence,1,0
+AU,northern-territories-victoria-research,"Northern Territories, Victoria Research",,ena_sequence,1,0
+IN,avikanagar,Avikanagar,,ena_sequence,1,0
+IR,azerbaijan,Azerbaijan,,ena_sequence,1,0
+US,virgina,Virgina,,ena_sequence,1,0
+FR,corsican-island,Corsican Island,,ena_sequence,1,1
+PS,jenin,Jenin,,ena_sequence,1,1
+SE,klippan,Klippan,,ena_sequence,1,1
+SE,karlskoga,Karlskoga,,ena_sequence,1,1
+GB,powyswales,PowysWales,,ena_sequence,1,1
+SE,veddige,Veddige,,ena_sequence,1,1
+SE,tingsryd,Tingsryd,,ena_sequence,1,1
+SE,vankiva,Vankiva,,ena_sequence,1,1
+SE,korsberga,Korsberga,,ena_sequence,1,1
+GB,channelils,ChannelIls,,ena_sequence,1,1
+SE,fjardhundra,Fjardhundra,,ena_sequence,1,1
+SE,visby,Visby,,ena_sequence,1,1
+EC,camal-santo-domingo,Camal Santo Domingo,,ena_sequence,1,0
+US,fort-collins,Fort Collins,,ena_sequence,1,0
+FR,allauch,Allauch,,ena_sequence,1,1
+MA,ouarzazate,Ouarzazate,,ena_sequence,1,1
+MA,essaouira,Essaouira,,ena_sequence,1,1
+FR,marseille,Marseille,,ena_sequence,1,1
+FR,balagne-corsica,Balagne/Corsica,,ena_sequence,1,1
+MG,anjiro,Anjiro,,ena_read_run,1,0
+CO,antioquioa-medellin,"Antioquioa, Medellin",,ena_read_run,1,0
+MX,baja-california-sur-8,Baja California Sur 8,,ena_read_run,1,0
+MX,baja-california-sur-9,Baja California Sur 9,,ena_read_run,1,0
+MX,tabasco-7,Tabasco 7,,ena_read_run,1,0
+BF,zorgho,ZORGHO,,ena_read_run,1,0
+SN,ngabou,NGABOU,,ena_read_run,1,0
+SN,santiane-mbake,SANTIANE MBAKE,,ena_read_run,1,0
+BF,yako,YAKO,,ena_read_run,1,0
+BD,cumilla,Cumilla,,ena_read_run,1,0
+NP,koshi-province,Koshi Province,,ena_read_run,1,0
+MX,yucatan-4,Yucatan 4,,ena_read_run,1,0
+MX,tabasco-6,Tabasco 6,,ena_read_run,1,0
+MX,tabasco-3,Tabasco 3,,ena_read_run,1,0
+SN,touba,TOUBA,,ena_read_run,1,0
+SN,ndane-mbacke,NDANE MBACKE,,ena_read_run,1,0
+MX,baja-california-sur-10,Baja California Sur 10,,ena_read_run,1,0
+MX,tabasco-4,Tabasco 4,,ena_read_run,1,0
+MX,tabasco-2,Tabasco 2,,ena_read_run,1,0
+TG,not-specified,Not specified,,ena_read_run,1,0
+MX,veracruz-11,Veracruz 11,,ena_read_run,1,0
+MX,baja-california-sur-7,Baja California Sur 7,,ena_read_run,1,0
+MX,baja-california-sur-6,Baja California Sur 6,,ena_read_run,1,0
+MX,tabasco-5,Tabasco 5,,ena_read_run,1,0
+MX,tabasco-1,Tabasco 1,,ena_read_run,1,0
+MX,sinaloa-2,Sinaloa 2,,ena_read_run,1,0
+MX,sinaloa-1,Sinaloa 1,,ena_read_run,1,0
+MX,quintana-roo-3,Quintana Roo 3,,ena_read_run,1,0
+MX,baja-california-sur-14,Baja California Sur 14,,ena_read_run,1,0
+MX,baja-california-sur-13,Baja California Sur 13,,ena_read_run,1,0
+MX,baja-california-sur-12,Baja California Sur 12,,ena_read_run,1,0
+MX,baja-california-sur-11,Baja California Sur 11,,ena_read_run,1,0
+NP,madhesh-province,Madhesh Province,,ena_read_run,1,0
+US,pasco-county,Pasco county,,ena_read_run,1,0
+US,collier-county,Collier county,,ena_read_run,1,0
+MX,cdmx,CDMX,,ena_read_run,1,0
+MX,colima3,Colima3,,ena_read_run,1,0
+MX,baja-california-sur3,Baja California Sur3,,ena_read_run,1,0
+MX,veracruz3,Veracruz3,,ena_read_run,1,0
+MX,baja-california-sur2,Baja California Sur2,,ena_read_run,1,0
+IN,hyderabad,Hyderabad,,ena_read_run,1,0
+MX,veracruz2,Veracruz2,,ena_read_run,1,0
+MX,chiapas2,Chiapas2,,ena_read_run,1,0
+MX,yucatan2,Yucatan2,,ena_read_run,1,0
+BD,shibganj,Shibganj,,ena_read_run,1,0
+MX,colima2,Colima2,,ena_read_run,1,0
+MX,oaxaca2,Oaxaca2,,ena_read_run,1,0
+BD,dohar,Dohar,,ena_read_run,1,0
+US,seattle,Seattle,,ena_read_run,1,0
+NG,ibadan,Ibadan,,ena_read_run,1,0
+CN,wuhan,Wuhan,,ena_read_run,1,0
+PR,host-infected-after-travel-to-puerto-rico,Host infected after travel to Puerto Rico,,ena_read_run,1,0
+RW,nyamasheke,Nyamasheke,,ena_read_run,1,0
+RW,nyaruguru,Nyaruguru,,ena_read_run,1,0
+KE,nyandarua,Nyandarua,,ena_read_run,1,0
+RW,nyanza,Nyanza,,ena_read_run,1,0
+RW,ngoma,Ngoma,,ena_read_run,1,0
+RW,rusizi,Rusizi,,ena_read_run,1,0
+BI,ruyaga,Ruyaga,,ena_read_run,1,0
+KE,bura,Bura,,ena_read_run,1,0
+KE,kamsuma,Kamsuma,,ena_read_run,1,0
+CN,yunan,Yunan,,ena_read_run,1,0
+KR,kyung-kee,Kyung Kee,,ena_read_run,1,0
+PH,santo-cristo,Santo Cristo,,ena_read_run,1,0
+ID,flores-golok,"Flores, golok",,ena_read_run,1,0
+NG,ogbomosho,Ogbomosho,,ena_read_run,1,0
+CO,leticia,Leticia,,ena_read_run,1,0
+CH,langnau,Langnau,,ena_read_run,1,1
+CH,cevio,Cevio,,ena_read_run,1,1
+CH,onsingen,Onsingen,,ena_read_run,1,1
+CH,wangi,Wangi,,ena_read_run,1,1
+CH,raron,Raron,,ena_read_run,1,1
+CH,gersau,Gersau,,ena_read_run,1,1
+LU,echternach-waldbillig,"Echternach, Waldbillig",,ena_read_run,1,1
+LU,redange-colpach,"Redange, Colpach",,ena_read_run,1,1
+JP,gumna-akabane,"Gumna,Akabane",,ena_read_run,1,0
+PE,mancora,Mancora,,bvbrc,1,0
+KE,mombasa,Mombasa,,bvbrc,1,0
+AU,torres-strait,Torres Strait,,bvbrc,1,0
+AU,seisia-northern-peninsular-area,"Seisia, Northern Peninsular Area",,bvbrc,1,0
+AU,mabuiag-island-torres-strait,"Mabuiag Island, Torres Strait",,bvbrc,1,0
+AU,badu-island-in-the-torres-strait,Badu Island in the Torres Strait,,bvbrc,1,0
+AU,injioo,Injioo,,bvbrc,1,0
+AU,bamaga-northern-peninsular-area,"Bamaga, Northern Peninsular Area",,bvbrc,1,0
+GH,daboya,Daboya,,bvbrc,1,0
+DE,wingst,Wingst,,bvbrc,1,1
+DE,barsinghausen,Barsinghausen,,bvbrc,1,1
+DE,uchte,Uchte,,bvbrc,1,1
+RU,stavropol-territory,Stavropol territory,,bvbrc,1,1
+KE,kajiado-county,Kajiado County,,bvbrc,1,0
+KE,mandera,Mandera,,bvbrc,1,0
+BE,rijkevorsel,Rijkevorsel,,pathoplexus,1,1
+MX,ciudad-de-mexico,Ciudad de Mexico,,pathoplexus,1,0
+MX,ciudad-de-mexico,CIUDAD DE MEXICO,,pathoplexus,1,0
+PK,matin,Matin,,pathoplexus,1,0
+PK,karachi,Karachi,,pathoplexus,1,0
+RU,stavropole-region,Stavropole Region,,pathoplexus,1,1
+RS,republic-of-kosovo,Republic of Kosovo,,pathoplexus,1,1
+TR,elicek-village-corum,Elicek Village/Corum,,pathoplexus,1,1
+TR,cevrecik,Cevrecik,,pathoplexus,1,1
+SD,dunkop-village-abyei-district-western-kordufan-province,"Dunkop Village, Abyei District, Western Kordufan Province",,pathoplexus,1,0
+SY,qalat-samaan,Qalat Samaan,,pathoplexus,1,1
+SY,kafr-takharim,Kafr Takharim,,pathoplexus,1,1
+TR,hassa,Hassa,,pathoplexus,1,1
+TR,antakya,Antakya,,pathoplexus,1,1
+ML,daral,Daral,,pathoplexus,1,0
+XK,gjilan,Gjilan,,pathoplexus,1,1
+IN,kutch,Kutch,,pathoplexus,1,0
+KZ,shyiely,Shyiely,,pathoplexus,1,0
+SD,darfur,Darfur,,pathoplexus,1,0
+UG,kikuube-district,Kikuube district,,pathoplexus,1,0
+KZ,shymkent,Shymkent,,pathoplexus,1,0
+KE,kajiado-county,Kajiado County,,pathoplexus,1,0
+KZ,turkestan-maktaral,"Turkestan, Maktaral",,pathoplexus,1,0
+KZ,turkestan-arys,"Turkestan, Arys",,pathoplexus,1,0
+KZ,turkestan-shardara,"Turkestan, Shardara",,pathoplexus,1,0
+KZ,turkestan-region-otyr-district-karakonyr-village,"Turkestan Region, Otyr District, Karakonyr Village",,pathoplexus,1,0
+ES,outskirts-of-ponferrada-city,outskirts of Ponferrada city,,pathoplexus,1,1
+PK,punjab-chakwal,Punjab-Chakwal,,pathoplexus,1,0
+PK,lakkimarwat-kpk,LakkiMarwat-KPK,,pathoplexus,1,0
+XK,xk005,Ferizaj,XK005,ecdc_atlas,1,1
+XK,xk007,Gjakovë,XK007,ecdc_atlas,1,1
+XK,xk003,Pejë,XK003,ecdc_atlas,1,1
+XK,xk001,Prishtinë,XK001,ecdc_atlas,1,1
+GR,unknown,Unknown,Unknown,ecdc_atlas,1,1
+PT,pt1b0,Península de Setúbal,PT1B0,ecdc_atlas,1,1
