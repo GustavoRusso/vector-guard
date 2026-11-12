@@ -4,8 +4,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Multi-source virus extract + reference CSVs implemented (`03`, `05`, `06`); H3 density / clean / merge still open |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference) |
+| Status | Multi-source virus extract + reference CSVs Done (`03`, `05`, `06`); `H3_RESOLUTION=4` locked via `07`; clean / merge still open |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -17,9 +17,9 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Tier 1 paths | Exact / backfilled GPS **or** curated subnational / NUTS3 centroids → `(lat, lon)` → `h3_cell` (see spec `03`) |
 | Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit; virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
 | Temporal grain | **`year` × `month`** |
-| H3 resolution | Chosen later in a density-check notebook; document the process here; record the chosen integer when selected |
+| H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Done** |
-| This iteration | Virus extract + reference tables Done (`03`, `04` EDA, `05`, `06`); remaining pipeline steps (H3 / clean / merge) still Planned |
+| This iteration | Virus extract + reference tables Done (`03`, `04` EDA, `05`, `06`); H3 density Done (`07`, res **4**); clean / merge still Planned |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
 
@@ -135,6 +135,8 @@ Notebook `07_h3_resolution_density.ipynb` chooses one integer resolution and rec
 
 **Selection rule:** pick the finest resolution that still yields a usable Tier 1 co-occurrence rate and stable cell occupancy for modelling under the **exact + centroid** mode (the locked production path); also document exact-only metrics as a sensitivity check. Prefer interpretability over micro-cells with almost no overlaps. Record the chosen `H3_RESOLUTION` in this spec (update when decided), in ROADMAP notes, and in the merge panel manifest.
 
+**Decision (2026-11):** `H3_RESOLUTION = 4`. Under `exact_plus_centroid`, res 4 retains ~3× the hex×month×`vector_group` co-occurring virus rows of res 5 (~128 vs ~45) with stable median occupancy (~3–4 virus detections per occupied cell). Res 5 over-fragments relative to VectorNet coverage. Res 3 was probed as a coarser neighbor (~335 co-occurring rows) but is outside the primary candidate band; production stays at 4. Centroid promotion is material (~44% of Tier 1 virus rows). Absolute co-occurrence remains sparse (VectorNet Europe/Med vs worldwide virus extract); the VectorNet-coverage training filter still applies at merge. Details: [`notebooks/07_h3_resolution_density.ipynb`](../notebooks/07_h3_resolution_density.ipynb).
+
 ## Pipeline ownership
 
 ```mermaid
@@ -176,7 +178,7 @@ flowchart TD
 | Source EDA viruses | `04_eda_viruses.ipynb` (multi-source EDA Done) | Insights / cleaning rules only | raw viruses |
 | Country + subnational reference | `05_reference_countries.ipynb` (multi-source aliases / `subnational_region` / `nuts_id` Done) | `data/reference/countries.csv`, `data/reference/subnational_locations.csv` | ISO list + alias / region / NUTS needs from multi-source extract |
 | Vector group map | `06_reference_vector_groups.ipynb` (exists) | `data/reference/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
-| H3 density check | `07_h3_resolution_density.ipynb` | Decision in specs/ROADMAP (+ later code constant); no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
+| H3 density check | `07_h3_resolution_density.ipynb` (**Done**, `H3_RESOLUTION=4`) | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `08_clean_vectors.ipynb` | `data/interim/vectors_normalized.parquet` (or CSV) | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | Clean viruses | `09_clean_viruses.ipynb` | `data/interim/viruses_normalized.parquet` (or CSV) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
 | **Merge panel** | `10_merge_modelling_panel.ipynb` | `data/processed/modelling_panel.parquet` (+ tier mix / manifest summary) | both interim tables |
@@ -314,7 +316,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 1. Upgrade `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` to the multi-source contract (spec `02`); refresh `04_eda_viruses` for per-source / geo coverage. **Done.**
 2. Add `data/reference/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv` (multi-source aliases + `subnational_region` / `nuts_id`). **Done (files written; commit when ready).**
 3. Add `vector_taxon_groups.csv` via notebook `06`. **Done (224 taxa mapped; commit when ready).**
-4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`.
+4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`. **Done — `H3_RESOLUTION=4`.**
 5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/interim/` using the coordinate priority ladder and `geo_precision`.
 6. Implement `10_merge_modelling_panel` → `data/processed/modelling_panel.*` + manifest summary.
 7. Point `notebook.ipynb` / `train.py` at the panel.

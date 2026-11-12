@@ -67,7 +67,7 @@ Data layout (ladder):
 | `data/interim/` | Normalized per-side detection tables after cleaning |
 | `data/processed/` | Merged **modelling panel** used by `notebook.ipynb` / `train.py` |
 
-H3 cell IDs are computed from lat/lon (exact GPS or curated subnational / NUTS3 centroids) at a resolution chosen in a density-check notebook (not a downloaded world H3 dump).
+H3 cell IDs are computed from lat/lon (exact GPS or curated subnational / NUTS3 centroids) at **`H3_RESOLUTION=4`** (chosen in `notebooks/07_h3_resolution_density.ipynb`; not a downloaded world H3 dump).
 
 ### Vector detections — VectorNet observations (selected)
 
@@ -142,7 +142,8 @@ See [`ROADMAP.md`](ROADMAP.md) for the planned features and build order (data, E
 | `notebooks/04_eda_viruses.ipynb` | Exploratory analysis of the multi-source virus detections dataset |
 | `notebooks/05_reference_countries.ipynb` | Build `countries.csv` + `subnational_locations.csv` (multi-source aliases / NUTS) |
 | `notebooks/06_reference_vector_groups.ipynb` | Build `vector_taxon_groups.csv` |
-| `notebooks/07`–`10` (planned) | H3 density check, clean both sides, merge modelling panel — see spec `04` |
+| `notebooks/07_h3_resolution_density.ipynb` | H3 density check → **`H3_RESOLUTION=4`** |
+| `notebooks/08`–`10` (planned) | Clean both sides, merge modelling panel — see spec `04` |
 | `data/reference/`, `data/interim/`, `data/processed/` | Lookup tables, normalized sides, modelling panel (see [Data](#data)) |
 | `specs/` | Decision records (dataset selection, matching strategy, panel pipeline) |
 | `notebook.ipynb` | Model comparison and tuning (after panel build) |

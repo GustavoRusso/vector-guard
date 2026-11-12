@@ -25,9 +25,9 @@ from vector_guard.virus_extract import (
     parse_decimal_coord,
 )
 
-# Chosen later in ``07_h3_resolution_density.ipynb``; assign_h3 always takes an
-# explicit resolution until that notebook locks this constant.
-H3_RESOLUTION: int | None = None
+# Locked in ``notebooks/07_h3_resolution_density.ipynb`` (spec ``04``): finest
+# candidate (4 vs 5) with usable Tier 1 co-occurrence under exact+centroid.
+H3_RESOLUTION: int = 4
 
 GEO_PRECISION_EXACT = "exact_coords"
 GEO_PRECISION_CENTROID = "subnational_centroid"

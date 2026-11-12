@@ -4,7 +4,7 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design only — **not implemented** in this iteration |
+| Status | Design locked; `H3_RESOLUTION=4` chosen in `07`; clean / merge notebooks still open |
 | Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -155,7 +155,9 @@ Fallback ladder per record:
 
 Pick one working resolution after a density check on VectorNet + virus coordinates (**exact_coords alone** and **exact_coords + subnational_centroid** combined). Indicative starting range for mosquito/tick risk panels: roughly **H3 resolution 4–5** (~50–150 km edge scale; confirm against data density). Use H3’s hierarchy later to coarsen or refine without redesigning join keys.
 
-**Selection process (locked):** choose the integer resolution in planned notebook `07_h3_resolution_density.ipynb` using the metrics in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Do not ship a worldwide H3 geometry dump—assign `h3_cell` from lat/lon via the `h3` library. Record the chosen resolution in spec `04`, the merge panel manifest, and a code constant; keep it fixed for a given modelling panel.
+**Selection process (locked):** choose the integer resolution in `07_h3_resolution_density.ipynb` using the metrics in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Do not ship a worldwide H3 geometry dump—assign `h3_cell` from lat/lon via the `h3` library. Record the chosen resolution in spec `04`, the merge panel manifest, and a code constant; keep it fixed for a given modelling panel.
+
+**Chosen value:** **`H3_RESOLUTION = 4`** (`vector_guard.resolve.H3_RESOLUTION`). Res 4 beats res 5 on Tier 1 co-occurrence under the exact+centroid production path; see notebook `07` and spec `04` for metrics.
 
 ### Geographic scope notes
 
