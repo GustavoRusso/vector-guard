@@ -68,6 +68,77 @@ def _clean_text(value: object) -> str:
     return text
 
 
+_ADMIN_SUFFIX_RE = re.compile(
+    r"\b(province|region|state|county|oblast|department|prefecture|republic)\b",
+    flags=re.IGNORECASE,
+)
+
+
+def strip_admin_suffix(text: object) -> str:
+    """Drop common admin-unit suffixes (``province``, ``county``, …)."""
+    raw = _clean_text(text)
+    if not raw:
+        return ""
+    return _ADMIN_SUFFIX_RE.sub("", raw).strip(" ,/-")
+
+
+def region_candidate_keys(region: object) -> list[str]:
+    """Ordered normalized keys for a free-text ``subnational_region``.
+
+    Order (trailing-first for multi-token strings):
+
+    1. Full string (+ admin-suffix-stripped variant)
+    2. Trailing segments after ``,`` / `` - `` / ``;`` (more specific admin)
+    3. Leading segments
+    4. Any remaining middle tokens
+
+    Parenthetical clutter is stripped before normalization. Does not invent
+    coordinates — callers must look keys up in the curated centroid index.
+    """
+    text = _clean_text(region)
+    if not text:
+        return []
+
+    raw_parts: list[str] = [text]
+
+    if "," in text:
+        parts = [p.strip() for p in text.split(",") if p.strip()]
+        if len(parts) >= 2:
+            raw_parts.append(parts[-1])
+            raw_parts.append(parts[0])
+            raw_parts.extend(parts[1:-1])
+        else:
+            raw_parts.extend(parts)
+
+    if " - " in text:
+        left, right = text.split(" - ", 1)
+        left, right = left.strip(), right.strip()
+        if right:
+            raw_parts.append(right)
+        if left:
+            raw_parts.append(left)
+
+    if ";" in text:
+        parts = [p.strip() for p in text.split(";") if p.strip()]
+        if len(parts) >= 2:
+            raw_parts.append(parts[-1])
+            raw_parts.append(parts[0])
+            raw_parts.extend(parts[1:-1])
+        else:
+            raw_parts.extend(parts)
+
+    keys: list[str] = []
+    for part in raw_parts:
+        cleaned = re.sub(r"\([^)]*\)", "", part).strip()
+        if not cleaned:
+            continue
+        for variant in (cleaned, strip_admin_suffix(cleaned)):
+            key = norm_key(variant)
+            if key and key not in keys:
+                keys.append(key)
+    return keys
+
+
 def load_countries(reference_dir: Path | None = None) -> pd.DataFrame:
     """Load ``data/reference/countries.csv``."""
     directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
@@ -242,8 +313,9 @@ def lookup_subnational_centroid(
 ) -> tuple[float, float] | None:
     """Match ``(country_iso2, region_key)`` for region text or ``nuts_id``.
 
-    Prefer ``nuts_id`` when both are provided (more specific). Never invents
-    coordinates for unmatched keys.
+    Prefer ``nuts_id`` when both are provided (more specific). Region free-text
+    uses :func:`region_candidate_keys` (trailing-first admin tokens). Never
+    invents coordinates for unmatched keys.
     """
     iso2 = _clean_text(country_iso2).upper()
     if not iso2:
@@ -256,15 +328,9 @@ def lookup_subnational_centroid(
 
     candidates: list[str] = []
     nuts = _clean_text(nuts_id)
-    region = _clean_text(subnational_region)
     if nuts:
         candidates.append(norm_key(nuts))
-    if region:
-        # Prefer the first comma-separated admin token (e.g. "Tuscany, Florence").
-        first = region.split(",", 1)[0].strip()
-        candidates.append(norm_key(first))
-        if first != region:
-            candidates.append(norm_key(region))
+    candidates.extend(region_candidate_keys(subnational_region))
 
     seen: set[str] = set()
     for key in candidates:

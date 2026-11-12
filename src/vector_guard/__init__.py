@@ -27,9 +27,11 @@ from vector_guard.resolve import (
     norm_key,
     parse_year_month_vectornet,
     parse_year_month_virus,
+    region_candidate_keys,
     resolve_coords_ladder,
     resolve_vector_country_iso2,
     resolve_virus_country_iso2,
+    strip_admin_suffix,
 )
 from vector_guard.virus_extract import (
     VIRUS_RAW_COLUMNS,
@@ -65,7 +67,9 @@ __all__ = [
     "norm_key",
     "parse_year_month_vectornet",
     "parse_year_month_virus",
+    "region_candidate_keys",
     "resolve_coords_ladder",
     "resolve_vector_country_iso2",
     "resolve_virus_country_iso2",
+    "strip_admin_suffix",
 ]
