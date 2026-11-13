@@ -4,8 +4,8 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design locked and implemented through merge (`07`–`10`); `H3_RESOLUTION=4` |
-| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1) |
+| Status | Design locked (`H3_RESOLUTION=4`); B2/A3 forward-label contract locked in this spec + [`04`](04-reference-data-and-panel-pipeline.md) — merge notebook `10` rebuild pending |
+| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -147,7 +147,7 @@ To inspect an `h3_cell` ID on a map manually, use the [H3 Viewer](https://clupas
 - H3 makes the **spatial key** portable worldwide even when VectorNet coverage is Europe / Mediterranean–heavy.
 - A truly worldwide **model** may still need non-EU vector sources later; this strategy only standardizes the join geometry.
 - Extra-European virus rows with GPS or resolvable subnational centroids can enter Tier 1; country-only rows stay at Tier 2.
-- **Training scope (locked):** worldwide join keys are allowed, but a unit enters the **supervised training panel** only if **VectorNet has coverage** in that unit. Virus-only units may remain for descriptive EDA. Full filter and panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
+- **Training scope (locked):** worldwide join keys are allowed, but a unit enters the **supervised training panel** only if **VectorNet has coverage** in that unit (observed VectorNet month). Virus-only units may remain for descriptive EDA. Full filter and panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
 
 ## Temporal alignment
 
@@ -156,11 +156,15 @@ Parse VectorNet `eventDate` and virus `collection_date` (all sources) into compa
 | Field | Rule |
 |-------|------|
 | `year` | Required for inclusion in the modelling panel |
-| `month` | Required for inclusion in the modelling panel (first implementation grain) |
+| `month` | Required for inclusion in the modelling panel (panel row grain) |
 | `season` | Optional later fallback if month coverage proves too sparse; not the default grain |
 | Date ranges | VectorNet often uses interval dates (`start/end`); use interval midpoint or start year-month consistently and record the rule in code |
 
-Default join grain for the first implementation: **`year` × `month`** (locked). Do not match on exact calendar days. Pipeline ownership and exclusion rules for missing month: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
+**Panel row grain (locked):** each supervised row is an observed VectorNet unit at **`year` × `month`** (plus spatial key and `vector_group`). Do not match on exact calendar days.
+
+**Virus label timing (locked — B2):** virus outcomes are **not** required to share the same calendar month as the vector row. Labels look **forward and backward from the vector row timestamp** within the same `h3_cell` × `vector_group` (Tier 1) — see [Aggregation into modelling units](#aggregation-into-modelling-units). Same-month co-occurrence remains a QA column only (`virus_same_month` in spec `04`).
+
+Pipeline ownership and exclusion rules for missing month: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
 
 ## Ecological (taxonomic) link
 
@@ -173,27 +177,53 @@ Do **not** join every virus to every vector taxon.
 
 ## Aggregation into modelling units
 
-For each join key `(h3_cell | country_iso2, year, month, vector_group)` [and optionally `pathogen`]:
+### Panel row semantics (B2 — locked)
 
-**Vector features (examples):**
+Each supervised panel row is a **VectorNet observation unit** at `(h3_cell | country_iso2, year, month, vector_group)`. Virus labels attach relative to that row’s timestamp `T`, using Tier‑1 virus events in the **same spatial key and same `vector_group` only**.
 
-- Presence / absence or count of detections
+Do **not** synthesize empty calendar months after the first vector hit; the panel skeleton stays observed VectorNet months.
+
+### Zone eligibility (A3 — locked)
+
+Per `(h3_cell, vector_group)` (Tier 1), compute the first VectorNet detection time (`first_vector_year` / `first_vector_month`). The zone is treated as vector-eligible **from that first hit onward**. A3 governs the **zone clock** and how virus history is interpreted relative to observed VectorNet presence; it does **not** fill months without traps.
+
+### Virus labels relative to row time `T` (locked)
+
+| Label family | Rule |
+|--------------|------|
+| Primary supervised target | `virus_within_5y` — any Tier‑1 virus in the same cell×`vector_group` with time in `(T, T+5 years]`; panel column `virus_detected` **aliases** this |
+| Secondary / sensitivity | `virus_within_10y` — same, horizon **10 years** |
+| Ever flags (always 0/1) | `virus_ever_before` — any virus with time **&lt; T**; `virus_ever_after` — any virus with time **&gt; T** |
+| Delay (nullable) | `years_to_first_virus_after` — years to earliest virus after `T` (**null** if none); `years_since_last_virus_before` — years since latest virus before `T` (**null** if none) |
+| QA / legacy | `virus_same_month` — strict same `year`×`month` co-occurrence (former same-month `virus_detected` meaning) |
+
+Country-only virus rows (`geo_precision=country_only`) do **not** invent H3 and do **not** contribute to Tier‑1 forward / ever / delay labels. Column-level contract: [`specs/04`](04-reference-data-and-panel-pipeline.md#panel-columns).
+
+**Worked examples** (same `h3` + `vector_group`):
+
+| Situation | `virus_ever_before` | `virus_ever_after` | `virus_within_5y` | `virus_within_10y` |
+|-----------|---------------------|--------------------|-------------------|--------------------|
+| Virus only before `T`, never again | 1 | 0 | 0 | 0 |
+| No virus before `T`; first virus 3y after `T` | 0 | 1 | 1 | 1 |
+| Virus before `T` **and** again 3y after `T` | 1 | 1 | 1 | 1 |
+| No virus before `T`; only virus 12y after `T` | 0 | 1 | 0 | 0 |
+| No virus in cell at all | 0 | 0 | 0 | 0 |
+
+### Vector features (examples)
+
+- Presence / absence or count of detections in the row’s month
 - Share of positive vs zero `individualCount` where meaningful
 - Establishment signals when published
 - Sampling effort proxies (`samplingProtocol`, `sampleSizeValue`) when usable
+- A3 zone clock: `first_vector_year` / `first_vector_month`
 
-**Virus target / labels (examples):**
+### Caveats
 
-- Binary: any detection in the unit-window
-- Count or intensity of detections (with awareness of sequencing vs outbreak-reporting bias; keep `source` distinguishable upstream)
-- Optional pathogen-specific panels vs pooled by `vector_group`
-
-**Caveats:**
-
-- Absence of a virus row in a unit is **not** proof of pathogen absence; treat zeros as “no reported detection in the merged feeds.”
+- Absence of a virus row after `T` (or within a horizon) is **not** proof of pathogen absence; treat zeros / null delays as “no reported detection in the merged feeds” (right-censored by extract end dates).
 - An H3 cell with no VectorNet traps is **not** proof of vector absence (effort / coverage bias).
 - Sequence detections ≠ clinical case counts; EMPRES-i / ECDC rows ≠ sequenced isolates (reporting bias remains).
 - Subnational-centroid Tier 1 cells are coarser than true GPS—interpret risk at hex/admin scale, not point address scale.
+- Virus **only before** the first / this VectorNet observation (`virus_ever_before=1`, `virus_ever_after=0`) must **not** inflate the primary forward target.
 
 ## Auxiliary: VectorNet `dynamicProperties` pathogens
 
@@ -213,7 +243,7 @@ They are **not** a substitute for the multi-source virus dataset in [`specs/02-v
 
 ## Implemented in
 
-Join design from this spec is implemented through reference, H3 density, clean, and merge notebooks (`05`–`10`) with `H3_RESOLUTION=4`. Detailed artifacts, resolve rules, and the modelling-panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Build status for remaining EDA / model work: [`ROADMAP.md`](../ROADMAP.md).
+Spatial resolve and interim clean notebooks (`05`–`09`) are implemented with `H3_RESOLUTION=4`. The **B2/A3 forward-label panel contract** is locked here and in spec `04`; rebuild merge notebook `10` (and regenerate `modelling_panel.parquet`) to match. Build status: [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 

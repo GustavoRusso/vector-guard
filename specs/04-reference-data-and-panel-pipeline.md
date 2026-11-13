@@ -4,8 +4,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Pipeline through modelling panel Done (`03`–`10`); `H3_RESOLUTION=4`; interim + `data/03_processed/modelling_panel.parquet`; primary `notebook.ipynb` panel prep Done |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing) |
+| Status | Interim clean Done (`03`–`09`); `H3_RESOLUTION=4`; **B2/A3 panel label contract locked** — merge notebook `10` + `modelling_panel.parquet` rebuild pending |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -15,8 +15,12 @@ Decision record for **reference / master data**, how each side is **resolved** o
 |----------|--------|
 | Geographic keys | Worldwide join keys allowed (H3 / ISO-2) |
 | Tier 1 paths | Exact / backfilled GPS **or** curated subnational / NUTS3 centroids → `(lat, lon)` → `h3_cell` (see spec `03`) |
-| Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit; virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
-| Temporal grain | **`year` × `month`** |
+| Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit (observed VectorNet month); virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
+| Panel row semantics | **B2** — one row per observed VectorNet `(spatial key, year, month, vector_group)`; virus labels relative to that row’s timestamp |
+| Zone eligibility | **A3** — per `(h3_cell, vector_group)`, zone clock from **first** VectorNet detection onward (`first_vector_year` / `first_vector_month`); no synthetic empty months |
+| Primary label | `virus_detected` **=** `virus_within_5y` (forward ≤5 years, same cell×`vector_group`) |
+| Secondary label | `virus_within_10y` (forward ≤10 years); ever-before / ever-after flags + nullable delay columns for EDA |
+| Temporal grain | Panel rows: **`year` × `month`** (vector observation). Virus labels are **not** same-month-only (see spec `03`) |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in [`specs/02`](02-virus-dataset-selection.md) |
 | Pipeline scope | Virus extract + reference + H3 + clean + merge (`03`–`10`); modelling panel at `data/03_processed/` |
@@ -252,23 +256,27 @@ Ecological join principle (same `vector_group` only): [`specs/03`](03-spatial-te
 
 **Goal:** one final dataset for model analysis and generation (`notebook.ipynb`, later `train.py`).
 
+Join principles (B2 row timing, A3 zone clock, forward labels): [`specs/03`](03-spatial-temporal-matching-strategy.md#aggregation-into-modelling-units).
+
 ### Unit definition
 
-Panel rows are **spatial–temporal units**, not raw detection rows. Path A / B and tier principles: [`specs/03`](03-spatial-temporal-matching-strategy.md).
+Panel rows are **VectorNet spatial–temporal units**, not raw detection rows. Path A / B and tier principles: [`specs/03`](03-spatial-temporal-matching-strategy.md).
 
 | Tier | Key | When |
 |------|-----|------|
-| Tier 1 | `(h3_cell, year, month, vector_group)` | Vector side has usable H3; virus features/labels attach when virus rows share that cell-window |
-| Tier 2 | `(country_iso2, year, month, vector_group)` | Fallback when H3 cannot be used for that unit |
+| Tier 1 | `(h3_cell, year, month, vector_group)` | Vector side has usable H3; virus labels attach from Tier‑1 virus events in the **same** `h3_cell` × `vector_group`, relative to the row timestamp (not same-month-only) |
+| Tier 2 | `(country_iso2, year, month, vector_group)` | Fallback when H3 cannot be used for that **vector** unit |
 
-Prefer Tier 1 when the vector side supports it. Country-only virus rows contribute at **Tier 2** only.
+Prefer Tier 1 when the vector side supports it. Country-only virus rows (`geo_precision=country_only`) stay out of Tier‑1 label construction; they may still inform Tier 2 if that tier is built.
 
-### Training filter
+### Training filter and label attachment
 
-- **Include** units with **VectorNet coverage** (vector feature present for that key).
-- Virus detection in the unit-window becomes the **label / target** (e.g. binary any detection in the merged feeds and/or count). Optionally retain source-mix summaries (sequence vs outbreak) as features or QA columns.
+- **Include** units with **VectorNet coverage** (observed VectorNet month for that key). Do **not** synthesize months without traps after first detection.
+- Per Tier‑1 `(h3_cell, vector_group)`, attach `first_vector_year` / `first_vector_month` (A3 zone clock).
+- **Primary target:** `virus_detected` = `virus_within_5y` (any Tier‑1 virus after the row time and within 5 years). Secondary: `virus_within_10y`.
+- Also attach `virus_ever_before` / `virus_ever_after`, nullable delay columns, same-month QA, and optional source-mix / geo-share summaries among viruses used for the relevant windows.
 - Virus-only units (no VectorNet in that key) may be exported for descriptive EDA but are **excluded from the supervised training panel**.
-- Caveats from spec `03` still apply: virus zero ≠ true absence; no VectorNet traps ≠ true vector absence; sequences ≠ clinical cases; centroid Tier 1 ≠ point GPS precision.
+- Caveats from spec `03` still apply: virus zero / null delay ≠ true absence (right-censored by extract end); no VectorNet traps ≠ true vector absence; sequences ≠ clinical cases; centroid Tier 1 ≠ point GPS precision; prior-only virus must not inflate the primary forward target.
 
 ### Panel columns
 
@@ -279,26 +287,38 @@ Authoritative schema for `data/03_processed/modelling_panel.*` (column order as 
 | `spatial_tier` | `h3` (Tier 1) or `country` (Tier 2) |
 | `h3_cell` | H3 cell ID when `spatial_tier == h3`; null on Tier 2 |
 | `country_iso2` | ISO 3166-1 alpha-2; Tier 2 join key, and metadata on Tier 1 when known |
-| `year` | Calendar year of the unit window |
-| `month` | Calendar month (1–12) of the unit window |
+| `year` | Calendar year of the **VectorNet** unit window |
+| `month` | Calendar month (1–12) of the **VectorNet** unit window |
 | `vector_group` | Ecological class: `mosquito`, `tick`, `biting_midge`, or `sandfly`. Part of the join key — vectors and viruses merge only within the same group |
 | `vector_present` | Always `1` in this supervised panel (VectorNet-left join; virus-only units are excluded) |
 | `vector_detection_count` | Number of VectorNet records in the unit (`count` of `record_id`) |
 | `individual_count_sum` | Sum of parsed VectorNet `individualCount` over those records (unparseable / missing contribute 0 to the sum) |
 | `individual_count_mean` | Mean of parsed `individualCount` over records with a parseable value |
-| `virus_detected` | Binary label: `1` if `virus_detection_count > 0`, else `0`. Zero means no reported detection in the merged virus feeds for that unit-window — **not** proven absence |
-| `virus_detection_count` | Number of virus records in the unit (`count` of `record_id`); filled with `0` when no virus rows match |
-| `virus_source_n_sequence` | Count of virus rows whose `source` is an INSDC / sequence feed (`ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`); `0` when none |
-| `virus_source_n_outbreak` | Count of virus rows whose `source` is an outbreak feed (`empres_i`, `ecdc_atlas`); `0` when none |
-| `share_virus_exact_coords` | Among virus rows in the unit, fraction with `geo_precision == exact_coords`. Set on Tier 1 positives; `NA` on Tier 2 or when no virus rows |
-| `share_virus_subnational_centroid` | Among virus rows in the unit, fraction with `geo_precision == subnational_centroid`. Set on Tier 1 positives; `NA` on Tier 2 or when no virus rows |
+| `first_vector_year` | A3: calendar year of the first VectorNet detection in this `(h3_cell, vector_group)` (Tier 1); Tier 2 analog uses `(country_iso2, vector_group)` if Tier 2 rows exist |
+| `first_vector_month` | A3: calendar month of that first VectorNet detection |
+| `virus_within_5y` | `1` if any Tier‑1 virus in the same spatial key × `vector_group` has time in `(T, T+5 years]` where `T` is this row’s year-month; else `0` |
+| `virus_within_10y` | Same as above with a **10-year** forward horizon |
+| `virus_detected` | **Primary supervised label** — alias of `virus_within_5y`. Zero means no reported detection in that forward window — **not** proven absence |
+| `virus_detection_count_within_5y` | Count of Tier‑1 virus `record_id`s in the 5-year forward window; `0` when none |
+| `virus_detection_count_within_10y` | Count in the 10-year forward window; `0` when none |
+| `virus_ever_before` | `1` if any Tier‑1 virus in the same key × `vector_group` has time **strictly before** `T`; else `0` |
+| `virus_ever_after` | `1` if any Tier‑1 virus in the same key × `vector_group` has time **strictly after** `T`; else `0` |
+| `years_to_first_virus_after` | Years from `T` to the **earliest** later virus; **null** if `virus_ever_after=0` |
+| `years_since_last_virus_before` | Years from the **latest** earlier virus to `T`; **null** if `virus_ever_before=0` |
+| `virus_same_month` | Legacy QA: `1` if any Tier‑1 virus shares this exact `year`×`month` (former same-month `virus_detected` meaning); else `0` |
+| `virus_source_n_sequence` | Among viruses in the **5-year forward window**, count whose `source` is an INSDC / sequence feed (`ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`); `0` when none |
+| `virus_source_n_outbreak` | Among viruses in the **5-year forward window**, count whose `source` is an outbreak feed (`empres_i`, `ecdc_atlas`); `0` when none |
+| `share_virus_exact_coords` | Among viruses in the **5-year forward window**, fraction with `geo_precision == exact_coords`. `NA` when the window has no virus rows (or on Tier 2 if not defined) |
+| `share_virus_subnational_centroid` | Among viruses in the **5-year forward window**, fraction with `geo_precision == subnational_centroid`. `NA` when the window has no virus rows |
+
+Removed from the contract (replaced): same-month-only `virus_detection_count` as the sole virus intensity field — use `virus_detection_count_within_5y` / `_within_10y` instead.
 
 ### Outputs
 
 | Path | Role |
 |------|------|
 | `data/03_processed/modelling_panel.parquet` (or `.csv`) | Modelling handoff table |
-| Merge summary / manifest fields | `H3_RESOLUTION`, row counts by `spatial_tier`, geo-precision mix, date range, training filter rules, source raw manifests’ SHA-256 when available |
+| Merge summary / manifest fields | `H3_RESOLUTION`; `eligibility=from_first_vector`; `primary_label=virus_within_5y`; `secondary_label=virus_within_10y`; `delay_missing=null`; row counts by `spatial_tier`; label positive rates; geo-precision mix; date range / censoring note; training filter rules; source raw manifests’ SHA-256 when available |
 
 Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (load panel or rebuild via the same pipeline).
 
@@ -311,7 +331,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 
 ## Status
 
-Pipeline through modelling panel is complete (`03`–`10`; `H3_RESOLUTION=4`). Panel prep in `notebook.ipynb` is Done; further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Reference + interim clean are complete (`03`–`09`; `H3_RESOLUTION=4`). The **B2/A3 forward-label panel schema** in this document is locked; regenerate the panel by updating and re-running `notebooks/01_sources/10_merge_modelling_panel.ipynb`, then refresh panel prep in `notebook.ipynb`. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
