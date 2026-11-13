@@ -193,7 +193,12 @@ def load_pathogen_vector_group(reference_dir: Path | None = None) -> pd.DataFram
 
 
 def load_priority_vector_taxa(reference_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/external/priority_vector_taxa.csv`` (closed panel species features)."""
+    """Load ``data/external/priority_vector_taxa.csv`` (EDA / prep closed species features).
+
+    Locked modelling contract: after the unit-grain species pivot, ``FEATURE_COLS``
+    use exactly these taxa as ``vector_count_<feature_slug>`` (0 if absent). Do not
+    substitute a frequency-selected column set for the modelling handoff.
+    """
     directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
     path = directory / "priority_vector_taxa.csv"
     if not path.exists():
@@ -212,7 +217,7 @@ def load_priority_vector_taxa(reference_dir: Path | None = None) -> pd.DataFrame
 
 
 def feature_slug_from_scientific_name(scientific_name: object) -> str:
-    """Stable snake_case slug for ``vector_count_<slug>`` panel columns."""
+    """Stable snake_case slug for ``vector_count_<slug>`` modelling feature columns."""
     text = _clean_text(scientific_name).casefold()
     if not text:
         return ""

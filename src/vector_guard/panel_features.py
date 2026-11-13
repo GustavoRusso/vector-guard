@@ -1,4 +1,15 @@
-"""Panel feature helpers for EDA / modelling prep."""
+"""Panel feature helpers for EDA / modelling prep.
+
+Locked modelling species rule
+-----------------------------
+``FEATURE_COLS`` species counts are the **closed** set from
+``priority_vector_taxa.csv``, named ``vector_count_<feature_slug>``, 0-filled when
+absent. Attach them only via unit-grain pivot then merge
+(``attach_priority_species_features``).
+
+Frequency pivots over the full species-long table are allowed for exploratory
+EDA only — they are **not** the modelling / ``train.py`` handoff contract.
+"""
 
 from __future__ import annotations
 
@@ -32,7 +43,7 @@ def _merge_key_frame(df: pd.DataFrame, keys: list[str]) -> tuple[pd.DataFrame, l
 
 
 def priority_count_columns(priority_taxa: pd.DataFrame) -> list[str]:
-    """Closed modelling columns ``vector_count_<feature_slug>``."""
+    """Locked modelling columns ``vector_count_<feature_slug>`` from priority taxa."""
     slugs = priority_taxa["feature_slug"].astype(str).tolist()
     return [f"vector_count_{slug}" for slug in slugs]
 
@@ -43,12 +54,12 @@ def pivot_priority_species_at_units(
     *,
     unit_keys: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
-    """Pivot long species counts to wide priority columns at **unit** grain.
+    """Pivot long species counts to the **locked** priority wide set at unit grain.
 
     Grain of ``species_long``: one row per unit × ``scientific_name`` (no
-    ``pathogen_name``). Only taxa in ``priority_taxa`` become columns; absent
-    taxa are ``0``. If ``unit_keys`` is given, restrict and left-align to those
-    units so every filtered panel unit gets a wide row.
+    ``pathogen_name``). Column set is exactly ``priority_taxa`` →
+    ``vector_count_<feature_slug>`` (absent → ``0``). Not a frequency-selected
+    open set. If ``unit_keys`` is given, restrict and left-align to those units.
     """
     missing = [c for c in _SPECIES_LONG_REQUIRED if c not in species_long.columns]
     if missing:
@@ -121,15 +132,18 @@ def attach_priority_species_features(
     species_long: pd.DataFrame,
     priority_taxa: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Attach priority ``vector_count_*`` via unit-grain pivot, then merge.
+    """Attach locked priority ``vector_count_*`` via unit-grain pivot, then merge.
+
+    Modelling contract: columns come only from ``priority_taxa`` (closed set).
 
     Correct order (pathogen-long panel):
 
     1. Distinct unit keys from ``panel``
-    2. Restrict + pivot ``species_long`` at unit grain
+    2. Restrict + pivot ``species_long`` at unit grain (priority taxa only)
     3. Left-merge wide counts onto ``panel`` (broadcast across pathogens)
 
     Do **not** join species-long onto pathogen-long rows before pivoting.
+    Do **not** replace the priority set with ad-hoc frequency columns for handoff.
     """
     n_in = len(panel)
     out = panel.copy()
