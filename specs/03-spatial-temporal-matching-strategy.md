@@ -4,7 +4,7 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design locked (`H3_RESOLUTION=4`); B2/A3 forward-label contract locked in this spec + [`04`](04-reference-data-and-panel-pipeline.md) — merge notebook `10` rebuild pending |
+| Status | Design locked and implemented through merge (`07`–`10`); `H3_RESOLUTION=4`; B2/A3 forward-label panel |
 | Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -243,7 +243,7 @@ They are **not** a substitute for the multi-source virus dataset in [`specs/02-v
 
 ## Implemented in
 
-Spatial resolve and interim clean notebooks (`05`–`09`) are implemented with `H3_RESOLUTION=4`. The **B2/A3 forward-label panel contract** is locked here and in spec `04`; rebuild merge notebook `10` (and regenerate `modelling_panel.parquet`) to match. Build status: [`ROADMAP.md`](../ROADMAP.md).
+Join design from this spec is implemented through reference, H3 density, clean, and merge notebooks (`05`–`10`) with `H3_RESOLUTION=4` and the B2/A3 forward-label panel. Detailed artifacts, resolve rules, and the modelling-panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Build status: [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 

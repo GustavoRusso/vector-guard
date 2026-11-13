@@ -4,6 +4,10 @@
     "max": "2025-04",
     "min": "1957-09"
   },
+  "delay_missing": "null",
+  "eligibility": "from_first_vector",
+  "horizon_years_primary": 5,
+  "horizon_years_secondary": 10,
   "inputs": {
     "vectors_normalized": "data/02_interim/vectors_normalized.parquet",
     "viruses_normalized": "data/02_interim/viruses_normalized.parquet"
@@ -13,14 +17,16 @@
     "panel": "data/03_processed/modelling_panel.parquet"
   },
   "panel_rows": 12995,
+  "primary_label": "virus_within_5y",
   "rows_by_spatial_tier": {
     "h3": 12995
   },
+  "secondary_label": "virus_within_10y",
   "source_manifest_sha256": {
     "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
     "virus_manifest.json": "315c2263058bdeece996cde5930da410270279408e0899bdac6f5bb12c9786a7"
   },
-  "temporal_grain": "year x month",
+  "temporal_grain": "year x month (vector observation); virus labels relative to row timestamp",
   "tier1_key": [
     "h3_cell",
     "year",
@@ -33,18 +39,24 @@
     "month",
     "vector_group"
   ],
-  "training_filter": "Supervised panel includes only units with VectorNet coverage; virus-only units are excluded. Virus zeros mean no reported detection in the merged feeds for that unit-window.",
+  "training_filter": "Supervised panel includes only observed VectorNet months (B2); virus-only units are excluded; no synthetic empty months after first vector (A3 clock only). Primary label virus_detected=virus_within_5y is forward from the row time in the same spatial key x vector_group. Zeros / null delays mean no reported detection in the merged feeds (right-censored by extract end), not proven absence.",
   "vector_groups": [
     "biting_midge",
     "mosquito",
     "sandfly",
     "tick"
   ],
+  "virus_ever_after_units": 4754,
+  "virus_ever_before_units": 1289,
   "virus_geo_precision_mix": {
-    "mean_share_centroid_on_positive_tier1": 0.2296296296296296,
-    "mean_share_exact_coords_on_positive_tier1": 0.7703703703703704,
-    "tier1_units_with_virus": 45
+    "mean_share_centroid_on_positive_tier1": 0.17364349815248203,
+    "mean_share_exact_coords_on_positive_tier1": 0.826356501847518,
+    "tier1_units_virus_same_month": 45,
+    "tier1_units_virus_within_10y": 2995,
+    "tier1_units_virus_within_5y": 1538
   },
-  "virus_positive_rate": 0.0034628703347441324,
-  "virus_positive_units": 45
+  "virus_positive_rate": 0.1183532127741439,
+  "virus_positive_units": 1538,
+  "virus_same_month_units": 45,
+  "virus_within_10y_units": 2995
 }

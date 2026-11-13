@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Interim clean Done (`03`–`09`); `H3_RESOLUTION=4`; **B2/A3 panel label contract locked** — merge notebook `10` + `modelling_panel.parquet` rebuild pending |
+| Status | Pipeline through modelling panel Done (`03`–`10`); `H3_RESOLUTION=4`; B2/A3 forward-label panel regenerated |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -331,7 +331,7 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 
 ## Status
 
-Reference + interim clean are complete (`03`–`09`; `H3_RESOLUTION=4`). The **B2/A3 forward-label panel schema** in this document is locked; regenerate the panel by updating and re-running `notebooks/01_sources/10_merge_modelling_panel.ipynb`, then refresh panel prep in `notebook.ipynb`. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through modelling panel is complete (`03`–`10`; `H3_RESOLUTION=4`) under the **B2/A3 forward-label** contract. Refresh panel prep in `notebook.ipynb` if it still assumes same-month-only positives. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
