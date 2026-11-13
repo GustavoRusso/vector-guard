@@ -80,6 +80,8 @@ The modelling handoff is a single panel:
 
 **Grain:** observed VectorNet units — Tier 1 `(h3_cell, year, month, vector_group)`; Tier 2 `(country_iso2, year, month, vector_group)`. **Primary target:** `virus_detected` (= `virus_within_5y`, forward ≤5 years in the same key×`vector_group`). Also on the panel: `virus_within_10y`, `virus_ever_before` / `virus_ever_after`, nullable delay columns, `virus_same_month`. Supervised rows require VectorNet coverage (B2/A3 contract in specs `03`/`04`).
 
+**Pathogen ↔ vector group:** which viruses join to which `vector_group` is documented in [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy) (decision docs live under `specs/`). Authoritative code map: [`src/vector_guard/data.py`](src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`.
+
 Load it in a notebook (same pattern as root [`notebook.ipynb`](notebook.ipynb)):
 
 ```python
