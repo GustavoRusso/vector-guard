@@ -18,7 +18,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit (observed VectorNet month); virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
 | Panel row semantics | **B2** — one row per observed VectorNet `(spatial key, year, month, vector_group)`; virus labels relative to that row’s timestamp |
 | Zone eligibility | **A3** — per `(h3_cell, vector_group)`, zone clock from **first** VectorNet detection onward (`first_vector_year` / `first_vector_month`); no synthetic empty months |
-| Primary label | `virus_detected` **=** `virus_within_5y` (forward ≤5 years, same cell×`vector_group`) |
+| Primary label | `virus_within_5y` (forward ≤5 years, same cell×`vector_group`) |
 | Secondary label | `virus_within_10y` (forward ≤10 years); ever-before / ever-after flags + nullable delay columns for EDA |
 | Temporal grain | Panel rows: **`year` × `month`** (vector observation). Virus labels are **not** same-month-only (see spec `03`) |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
@@ -273,7 +273,7 @@ Prefer Tier 1 when the vector side supports it. Country-only virus rows (`geo_pr
 
 - **Include** units with **VectorNet coverage** (observed VectorNet month for that key). Do **not** synthesize months without traps after first detection.
 - Per Tier‑1 `(h3_cell, vector_group)`, attach `first_vector_year` / `first_vector_month` (A3 zone clock).
-- **Primary target:** `virus_detected` = `virus_within_5y` (any Tier‑1 virus after the row time and within 5 years). Secondary: `virus_within_10y`.
+- **Primary target:** `virus_within_5y` (any Tier‑1 virus after the row time and within 5 years). Secondary: `virus_within_10y`.
 - Also attach `virus_ever_before` / `virus_ever_after`, nullable delay columns, same-month QA, and optional source-mix / geo-share summaries among viruses used for the relevant windows.
 - Virus-only units (no VectorNet in that key) may be exported for descriptive EDA but are **excluded from the supervised training panel**.
 - Caveats from spec `03` still apply: virus zero / null delay ≠ true absence (right-censored by extract end); no VectorNet traps ≠ true vector absence; sequences ≠ clinical cases; centroid Tier 1 ≠ point GPS precision; prior-only virus must not inflate the primary forward target.
@@ -296,22 +296,21 @@ Authoritative schema for `data/03_processed/modelling_panel.*` (column order as 
 | `individual_count_mean` | Mean of parsed `individualCount` over records with a parseable value |
 | `first_vector_year` | A3: calendar year of the first VectorNet detection in this `(h3_cell, vector_group)` (Tier 1); Tier 2 analog uses `(country_iso2, vector_group)` if Tier 2 rows exist |
 | `first_vector_month` | A3: calendar month of that first VectorNet detection |
-| `virus_within_5y` | `1` if any Tier‑1 virus in the same spatial key × `vector_group` has time in `(T, T+5 years]` where `T` is this row’s year-month; else `0` |
+| `virus_within_5y` | **Primary supervised label:** `1` if any Tier‑1 virus in the same spatial key × `vector_group` has time in `(T, T+5 years]` where `T` is this row’s year-month; else `0`. Zero means no reported detection in that forward window — **not** proven absence |
 | `virus_within_10y` | Same as above with a **10-year** forward horizon |
-| `virus_detected` | **Primary supervised label** — alias of `virus_within_5y`. Zero means no reported detection in that forward window — **not** proven absence |
 | `virus_detection_count_within_5y` | Count of Tier‑1 virus `record_id`s in the 5-year forward window; `0` when none |
 | `virus_detection_count_within_10y` | Count in the 10-year forward window; `0` when none |
 | `virus_ever_before` | `1` if any Tier‑1 virus in the same key × `vector_group` has time **strictly before** `T`; else `0` |
 | `virus_ever_after` | `1` if any Tier‑1 virus in the same key × `vector_group` has time **strictly after** `T`; else `0` |
 | `years_to_first_virus_after` | Years from `T` to the **earliest** later virus; **null** if `virus_ever_after=0` |
 | `years_since_last_virus_before` | Years from the **latest** earlier virus to `T`; **null** if `virus_ever_before=0` |
-| `virus_same_month` | Legacy QA: `1` if any Tier‑1 virus shares this exact `year`×`month` (former same-month `virus_detected` meaning); else `0` |
+| `virus_same_month` | Legacy QA: `1` if any Tier‑1 virus shares this exact `year`×`month`; else `0` |
 | `virus_source_n_sequence` | Among viruses in the **5-year forward window**, count whose `source` is an INSDC / sequence feed (`ena_sequence`, `ena_read_run`, `bvbrc`, `pathoplexus`); `0` when none |
 | `virus_source_n_outbreak` | Among viruses in the **5-year forward window**, count whose `source` is an outbreak feed (`empres_i`, `ecdc_atlas`); `0` when none |
 | `share_virus_exact_coords` | Among viruses in the **5-year forward window**, fraction with `geo_precision == exact_coords`. `NA` when the window has no virus rows (or on Tier 2 if not defined) |
 | `share_virus_subnational_centroid` | Among viruses in the **5-year forward window**, fraction with `geo_precision == subnational_centroid`. `NA` when the window has no virus rows |
 
-Removed from the contract (replaced): same-month-only `virus_detection_count` as the sole virus intensity field — use `virus_detection_count_within_5y` / `_within_10y` instead.
+Removed from the contract (replaced): same-month-only `virus_detection_count` as the sole virus intensity field — use `virus_detection_count_within_5y` / `_within_10y` instead. The former alias column `virus_detected` was dropped; use `virus_within_5y` as the primary supervised label.
 
 ### Outputs
 

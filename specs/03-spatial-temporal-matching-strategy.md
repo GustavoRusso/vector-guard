@@ -191,11 +191,11 @@ Per `(h3_cell, vector_group)` (Tier 1), compute the first VectorNet detection ti
 
 | Label family | Rule |
 |--------------|------|
-| Primary supervised target | `virus_within_5y` — any Tier‑1 virus in the same cell×`vector_group` with time in `(T, T+5 years]`; panel column `virus_detected` **aliases** this |
+| Primary supervised target | `virus_within_5y` — any Tier‑1 virus in the same cell×`vector_group` with time in `(T, T+5 years]` |
 | Secondary / sensitivity | `virus_within_10y` — same, horizon **10 years** |
 | Ever flags (always 0/1) | `virus_ever_before` — any virus with time **&lt; T**; `virus_ever_after` — any virus with time **&gt; T** |
 | Delay (nullable) | `years_to_first_virus_after` — years to earliest virus after `T` (**null** if none); `years_since_last_virus_before` — years since latest virus before `T` (**null** if none) |
-| QA / legacy | `virus_same_month` — strict same `year`×`month` co-occurrence (former same-month `virus_detected` meaning) |
+| QA / legacy | `virus_same_month` — strict same `year`×`month` co-occurrence |
 
 Country-only virus rows (`geo_precision=country_only`) do **not** invent H3 and do **not** contribute to Tier‑1 forward / ever / delay labels. Column-level contract: [`specs/04`](04-reference-data-and-panel-pipeline.md#panel-columns).
 

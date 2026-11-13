@@ -39,7 +39,7 @@
     "month",
     "vector_group"
   ],
-  "training_filter": "Supervised panel includes only observed VectorNet months (B2); virus-only units are excluded; no synthetic empty months after first vector (A3 clock only). Primary label virus_detected=virus_within_5y is forward from the row time in the same spatial key x vector_group. Zeros / null delays mean no reported detection in the merged feeds (right-censored by extract end), not proven absence.",
+  "training_filter": "Supervised panel includes only observed VectorNet months (B2); virus-only units are excluded; no synthetic empty months after first vector (A3 clock only). Primary label virus_within_5y is forward from the row time in the same spatial key x vector_group. Zeros / null delays mean no reported detection in the merged feeds (right-censored by extract end), not proven absence.",
   "vector_groups": [
     "biting_midge",
     "mosquito",
