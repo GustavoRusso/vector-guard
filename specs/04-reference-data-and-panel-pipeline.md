@@ -18,8 +18,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Training filter | A unit enters the **training** panel only if **VectorNet has coverage** in that unit; virus-only units may appear in descriptive EDA, not as supervised rows that imply vector context |
 | Temporal grain | **`year` × `month`** |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
-| Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in spec `02`; upgrade **Done** |
-| This iteration | Virus extract + reference + H3 + clean + merge Done (`03`–`10`); modelling panel at `data/03_processed/` |
+| Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in [`specs/02`](02-virus-dataset-selection.md) |
+| Pipeline scope | Virus extract + reference + H3 + clean + merge (`03`–`10`); modelling panel at `data/03_processed/` |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
 
@@ -27,18 +27,18 @@ Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-match
 
 ```text
 data/
-  raw/           # extracts only (gitignored); notebooks 01, 03
-  reference/     # committed master/lookup tables; notebooks 05, 06
-  interim/       # normalized vector / virus row tables; notebooks 08, 09
-  processed/     # modelling panel + merge manifest; notebook 10
+  01_raw/        # extracts only (gitignored); notebooks 01, 03
+  external/      # committed master/lookup tables; notebooks 05, 06
+  02_interim/    # normalized vector / virus row tables; notebooks 08, 09
+  03_processed/  # modelling panel + merge manifest; notebook 10
 ```
 
 | Layer | Contents | Commit? |
 |-------|----------|---------|
-| `raw/` | VectorNet DwC-A; multi-source `virus_detections.tsv` (+ `manifest.json`) | No (re-fetch documented in README) |
-| `reference/` | Countries, subnational centroids, vector taxon → group maps (small) | Yes |
-| `interim/` | Per-side normalized detections | Usually no (rebuildable) |
-| `processed/` | Aggregated modelling panel | Prefer commit if small; else document rebuild |
+| `01_raw/` | VectorNet DwC-A; multi-source `virus_detections.tsv` (+ `manifest.json`) | No (re-fetch documented in README) |
+| `external/` | Countries, subnational centroids, vector taxon → group maps (small) | Yes |
+| `02_interim/` | Per-side normalized detections | Usually no (rebuildable) |
+| `03_processed/` | Aggregated modelling panel | Prefer commit if small; else document rebuild |
 
 ## What counts as reference data
 
@@ -46,20 +46,20 @@ data/
 
 **ISO-2 countries, subnational / NUTS3 centroid lookups, name aliases, and vector_group maps are reference data** and live under `data/external/`.
 
-| Artifact | Nature | Path (when implemented) | How generated | Used to resolve |
-|----------|--------|-------------------------|---------------|-----------------|
+| Artifact | Nature | Path | How generated | Used to resolve |
+|----------|--------|------|---------------|-----------------|
 | Countries + aliases + scope flags | Static reference CSV | `data/external/countries.csv` | Curated from ISO 3166-1 + virus / VectorNet name aliases observed in EDA | Virus `country` → `country_iso2`; validate VectorNet ISO-2; QA / scope flags |
 | Subnational / NUTS3 centroids | Static reference CSV | `data/external/subnational_locations.csv` (~7.8k rows incl. virus spelling aliases) | Distinct virus region strings + European NUTS3/NE admin1 centroids + original spelling aliases | `(country_iso2, subnational_region \| nuts_id)` → centroid `(lat, lon)` → Tier 1 H3 |
 | Pathogen ↔ `vector_group` | Project config (code) | [`src/vector_guard/data.py`](../src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`; optional mirror `data/external/pathogen_vector_group.csv` | From [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Tag virus rows; ecological join filter |
 | Vector taxon → `vector_group` | Static reference CSV | `data/external/vector_taxon_groups.csv` | Curated from VectorNet `scientificName` inventory (EDA) | Tag VectorNet rows before aggregate / join |
-| H3 resolution choice | Decision + code constant | Recorded in this spec (when chosen) and a future `H3_RESOLUTION` constant | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
+| H3 resolution choice | Decision + code constant | This spec + `vector_guard.resolve.H3_RESOLUTION` (`4`) | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
 | Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | Primary EDA / `notebook.ipynb` / `train.py` |
 
 **Out of reference scope (v1):** full NUTS polygon geometry dumps; on-the-fly geocoders for unmatched free-text; committing raw extracts. NUTS **centroids** (and equivalent admin centroids) **are** in scope via `subnational_locations.csv`.
 
 ### `countries.csv` — generation rules
 
-Planned columns (minimum):
+Columns:
 
 | Column | Meaning |
 |--------|---------|
@@ -78,7 +78,7 @@ Generation process (notebook `notebooks/01_sources/05_reference_countries.ipynb`
 
 ### `subnational_locations.csv` — generation rules
 
-Planned columns (minimum):
+Columns:
 
 | Column | Meaning |
 |--------|---------|
@@ -99,7 +99,7 @@ Generation process (same notebook family as countries — `notebooks/01_sources/
 
 ### `vector_taxon_groups.csv` — generation rules
 
-Planned columns (minimum):
+Columns:
 
 | Column | Meaning |
 |--------|---------|
@@ -133,37 +133,13 @@ Notebook `07_h3_resolution_density.ipynb` chooses one integer resolution and rec
 | Median detections per occupied cell | Over-fragmentation vs lumping |
 | Mix of `geo_precision` among Tier 1 virus rows | Transparency on how much Tier 1 relies on centroids |
 
-**Selection rule:** pick the finest resolution that still yields a usable Tier 1 co-occurrence rate and stable cell occupancy for modelling under the **exact + centroid** mode (the locked production path); also document exact-only metrics as a sensitivity check. Prefer interpretability over micro-cells with almost no overlaps. Record the chosen `H3_RESOLUTION` in this spec (update when decided), in ROADMAP notes, and in the merge panel manifest.
+**Selection rule:** pick the finest resolution that still yields a usable Tier 1 co-occurrence rate and stable cell occupancy for modelling under the **exact + centroid** mode (the locked production path); also document exact-only metrics as a sensitivity check. Prefer interpretability over micro-cells with almost no overlaps. Record the chosen `H3_RESOLUTION` in this spec, in `vector_guard.resolve.H3_RESOLUTION`, and in the merge panel manifest.
 
 **Decision (2026-11):** `H3_RESOLUTION = 4`. Under `exact_plus_centroid`, res 4 retains ~3× the hex×month×`vector_group` co-occurring virus rows of res 5 (~128 vs ~45) with stable median occupancy (~3–4 virus detections per occupied cell). Res 5 over-fragments relative to VectorNet coverage. Res 3 was probed as a coarser neighbor (~335 co-occurring rows) but is outside the primary candidate band; production stays at 4. Absolute co-occurrence remains sparse (VectorNet Europe/Med vs worldwide virus extract); the VectorNet-coverage training filter still applies at merge. Details: [`notebooks/01_sources/07_h3_resolution_density.ipynb`](../notebooks/01_sources/07_h3_resolution_density.ipynb).
 
-**Path B lookup parity (2026-11):** Runtime `lookup_subnational_centroid` in [`src/vector_guard/resolve.py`](../src/vector_guard/resolve.py) now uses the same trailing-first `region_candidate_keys` / `strip_admin_suffix` logic as notebook `05` (comma / ` - ` / `;` segments). Notebook `05` also persists original virus spelling aliases into `subnational_locations.csv` and extends curated `REGION_ALIASES` for high-frequency VectorNet-scope misses. Rebuild of `09`→`10` after this change:
+**Path B lookup parity (locked):** Runtime `lookup_subnational_centroid` in [`src/vector_guard/resolve.py`](../src/vector_guard/resolve.py) uses the same trailing-first `region_candidate_keys` / `strip_admin_suffix` logic as notebook `05` (comma / ` - ` / `;` segments). Notebook `05` persists original virus spelling aliases into `subnational_locations.csv` and curated `REGION_ALIASES` for high-frequency VectorNet-scope misses. Unmatched keys go to rebuildable `data/02_interim/virus_unmatched_regions.csv` for follow-up curation—never invent centroids in `09_clean_viruses`.
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Interim `geo_precision` mix (n=168,277) | exact 21.2% / centroid 16.8% / country_only 62.0% | exact 21.2% / centroid **24.8%** / country_only **54.0%** |
-| Interim Tier 1 (`h3_cell` non-null) | 38.0% | **46.0%** |
-| Centroid share among Tier 1 virus rows | ~44% | **~54%** |
-| `subnational_locations.csv` rows | 2,472 | **7,788** (canonical + virus spelling aliases) |
-| Unmatched region keys (rebuildable) | display-only in `09` | [`data/02_interim/virus_unmatched_regions.csv`](../data/02_interim/virus_unmatched_regions.csv) — 1,875 keys (628 VectorNet-scope) |
-| Modelling panel rows / `virus_detected=1` | 12,995 / **35** | 12,995 / **35** (unchanged) |
-
-At the Path B rebuild, panel positives stayed GPS-dominated (~93% exact share on positive units) because year-month + VectorNet co-occurrence still gated supervised rows; richer Path B mainly grew interim Tier 1 coverage. Month parsing (below) later raised centroid contribution on positives without changing absolute positive-unit count much.
-
-**Virus date-format completeness (2026-11):** `parse_collection_sort_key` / `parse_year_month_virus` in [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) and [`src/vector_guard/resolve.py`](../src/vector_guard/resolve.py) accept ISO `YYYY-MM(-DD)`, ENA `dd-Mon-yyyy` / `Mon-yyyy`, and ISO week `YYYY-Www` (Monday of that week → calendar month). Bare years still lack month and stay panel-excluded (grain remains `year × month`; season fallback deferred). Rebuild of `09`→`10`:
-
-| Metric | Before | After |
-|--------|--------|-------|
-| Interim `year_month_share` (n=168,277) | 33.6% | **65.5%** (110,239 ready) |
-| Month share — `exact_coords` | 86.1% | **95.3%** |
-| Month share — `subnational_centroid` | 28.7% | **72.4%** |
-| Month share — `country_only` | 15.2% | **50.6%** |
-| `ena_sequence` month share | ~12% | **~57%** |
-| `ecdc_atlas` month share | ~77% | **100%** (ISO-week → month) |
-| Modelling panel rows / `virus_detected=1` | 12,995 / 45 | 12,995 / **45** |
-| Mean exact / centroid share on positive Tier 1 | ~93% / ~7% | **77.0% / 23.0%** |
-
-Month completeness was the larger panel bottleneck vs more centroids: recovering ENA month tokens roughly doubled virus-ready rows. Absolute positive units stay sparse under the VectorNet-coverage filter; centroid share among positives rose as more Path B rows cleared the year-month gate.
+**Virus date formats (locked):** `parse_collection_sort_key` / `parse_year_month_virus` in [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) and [`src/vector_guard/resolve.py`](../src/vector_guard/resolve.py) accept ISO `YYYY-MM(-DD)`, ENA `dd-Mon-yyyy` / `Mon-yyyy`, and ISO week `YYYY-Www` (Monday of that week → calendar month). Bare years lack month and stay panel-excluded (grain remains `year × month`; season fallback deferred).
 
 **Locate a cell on a map:** paste any panel / interim `h3_cell` ID into the [H3 Viewer](https://clupasq.github.io/h3-viewer/) to inspect its hexagon on a basemap.
 
@@ -200,43 +176,27 @@ flowchart TD
   merge --> courseNb
 ```
 
-| Step | Notebook (planned) | Writes | Reads |
-|------|--------------------|--------|-------|
-| Extract vectors | `notebooks/01_sources/01_extract_vectors.ipynb` (exists) | `data/01_raw/vector/` | VectorNet DwC-A URL |
-| Extract viruses | `notebooks/01_sources/03_extract_viruses.ipynb` (**multi-source Done**) | `data/01_raw/virus/virus_detections.tsv` + `manifest.json` | ENA Portal (`sequence`, `read_run`, `sample`); BV-BRC; Pathoplexus; FAO EMPRES-i; ECDC NUTS3 / seasonal tables — see [Virus extract contract](#virus-extract-contract-notebook-03) |
-| Source inspect vectors | `notebooks/01_sources/02_inspect_vectors.ipynb` (exists) | Insights / cleaning rules only | raw vectors |
-| Source inspect viruses | `notebooks/01_sources/04_inspect_viruses.ipynb` (multi-source inspect Done) | Insights / cleaning rules only | raw viruses |
-| Country + subnational reference | `notebooks/01_sources/05_reference_countries.ipynb` (multi-source aliases / `subnational_region` / `nuts_id` Done; virus spelling aliases + VectorNet-scope `REGION_ALIASES` Done) | `data/external/countries.csv`, `data/external/subnational_locations.csv` | ISO list + alias / region / NUTS needs from multi-source extract; unmatched list from `09` |
-| Vector group map | `notebooks/01_sources/06_reference_vector_groups.ipynb` (exists) | `data/external/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
-| H3 density check | `07_h3_resolution_density.ipynb` (**Done**, `H3_RESOLUTION=4`) | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
-| Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` (**Done**) | `data/02_interim/vectors_normalized.parquet` | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
-| Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` (**Done**) | `data/02_interim/viruses_normalized.parquet`; `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
-| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` (**Done**) | `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json` | both interim tables |
-| Primary EDA + models | `notebook.ipynb` (later) | model artifacts | modelling panel |
+| Step | Notebook | Writes | Reads |
+|------|----------|--------|-------|
+| Extract vectors | `notebooks/01_sources/01_extract_vectors.ipynb` | `data/01_raw/vector/` | VectorNet DwC-A URL |
+| Extract viruses | `notebooks/01_sources/03_extract_viruses.ipynb` | `data/01_raw/virus/virus_detections.tsv` + `manifest.json` | Multi-source feeds — contract in [`specs/02`](02-virus-dataset-selection.md) |
+| Source inspect vectors | `notebooks/01_sources/02_inspect_vectors.ipynb` | Insights / cleaning rules only | raw vectors |
+| Source inspect viruses | `notebooks/01_sources/04_inspect_viruses.ipynb` | Insights / cleaning rules only | raw viruses |
+| Country + subnational reference | `notebooks/01_sources/05_reference_countries.ipynb` | `data/external/countries.csv`, `data/external/subnational_locations.csv` | ISO list + alias / region / NUTS needs from multi-source extract; unmatched list from `09` |
+| Vector group map | `notebooks/01_sources/06_reference_vector_groups.ipynb` | `data/external/vector_taxon_groups.csv` | VectorNet `scientificName` inventory |
+| H3 density check | `07_h3_resolution_density.ipynb` | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
+| Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` | `data/02_interim/vectors_normalized.parquet` | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
+| Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet`; `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
+| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json` | both interim tables |
+| Primary EDA + models | `notebook.ipynb` | Panel prep Done; model training next (see ROADMAP) | modelling panel |
 
 Source inspect notebooks (`02`, `04` under `notebooks/01_sources/`) diagnose quality and relevance; they do **not** own the final modelling table and are **not** the project EDA deliverable. Cleaning notebooks apply documented rules; the merge notebook owns the panel contract.
 
-### Virus extract contract (notebook `03`)
-
-Aligned with [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md). **Implemented:**
-
-1. `VIRUS_VECTOR_TAXON_MAP` covers **26** live-verified taxa (ICTV `tax_ids` + `legacy_tax_ids`).
-2. Fetch and normalize feeds into one table:
-   - ENA `result=sequence`
-   - ENA `result=read_run` + `result=sample` (coordinate / date backfill via `sample_accession`)
-   - BV-BRC Genome API (`https://www.bv-brc.org/api/genome/`)
-   - Pathoplexus LAPIS (`https://lapis.pathoplexus.org/{slug}/sample/details?dataFormat=tsv`)
-   - FAO EMPRES-i BigQuery CSV (`https://api.data.apps.fao.org/api/v2/bigquery`)
-   - ECDC WNV weekly/monthly NUTS3 CSVs (`https://wnv-weekly.ecdc.europa.eu/`, `https://wnv-monthly.ecdc.europa.eu/`)
-3. Write unified `data/01_raw/virus/virus_detections.tsv` using the canonical 19 columns in spec `02` (`VIRUS_RAW_COLUMNS`).
-4. Apply INSDC vs outbreak dedupe rules from spec `02` (`vector_guard.virus_extract`).
-5. Write `manifest.json` with fetch time, citations, SHA-256, **per-source** counts, per-pathogen counts, and `coord_source_counts`.
-
-`load_virus_detections()` loads the unified TSV as a string-typed DataFrame.
+Virus raw extract schema, feeds, and taxonomy: [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) (notebook `03` implements that contract).
 
 ## Resolve rules (before merge)
 
-Apply these when building interim normalized tables.
+Apply these when building interim normalized tables. **Join principles** (Path A / B, Tier 1 vs 2, guardrails, temporal grain, ecological link) are defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This section is the implementer contract only.
 
 ### Country → `country_iso2`
 
@@ -248,7 +208,7 @@ Apply these when building interim normalized tables.
 
 ### Coordinates → `(lat, lon)` → `h3_cell` (priority locked)
 
-Resolve virus (and, if needed, vector) coordinates in this order before assigning H3:
+Implements Path A → Path B → Tier 2 from spec `03`. Resolve virus (and, if needed, vector) coordinates in this order before assigning H3:
 
 | Priority | Rule | Resulting `geo_precision` |
 |----------|------|---------------------------|
@@ -261,12 +221,13 @@ Then:
 
 | Rule | Detail |
 |------|--------|
-| Valid resolved lat/lon | Assign `h3_cell` at the chosen `H3_RESOLUTION` → eligible for **Tier 1**. |
-| Missing / invalid coords after the ladder | Leave `h3_cell` null → **Tier 2 only** (`country_iso2`). |
-| Guardrail | Do **not** call external geocoders inside `09_clean_viruses` for unmatched strings; add a curated row to `subnational_locations.csv` instead. Persist unmatched keys to `data/02_interim/virus_unmatched_regions.csv` for `05` follow-up. |
-| Prefer GPS | If exact GPS and a centroid match both exist, keep exact GPS and `geo_precision=exact_coords`. |
+| Valid resolved lat/lon | Assign `h3_cell` at `H3_RESOLUTION` → **Tier 1** |
+| Missing / invalid coords after the ladder | Leave `h3_cell` null → **Tier 2** (`country_iso2`) |
+| Unmatched region strings | Persist to `data/02_interim/virus_unmatched_regions.csv` for notebook `05` curation; do not geocode inside `09_clean_viruses` (guardrails in spec `03`) |
 
 ### Time → `year`, `month`
+
+Temporal grain principle (`year` × `month` locked): [`specs/03`](03-spatial-temporal-matching-strategy.md#temporal-alignment).
 
 | Rule | Detail |
 |------|--------|
@@ -278,6 +239,8 @@ Then:
 | Virus excluded | Year-only (`YYYY`), empty / unparseable, and other strings without a recoverable calendar month — drop from the panel (may remain in descriptive EDA). Do **not** invent a month for bare years. |
 
 ### Ecology → `vector_group`
+
+Ecological join principle (same `vector_group` only): [`specs/03`](03-spatial-temporal-matching-strategy.md#ecological-taxonomic-link).
 
 | Side | Rule |
 |------|------|
@@ -291,14 +254,14 @@ Then:
 
 ### Unit definition
 
-Panel rows are **spatial–temporal units**, not raw detection rows.
+Panel rows are **spatial–temporal units**, not raw detection rows. Path A / B and tier principles: [`specs/03`](03-spatial-temporal-matching-strategy.md).
 
 | Tier | Key | When |
 |------|-----|------|
-| Tier 1 | `(h3_cell, year, month, vector_group)` | Unit has usable H3 on the vector side (Path A GPS or Path B centroid); virus features/labels attached when virus rows share that cell-window |
+| Tier 1 | `(h3_cell, year, month, vector_group)` | Vector side has usable H3; virus features/labels attach when virus rows share that cell-window |
 | Tier 2 | `(country_iso2, year, month, vector_group)` | Fallback when H3 cannot be used for that unit |
 
-Prefer Tier 1 when the vector side supports it; attach virus aggregates at the same key. Country-only virus rows (no GPS and no centroid match) contribute at **Tier 2** only—do not invent H3 for them.
+Prefer Tier 1 when the vector side supports it. Country-only virus rows contribute at **Tier 2** only.
 
 ### Training filter
 
@@ -341,21 +304,14 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 
 ## Non-goals (remaining pipeline)
 
-- Choosing the numeric H3 resolution before notebook `07`
+- Changing `H3_RESOLUTION` without re-running notebook `07` and rebuilding interim + panel
 - Shipping full NUTS polygon dumps or calling live geocoders for unmatched free-text
 - Committing `data/01_raw/` extracts
 - Defining the final ML feature set beyond the panel contract above
 
-## Implementation checklist
+## Status
 
-1. Upgrade `notebooks/01_sources/03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` to the multi-source contract (spec `02`); refresh `04_inspect_viruses` for per-source / geo coverage. **Done.**
-2. Add `data/external/` via notebook `05`: commit `countries.csv` and `subnational_locations.csv` (multi-source aliases + `subnational_region` / `nuts_id`). **Done (files written; commit when ready).**
-3. Add `vector_taxon_groups.csv` via notebook `06`. **Done (224 taxa mapped; commit when ready).**
-4. Run `07_h3_resolution_density.ipynb` (exact-only vs exact+centroid); update this spec with the chosen `H3_RESOLUTION`. **Done — `H3_RESOLUTION=4`.**
-5. Implement `08_clean_vectors` / `09_clean_viruses` writers to `data/02_interim/` using the coordinate priority ladder and `geo_precision`. **Done (`08`, `09`; unmatched regions CSV + Path B lookup parity + ENA/ISO-week date parsing Done).**
-6. Implement `10_merge_modelling_panel` → `data/03_processed/modelling_panel.*` + manifest summary. **Done** (rebuilt after virus date-format completeness; panel rows 12,995 / `virus_detected=1` units 45; interim `year_month_share` 65.5%).
-7. Point `notebook.ipynb` / `train.py` at the panel. **Done for `notebook.ipynb`** (panel load + prep handoff); `train.py` still later.
-8. Mark corresponding ROADMAP rows Done. **Done for reference / H3 / clean / merge.**
+Pipeline through modelling panel is complete (`03`–`10`; `H3_RESOLUTION=4`). Panel prep in `notebook.ipynb` is Done; further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
@@ -365,4 +321,4 @@ Consumers: `notebook.ipynb` (EDA on the panel + model selection), `train.py` (lo
 | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | VectorNet source |
 | [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Multi-source virus feeds, unified schema, pathogen ↔ vector_group |
 | [`README.md`](../README.md) | Data ladder and intended approach |
-| [`ROADMAP.md`](../ROADMAP.md) | Build status for reference / clean / merge steps |
+| [`ROADMAP.md`](../ROADMAP.md) | Build status (data foundation Done; EDA / models next) |

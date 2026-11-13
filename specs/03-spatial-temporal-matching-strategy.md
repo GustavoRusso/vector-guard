@@ -15,7 +15,7 @@ Vector Guard estimates geographic **risk / suitability** by relating vector pres
 
 The primary high-resolution spatial unit is **Uber H3** (hexagonal hierarchical spatial index), chosen so the same join key works **worldwide**. NUTS regions are **not** the canonical join unit (they are Europe-only); they **are** a valid input to **resolve lat/lon centroids** that then map into H3 Tier 1, and may also be kept as optional Europe enrichment for reporting or ECDC comparison.
 
-Implementation (code, notebooks, feature tables) is deferred to future iterations. This document is the decision record for *how* the join should work when that work starts. Artifact ownership and resolve notebooks live in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
+This document is the decision record for *how* the join works (tiers, Path A/B, temporal grain, ecological link). Artifact ownership, resolve notebooks, and the modelling-panel contract live in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
 
 ## Inputs
 
@@ -89,6 +89,8 @@ H3 assignment always uses a concrete `(lat, lon)` at the chosen `H3_RESOLUTION`.
 
 Both paths produce the same Tier 1 key: `h3_cell`. Country-only rows (no GPS and no resolvable subnational / NUTS key) stay at **Tier 2** with `geo_precision=country_only`.
 
+Implementer priority table, ISO-2 aliases, `region_candidate_keys`, and unmatched-region artifacts: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) (Resolve rules).
+
 ### Why centroid promotion is allowed at H3 res 4–5
 
 Indicative H3 resolutions **4–5** have edge scales on the order of **~50–150 km**, comparable to **NUTS3 / province / county** administrative units—not street addresses. Mapping a trusted admin-unit centroid into an H3 cell at that scale does **not** invent micro-precision; it places the detection in the same coarse hex that a mid-province GPS point would occupy.
@@ -110,46 +112,25 @@ This decision is required because virus sequence metadata are often country-only
 | **VectorNet** | Usually has `decimalLatitude` / `decimalLongitude`; `higherGeographyID` often NUTS/GAUL | Strong direct H3 coverage inside Europe / Mediterranean; NUTS IDs useful for enrichment and optional centroid QA |
 | **Virus multi-source extract** | Mix of exact GPS (ENA location / BioSample / BV-BRC / EMPRES-i), `Country: region` / Pathoplexus `division`, ECDC `nuts_id`, and country-only | Tier 1 via path A or B; Tier 2 only when neither applies |
 
-### VectorNet side
+### Per-side geo fields (summary)
 
-Normalize each occurrence to:
+| Side | Typical inputs into Path A / B |
+|------|--------------------------------|
+| **VectorNet** | `decimalLatitude` / `decimalLongitude` → Path A; else resolvable `higherGeographyID` / NUTS → Path B; else country Tier 2. `nuts_id` may stay as Europe enrichment, not the worldwide join key. |
+| **Virus** | Exact / backfilled GPS (`coord_source` in `{exact_gps, sample_backfill}`) → Path A; else `(country_iso2, subnational_region \| nuts_id)` via `subnational_locations.csv` → Path B; else country Tier 2. |
 
-- `country_iso2` from published `countryCode` when present; else derive from the first two characters of `higherGeographyID` (as in vector EDA)
-- `lat` / `lon` from `decimalLatitude` / `decimalLongitude` when valid → Path A
-- `h3_cell` = H3 index of `(lat, lon)` at the chosen resolution (Tier 1 key)
-- `nuts_id` from `higherGeographyID` when present (e.g. `ITI43`, `ES241`) — enrichment and optional consistency checks against `subnational_locations.csv`; not the Tier 1 join key by itself
-- `geo_precision` typically `exact_coords` when GPS present; VectorNet rows without GPS are rare—if GPS missing but `nuts_id` resolves via the reference table, Path B is allowed with `geo_precision=subnational_centroid`
-
-### Virus side
-
-Normalize each multi-source detection to:
-
-- `country_iso2` parsed from `country` (ENA style often `Country: region, locality`) via `data/external/countries.csv` aliases
-- `subnational_region` from the text after `:` / Pathoplexus `division` / BV-BRC place strings when present
-- `nuts_id` when published (ECDC / aligned feeds)
-- `(lat, lon)` resolution priority (locked; detail also in spec `04`):
-  1. Source exact GPS (`lat`/`lon` with `coord_source` in `{exact_gps, sample_backfill}`) → Path A
-  2. Cross-source accession / sample backfill already reflected in the raw extract → still Path A
-  3. Match `(country_iso2, subnational_region | nuts_id)` to `data/external/subnational_locations.csv` → Path B centroid
-  4. Else leave coords null → Tier 2 only
-- `h3_cell` when a resolved `(lat, lon)` exists (Tier 1); otherwise unset
-- `geo_precision` ∈ `{exact_coords, subnational_centroid, country_only}`
+Full field-by-field resolve steps: [`specs/04`](04-reference-data-and-panel-pipeline.md#resolve-rules-before-merge).
 
 ### Resolution tiers
 
-Join and aggregate at the finest tier both sides support for a given unit; do not invent precision beyond the rules above.
+Join and aggregate at the finest tier both sides support for a given unit; do not invent precision beyond the Path A / B guardrails above.
 
 | Tier | Spatial unit | When to use |
 |------|--------------|-------------|
-| **Tier 1 (high res)** | **Uber H3 cell** at a fixed resolution | Row has usable `(lat, lon)` from Path A (exact GPS) **or** Path B (curated subnational / NUTS3 centroid), mapped to `h3_cell`; virus and vector features linked via `vector_group` and time |
+| **Tier 1 (high res)** | **Uber H3 cell** at a fixed resolution | Row has usable `(lat, lon)` from Path A **or** Path B, mapped to `h3_cell`; virus and vector features linked via `vector_group` and time |
 | **Tier 2 (broad)** | ISO-2 country | No usable GPS and no resolvable subnational / NUTS key; or H3 cannot be assigned |
 
-Fallback ladder per record:
-
-1. Assign `h3_cell` from exact / backfilled GPS if valid → **Tier 1** (`geo_precision=exact_coords`).
-2. Else assign `h3_cell` from curated subnational / NUTS3 centroid if the reference lookup matches → **Tier 1** (`geo_precision=subnational_centroid`).
-3. Else keep `country_iso2` only → **Tier 2** (`geo_precision=country_only`).
-4. Optionally attach NUTS IDs for Europe reporting / ECDC comparison — never as the sole worldwide modelling key.
+Optional NUTS IDs for Europe reporting / ECDC comparison may attach alongside H3 keys — never as the sole worldwide modelling key.
 
 ### H3 resolution
 
@@ -228,19 +209,11 @@ They are **not** a substitute for the multi-source virus dataset in [`specs/02-v
 - Predicting exact first-introduction day at a site
 - Using NUTS as the primary worldwide join key (centroids → H3 only)
 - On-the-fly geocoding of unmatched free-text localities outside `subnational_locations.csv`
-- Implementing H3 indexing, reference CSV builds, or feature pipelines in this documentation pass
+- Owning artifact paths, notebook steps, or the panel column contract (see [`specs/04`](04-reference-data-and-panel-pipeline.md))
 
-## Implementation checklist (future)
+## Implemented in
 
-Detailed reference artifacts (including `subnational_locations.csv`), notebook ownership (`05`–`10`), resolve rules, and merge panel contract live in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Summary:
-
-1. Shared normalizers for country ISO-2, dates, and `vector_group` (reference CSVs + clean notebooks)
-2. Build and commit `data/external/subnational_locations.csv` from distinct virus subnational strings + European NUTS3 centroids
-3. H3 cell assignment from Path A GPS or Path B centroids at the resolution chosen in `07_h3_resolution_density.ipynb`, with fallback to country when neither applies; evaluate density for exact-only vs exact+centroid
-4. Optional NUTS attachment for Europe reporting (alongside H3 keys)
-5. Aggregated training panel under `data/03_processed/` keyed by `(h3_cell or country_iso2, year, month, vector_group)`, with VectorNet coverage required for supervised rows
-6. Notebook documenting H3 resolution choice, Tier 1 vs Tier 2 mix by `geo_precision`, class balance, and sequencing / outbreak / effort-bias caveats
-7. Update to [`ROADMAP.md`](../ROADMAP.md) when reference / clean / merge items move from Planned to Done
+Join design from this spec is implemented through reference, H3 density, clean, and merge notebooks (`05`–`10`) with `H3_RESOLUTION=4`. Detailed artifacts, resolve rules, and the modelling-panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Build status for remaining EDA / model work: [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
@@ -250,4 +223,4 @@ Detailed reference artifacts (including `subnational_locations.csv`), notebook o
 | [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Multi-source virus feeds + pathogen ↔ vector_group table |
 | [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids), resolve steps, merge modelling panel |
 | [`README.md`](../README.md) | Intended approach (join to common geo–temporal units) |
-| [`ROADMAP.md`](../ROADMAP.md) | Reference / clean / merge steps Planned |
+| [`ROADMAP.md`](../ROADMAP.md) | Build status (data foundation Done; EDA / models next) |

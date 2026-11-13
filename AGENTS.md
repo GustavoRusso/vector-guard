@@ -8,27 +8,23 @@
 
 ## `specs/` — decision documentation
 
-- Store documentation of **decisions taken** on the project in `specs/`.
-- One document per **topic or project step** (for example dataset choice, geographic unit, model selection, project layout).
+- Store documentation of **decisions taken** on the project in `specs/` (for example dataset choice, geographic unit, model selection).
+- One document per **topic or project step**.
 - When a decision is made or changed during work, record or update it in `specs/`, not in `docs/`.
+- Repo layout and deliverable → path map live in [`README.md`](README.md), not in `specs/`.
 
-## `notebooks/` — staged Jupyter work
+## Layout and deliverables
 
-- `notebooks/01_sources/` — dataset construction (extract, inspect, clean, merge). Not the EDA deliverable area. Runbook: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md).
-- `notebooks/02_eda/`, `03_features/`, `04_modeling/` — optional drafts; primary EDA and modeling live in root `notebook.ipynb`.
+See [`README.md`](README.md) § Project layout and Deliverable areas → location.
 
-## `data/` — staged data ladder
+- `notebooks/01_sources/` — dataset construction only (not the EDA deliverable). Runbook: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md).
+- Primary EDA and modeling: root `notebook.ipynb`.
+- Reusable notebook code: `src/vector_guard/`.
 
-- `data/01_raw/` → `data/02_interim/` → `data/03_processed/` (modelling panel handoff)
-- `data/external/` — committed lookup / dictionary tables
-
-## `src/vector_guard` — reusable code for notebooks
-
-## Related project files
+## Related living docs
 
 | Path | Role |
 |------|------|
-| [`README.md`](README.md) | Problem statement, Deliverable areas map, run instructions |
-| [`ROADMAP.md`](ROADMAP.md) | Feature and deliverable plan |
-| [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) | Dataset construction runbook (regenerate modelling panel; links specs `01`–`04`) |
-| [`specs/05-project-layout.md`](specs/05-project-layout.md) | Layout decision and deliverable areas → path map |
+| [`README.md`](README.md) | Problem statement, layout, deliverable map, dataset pointer, run instructions |
+| [`ROADMAP.md`](ROADMAP.md) | Feature and deliverable plan / status |
+| [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) | Dataset construction runbook |

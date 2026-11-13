@@ -1,6 +1,6 @@
 # Vector Guard roadmap
 
-Feature and deliverable plan. Items are ordered for a practical build sequence.
+Feature and deliverable plan. Items are ordered for a practical build sequence. Decisions live in [`specs/`](specs/); this file tracks **status** only. Layout and deliverable → path map: [`README.md`](README.md).
 
 | Status | Meaning |
 |--------|---------|
@@ -17,9 +17,9 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| README problem statement and intended use | Done | See [`README.md`](README.md) |
-| Run instructions for setup, train, predict, Docker | Planned | Fill stub sections as components land |
-| Link data download / inclusion instructions in README | Done | Panel path + load in [`README.md`](README.md); regenerate / design in [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md); multi-source / subnational path in [`specs/`](specs/) |
+| README problem statement and intended use | Done | [`README.md`](README.md) |
+| Run instructions for setup, train, predict, Docker | Planned | Fill README stub as components land |
+| Link data download / inclusion instructions in README | Done | [`README.md`](README.md); rebuild runbook [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) |
 
 ---
 
@@ -29,17 +29,17 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Select and document vector detection source(s) | Done | VectorNet observations DwC-A — [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
-| Select and document virus detection source(s) | Done | Multi-source strategy implemented (6 feeds, 26 pathogens, 19-col TSV) — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| Document spatial join (H3 + subnational centroids) | Done | Path A GPS / Path B curated centroids → Tier 1; country Tier 2 — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
-| Document reference data + panel pipeline | Done | Countries, `subnational_locations.csv`, vector_group maps, coord priority ladder, H3 selection, merge contract — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Build vector dataset (geo + time) | Done | `notebooks/01_sources/08_clean_vectors.ipynb` → `data/02_interim/vectors_normalized.parquet` (ISO-2, midpoint year-month, `vector_group`, coord ladder, H3@4) |
-| Upgrade virus raw extract (multi-source + taxonomy) | Done | `notebooks/01_sources/03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` (26 taxa): ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC; unified 19-col schema + per-source manifest; EDA `04` + reference `05` refreshed — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| Build virus dataset (geo + time, clean) | Done | `notebooks/01_sources/09_clean_viruses.ipynb` → `data/02_interim/viruses_normalized.parquet` (ISO-2, coord ladder, `geo_precision`, H3@4) |
-| Build reference data (countries, subnational centroids, vector taxon groups) | Done | `notebooks/01_sources/05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `notebooks/01_sources/06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Choose H3 resolution (density check) | Done | `notebooks/01_sources/07_h3_resolution_density.ipynb` → **`H3_RESOLUTION=4`** (exact+centroid production path; res 5 over-fragments co-occurrence); constant in `vector_guard.resolve` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Merge modelling panel (vector + virus) | Done | `notebooks/01_sources/10_merge_modelling_panel.ipynb` → `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json`; grain `year×month`; VectorNet coverage required — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh / rebuild documented in [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md); reference CSVs committed under `data/external/` |
+| Select and document vector detection source(s) | Done | [`specs/01`](specs/01-vector-dataset-selection.md) |
+| Select and document virus detection source(s) | Done | [`specs/02`](specs/02-virus-dataset-selection.md) |
+| Document spatial join (H3 + subnational centroids) | Done | [`specs/03`](specs/03-spatial-temporal-matching-strategy.md) |
+| Document reference data + panel pipeline | Done | [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Build vector dataset (geo + time) | Done | Notebook `08` → interim; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Upgrade virus raw extract (multi-source + taxonomy) | Done | Notebook `03`; see [`specs/02`](specs/02-virus-dataset-selection.md) |
+| Build virus dataset (geo + time, clean) | Done | Notebook `09` → interim; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Build reference data (countries, subnational centroids, vector taxon groups) | Done | Notebooks `05`–`06`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Choose H3 resolution (density check) | Done | Notebook `07`; `H3_RESOLUTION=4` — [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Merge modelling panel (vector + virus) | Done | Notebook `10` → `data/03_processed/`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Commit data or publish reproducible download steps | Done | Rebuild: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) |
 
 ---
 
@@ -49,12 +49,12 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Initial vector / virus source inspect notebooks | Done | `notebooks/01_sources/02_inspect_vectors.ipynb`, `04_inspect_viruses.ipynb` (construction QA; not the EDA deliverable area) |
-| Data cleaning and preparation in `notebook.ipynb` | Done | `notebook.ipynb`: load panel + manifest; missingness; winsorize counts; year≥2010 geo/time filters; `panel_prep` / `X`/`y` handoff |
+| Initial vector / virus source inspect notebooks | Done | Construction QA in `01_sources` (`02`, `04`); not the EDA deliverable |
+| Data cleaning and preparation in `notebook.ipynb` | Done | Panel load + prep handoff in root notebook |
 | Distribution and range analysis of features | Next | Including spatial/temporal coverage |
-| Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
-| Feature importance analysis | Planned | e.g. correlation, model-based importance |
-| Spatial / temporal exploratory plots | Planned | Maps and time-series views of vector vs virus |
+| Target variable analysis (risk / suitability label) | Planned | Class balance, risk-score target definition |
+| Feature importance analysis | Planned | |
+| Spatial / temporal exploratory plots | Planned | |
 
 ---
 
@@ -64,11 +64,11 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Baseline linear model (e.g. logistic regression) | Planned | Interpretable risk probability baseline |
+| Baseline linear model (e.g. logistic regression) | Planned | |
 | Tree-based model(s) (e.g. Random Forest, XGBoost) | Planned | At least one linear + one tree-based |
-| Hyperparameter tuning for candidate models | Planned | Cross-validation; select best model |
+| Hyperparameter tuning for candidate models | Planned | |
 | Model comparison metrics documented in notebook | Planned | e.g. ROC-AUC, PR-AUC, calibration |
-| Persist final model artifact | Planned | pickle / joblib / equivalent |
+| Persist final model artifact | Planned | |
 
 ---
 
@@ -78,8 +78,8 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| `train.py` — train final model end-to-end | Planned | Same pipeline as selected notebook model |
-| `train.py` — save model (and preprocessing) to disk | Planned | Loadable by the prediction service |
+| `train.py` — train final model end-to-end | Planned | |
+| `train.py` — save model (and preprocessing) to disk | Planned | |
 
 ---
 
@@ -90,8 +90,8 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | `predict.py` — load model and preprocessing | Planned | |
-| HTTP API endpoint for risk score prediction | Planned | Input: location / features; output: risk probability |
-| Example request documented in README | Planned | curl or similar |
+| HTTP API endpoint for risk score prediction | Planned | |
+| Example request documented in README | Planned | |
 
 ---
 
@@ -101,9 +101,9 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Locked dependency file (`pyproject.toml` / `requirements.txt` / Pipenv) | Planned | Project already has `pyproject.toml`; keep it authoritative |
-| Documented virtual environment create / activate / install | Planned | Update README Setup section |
-| Pin versions for reproducible installs | Planned | lockfile where applicable |
+| Locked dependency file (`pyproject.toml` + `uv.lock`) | Done | Files present; keep authoritative |
+| Documented virtual environment create / activate / install | Planned | README How to run stub |
+| Pin versions for reproducible installs | Done | Via `uv.lock` |
 
 ---
 
@@ -125,7 +125,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Deployment scripts or IaC for cloud / k8s | Later | Local or remote cluster acceptable |
+| Deployment scripts or IaC for cloud / k8s | Later | |
 | README deploy steps with concrete commands | Later | |
 | Public test URL **or** video/screenshot of the live service | Later | |
 
@@ -148,16 +148,11 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-1. Lock data sources and publish reproducible download steps (vector + multi-source virus extracts in place; reference CSVs Done)
-2. Clean both sides; choose H3 (exact vs centroid); merge modelling panel — **Done** (`07`–`10`, `H3_RESOLUTION=4`)
-3. Deepen EDA on the panel (prep Done in `notebook.ipynb`; distributions / target / importance Next); train, compare, and tune multiple models; pick one
-4. Export `train.py` and ship `predict.py` API
-5. Finish environment docs, Docker, and README run instructions
-6. Optionally deploy to the cloud and add proof of the live service
+Data foundation is **Done**. Next: deepen EDA on the panel, then models → `train.py` → API → env docs / Docker → optional cloud.
 
 ---
 
 ## Out of scope for this roadmap
 
-- Clinical diagnosis or medical decision support  
+- Clinical diagnosis or medical decision support
 - Exact virus introduction *timing* (stochastic; not the modeling target)
