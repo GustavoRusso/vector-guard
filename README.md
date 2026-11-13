@@ -150,6 +150,7 @@ curl -X POST http://localhost:8000/predict \
 
 - Not a clinical diagnostic; does not replace expert epidemiological judgment.
 - Exact first-introduction timing is out of scope.
+- Virus detections are not classified as local vs imported; travel-related cases may appear as place-time positives (deferred label-quality work in [`ROADMAP.md`](ROADMAP.md) / [`specs/02`](specs/02-virus-dataset-selection.md)).
 - Virus zeros mean no report in the merged feeds for that unit-window, not proof of absence.
 
 See [`ROADMAP.md`](ROADMAP.md) for planned features and build order.

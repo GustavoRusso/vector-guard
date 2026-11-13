@@ -243,10 +243,21 @@ Cleaning, ISO-2, subnational centroid → H3, and panel merge remain owned by sp
 
 VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g. `{"pathogen": "West Nile virus"}`). Those sparse rows are **not** part of the multi-source virus extract; they may be used later as an optional validation / enrichment signal during EDA or matching.
 
+## Candidates for future additions
+
+### Local (autochthonous) vs imported acquisition
+
+- **What:** Structured distinction between detections that imply a **local transmission cycle** (infection acquired in place via competent vectors) and **imported / travel-related** cases (infection acquired elsewhere; illness observed after travel).
+- **Why it matters:** Imported cases at a location do not mean the vector–virus cycle is established there. Treating them as positive labels can inflate suitability / outbreak-risk targets.
+- **What exists today:** No `acquisition_type` (or equivalent) in `VIRUS_RAW_COLUMNS`. A few ENA free-text place strings mention import (e.g. `imported from Brazil` under Portugal); cleaning currently treats those as unmatched region names, not epidemiology labels. ECDC WNV rows are case counts by unit/host, not classified as local vs travel.
+- **Possible later approaches (incomplete coverage expected):** parse ENA “imported from …” free text into e.g. `acquisition_type` + optional origin; prefer surveillance feeds that publish autochthonous vs imported classification; optional host-based heuristics. Do not expect full coverage from INSDC sequence metadata alone.
+- **Status:** Deferred — tracked as **Later** in [`ROADMAP.md`](../ROADMAP.md) § Data foundation. Not required for the current multi-source extract.
+
 ## Out of scope for this decision
 
 - Spatial-temporal join implementation and subnational centroid promotion (design in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) and [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md))
 - Clinical diagnosis or exact introduction-date prediction
+- Systematic local-vs-imported case classification in the v1 extract (deferred; see [Candidates for future additions](#candidates-for-future-additions))
 
 ## Related project files
 

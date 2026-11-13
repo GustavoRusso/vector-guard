@@ -40,6 +40,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence. 
 | Choose H3 resolution (density check) | Done | Notebook `07`; `H3_RESOLUTION=4` — [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
 | Merge modelling panel (vector + virus) | Done | Notebook `10` → `data/03_processed/`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
 | Commit data or publish reproducible download steps | Done | Rebuild: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) |
+| Distinguish local vs imported virus detections | Later | Label quality: filter/down-weight travel-related cases so they do not imply an established local cycle; see [`specs/02`](specs/02-virus-dataset-selection.md) § Candidates for future additions |
 
 ---
 
