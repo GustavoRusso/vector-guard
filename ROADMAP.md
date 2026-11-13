@@ -13,19 +13,19 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 1. Problem description and documentation
 
-**Criteria:** Problem description (full credit when README has enough context on the problem and how the solution is used).
+**Deliverable area:** Problem description (complete when README has enough context on the problem and how the solution is used).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | README problem statement and intended use | Done | See [`README.md`](README.md) |
 | Run instructions for setup, train, predict, Docker | Planned | Fill stub sections as components land |
-| Link data download / inclusion instructions in README | Done | VectorNet + virus extract steps in [`README.md`](README.md); multi-source / subnational path in [`specs/`](specs/) |
+| Link data download / inclusion instructions in README | Done | Panel path + load in [`README.md`](README.md); regenerate / design in [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md); multi-source / subnational path in [`specs/`](specs/) |
 
 ---
 
 ## 2. Data foundation
 
-**Criteria:** Reproducibility (data committed or clearly downloadable); feeds EDA and training.
+**Deliverable area:** Reproducibility (data committed or clearly downloadable); feeds EDA and training.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -39,17 +39,17 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Build reference data (countries, subnational centroids, vector taxon groups) | Done | `notebooks/01_sources/05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `notebooks/01_sources/06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Choose H3 resolution (density check) | Done | `notebooks/01_sources/07_h3_resolution_density.ipynb` → **`H3_RESOLUTION=4`** (exact+centroid production path; res 5 over-fragments co-occurrence); constant in `vector_guard.resolve` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Merge modelling panel (vector + virus) | Done | `notebooks/01_sources/10_merge_modelling_panel.ipynb` → `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json`; grain `year×month`; VectorNet coverage required — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README; reference CSVs to be committed when built |
+| Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh / rebuild documented in [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md); reference CSVs committed under `data/external/` |
 
 ---
 
 ## 3. Exploratory data analysis
 
-**Criteria:** EDA (full credit: ranges, missing values, target analysis, feature importance).
+**Deliverable area:** EDA (complete when: ranges, missing values, target analysis, feature importance).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Initial vector / virus source inspect notebooks | Done | `notebooks/01_sources/02_inspect_vectors.ipynb`, `04_inspect_viruses.ipynb` (construction QA; not the EDA criterion) |
+| Initial vector / virus source inspect notebooks | Done | `notebooks/01_sources/02_inspect_vectors.ipynb`, `04_inspect_viruses.ipynb` (construction QA; not the EDA deliverable area) |
 | Data cleaning and preparation in `notebook.ipynb` | Done | `notebook.ipynb`: load panel + manifest; missingness; winsorize counts; year≥2010 geo/time filters; `panel_prep` / `X`/`y` handoff |
 | Distribution and range analysis of features | Next | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |
@@ -60,7 +60,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 4. Model training and selection
 
-**Criteria:** Model training (full credit: multiple models **and** hyperparameter tuning).
+**Deliverable area:** Model training (complete when: multiple models **and** hyperparameter tuning).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -74,7 +74,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 5. Training script export
 
-**Criteria:** Exporting notebook to script.
+**Deliverable area:** Exporting notebook to script.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -85,7 +85,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 6. Prediction service
 
-**Criteria:** Model deployment (web service with Flask, FastAPI, BentoML, or similar).
+**Deliverable area:** Model deployment (web service with Flask, FastAPI, BentoML, or similar).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -97,7 +97,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 7. Environment and dependencies
 
-**Criteria:** Dependency and environment management (full credit: dependency file + virtual env + README install/activate steps).
+**Deliverable area:** Dependency and environment management (complete when: dependency file + virtual env + README install/activate steps).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -109,7 +109,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 8. Containerization
 
-**Criteria:** Containerization (full credit: Dockerfile **and** README build/run instructions).
+**Deliverable area:** Containerization (complete when: Dockerfile **and** README build/run instructions).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
@@ -121,7 +121,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 ## 9. Cloud / cluster deployment (stretch)
 
-**Criteria:** Cloud deployment (full credit: deploy code + live URL or demo video/screenshot).
+**Deliverable area:** Cloud deployment (complete when: deploy code + live URL or demo video/screenshot).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|

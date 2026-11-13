@@ -14,7 +14,7 @@ Organize the repository as a **generic ML project**:
 3. **Staged data** — `data/01_raw/` → `data/02_interim/` → `data/03_processed/`, plus `data/external/` for lookups.
 4. **Staged notebooks** — `01_sources`, `02_eda`, `03_features`, `04_modeling`; primary EDA and modeling remain in root `notebook.ipynb`.
 
-Dataset construction (multi-source fetch, inspect, clean, merge) maps to **Reproducibility** / Data. It is **not** the **EDA** criterion. EDA and model training apply to the modelling panel in `notebook.ipynb`.
+Dataset construction (multi-source fetch, inspect, clean, merge) maps to **Reproducibility** / Data. It is **not** the **EDA** deliverable area. EDA and model training apply to the modelling panel in `notebook.ipynb`.
 
 ## Tree
 
@@ -41,21 +41,22 @@ vector-guard/
 └── deploy/
 ```
 
-## Evaluation Criteria → location
+## Deliverable areas → location
 
-| Criterion | Where |
-|-----------|-------|
-| Problem description | `README.md` § Problem description |
+| Deliverable area | Where |
+|------------------|-------|
+| Problem description | `README.md` § Problem statement |
 | EDA | `notebook.ipynb` only |
 | Model training | `notebook.ipynb` |
 | Exporting notebook to script | `train.py` |
-| Reproducibility | `data/` + README Data/Setup; rebuild via `notebooks/01_sources/` |
+| Reproducibility | `data/` + README Dataset description; rebuild via [`notebooks/01_sources/README.md`](../notebooks/01_sources/README.md) |
 | Model deployment | `predict.py` |
-| Dependency and environment management | `pyproject.toml` + `uv.lock` + README Setup |
-| Containerization | `Dockerfile` + README Deployment |
-| Cloud deployment | `deploy/` + README Deployment (optional) |
+| Dependency and environment management | `pyproject.toml` + `uv.lock` + README How to run locally and via Docker |
+| Containerization | `Dockerfile` + README How to run locally and via Docker |
+| Cloud deployment | `deploy/` + README How to run locally and via Docker (optional) |
 
 ## Related
 
-- [`README.md`](../README.md) — mirrors this map for readers
+- [`README.md`](../README.md) — mirrors this Deliverable areas map for readers (Problem statement, Dataset description, Architecture, EDA, Modeling, How to run, API, Limitations)
+- [`notebooks/01_sources/README.md`](../notebooks/01_sources/README.md) — dataset construction runbook (regenerate panel; links specs `01`–`04`)
 - [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) — panel build contract

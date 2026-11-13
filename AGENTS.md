@@ -14,7 +14,7 @@
 
 ## `notebooks/` — staged Jupyter work
 
-- `notebooks/01_sources/` — dataset construction (extract, inspect, clean, merge). Not the EDA Evaluation Criterion.
+- `notebooks/01_sources/` — dataset construction (extract, inspect, clean, merge). Not the EDA deliverable area. Runbook: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md).
 - `notebooks/02_eda/`, `03_features/`, `04_modeling/` — optional drafts; primary EDA and modeling live in root `notebook.ipynb`.
 
 ## `data/` — staged data ladder
@@ -28,6 +28,7 @@
 
 | Path | Role |
 |------|------|
-| [`README.md`](README.md) | Problem statement, Evaluation Criteria map, run instructions |
+| [`README.md`](README.md) | Problem statement, Deliverable areas map, run instructions |
 | [`ROADMAP.md`](ROADMAP.md) | Feature and deliverable plan |
-| [`specs/05-project-layout.md`](specs/05-project-layout.md) | Layout decision and criteria→path map |
+| [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) | Dataset construction runbook (regenerate modelling panel; links specs `01`–`04`) |
+| [`specs/05-project-layout.md`](specs/05-project-layout.md) | Layout decision and deliverable areas → path map |
