@@ -1,0 +1,27 @@
+pathogen_name,vector_group
+African horse sickness virus,biting_midge
+Akabane orthobunyavirus,biting_midge
+Bluetongue virus,biting_midge
+Epizootic hemorrhagic disease virus,biting_midge
+Schmallenberg virus,biting_midge
+Batai orthobunyavirus,mosquito
+Chikungunya virus,mosquito
+Dengue virus,mosquito
+Inkoo orthobunyavirus,mosquito
+Japanese encephalitis virus,mosquito
+Rift Valley fever virus,mosquito
+Sindbis virus,mosquito
+Tahyna / California encephalitis orthobunyavirus,mosquito
+Usutu virus,mosquito
+West Nile virus,mosquito
+Yellow fever virus,mosquito
+Zika virus,mosquito
+Phlebovirus (Mediterranean sandfly fever complex),sandfly
+Sandfly fever Naples phlebovirus / Toscana virus,sandfly
+Alongshan virus,tick
+Crimean-Congo hemorrhagic fever virus,tick
+Jingmen tick virus,tick
+Louping ill virus,tick
+Omsk hemorrhagic fever virus,tick
+Thogoto / Bourbon thogotovirus,tick
+Tick-borne encephalitis virus,tick

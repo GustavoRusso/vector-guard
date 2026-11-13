@@ -178,6 +178,48 @@ def load_vector_taxon_groups(reference_dir: Path | None = None) -> pd.DataFrame:
     )
 
 
+def load_pathogen_vector_group(reference_dir: Path | None = None) -> pd.DataFrame:
+    """Load ``data/external/pathogen_vector_group.csv`` (mirror of ``VIRUS_VECTOR_TAXON_MAP``)."""
+    directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
+    path = directory / "pathogen_vector_group.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing {path}. Run notebooks/01_sources/06_reference_vector_groups.ipynb first."
+        )
+    return pd.read_csv(
+        path,
+        dtype={"pathogen_name": str, "vector_group": str},
+    )
+
+
+def load_priority_vector_taxa(reference_dir: Path | None = None) -> pd.DataFrame:
+    """Load ``data/external/priority_vector_taxa.csv`` (closed panel species features)."""
+    directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
+    path = directory / "priority_vector_taxa.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing {path}. Run notebooks/01_sources/06_reference_vector_groups.ipynb first."
+        )
+    return pd.read_csv(
+        path,
+        dtype={
+            "scientific_name": str,
+            "vector_group": str,
+            "feature_slug": str,
+            "notes": str,
+        },
+    )
+
+
+def feature_slug_from_scientific_name(scientific_name: object) -> str:
+    """Stable snake_case slug for ``vector_count_<slug>`` panel columns."""
+    text = _clean_text(scientific_name).casefold()
+    if not text:
+        return ""
+    slug = re.sub(r"[^a-z0-9]+", "_", text)
+    return re.sub(r"_+", "_", slug).strip("_")
+
+
 def load_interim_vectors(interim_dir: Path | None = None) -> pd.DataFrame:
     """Load ``data/02_interim/vectors_normalized.parquet``."""
     directory = Path(interim_dir) if interim_dir is not None else default_interim_dir()

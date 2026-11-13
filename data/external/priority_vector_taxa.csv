@@ -1,0 +1,53 @@
+scientific_name,vector_group,feature_slug,notes
+Culicoides,biting_midge,culicoides,freq_rank:1;n_rows:23807
+Culicoides achrayi,biting_midge,culicoides_achrayi,freq_rank:10;n_rows:258
+Culicoides chiopterus,biting_midge,culicoides_chiopterus,freq_rank:3;n_rows:4662
+Culicoides circumscriptus,biting_midge,culicoides_circumscriptus,freq_rank:5;n_rows:3260
+Culicoides dewulfi,biting_midge,culicoides_dewulfi,freq_rank:4;n_rows:4295
+Culicoides festivipennis,biting_midge,culicoides_festivipennis,freq_rank:12;n_rows:177
+Culicoides furcillatus,biting_midge,culicoides_furcillatus,freq_rank:14;n_rows:158
+Culicoides imicola,biting_midge,culicoides_imicola,freq_rank:2;n_rows:5357
+Culicoides kingi,biting_midge,culicoides_kingi,freq_rank:8;n_rows:333
+Culicoides lupicaris,biting_midge,culicoides_lupicaris,freq_rank:7;n_rows:1100
+Culicoides pallidicornis,biting_midge,culicoides_pallidicornis,freq_rank:9;n_rows:268
+Culicoides paolae,biting_midge,culicoides_paolae,freq_rank:11;n_rows:194
+Culicoides puncticollis,biting_midge,culicoides_puncticollis,freq_rank:15;n_rows:150
+Culicoides riethi,biting_midge,culicoides_riethi,freq_rank:13;n_rows:166
+Culicoides scoticus,biting_midge,culicoides_scoticus,freq_rank:6;n_rows:3179
+Aedes,mosquito,aedes,freq_rank:6;n_rows:2071
+Aedes albopictus,mosquito,aedes_albopictus,freq_rank:2;n_rows:6538
+Aedes caspius,mosquito,aedes_caspius,freq_rank:4;n_rows:3282
+Aedes japonicus,mosquito,aedes_japonicus,freq_rank:5;n_rows:3088
+Aedes vexans vexans,mosquito,aedes_vexans_vexans,freq_rank:12;n_rows:1011
+Anopheles,mosquito,anopheles,freq_rank:7;n_rows:1786
+Anopheles claviger,mosquito,anopheles_claviger,freq_rank:8;n_rows:1695
+Coquillettidia richiardii,mosquito,coquillettidia_richiardii,freq_rank:11;n_rows:1037
+Culex,mosquito,culex,freq_rank:3;n_rows:5685
+Culex laticinctus,mosquito,culex_laticinctus,freq_rank:15;n_rows:623
+Culex pipiens,mosquito,culex_pipiens,freq_rank:1;n_rows:8232
+Culex theileri,mosquito,culex_theileri,freq_rank:13;n_rows:813
+Culex torrentium,mosquito,culex_torrentium,freq_rank:14;n_rows:713
+Culiseta annulata,mosquito,culiseta_annulata,freq_rank:9;n_rows:1507
+Culiseta longiareolata,mosquito,culiseta_longiareolata,freq_rank:10;n_rows:1458
+Phlebotomus,sandfly,phlebotomus,freq_rank:12;n_rows:235
+Phlebotomus alexandri,sandfly,phlebotomus_alexandri,freq_rank:11;n_rows:276
+Phlebotomus balcanicus,sandfly,phlebotomus_balcanicus,freq_rank:8;n_rows:1072
+Phlebotomus burneyi,sandfly,phlebotomus_burneyi,freq_rank:14;n_rows:160
+Phlebotomus longicuspis,sandfly,phlebotomus_longicuspis,freq_rank:4;n_rows:2110
+Phlebotomus mascittii,sandfly,phlebotomus_mascittii,freq_rank:9;n_rows:390
+Phlebotomus neglectus,sandfly,phlebotomus_neglectus,freq_rank:6;n_rows:1462
+Phlebotomus papatasi,sandfly,phlebotomus_papatasi,freq_rank:2;n_rows:2971
+Phlebotomus perfiliewi,sandfly,phlebotomus_perfiliewi,freq_rank:3;n_rows:2740
+Phlebotomus perniciosus,sandfly,phlebotomus_perniciosus,freq_rank:1;n_rows:3072
+Phlebotomus sergenti,sandfly,phlebotomus_sergenti,freq_rank:7;n_rows:1123
+Phlebotomus simici,sandfly,phlebotomus_simici,freq_rank:13;n_rows:229
+Phlebotomus tobbi,sandfly,phlebotomus_tobbi,freq_rank:10;n_rows:314
+Sergentomyia dentata,sandfly,sergentomyia_dentata,freq_rank:15;n_rows:141
+Sergentomyia minuta,sandfly,sergentomyia_minuta,freq_rank:5;n_rows:1830
+Dermacentor reticulatus,tick,dermacentor_reticulatus,freq_rank:2;n_rows:533
+Hyalomma lusitanicum,tick,hyalomma_lusitanicum,freq_rank:6;n_rows:9
+Hyalomma marginatum,tick,hyalomma_marginatum,freq_rank:5;n_rows:69
+Ixodes persulcatus,tick,ixodes_persulcatus,freq_rank:4;n_rows:107
+Ixodes ricinus,tick,ixodes_ricinus,freq_rank:1;n_rows:3610
+Ornithodoros erraticus,tick,ornithodoros_erraticus,freq_rank:7;n_rows:1
+Rhipicephalus,tick,rhipicephalus,freq_rank:3;n_rows:186
