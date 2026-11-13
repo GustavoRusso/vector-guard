@@ -4,14 +4,14 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design locked and implemented through merge (`07`–`10`); `H3_RESOLUTION=4`; B2/A3 forward-label panel |
-| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels) |
+| Status | Design locked through merge (`07`–`10`); `H3_RESOLUTION=4`; **B2 pathogen-long** panel (A3 zone clock); group-only virus labels superseded |
+| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels + priority vector taxa features) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
 ## Purpose
 
-Vector Guard estimates geographic **risk / suitability** by relating vector presence patterns to virus detection patterns over space and time. Raw tables do not share a schema. This spec defines how both sides are normalized and aggregated into join keys before modelling.
+Vector Guard estimates **pathogen-specific** geographic risk: given vectors observed in a place (ideally at species/genus resolution), how likely is **pathogen X** soon. Raw tables do not share a schema. This spec defines how both sides are normalized and aggregated into join keys before modelling.
 
 The primary high-resolution spatial unit is **Uber H3** (hexagonal hierarchical spatial index), chosen so the same join key works **worldwide**. NUTS regions are **not** the canonical join unit (they are Europe-only); they **are** a valid input to **resolve lat/lon centroids** that then map into H3 Tier 1, and may also be kept as optional Europe enrichment for reporting or ECDC comparison.
 
@@ -46,8 +46,8 @@ flowchart TD
   end
 
   subgraph joinUnit [Common Join Tiers]
-    tier1["Tier 1: H3 cell x year x month x vector_group"]
-    tier2["Tier 2: ISO-2 country x year x month x vector_group"]
+    tier1["Tier 1: H3 x year x month x vector_group x pathogen"]
+    tier2["Tier 2: ISO-2 x year x month x vector_group x pathogen"]
   end
 
   subgraph optional [Optional Europe enrichment]
@@ -127,7 +127,7 @@ Join and aggregate at the finest tier both sides support for a given unit; do no
 
 | Tier | Spatial unit | When to use |
 |------|--------------|-------------|
-| **Tier 1 (high res)** | **Uber H3 cell** at a fixed resolution | Row has usable `(lat, lon)` from Path A **or** Path B, mapped to `h3_cell`; virus and vector features linked via `vector_group` and time |
+| **Tier 1 (high res)** | **Uber H3 cell** at a fixed resolution | Row has usable `(lat, lon)` from Path A **or** Path B, mapped to `h3_cell`; vector features and **pathogen-specific** labels linked via `vector_group` × `pathogen_name` and time |
 | **Tier 2 (broad)** | ISO-2 country | No usable GPS and no resolvable subnational / NUTS key; or H3 cannot be assigned |
 
 Optional NUTS IDs for Europe reporting / ECDC comparison may attach alongside H3 keys — never as the sole worldwide modelling key.
@@ -160,76 +160,91 @@ Parse VectorNet `eventDate` and virus `collection_date` (all sources) into compa
 | `season` | Optional later fallback if month coverage proves too sparse; not the default grain |
 | Date ranges | VectorNet often uses interval dates (`start/end`); use interval midpoint or start year-month consistently and record the rule in code |
 
-**Panel row grain (locked):** each supervised row is an observed VectorNet unit at **`year` × `month`** (plus spatial key and `vector_group`). Do not match on exact calendar days.
+**Panel row grain (locked):** each supervised row is an observed VectorNet unit at **`year` × `month`**, plus spatial key, `vector_group`, and **`pathogen_name`**. Do not match on exact calendar days.
 
-**Virus label timing (locked — B2):** virus outcomes are **not** required to share the same calendar month as the vector row. Labels look **forward and backward from the vector row timestamp** within the same `h3_cell` × `vector_group` (Tier 1) — see [Aggregation into modelling units](#aggregation-into-modelling-units). Same-month co-occurrence remains a QA column only (`virus_same_month` in spec `04`).
+**Pathogen label timing (locked — B2):** pathogen outcomes are **not** required to share the same calendar month as the vector row. Labels look **forward and backward from the vector row timestamp** within the same `h3_cell` × **`pathogen_name`** (Tier 1) — see [Aggregation into modelling units](#aggregation-into-modelling-units). Same-month co-occurrence remains a QA column only (`pathogen_same_month` in spec `04`).
 
 Pipeline ownership and exclusion rules for missing month: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md).
 
 ## Ecological (taxonomic) link
 
-Do **not** join every virus to every vector taxon.
+Do **not** join every pathogen to every vector taxon.
 
-1. Tag each virus row with `vector_group` ∈ {`mosquito`, `tick`, `biting_midge`, `sandfly`} using the taxonomy table in the virus dataset spec.
+1. Tag each virus row with `vector_group` ∈ {`mosquito`, `tick`, `biting_midge`, `sandfly`} using the taxonomy table in the virus dataset spec (`pathogen_name` → `vector_group`).
 2. Map VectorNet `scientificName` (and family/order cues) into the same `vector_group`.
-3. Restrict feature construction so that, for example, mosquito abundance/presence informs mosquito-borne virus risk labels, tick presence informs tick-borne viruses, and so on.
-4. Optional finer filter: competent genera (e.g. `Culex` / `Aedes` for West Nile) as a secondary feature, not a hard requirement for the first join.
+3. **Explode** each VectorNet place–time × `vector_group` unit to **all** pathogens in that group from `VIRUS_VECTOR_TAXON_MAP` (full factorial negatives). Mosquito units get mosquito-borne pathogens only; tick units get tick-borne pathogens only; and so on.
+4. Restrict label attachment so mosquito vector features inform mosquito-pathogen rows, tick features inform tick-pathogen rows, etc.
+5. Finer competence (e.g. `Culex` / `Aedes` for West Nile) is a **feature**, not a hard join gate for v1 — see priority taxa in [`specs/04`](04-reference-data-and-panel-pipeline.md).
 
 ## Aggregation into modelling units
 
 ### Panel row semantics (B2 — locked)
 
-Each supervised panel row is a **VectorNet observation unit** at `(h3_cell | country_iso2, year, month, vector_group)`. Virus labels attach relative to that row’s timestamp `T`, using Tier‑1 virus events in the **same spatial key and same `vector_group` only**.
+Each supervised panel row is a **VectorNet observation unit crossed with one pathogen**:
 
-Do **not** synthesize empty calendar months after the first vector hit; the panel skeleton stays observed VectorNet months.
+`(h3_cell | country_iso2, year, month, vector_group, pathogen_name)`
+
+Construction:
+
+1. Aggregate observed VectorNet months at `(spatial key, year, month, vector_group)` (no synthetic empty months).
+2. Left-merge explode onto every `pathogen_name` mapped to that `vector_group` in `VIRUS_VECTOR_TAXON_MAP`.
+3. Attach pathogen-specific labels relative to the row timestamp `T`, using Tier‑1 virus events in the **same spatial key and same `pathogen_name` only** (also require matching `vector_group` for safety).
+
+Do **not** synthesize empty calendar months after the first vector hit; the panel skeleton stays observed VectorNet months. Group-level “any virus in `vector_group`” labels are **not** part of the panel (derivable via `groupby` max over pathogens if needed).
 
 ### Zone eligibility (A3 — locked)
 
-Per `(h3_cell, vector_group)` (Tier 1), compute the first VectorNet detection time (`first_vector_year` / `first_vector_month`). The zone is treated as vector-eligible **from that first hit onward**. A3 governs the **zone clock** and how virus history is interpreted relative to observed VectorNet presence; it does **not** fill months without traps.
+Per `(h3_cell, vector_group)` (Tier 1), compute the first VectorNet detection time (`first_vector_year` / `first_vector_month`). The zone is treated as vector-eligible **from that first hit onward**. A3 is a **vector establishment** clock — **not** per pathogen. It does **not** fill months without traps.
 
-### Virus labels relative to row time `T` (locked)
+### Pathogen labels relative to row time `T` (locked)
+
+All labels below refer to Tier‑1 events of **this row’s** `pathogen_name` only (not any pathogen in the `vector_group`).
 
 | Label family | Rule |
 |--------------|------|
-| Primary supervised target | `virus_within_5y` — any Tier‑1 virus in the same cell×`vector_group` with time in `(T, T+5 years]` |
-| Secondary / sensitivity | `virus_within_10y` — same, horizon **10 years** |
-| Ever flags (always 0/1) | `virus_ever_before` — any virus with time **&lt; T**; `virus_ever_after` — any virus with time **&gt; T** |
-| Delay (nullable) | `years_to_first_virus_after` — years to earliest virus after `T` (**null** if none); `years_since_last_virus_before` — years since latest virus before `T` (**null** if none) |
-| QA / legacy | `virus_same_month` — strict same `year`×`month` co-occurrence |
+| Primary supervised target | `pathogen_within_5y` — any Tier‑1 detection of this `pathogen_name` in the same cell with time in `(T, T+5 years]` |
+| Secondary / sensitivity | `pathogen_within_10y` — same, horizon **10 years** |
+| Ever flags (always 0/1) | `pathogen_ever_before` — any event of this pathogen with time **&lt; T**; `pathogen_ever_after` — any with time **&gt; T** |
+| Delay (nullable) | `years_to_first_pathogen_after` — years to earliest later event of this pathogen (**null** if none); `years_since_last_pathogen_before` — years since latest earlier event (**null** if none) |
+| QA | `pathogen_same_month` — strict same `year`×`month` co-occurrence of this pathogen |
 
 Country-only virus rows (`geo_precision=country_only`) do **not** invent H3 and do **not** contribute to Tier‑1 forward / ever / delay labels. Column-level contract: [`specs/04`](04-reference-data-and-panel-pipeline.md#panel-columns).
 
-**Worked examples** (same `h3` + `vector_group`):
+**Worked examples** (same `h3` + **same `pathogen_name`**; other pathogens in the cell do not flip these flags):
 
-| Situation | `virus_ever_before` | `virus_ever_after` | `virus_within_5y` | `virus_within_10y` |
-|-----------|---------------------|--------------------|-------------------|--------------------|
-| Virus only before `T`, never again | 1 | 0 | 0 | 0 |
-| No virus before `T`; first virus 3y after `T` | 0 | 1 | 1 | 1 |
-| Virus before `T` **and** again 3y after `T` | 1 | 1 | 1 | 1 |
-| No virus before `T`; only virus 12y after `T` | 0 | 1 | 0 | 0 |
-| No virus in cell at all | 0 | 0 | 0 | 0 |
+| Situation | `pathogen_ever_before` | `pathogen_ever_after` | `pathogen_within_5y` | `pathogen_within_10y` |
+|-----------|------------------------|-----------------------|----------------------|-----------------------|
+| This pathogen only before `T`, never again | 1 | 0 | 0 | 0 |
+| No event before `T`; first event of this pathogen 3y after `T` | 0 | 1 | 1 | 1 |
+| Event before `T` **and** again 3y after `T` | 1 | 1 | 1 | 1 |
+| No event before `T`; only event 12y after `T` | 0 | 1 | 0 | 0 |
+| No events of this pathogen in cell at all | 0 | 0 | 0 | 0 |
+| Other pathogen in cell within 5y; this pathogen never | 0 | 0 | 0 | 0 |
 
 ### Vector features (examples)
 
-- Presence / absence or count of detections in the row’s month
+- Presence / absence or count of detections in the row’s month (`vector_group` aggregates)
+- `species_richness` — distinct VectorNet `scientific_name` values in the unit
+- Detection counts for a **closed priority-taxon list** (`vector_count_<slug>` from `priority_vector_taxa.csv` — see spec `04`)
 - Share of positive vs zero `individualCount` where meaningful
 - Establishment signals when published
 - Sampling effort proxies (`samplingProtocol`, `sampleSizeValue`) when usable
-- A3 zone clock: `first_vector_year` / `first_vector_month`
+- A3 zone clock: `first_vector_year` / `first_vector_month` (per cell × `vector_group`)
 
 ### Caveats
 
-- Absence of a virus row after `T` (or within a horizon) is **not** proof of pathogen absence; treat zeros / null delays as “no reported detection in the merged feeds” (right-censored by extract end dates).
+- Absence of a pathogen event after `T` (or within a horizon) is **not** proof of pathogen absence; treat zeros / null delays as “no reported detection in the merged feeds” (right-censored by extract end dates).
 - An H3 cell with no VectorNet traps is **not** proof of vector absence (effort / coverage bias).
 - Sequence detections ≠ clinical case counts; EMPRES-i / ECDC rows ≠ sequenced isolates (reporting bias remains).
 - Subnational-centroid Tier 1 cells are coarser than true GPS—interpret risk at hex/admin scale, not point address scale.
-- Virus **only before** the first / this VectorNet observation (`virus_ever_before=1`, `virus_ever_after=0`) must **not** inflate the primary forward target.
+- Pathogen history **only before** the first / this VectorNet observation (`pathogen_ever_before=1`, `pathogen_ever_after=0`) must **not** inflate the primary forward target.
+- `vector_group` alone does not separate pathogens that share a group; species/genus features and place–time context are required for pathogen-specific discrimination.
 
 ## Auxiliary: VectorNet `dynamicProperties` pathogens
 
 Sparse VectorNet rows may embed pathogen JSON (e.g. `{"pathogen": "West Nile virus"}`) when that column is present in a given archive revision. Use them only as:
 
-- Optional **validation** against multi-source virus labels in overlapping H3 / country units, or
+- Optional **validation** against multi-source pathogen-specific labels in overlapping H3 / country units, or
 - Enrichment flags
 
 They are **not** a substitute for the multi-source virus dataset in [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md).
@@ -239,11 +254,12 @@ They are **not** a substitute for the multi-source virus dataset in [`specs/02-v
 - Predicting exact first-introduction day at a site
 - Using NUTS as the primary worldwide join key (centroids → H3 only)
 - On-the-fly geocoding of unmatched free-text localities outside `subnational_locations.csv`
+- Hard species–pathogen competence filters as join gates (features only in v1)
 - Owning artifact paths, notebook steps, or the panel column contract (see [`specs/04`](04-reference-data-and-panel-pipeline.md))
 
 ## Implemented in
 
-Join design from this spec is implemented through reference, H3 density, clean, and merge notebooks (`05`–`10`) with `H3_RESOLUTION=4` and the B2/A3 forward-label panel. Detailed artifacts, resolve rules, and the modelling-panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Build status: [`ROADMAP.md`](../ROADMAP.md).
+Join design from this spec is implemented through reference, H3 density, clean, and merge notebooks (`05`–`10`) with `H3_RESOLUTION=4` and the **B2 pathogen-long / A3** panel. Detailed artifacts, resolve rules, and the modelling-panel contract: [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Build status: [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
@@ -251,6 +267,6 @@ Join design from this spec is implemented through reference, H3 density, clean, 
 |------|------|
 | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | VectorNet source |
 | [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Multi-source virus feeds + pathogen ↔ vector_group table |
-| [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids), resolve steps, merge modelling panel |
+| [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference data (incl. subnational centroids, priority taxa), resolve steps, merge modelling panel |
 | [`README.md`](../README.md) | Intended approach (join to common geo–temporal units) |
 | [`ROADMAP.md`](../ROADMAP.md) | Build status (data foundation Done; EDA / models next) |
