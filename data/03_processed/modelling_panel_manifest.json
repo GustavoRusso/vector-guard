@@ -18,7 +18,7 @@
   },
   "source_manifest_sha256": {
     "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
-    "virus_manifest.json": "9ea599ec4b940982973c5e8563d34c5f02e29ae89fdcba5b073329c48e1034c0"
+    "virus_manifest.json": "315c2263058bdeece996cde5930da410270279408e0899bdac6f5bb12c9786a7"
   },
   "temporal_grain": "year x month",
   "tier1_key": [

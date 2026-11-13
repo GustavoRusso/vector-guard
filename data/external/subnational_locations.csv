@@ -112,6 +112,7 @@ AT,strasshof-lower-austria,admin1,Niederösterreich,48.2477,15.7448,NaturalEarth
 AT,styria,admin1,Steiermark,47.3901,14.8565,NaturalEarth_10m_admin1
 AT,upper-austria,admin1,Oberösterreich,48.2377,13.856,NaturalEarth_10m_admin1
 AT,vienna,admin1,Wien,48.2247,16.3798,NaturalEarth_10m_admin1
+AT,weinviertel,nuts3,Weinviertel,48.626414,16.05267,NUTS_2021
 AT,wien,admin1,Wien,48.202775,16.393215,NUTS_2021
 AT,wiener-umland-nordteil,nuts3,Wiener Umland/Nordteil,48.298201,16.665094,NUTS_2021
 AT,wiener-umland-sudteil,nuts3,Wiener Umland/Südteil,48.03974,16.491644,NUTS_2021
@@ -2380,6 +2381,7 @@ DE,de409,nuts3,Märkisch-Oderland,52.665795,14.087945,NUTS_2021
 DE,de40b,nuts3,Oberspreewald-Lausitz,51.601001,13.948689,NUTS_2021
 DE,de40c,nuts3,Oder-Spree,52.231965,14.226823,NUTS_2021
 DE,de40e,nuts3,Potsdam-Mittelmark,52.233763,12.698203,NUTS_2021
+DE,de40g,nuts3,Spree-Neiße,51.621295,14.409174,NUTS_2021
 DE,de40h,nuts3,Teltow-Fläming,52.071284,13.234559,NUTS_2021
 DE,de40i,nuts3,Uckermark,53.255454,13.827284,NUTS_2021
 DE,de501,nuts3,"Bremen, Kreisfreie Stadt",53.106459,8.78765,NUTS_2021
@@ -2664,6 +2666,7 @@ FM,yap-state-federated-states-of,admin1,Yap,9.58101,138.114,NaturalEarth_10m_adm
 FR,ain,nuts3,Ain,46.134971,5.116558,NUTS_2021
 FR,aisne,nuts3,Aisne,49.560973,3.560342,NUTS_2021
 FR,allier,nuts3,Allier,46.387541,3.195469,NUTS_2021
+FR,alpes-de-haute-provence,nuts3,Alpes-de-Haute-Provence,44.098268,6.246728,NUTS_2021
 FR,alpes-maritimes,nuts3,Alpes-Maritimes,43.920594,7.175313,NUTS_2021
 FR,alsace,admin1,Alsace,48.318261,7.451482,NUTS_2021
 FR,alsace-region,admin1,Alsace,48.318261,7.451482,NUTS_2021
@@ -2797,6 +2800,7 @@ FR,frk25,nuts3,Loire,45.721837,4.16618,NUTS_2021
 FR,frk26,nuts3,Rhône,45.875051,4.634208,NUTS_2021
 FR,frk27,nuts3,Savoie,45.478972,6.451056,NUTS_2021
 FR,frk28,nuts3,Haute-Savoie,46.067671,6.456486,NUTS_2021
+FR,frl01,nuts3,Alpes-de-Haute-Provence,44.098268,6.246728,NUTS_2021
 FR,frl02,nuts3,Hautes-Alpes,44.669714,6.281027,NUTS_2021
 FR,frl03,nuts3,Alpes-Maritimes,43.920594,7.175313,NUTS_2021
 FR,frl04,nuts3,Bouches-du-Rhône,43.546931,5.087852,NUTS_2021
@@ -4639,6 +4643,7 @@ IT,biella,nuts3,Biella,45.585654,8.082777,NUTS_2021
 IT,bologna,nuts3,Bologna,44.409527,11.333756,NUTS_2021
 IT,brescia,nuts3,Brescia,45.687111,10.32893,NUTS_2021
 IT,brindisi,nuts3,Brindisi,40.618465,17.715086,NUTS_2021
+IT,cagliari,nuts3,Cagliari,39.416053,9.187343,NUTS_2021
 IT,calabria,admin1,Calabria,39.160409,16.382188,NUTS_2021
 IT,calabria-cosenza-city,admin1,Calabria,39.160409,16.382188,NUTS_2021
 IT,calabria-guardavalle,admin1,Calabria,39.160409,16.382188,NUTS_2021
@@ -4732,6 +4737,7 @@ IT,itg17,nuts3,Catania,37.59287,15.03173,NUTS_2021
 IT,itg19,nuts3,Siracusa,37.058976,15.031309,NUTS_2021
 IT,itg2d,nuts3,Sassari,40.610226,8.708366,NUTS_2021
 IT,itg2e,nuts3,Nuoro,40.397208,9.474321,NUTS_2021
+IT,itg2f,nuts3,Cagliari,39.416053,9.187343,NUTS_2021
 IT,itg2g,nuts3,Oristano,40.000556,8.72979,NUTS_2021
 IT,itg2h,nuts3,Sud Sardegna,39.506438,8.69813,NUTS_2021
 IT,ith10,nuts3,Bolzano-Bozen,46.705278,11.424148,NUTS_2021
@@ -5677,6 +5683,8 @@ PL,pl911,nuts3,Miasto Warszawa,52.240589,21.028379,NUTS_2021
 PL,pl924,nuts3,Ostrołęcki,52.992504,21.438035,NUTS_2021
 PL,podlaskie,admin1,Podlaskie,53.266902,22.944622,NUTS_2021
 PR,puerto-rico,admin1,Puerto Rico,18.2448,-66.4441,NaturalEarth_10m_admin1
+PT,alentejo-central,nuts3,Alentejo Central,38.598735,-7.856809,NUTS_2021
+PT,algarve,admin1,Algarve,37.20256,-8.129924,NUTS_2021
 PT,alto-alentejo,nuts3,Alto Alentejo,39.286789,-7.624405,NUTS_2021
 PT,braganca,admin1,Bragança,41.5188,-6.81935,NaturalEarth_10m_admin1
 PT,faro,admin1,Faro,37.1704,-7.93895,NaturalEarth_10m_admin1
@@ -5815,6 +5823,7 @@ RO,ro322,nuts3,Ilfov,44.546147,26.159845,NUTS_2021
 RO,ro411,nuts3,Dolj,44.138623,23.631586,NUTS_2021
 RO,ro413,nuts3,Mehedinţi,44.590247,22.813962,NUTS_2021
 RO,ro414,nuts3,Olt,44.245829,24.439211,NUTS_2021
+RO,ro415,nuts3,Vâlcea,45.10114,24.109027,NUTS_2021
 RO,ro421,nuts3,Arad,46.262233,21.754042,NUTS_2021
 RO,ro422,nuts3,Caraş-Severin,45.145848,22.027985,NUTS_2021
 RO,ro423,nuts3,Hunedoara,45.736156,22.938507,NUTS_2021
@@ -5825,6 +5834,7 @@ RO,sibiu-county,nuts3,Sibiu,45.851767,24.259897,NUTS_2021
 RO,suceava,nuts3,Suceava,47.615347,25.823836,NUTS_2021
 RO,teleorman,nuts3,Teleorman,44.016724,25.191096,NUTS_2021
 RO,tulcea,nuts3,Tulcea,44.987761,28.855079,NUTS_2021
+RO,valcea,nuts3,Vâlcea,45.10114,24.109027,NUTS_2021
 RO,vaslui,nuts3,Vaslui,46.518689,27.763413,NUTS_2021
 RO,vrancea,nuts3,Vrancea,45.782339,26.975343,NUTS_2021
 RS,belgrade,admin1,Grad Beograd,44.6408,20.4001,NaturalEarth_10m_admin1
