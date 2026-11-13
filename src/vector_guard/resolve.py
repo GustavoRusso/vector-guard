@@ -25,8 +25,8 @@ from vector_guard.virus_extract import (
     parse_decimal_coord,
 )
 
-# Locked in ``notebooks/07_h3_resolution_density.ipynb`` (spec ``04``): finest
-# candidate (4 vs 5) with usable Tier 1 co-occurrence under exact+centroid.
+# Locked in ``notebooks/01_sources/07_h3_resolution_density.ipynb`` (spec ``04``):
+# finest candidate (4 vs 5) with usable Tier 1 co-occurrence under exact+centroid.
 H3_RESOLUTION: int = 4
 
 GEO_PRECISION_EXACT = "exact_coords"
@@ -140,23 +140,23 @@ def region_candidate_keys(region: object) -> list[str]:
 
 
 def load_countries(reference_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/reference/countries.csv``."""
+    """Load ``data/external/countries.csv``."""
     directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
     path = directory / "countries.csv"
     if not path.exists():
         raise FileNotFoundError(
-            f"Missing {path}. Run notebooks/05_reference_countries.ipynb first."
+            f"Missing {path}. Run notebooks/01_sources/05_reference_countries.ipynb first."
         )
     return pd.read_csv(path, dtype={"iso2": str, "name": str, "name_aliases": str})
 
 
 def load_subnational_locations(reference_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/reference/subnational_locations.csv``."""
+    """Load ``data/external/subnational_locations.csv``."""
     directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
     path = directory / "subnational_locations.csv"
     if not path.exists():
         raise FileNotFoundError(
-            f"Missing {path}. Run notebooks/05_reference_countries.ipynb first."
+            f"Missing {path}. Run notebooks/01_sources/05_reference_countries.ipynb first."
         )
     return pd.read_csv(
         path,
@@ -165,12 +165,12 @@ def load_subnational_locations(reference_dir: Path | None = None) -> pd.DataFram
 
 
 def load_vector_taxon_groups(reference_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/reference/vector_taxon_groups.csv``."""
+    """Load ``data/external/vector_taxon_groups.csv``."""
     directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
     path = directory / "vector_taxon_groups.csv"
     if not path.exists():
         raise FileNotFoundError(
-            f"Missing {path}. Run notebooks/06_reference_vector_groups.ipynb first."
+            f"Missing {path}. Run notebooks/01_sources/06_reference_vector_groups.ipynb first."
         )
     return pd.read_csv(
         path,
@@ -179,23 +179,23 @@ def load_vector_taxon_groups(reference_dir: Path | None = None) -> pd.DataFrame:
 
 
 def load_interim_vectors(interim_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/interim/vectors_normalized.parquet``."""
+    """Load ``data/02_interim/vectors_normalized.parquet``."""
     directory = Path(interim_dir) if interim_dir is not None else default_interim_dir()
     path = directory / _VECTORS_INTERIM_NAME
     if not path.exists():
         raise FileNotFoundError(
-            f"Missing {path}. Run notebooks/08_clean_vectors.ipynb first."
+            f"Missing {path}. Run notebooks/01_sources/08_clean_vectors.ipynb first."
         )
     return pd.read_parquet(path)
 
 
 def load_interim_viruses(interim_dir: Path | None = None) -> pd.DataFrame:
-    """Load ``data/interim/viruses_normalized.parquet``."""
+    """Load ``data/02_interim/viruses_normalized.parquet``."""
     directory = Path(interim_dir) if interim_dir is not None else default_interim_dir()
     path = directory / _VIRUSES_INTERIM_NAME
     if not path.exists():
         raise FileNotFoundError(
-            f"Missing {path}. Run notebooks/09_clean_viruses.ipynb first."
+            f"Missing {path}. Run notebooks/01_sources/09_clean_viruses.ipynb first."
         )
     return pd.read_parquet(path)
 

@@ -5,12 +5,12 @@
     "min": "1957-09"
   },
   "inputs": {
-    "vectors_normalized": "data/interim/vectors_normalized.parquet",
-    "viruses_normalized": "data/interim/viruses_normalized.parquet"
+    "vectors_normalized": "data/02_interim/vectors_normalized.parquet",
+    "viruses_normalized": "data/02_interim/viruses_normalized.parquet"
   },
   "outputs": {
-    "manifest": "data/processed/modelling_panel_manifest.json",
-    "panel": "data/processed/modelling_panel.parquet"
+    "manifest": "data/03_processed/modelling_panel_manifest.json",
+    "panel": "data/03_processed/modelling_panel.parquet"
   },
   "panel_rows": 12995,
   "rows_by_spatial_tier": {

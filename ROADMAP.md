@@ -33,12 +33,12 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 | Select and document virus detection source(s) | Done | Multi-source strategy implemented (6 feeds, 26 pathogens, 19-col TSV) — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
 | Document spatial join (H3 + subnational centroids) | Done | Path A GPS / Path B curated centroids → Tier 1; country Tier 2 — [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
 | Document reference data + panel pipeline | Done | Countries, `subnational_locations.csv`, vector_group maps, coord priority ladder, H3 selection, merge contract — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Build vector dataset (geo + time) | Done | `08_clean_vectors.ipynb` → `data/interim/vectors_normalized.parquet` (ISO-2, midpoint year-month, `vector_group`, coord ladder, H3@4) |
-| Upgrade virus raw extract (multi-source + taxonomy) | Done | `03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` (26 taxa): ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC; unified 19-col schema + per-source manifest; EDA `04` + reference `05` refreshed — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
-| Build virus dataset (geo + time, clean) | Done | `09_clean_viruses.ipynb` → `data/interim/viruses_normalized.parquet` (ISO-2, coord ladder, `geo_precision`, H3@4) |
-| Build reference data (countries, subnational centroids, vector taxon groups) | Done | `05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Choose H3 resolution (density check) | Done | `07_h3_resolution_density.ipynb` → **`H3_RESOLUTION=4`** (exact+centroid production path; res 5 over-fragments co-occurrence); constant in `vector_guard.resolve` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
-| Merge modelling panel (vector + virus) | Done | `10_merge_modelling_panel.ipynb` → `data/processed/modelling_panel.parquet` + `modelling_panel_manifest.json`; grain `year×month`; VectorNet coverage required — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Build vector dataset (geo + time) | Done | `notebooks/01_sources/08_clean_vectors.ipynb` → `data/02_interim/vectors_normalized.parquet` (ISO-2, midpoint year-month, `vector_group`, coord ladder, H3@4) |
+| Upgrade virus raw extract (multi-source + taxonomy) | Done | `notebooks/01_sources/03_extract_viruses.ipynb` + `VIRUS_VECTOR_TAXON_MAP` (26 taxa): ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC; unified 19-col schema + per-source manifest; EDA `04` + reference `05` refreshed — [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) |
+| Build virus dataset (geo + time, clean) | Done | `notebooks/01_sources/09_clean_viruses.ipynb` → `data/02_interim/viruses_normalized.parquet` (ISO-2, coord ladder, `geo_precision`, H3@4) |
+| Build reference data (countries, subnational centroids, vector taxon groups) | Done | `notebooks/01_sources/05_reference_countries.ipynb` → `countries.csv` + `subnational_locations.csv`; `notebooks/01_sources/06_reference_vector_groups.ipynb` → `vector_taxon_groups.csv` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Choose H3 resolution (density check) | Done | `notebooks/01_sources/07_h3_resolution_density.ipynb` → **`H3_RESOLUTION=4`** (exact+centroid production path; res 5 over-fragments co-occurrence); constant in `vector_guard.resolve` — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Merge modelling panel (vector + virus) | Done | `notebooks/01_sources/10_merge_modelling_panel.ipynb` → `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json`; grain `year×month`; VectorNet coverage required — [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
 | Commit data or publish reproducible download steps | Done | Raw data gitignored; refresh notebooks documented in README; reference CSVs to be committed when built |
 
 ---
@@ -49,7 +49,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence.
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Initial vector / virus EDA notebooks | Done | `02_eda_vectors.ipynb`, `04_eda_viruses.ipynb` (multi-source per-source / `coord_source` / NUTS3 coverage) |
+| Initial vector / virus source inspect notebooks | Done | `notebooks/01_sources/02_inspect_vectors.ipynb`, `04_inspect_viruses.ipynb` (construction QA; not the EDA criterion) |
 | Data cleaning and preparation in `notebook.ipynb` | Done | `notebook.ipynb`: load panel + manifest; missingness; winsorize counts; year≥2010 geo/time filters; `panel_prep` / `X`/`y` handoff |
 | Distribution and range analysis of features | Next | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, definition of risk score target |

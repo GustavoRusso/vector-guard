@@ -11,8 +11,8 @@ The project uses the **VectorNet observations** Darwin Core Archive (DwC-A) publ
 | Latest download URL | `https://www.gbif.se/ipt/archive.do?r=vectornet_historical_data` |
 | Format | Darwin Core Archive (DwC-A ZIP) |
 | License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| Local path | `data/raw/vector/` (not committed; re-fetched on demand) |
-| Extract notebook | [`notebooks/01_extract_vectors.ipynb`](../notebooks/01_extract_vectors.ipynb) |
+| Local path | `data/01_raw/vector/` (not committed; re-fetched on demand) |
+| Extract notebook | [`notebooks/01_sources/01_extract_vectors.ipynb`](../notebooks/01_sources/01_extract_vectors.ipynb) |
 | Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_vector_detections()` |
 
 ## Requirements that drove the choice
@@ -55,7 +55,7 @@ Archive layout after extract: `occurrence.txt` (core table), `meta.xml`, `eml.xm
 
 ### Why VectorNet observations was chosen
 
-- **Institutional fit:** Official ECDC / EFSA One Health vector surveillance under the VectorNet GBIF publisher, aligned with European public-health use cases described in early research notes under `docs/`.
+- **Institutional fit:** Official ECDC / EFSA One Health vector surveillance under the VectorNet GBIF publisher, aligned with European public-health One Health vector surveillance use cases.
 - **Schema fit:** Standardized DwC-A with coordinates, administrative geography IDs, and event dates—enough to support country-, NUTS-, or grid-level aggregation later.
 - **Access model:** One HTTP GET of the latest ZIP from the GBIF Sweden IPT; **no GBIF account**, no async download queue, no API key.
 - **Surveillance semantics:** Includes sampling protocol / effort fields, not only opportunistic presence points.
@@ -63,7 +63,7 @@ Archive layout after extract: `occurrence.txt` (core table), `meta.xml`, `eml.xm
 
 ### How to refresh
 
-Run all cells in [`notebooks/01_extract_vectors.ipynb`](../notebooks/01_extract_vectors.ipynb). The notebook wipes `data/raw/vector/` (except `.gitkeep`), downloads the latest IPT archive, extracts it, and writes `manifest.json`.
+Run all cells in [`notebooks/01_sources/01_extract_vectors.ipynb`](../notebooks/01_sources/01_extract_vectors.ipynb). The notebook wipes `data/01_raw/vector/` (except `.gitkeep`), downloads the latest IPT archive, extracts it, and writes `manifest.json`.
 
 ```python
 from vector_guard.data import load_vector_detections

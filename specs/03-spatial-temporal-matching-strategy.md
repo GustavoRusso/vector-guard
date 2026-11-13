@@ -1,6 +1,6 @@
 # Spatial-temporal matching strategy (Virus ↔ VectorNet)
 
-Design specification for joining **virus detections** (multi-source extract under `data/raw/virus/`) with **vector detections** (VectorNet DwC-A) onto common geographic–temporal units.
+Design specification for joining **virus detections** (multi-source extract under `data/01_raw/virus/`) with **vector detections** (VectorNet DwC-A) onto common geographic–temporal units.
 
 | Field | Value |
 |-------|-------|
@@ -21,8 +21,8 @@ Implementation (code, notebooks, feature tables) is deferred to future iteration
 
 | Side | Source | Key raw fields |
 |------|--------|----------------|
-| Vectors | VectorNet DwC-A (`data/raw/vector/occurrence.txt`) | `scientificName`, `countryCode` (or derived from `higherGeographyID`), `higherGeographyID`, `decimalLatitude`, `decimalLongitude`, `eventDate`, `individualCount`, sampling effort fields; optional `dynamicProperties` when present |
-| Viruses | Multi-source extract (`data/raw/virus/virus_detections.tsv`) — see [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | `source`, `pathogen_name` / `tax_id`, `country`, `subnational_region`, `nuts_id`, `lat`, `lon`, `coord_source`, `collection_date`, `host`, `isolation_source`, accessions |
+| Vectors | VectorNet DwC-A (`data/01_raw/vector/occurrence.txt`) | `scientificName`, `countryCode` (or derived from `higherGeographyID`), `higherGeographyID`, `decimalLatitude`, `decimalLongitude`, `eventDate`, `individualCount`, sampling effort fields; optional `dynamicProperties` when present |
+| Viruses | Multi-source extract (`data/01_raw/virus/virus_detections.tsv`) — see [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | `source`, `pathogen_name` / `tax_id`, `country`, `subnational_region`, `nuts_id`, `lat`, `lon`, `coord_source`, `collection_date`, `host`, `isolation_source`, accessions |
 
 Pathogen ↔ vector-group mapping is defined in [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) (target virus taxonomy table).
 
@@ -85,7 +85,7 @@ H3 assignment always uses a concrete `(lat, lon)` at the chosen `H3_RESOLUTION`.
 | Path | When | How `(lat, lon)` is obtained | `geo_precision` (cleaning) |
 |------|------|------------------------------|----------------------------|
 | **A. Direct coordinates** | Valid `lat` / `lon` on the raw row (`coord_source` of `exact_gps` or `sample_backfill` for viruses; VectorNet `decimalLatitude` / `decimalLongitude`) | Use published coordinates as-is | `exact_coords` |
-| **B. Curated subnational / NUTS3 centroid** | No usable GPS, but a resolvable `(country_iso2, subnational_region)` and/or `nuts_id` matches [`data/reference/subnational_locations.csv`](04-reference-data-and-panel-pipeline.md) | Lookup table supplies representative centroid `(lat, lon)` | `subnational_centroid` |
+| **B. Curated subnational / NUTS3 centroid** | No usable GPS, but a resolvable `(country_iso2, subnational_region)` and/or `nuts_id` matches [`data/external/subnational_locations.csv`](04-reference-data-and-panel-pipeline.md) | Lookup table supplies representative centroid `(lat, lon)` | `subnational_centroid` |
 
 Both paths produce the same Tier 1 key: `h3_cell`. Country-only rows (no GPS and no resolvable subnational / NUTS key) stay at **Tier 2** with `geo_precision=country_only`.
 
@@ -97,7 +97,7 @@ This decision is required because virus sequence metadata are often country-only
 
 ### Guardrails (do not invent precision)
 
-1. **Never** geocode ambiguous free-text on the fly during clean/merge without first recording the `(country_iso2, region_key)` → centroid row in `data/reference/subnational_locations.csv`.
+1. **Never** geocode ambiguous free-text on the fly during clean/merge without first recording the `(country_iso2, region_key)` → centroid row in `data/external/subnational_locations.csv`.
 2. Only promote strings / codes that match the curated reference table (normalized keys). Unmatched region text stays country-only → **Tier 2**.
 3. Prefer **exact GPS** over centroid when both are available on a row.
 4. Record `geo_precision` on interim virus (and optionally vector) rows so density checks and models can distinguish `exact_coords` vs `subnational_centroid` vs `country_only`.
@@ -124,13 +124,13 @@ Normalize each occurrence to:
 
 Normalize each multi-source detection to:
 
-- `country_iso2` parsed from `country` (ENA style often `Country: region, locality`) via `data/reference/countries.csv` aliases
+- `country_iso2` parsed from `country` (ENA style often `Country: region, locality`) via `data/external/countries.csv` aliases
 - `subnational_region` from the text after `:` / Pathoplexus `division` / BV-BRC place strings when present
 - `nuts_id` when published (ECDC / aligned feeds)
 - `(lat, lon)` resolution priority (locked; detail also in spec `04`):
   1. Source exact GPS (`lat`/`lon` with `coord_source` in `{exact_gps, sample_backfill}`) → Path A
   2. Cross-source accession / sample backfill already reflected in the raw extract → still Path A
-  3. Match `(country_iso2, subnational_region | nuts_id)` to `data/reference/subnational_locations.csv` → Path B centroid
+  3. Match `(country_iso2, subnational_region | nuts_id)` to `data/external/subnational_locations.csv` → Path B centroid
   4. Else leave coords null → Tier 2 only
 - `h3_cell` when a resolved `(lat, lon)` exists (Tier 1); otherwise unset
 - `geo_precision` ∈ `{exact_coords, subnational_centroid, country_only}`
@@ -235,10 +235,10 @@ They are **not** a substitute for the multi-source virus dataset in [`specs/02-v
 Detailed reference artifacts (including `subnational_locations.csv`), notebook ownership (`05`–`10`), resolve rules, and merge panel contract live in [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md). Summary:
 
 1. Shared normalizers for country ISO-2, dates, and `vector_group` (reference CSVs + clean notebooks)
-2. Build and commit `data/reference/subnational_locations.csv` from distinct virus subnational strings + European NUTS3 centroids
+2. Build and commit `data/external/subnational_locations.csv` from distinct virus subnational strings + European NUTS3 centroids
 3. H3 cell assignment from Path A GPS or Path B centroids at the resolution chosen in `07_h3_resolution_density.ipynb`, with fallback to country when neither applies; evaluate density for exact-only vs exact+centroid
 4. Optional NUTS attachment for Europe reporting (alongside H3 keys)
-5. Aggregated training panel under `data/processed/` keyed by `(h3_cell or country_iso2, year, month, vector_group)`, with VectorNet coverage required for supervised rows
+5. Aggregated training panel under `data/03_processed/` keyed by `(h3_cell or country_iso2, year, month, vector_group)`, with VectorNet coverage required for supervised rows
 6. Notebook documenting H3 resolution choice, Tier 1 vs Tier 2 mix by `geo_precision`, class balance, and sequencing / outbreak / effort-bias caveats
 7. Update to [`ROADMAP.md`](../ROADMAP.md) when reference / clean / merge items move from Planned to Done
 

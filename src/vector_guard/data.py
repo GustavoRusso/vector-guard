@@ -205,27 +205,27 @@ def find_repo_root(start: Path | None = None) -> Path:
 
 def default_vector_raw_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
-    return root / "data" / "raw" / "vector"
+    return root / "data" / "01_raw" / "vector"
 
 
 def default_virus_raw_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
-    return root / "data" / "raw" / "virus"
+    return root / "data" / "01_raw" / "virus"
 
 
 def default_reference_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
-    return root / "data" / "reference"
+    return root / "data" / "external"
 
 
 def default_interim_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
-    return root / "data" / "interim"
+    return root / "data" / "02_interim"
 
 
 def default_processed_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
-    return root / "data" / "processed"
+    return root / "data" / "03_processed"
 
 
 def resolve_vector_core_path(raw_dir: Path) -> Path:
@@ -233,7 +233,7 @@ def resolve_vector_core_path(raw_dir: Path) -> Path:
     if not raw_dir.exists():
         raise FileNotFoundError(
             f"Vector raw directory not found: {raw_dir}. "
-            "Run notebooks/01_extract_vectors.ipynb first."
+            "Run notebooks/01_sources/01_extract_vectors.ipynb first."
         )
 
     meta_path = raw_dir / "meta.xml"
@@ -256,7 +256,7 @@ def resolve_vector_core_path(raw_dir: Path) -> Path:
 
     raise FileNotFoundError(
         f"Could not find DwC-A core table under {raw_dir}. "
-        "Run notebooks/01_extract_vectors.ipynb to refresh the raw archive."
+        "Run notebooks/01_sources/01_extract_vectors.ipynb to refresh the raw archive."
     )
 
 
@@ -265,7 +265,7 @@ def resolve_virus_core_path(raw_dir: Path) -> Path:
     if not raw_dir.exists():
         raise FileNotFoundError(
             f"Virus raw directory not found: {raw_dir}. "
-            "Run notebooks/03_extract_viruses.ipynb first."
+            "Run notebooks/01_sources/03_extract_viruses.ipynb first."
         )
 
     candidate = raw_dir / _VIRUS_TSV_NAME
@@ -274,7 +274,7 @@ def resolve_virus_core_path(raw_dir: Path) -> Path:
 
     raise FileNotFoundError(
         f"Could not find {_VIRUS_TSV_NAME} under {raw_dir}. "
-        "Run notebooks/03_extract_viruses.ipynb to refresh the raw extract."
+        "Run notebooks/01_sources/03_extract_viruses.ipynb to refresh the raw extract."
     )
 
 
@@ -285,7 +285,7 @@ def load_vector_detections(raw_dir: Path | None = None) -> pd.DataFrame:
     ----------
     raw_dir:
         Directory containing the extracted DwC-A. Defaults to
-        ``<repo>/data/raw/vector``.
+        ``<repo>/data/01_raw/vector``.
     """
     directory = Path(raw_dir) if raw_dir is not None else default_vector_raw_dir()
     core_path = resolve_vector_core_path(directory)
@@ -295,7 +295,8 @@ def load_vector_detections(raw_dir: Path | None = None) -> pd.DataFrame:
 def load_virus_detections(raw_dir: Path | None = None) -> pd.DataFrame:
     """Load the multi-source virus detections TSV as a string-typed DataFrame.
 
-    Expects the unified schema written by ``notebooks/03_extract_viruses.ipynb``
+    Expects the unified schema written by
+    ``notebooks/01_sources/03_extract_viruses.ipynb``
     (see ``VIRUS_RAW_COLUMNS`` in ``vector_guard.virus_extract``): ``record_id``,
     ``source``, accessions, pathogen tags, place / NUTS / coords, ``coord_source``,
     and collection / host fields.
@@ -304,7 +305,7 @@ def load_virus_detections(raw_dir: Path | None = None) -> pd.DataFrame:
     ----------
     raw_dir:
         Directory containing ``virus_detections.tsv``. Defaults to
-        ``<repo>/data/raw/virus``.
+        ``<repo>/data/01_raw/virus``.
     """
     directory = Path(raw_dir) if raw_dir is not None else default_virus_raw_dir()
     core_path = resolve_virus_core_path(directory)

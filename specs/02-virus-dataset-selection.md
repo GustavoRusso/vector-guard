@@ -10,7 +10,7 @@ Decision record for the **virus detections** sources used by Vector Guard (patho
 
 ## Decision
 
-Use a **multi-source programmatic virus detection strategy** written into a single unified table under `data/raw/virus/`. The feeds combine INSDC sequence metadata (via ENA Portal + curated portals) with European / Mediterranean outbreak and surveillance tables so that pathogen + place + time coverage is dense enough for VectorNet joins.
+Use a **multi-source programmatic virus detection strategy** written into a single unified table under `data/01_raw/virus/`. The feeds combine INSDC sequence metadata (via ENA Portal + curated portals) with European / Mediterranean outbreak and surveillance tables so that pathogen + place + time coverage is dense enough for VectorNet joins.
 
 | Field | Value |
 |-------|-------|
@@ -20,10 +20,10 @@ Use a **multi-source programmatic virus detection strategy** written into a sing
 | Curated sequence enrichment | [BV-BRC Genome REST API](https://www.bv-brc.org/api/genome/); [Pathoplexus LAPIS](https://pathoplexus.org/) |
 | Outbreak / admin surveillance | FAO EMPRES-i BigQuery CSV; ECDC WNV weekly/monthly NUTS3 reports |
 | Format | Unified TSV metadata extract (`virus_detections.tsv`) |
-| Local path | `data/raw/virus/` (not committed; re-fetched on demand) |
-| Extract notebook | [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) |
+| Local path | `data/01_raw/virus/` (not committed; re-fetched on demand) |
+| Extract notebook | [`notebooks/01_sources/03_extract_viruses.ipynb`](../notebooks/01_sources/03_extract_viruses.ipynb) |
 | Loader / helpers | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_virus_detections()`, `VIRUS_VECTOR_TAXON_MAP`; [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) — `VIRUS_RAW_COLUMNS`, normalize / dedupe |
-| EDA notebook | [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) |
+| Inspect notebook | [`notebooks/01_sources/04_inspect_viruses.ipynb`](../notebooks/01_sources/04_inspect_viruses.ipynb) |
 
 **Why multi-source (not replace ENA):** ENA `result=sequence` alone yields many rows but sparse exact coordinates and drops sequences that lack both `country` and `collection_date` on the sequence flatfile. Read runs, BioSamples, curated INSDC portals, and outbreak feeds densify **geolocation** and add non-sequenced Europe detections without abandoning a free, reproducible download path.
 
@@ -116,14 +116,14 @@ Virus records must be joinable later to VectorNet on space and time (join design
 
 1. **Access:** Prefer free, account-free, reproducible HTTP/API or checksummed bulk extracts.
 2. **Coverage:** Europe-strong + worldwide sequences, plus Europe/Med outbreak and NUTS3 densification.
-3. **Schema:** One unified `data/raw/virus/virus_detections.tsv` shape with an explicit `source` column.
+3. **Schema:** One unified `data/01_raw/virus/virus_detections.tsv` shape with an explicit `source` column.
 4. **Taxon breadth:** One `VIRUS_VECTOR_TAXON_MAP` drives sequence/run queries and pathogen tagging across feeds.
 5. **Geo density:** Multi-source + sample backfill + curated coords address the sparse ENA `location` field without inventing street-level precision at extract time (centroid promotion is specified in specs `03` / `04`).
 6. **Do not replace ENA wholesale:** Secondary portals overlap INSDC; outbreak feeds complement rather than substitute sequence detections.
 
 ## Unified raw schema and deduplication
 
-Output of the extract: `data/raw/virus/virus_detections.tsv` plus `manifest.json` (fetch time, per-source and per-pathogen counts, SHA-256, citations, `coord_source_counts`).
+Output of the extract: `data/01_raw/virus/virus_detections.tsv` plus `manifest.json` (fetch time, per-source and per-pathogen counts, SHA-256, citations, `coord_source_counts`).
 
 ### Canonical columns (`VIRUS_RAW_COLUMNS`)
 
@@ -221,9 +221,9 @@ Keep tagging outbreak rows (`empres_i`, `ecdc_atlas`) with the same `pathogen_na
 
 ### Extract implementation
 
-[`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb):
+[`notebooks/01_sources/03_extract_viruses.ipynb`](../notebooks/01_sources/03_extract_viruses.ipynb):
 
-1. Wipe `data/raw/virus/` (preserve `.gitkeep`).
+1. Wipe `data/01_raw/virus/` (preserve `.gitkeep`).
 2. Fetch all six feeds; normalize into `VIRUS_RAW_COLUMNS`.
 3. Apply INSDC + outbreak dedupe; assign stable `record_id`.
 4. Write `virus_detections.tsv` + `manifest.json` (per-source / per-pathogen counts, citations, `coord_source_counts`).
@@ -257,7 +257,7 @@ VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g.
 | [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference tables, virus clean/resolve, modelling panel |
 | [`README.md`](../README.md) | Published virus data table and refresh steps |
 | [`ROADMAP.md`](../ROADMAP.md) | Build status for multi-source extract / taxonomy |
-| [`notebooks/03_extract_viruses.ipynb`](../notebooks/03_extract_viruses.ipynb) | Multi-source virus extract |
-| [`notebooks/04_eda_viruses.ipynb`](../notebooks/04_eda_viruses.ipynb) | Virus EDA (per-source, coord_source, NUTS3) |
+| [`notebooks/01_sources/03_extract_viruses.ipynb`](../notebooks/01_sources/03_extract_viruses.ipynb) | Multi-source virus extract |
+| [`notebooks/01_sources/04_inspect_viruses.ipynb`](../notebooks/01_sources/04_inspect_viruses.ipynb) | Virus source inspect (per-source, coord_source, NUTS3) |
 | [`src/vector_guard/data.py`](../src/vector_guard/data.py) | `VIRUS_VECTOR_TAXON_MAP`, `load_virus_detections()` |
 | [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) | Unified schema + dedupe helpers |

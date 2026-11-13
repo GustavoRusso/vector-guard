@@ -1,15 +1,15 @@
 docs
 
-# VectorNet DwC-A raw downloads (re-fetch via notebooks/01_extract_vectors.ipynb)
-data/raw/vector/*
-!data/raw/vector/.gitkeep
+# VectorNet DwC-A raw downloads (re-fetch via notebooks/01_sources/01_extract_vectors.ipynb)
+data/01_raw/vector/*
+!data/01_raw/vector/.gitkeep
 
-# ENA / INSDC virus detection raw downloads (re-fetch via notebooks/03_extract_viruses.ipynb)
-data/raw/virus/*
-!data/raw/virus/.gitkeep
+# Multi-source virus detection raw downloads (re-fetch via notebooks/01_sources/03_extract_viruses.ipynb)
+data/01_raw/virus/*
+!data/01_raw/virus/.gitkeep
 
-# Cached GIS downloads used to build reference CSVs (notebook 05)
-data/reference/.cache/
+# Cached GIS downloads used to build external lookup CSVs (notebook 05)
+data/external/.cache/
 
 
 # Byte-compiled / optimized / DLL files

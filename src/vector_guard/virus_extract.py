@@ -1,6 +1,6 @@
 """Normalize and deduplicate multi-source virus detection extracts.
 
-Helpers for ``notebooks/03_extract_viruses.ipynb`` that implement the unified
+Helpers for ``notebooks/01_sources/03_extract_viruses.ipynb`` that implement the unified
 raw schema and merge rules from ``specs/02-virus-dataset-selection.md``.
 """
 
