@@ -4,7 +4,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | Specs locked for **B2 pathogen-long** panel (`H3_RESOLUTION=4`, A3 clock); merge notebook / processed parquet rebuild tracked after this decision |
+| Status | **B2 pathogen-long** panel locked and regenerated (`H3_RESOLUTION=4`, A3 clock); notebook `10` + `data/03_processed/modelling_panel.*` |
 | Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels + priority vector taxa) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
@@ -387,7 +387,7 @@ Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + model selection
 
 ## Status
 
-Specs lock the **B2 pathogen-long / A3** contract (`H3_RESOLUTION=4`). Reference CSVs (`pathogen_vector_group.csv`, `priority_vector_taxa.csv`) and merge notebook `10` must be rebuilt to match this schema before consumers rely on the processed parquet. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through the **B2 pathogen-long / A3** modelling panel is complete (`03`–`10`; `H3_RESOLUTION=4`). Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 

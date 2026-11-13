@@ -9,54 +9,245 @@
   "horizon_years_primary": 5,
   "horizon_years_secondary": 10,
   "inputs": {
+    "pathogen_vector_group": "data/external/pathogen_vector_group.csv",
+    "priority_vector_taxa": "data/external/priority_vector_taxa.csv",
     "vectors_normalized": "data/02_interim/vectors_normalized.parquet",
     "viruses_normalized": "data/02_interim/viruses_normalized.parquet"
   },
+  "n_pathogens": 26,
   "outputs": {
     "manifest": "data/03_processed/modelling_panel_manifest.json",
     "panel": "data/03_processed/modelling_panel.parquet"
   },
-  "panel_rows": 12995,
-  "primary_label": "virus_within_5y",
-  "rows_by_spatial_tier": {
-    "h3": 12995
+  "panel_rows": 112134,
+  "pathogen_ever_after_units": 6102,
+  "pathogen_ever_before_units": 1388,
+  "pathogen_geo_precision_mix": {
+    "mean_share_centroid_on_positive_tier1": 0.20252862586311188,
+    "mean_share_exact_coords_on_positive_tier1": 0.7974713741368881,
+    "tier1_rows_pathogen_same_month": 46,
+    "tier1_rows_pathogen_within_10y": 3417,
+    "tier1_rows_pathogen_within_5y": 1740
   },
-  "secondary_label": "virus_within_10y",
+  "pathogen_positive_rate": 0.015517149125153834,
+  "pathogen_positive_rates": {
+    "African horse sickness virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 5038
+    },
+    "Akabane orthobunyavirus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 5038
+    },
+    "Alongshan virus": {
+      "positive_rate": 0.002331002331002331,
+      "positives": 2,
+      "rows": 858
+    },
+    "Batai orthobunyavirus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Bluetongue virus": {
+      "positive_rate": 0.08455736403334657,
+      "positives": 426,
+      "rows": 5038
+    },
+    "Chikungunya virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Crimean-Congo hemorrhagic fever virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 858
+    },
+    "Dengue virus": {
+      "positive_rate": 0.0004495055439017081,
+      "positives": 3,
+      "rows": 6674
+    },
+    "Epizootic hemorrhagic disease virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 5038
+    },
+    "Inkoo orthobunyavirus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Japanese encephalitis virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Jingmen tick virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 858
+    },
+    "Louping ill virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 858
+    },
+    "Omsk hemorrhagic fever virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 858
+    },
+    "Phlebovirus (Mediterranean sandfly fever complex)": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 425
+    },
+    "Rift Valley fever virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Sandfly fever Naples phlebovirus / Toscana virus": {
+      "positive_rate": 0.011764705882352941,
+      "positives": 5,
+      "rows": 425
+    },
+    "Schmallenberg virus": {
+      "positive_rate": 0.048630408892417626,
+      "positives": 245,
+      "rows": 5038
+    },
+    "Sindbis virus": {
+      "positive_rate": 0.00014983518130056938,
+      "positives": 1,
+      "rows": 6674
+    },
+    "Tahyna / California encephalitis orthobunyavirus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Thogoto / Bourbon thogotovirus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 858
+    },
+    "Tick-borne encephalitis virus": {
+      "positive_rate": 0.004662004662004662,
+      "positives": 4,
+      "rows": 858
+    },
+    "Usutu virus": {
+      "positive_rate": 0.07476775546898412,
+      "positives": 499,
+      "rows": 6674
+    },
+    "West Nile virus": {
+      "positive_rate": 0.0827090200779143,
+      "positives": 552,
+      "rows": 6674
+    },
+    "Yellow fever virus": {
+      "positive_rate": 0.0,
+      "positives": 0,
+      "rows": 6674
+    },
+    "Zika virus": {
+      "positive_rate": 0.0004495055439017081,
+      "positives": 3,
+      "rows": 6674
+    }
+  },
+  "pathogen_positive_units": 1740,
+  "pathogen_same_month_units": 46,
+  "pathogen_within_10y_units": 3417,
+  "primary_label": "pathogen_within_5y",
+  "priority_feature_slugs": [
+    "culicoides",
+    "culicoides_achrayi",
+    "culicoides_chiopterus",
+    "culicoides_circumscriptus",
+    "culicoides_dewulfi",
+    "culicoides_festivipennis",
+    "culicoides_furcillatus",
+    "culicoides_imicola",
+    "culicoides_kingi",
+    "culicoides_lupicaris",
+    "culicoides_pallidicornis",
+    "culicoides_paolae",
+    "culicoides_puncticollis",
+    "culicoides_riethi",
+    "culicoides_scoticus",
+    "aedes",
+    "aedes_albopictus",
+    "aedes_caspius",
+    "aedes_japonicus",
+    "aedes_vexans_vexans",
+    "anopheles",
+    "anopheles_claviger",
+    "coquillettidia_richiardii",
+    "culex",
+    "culex_laticinctus",
+    "culex_pipiens",
+    "culex_theileri",
+    "culex_torrentium",
+    "culiseta_annulata",
+    "culiseta_longiareolata",
+    "phlebotomus",
+    "phlebotomus_alexandri",
+    "phlebotomus_balcanicus",
+    "phlebotomus_burneyi",
+    "phlebotomus_longicuspis",
+    "phlebotomus_mascittii",
+    "phlebotomus_neglectus",
+    "phlebotomus_papatasi",
+    "phlebotomus_perfiliewi",
+    "phlebotomus_perniciosus",
+    "phlebotomus_sergenti",
+    "phlebotomus_simici",
+    "phlebotomus_tobbi",
+    "sergentomyia_dentata",
+    "sergentomyia_minuta",
+    "dermacentor_reticulatus",
+    "hyalomma_lusitanicum",
+    "hyalomma_marginatum",
+    "ixodes_persulcatus",
+    "ixodes_ricinus",
+    "ornithodoros_erraticus",
+    "rhipicephalus"
+  ],
+  "rows_by_spatial_tier": {
+    "h3": 112134
+  },
+  "secondary_label": "pathogen_within_10y",
   "source_manifest_sha256": {
     "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
     "virus_manifest.json": "315c2263058bdeece996cde5930da410270279408e0899bdac6f5bb12c9786a7"
   },
-  "temporal_grain": "year x month (vector observation); virus labels relative to row timestamp",
+  "temporal_grain": "year x month (vector observation); pathogen labels relative to row timestamp",
   "tier1_key": [
     "h3_cell",
     "year",
     "month",
-    "vector_group"
+    "vector_group",
+    "pathogen_name"
   ],
   "tier2_key": [
     "country_iso2",
     "year",
     "month",
-    "vector_group"
+    "vector_group",
+    "pathogen_name"
   ],
-  "training_filter": "Supervised panel includes only observed VectorNet months (B2); virus-only units are excluded; no synthetic empty months after first vector (A3 clock only). Primary label virus_within_5y is forward from the row time in the same spatial key x vector_group. Zeros / null delays mean no reported detection in the merged feeds (right-censored by extract end), not proven absence.",
+  "training_filter": "Supervised panel includes only observed VectorNet months (B2 pathogen-long); virus-only units are excluded; no synthetic empty months after first vector (A3 clock only). Primary label pathogen_within_5y is forward from the row time in the same spatial key x pathogen_name (within vector_group). Zeros / null delays mean no reported detection of that pathogen in the merged feeds (right-censored by extract end), not proven absence.",
   "vector_groups": [
     "biting_midge",
     "mosquito",
     "sandfly",
     "tick"
-  ],
-  "virus_ever_after_units": 4754,
-  "virus_ever_before_units": 1289,
-  "virus_geo_precision_mix": {
-    "mean_share_centroid_on_positive_tier1": 0.17364349815248203,
-    "mean_share_exact_coords_on_positive_tier1": 0.826356501847518,
-    "tier1_units_virus_same_month": 45,
-    "tier1_units_virus_within_10y": 2995,
-    "tier1_units_virus_within_5y": 1538
-  },
-  "virus_positive_rate": 0.1183532127741439,
-  "virus_positive_units": 1538,
-  "virus_same_month_units": 45,
-  "virus_within_10y_units": 2995
+  ]
 }

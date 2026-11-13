@@ -1,24 +1,24 @@
 # Vector Guard
 
-Predict geographic risk of vector-borne virus presence or outbreak from vector detections and related spatial-temporal context.
+Predict **pathogen-specific** geographic risk from observed vector activity (ideally at species/genus resolution): given vectors here, how likely is pathogen X soon?
 
 ## Problem statement
 
-Vector-borne diseases (for example dengue, West Nile fever, Zika, or chikungunya) spread when competent vectors—such as mosquitoes or ticks—are present and environmental and ecological conditions allow transmission. As vectors expand into new areas and climate and land use change, public-health agencies need ways to prioritize surveillance and control before outbreaks become large.
+Vector-borne diseases (for example dengue, West Nile fever, Zika, or chikungunya) spread when competent vectors—such as mosquitoes or ticks—are present and environmental and ecological conditions allow transmission. The same vector group can transmit several pathogens, so prioritization needs **which** pathogen is at risk—not only whether any virus in that ecological group might appear.
 
 Existing tools often fall into two categories:
 
-1. **Suitability / outbreak risk** — Can this place support transmission *if* the pathogen is present? This is relatively tractable with entomological, environmental, and epidemiological signals.
-2. **Exact introduction timing** — *When* will the virus first arrive at a given location? That is highly stochastic: it depends on rare human mobility events (for example an infected traveler) and is much harder to predict reliably.
+1. **Suitability / outbreak risk** — Can this place support transmission of a given pathogen *if* introduction occurs? This is relatively tractable with entomological, environmental, and epidemiological signals.
+2. **Exact introduction timing** — *When* will a pathogen first arrive at a given location? That is highly stochastic: it depends on rare human mobility events (for example an infected traveler) and is much harder to predict reliably.
 
-**Vector Guard** focuses on the first problem. The project estimates a **risk score** (probability of suitability or outbreak risk) for geographic locations, including places where virus reports are sparse or absent, by relating vector presence patterns to virus detection patterns over space and time.
+**Vector Guard** focuses on the first problem. The project estimates a **pathogen-specific risk score** for geographic locations by relating vector presence patterns (including priority species/genus counts) to detection patterns of each target pathogen over space and time.
 
 ### How the solution will be used
 
 The intended output is an **early-warning / prioritization aid** for surveillance and control planning:
 
-- Flag locations with high estimated risk given observed vector activity
-- Help compare relative risk across regions or time windows
+- Flag locations with high estimated risk for a **named pathogen** given observed vector activity
+- Help compare relative risk across pathogens, regions, or time windows
 - Support decisions on where to intensify trapping, testing, or outreach
 
 ### Project layout
@@ -78,9 +78,9 @@ The modelling handoff is a single panel:
 | Panel | [`data/03_processed/modelling_panel.parquet`](data/03_processed/) |
 | Manifest | `data/03_processed/modelling_panel_manifest.json` |
 
-**Grain:** observed VectorNet units — Tier 1 `(h3_cell, year, month, vector_group)`; Tier 2 `(country_iso2, year, month, vector_group)`. **Primary target:** `virus_within_5y` (forward ≤5 years in the same key×`vector_group`). Also on the panel: `virus_within_10y`, `virus_ever_before` / `virus_ever_after`, nullable delay columns, `virus_same_month`. Supervised rows require VectorNet coverage (B2/A3 contract in specs `03`/`04`).
+**Grain (B2 pathogen-long):** each observed VectorNet unit × each mapped pathogen — Tier 1 `(h3_cell, year, month, vector_group, pathogen_name)`; Tier 2 `(country_iso2, year, month, vector_group, pathogen_name)`. **Primary target:** `pathogen_within_5y` (forward ≤5 years for **that** pathogen). Also on the panel: `pathogen_within_10y`, ever/delay/same-month flags, `species_richness`, and `vector_count_<slug>` priority-taxon features. Supervised rows require VectorNet coverage (B2/A3 contract in specs `03`/`04`).
 
-**Pathogen ↔ vector group:** which viruses join to which `vector_group` is documented in [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy) (decision docs live under `specs/`). Authoritative code map: [`src/vector_guard/data.py`](src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`.
+**Pathogen ↔ vector group:** which pathogens explode onto which `vector_group` is documented in [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy); mirror CSV `data/external/pathogen_vector_group.csv`. Authoritative code map: [`src/vector_guard/data.py`](src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`.
 
 Load it in a notebook (same pattern as root [`notebook.ipynb`](notebook.ipynb)):
 
@@ -145,7 +145,7 @@ Until then: rebuild the panel via [`notebooks/01_sources/README.md`](notebooks/0
 # Placeholder — endpoint and payload TBD
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
-  -d '{"h3_cell": "...", "year": 2023, "month": 7, "vector_group": "mosquito"}'
+  -d '{"h3_cell": "...", "year": 2023, "month": 7, "vector_group": "mosquito", "pathogen_name": "West Nile virus"}'
 ```
 
 ## Known limitations / next steps
@@ -153,6 +153,6 @@ curl -X POST http://localhost:8000/predict \
 - Not a clinical diagnostic; does not replace expert epidemiological judgment.
 - Exact first-introduction timing is out of scope.
 - Virus detections are not classified as local vs imported; travel-related cases may appear as place-time positives (deferred label-quality work in [`ROADMAP.md`](ROADMAP.md) / [`specs/02`](specs/02-virus-dataset-selection.md)).
-- Virus zeros mean no report in the merged feeds for that unit-window, not proof of absence.
+- Pathogen zeros mean no report of **that** pathogen in the merged feeds for that unit-window, not proof of absence.
 
 See [`ROADMAP.md`](ROADMAP.md) for planned features and build order.

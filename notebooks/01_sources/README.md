@@ -4,6 +4,8 @@ Rebuild the modelling panel used by root [`notebook.ipynb`](../../notebook.ipynb
 
 **Output:** [`data/03_processed/modelling_panel.parquet`](../../data/03_processed/) (+ `modelling_panel_manifest.json`).
 
+**Panel grain:** B2 **pathogen-long** — observed VectorNet `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Primary label: `pathogen_within_5y`. Species features: `species_richness` + `vector_count_<slug>` from `priority_vector_taxa.csv`.
+
 This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA and model training use the panel in root `notebook.ipynb`.
 
 Design decisions live in [`specs/`](../../specs/). Do not invent join rules, schemas, or pipeline contracts here; update the relevant spec when a decision changes.
@@ -29,7 +31,7 @@ Run in order when rebuilding from scratch (or re-run from the step that changed)
 | [`03_extract_viruses.ipynb`](03_extract_viruses.ipynb) | Multi-source virus extract | `data/01_raw/virus/virus_detections.tsv` + `manifest.json` |
 | [`04_inspect_viruses.ipynb`](04_inspect_viruses.ipynb) | Virus construction QA | — |
 | [`05_reference_countries.ipynb`](05_reference_countries.ipynb) | Countries + subnational centroids | `data/external/countries.csv`, `subnational_locations.csv` |
-| [`06_reference_vector_groups.ipynb`](06_reference_vector_groups.ipynb) | Taxon → `vector_group` | `data/external/vector_taxon_groups.csv` |
+| [`06_reference_vector_groups.ipynb`](06_reference_vector_groups.ipynb) | Taxon → `vector_group`; pathogen mirror; priority taxa | `vector_taxon_groups.csv`, `pathogen_vector_group.csv`, `priority_vector_taxa.csv` |
 | [`07_h3_resolution_density.ipynb`](07_h3_resolution_density.ipynb) | H3 resolution density check | Decision recorded in [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) (`H3_RESOLUTION=4`) |
 | [`08_clean_vectors.ipynb`](08_clean_vectors.ipynb) | Normalize vectors | `data/02_interim/vectors_normalized.parquet` |
 | [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses | `data/02_interim/viruses_normalized.parquet` |
