@@ -32,9 +32,10 @@ Run in order when rebuilding from scratch (or re-run from the step that changed)
 | [`04_inspect_viruses.ipynb`](04_inspect_viruses.ipynb) | Virus construction QA | — |
 | [`05_reference_countries.ipynb`](05_reference_countries.ipynb) | Countries + subnational centroids | `data/external/countries.csv`, `subnational_locations.csv` |
 | [`06_reference_vector_groups.ipynb`](06_reference_vector_groups.ipynb) | Taxon → `vector_group`; pathogen mirror; priority taxa (**EDA/prep** closed set) | `vector_taxon_groups.csv`, `pathogen_vector_group.csv`, `priority_vector_taxa.csv` |
+| [`06b_reference_host_groups.ipynb`](06b_reference_host_groups.ipynb) | Host → `host_group` aliases | `data/external/host_groups.csv` |
 | [`07_h3_resolution_density.ipynb`](07_h3_resolution_density.ipynb) | H3 resolution density check | Decision recorded in [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) (`H3_RESOLUTION=4`) |
 | [`08_clean_vectors.ipynb`](08_clean_vectors.ipynb) | Normalize vectors | `data/02_interim/vectors_normalized.parquet` |
-| [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses | `data/02_interim/viruses_normalized.parquet` |
+| [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses (incl. `host_group`) | `viruses_normalized.parquet`; `virus_unmatched_regions.csv`; `virus_unmatched_hosts.csv` |
 | [`10_merge_modelling_panel.ipynb`](10_merge_modelling_panel.ipynb) | Merge supervised panel + species side table | `modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` |
 
 ## Refresh raw extracts
@@ -61,8 +62,8 @@ viruses = load_virus_detections()
 ## Rebuild the modelling panel end-to-end
 
 1. Refresh raw extracts (`01`, `03`) if sources changed.
-2. Refresh reference tables (`05`, `06`) if aliases or taxon maps changed.
-3. Re-run clean steps (`08`, `09`), then merge (`10`).
+2. Refresh reference tables (`05`, `06`, `06b`) if country/region aliases, taxon maps, or host → `host_group` aliases changed.
+3. Re-run clean steps (`08`, `09`), then merge (`10`). (`09` applies `host_groups.csv`; merge does not consume `host_group` yet.)
 4. Confirm `data/03_processed/modelling_panel.parquet` and `modelling_panel_species.parquet` exist, then open root `notebook.ipynb`.
 
 How to load the panel / species table: root [`README.md`](../../README.md) Dataset section and [`notebook.ipynb`](../../notebook.ipynb).
