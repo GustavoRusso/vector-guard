@@ -4,8 +4,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | **B2 pathogen-long** panel + **long species side table** contract locked (`H3_RESOLUTION=4`, A3 clock); notebook `10` → `modelling_panel.*` + `modelling_panel_species.parquet`; wide `vector_count_*` are an EDA/prep late pivot, not merge columns |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species composition side table + late priority pivot) |
+| Status | **B2 pathogen-long** panel + **long species side table** contract locked (`H3_RESOLUTION=4`, A3 clock); notebook `10` → `modelling_panel.*` + `modelling_panel_species.parquet`; wide `vector_count_*` are an EDA/prep late pivot, not merge columns; virus interim `host_group` classification locked (merge does **not** consume it yet) |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species composition side table + late priority pivot); 2026-11 (virus `host` → `host_group`) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -25,6 +25,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Vector species features | Panel: group aggregates + `species_richness` only (no merge-time `vector_count_*`). Full composition in long `modelling_panel_species.parquet` (unit × `scientific_name`). EDA/prep: unit-grain pivot of the **locked** closed set from `priority_vector_taxa.csv` → `vector_count_<feature_slug>` (0 if absent); frequency pivots of the full long table are exploratory only |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in [`specs/02`](02-virus-dataset-selection.md) |
+| Virus `host_group` | Interim classification of free-text `host` (+ `isolation_source` fallback when unresolved) into a closed vocabulary on `viruses_normalized.parquet`; merge notebook `10` does **not** consume `host_group` in this milestone |
 | Pipeline scope | Virus extract + reference + H3 + clean + merge (`03`–`10`); modelling panel at `data/03_processed/` |
 
 Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md). This spec owns **artifacts, storage, notebook ownership, resolve rules, and the merge contract**.
@@ -34,7 +35,7 @@ Join geometry and tier rules remain defined in [`specs/03-spatial-temporal-match
 ```text
 data/
   01_raw/        # extracts only (gitignored); notebooks 01, 03
-  external/      # committed master/lookup tables; notebooks 05, 06
+  external/      # committed master/lookup tables; notebooks 05, 06, 06b
   02_interim/    # normalized vector / virus row tables; notebooks 08, 09
   03_processed/  # modelling panel + species side table + merge manifest; notebook 10
 ```
@@ -42,15 +43,15 @@ data/
 | Layer | Contents | Commit? |
 |-------|----------|---------|
 | `01_raw/` | VectorNet DwC-A; multi-source `virus_detections.tsv` (+ `manifest.json`) | No (re-fetch documented in README) |
-| `external/` | Countries, subnational centroids, vector taxon → group maps, priority taxa, pathogen ↔ group mirror (small) | Yes |
-| `02_interim/` | Per-side normalized detections | Usually no (rebuildable) |
+| `external/` | Countries, subnational centroids, vector taxon → group maps, host → `host_group` aliases, priority taxa, pathogen ↔ group mirror (small) | Yes |
+| `02_interim/` | Per-side normalized detections (+ rebuildable unmatched region / host lists) | Usually no (rebuildable) |
 | `03_processed/` | Modelling panel + long species composition table + merge manifest | Prefer commit if small; else document rebuild |
 
 ## What counts as reference data
 
 **Uber H3 is not a downloaded master table.** Cell IDs are computed from `(lat, lon)` with the `h3` library at a fixed resolution. Do not store a worldwide H3 geometry dump for the join.
 
-**ISO-2 countries, subnational / NUTS3 centroid lookups, name aliases, vector_group maps, pathogen ↔ group mirror, and priority vector taxa are reference data** and live under `data/external/`.
+**ISO-2 countries, subnational / NUTS3 centroid lookups, name aliases, vector_group maps, host → `host_group` aliases, pathogen ↔ group mirror, and priority vector taxa are reference data** and live under `data/external/`.
 
 | Artifact | Nature | Path | How generated | Used to resolve |
 |----------|--------|------|---------------|-----------------|
@@ -58,6 +59,7 @@ data/
 | Subnational / NUTS3 centroids | Static reference CSV | `data/external/subnational_locations.csv` (~7.8k rows incl. virus spelling aliases) | Distinct virus region strings + European NUTS3/NE admin1 centroids + original spelling aliases | `(country_iso2, subnational_region \| nuts_id)` → centroid `(lat, lon)` → Tier 1 H3 |
 | Pathogen ↔ `vector_group` | Project config (code) + committed mirror | [`src/vector_guard/data.py`](../src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`; mirror `data/external/pathogen_vector_group.csv` | From [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md); mirror written by notebook `06` | Tag virus rows; ecological join filter; **panel pathogen explosion** |
 | Vector taxon → `vector_group` | Static reference CSV | `data/external/vector_taxon_groups.csv` | Curated from VectorNet `scientificName` inventory (EDA) | Tag VectorNet rows before aggregate / join |
+| Host → `host_group` aliases | Static reference CSV | `data/external/host_groups.csv` | Curated from virus `host` inventory + VectorNet / global vector taxa seeds (notebook `06b`) | Tag virus interim rows with closed `host_group` (EDA / future label splits; **not** a merge key) |
 | Priority vector taxa (EDA / prep) | Static reference CSV | `data/external/priority_vector_taxa.csv` | Top / competent genera–species per `vector_group` from VectorNet frequency (notebook `06`) | **Locked** closed set for late unit-grain pivot → `vector_count_<feature_slug>` in EDA/prep / `train.py` handoff — **not** merge panel columns |
 | H3 resolution choice | Decision + code constant | This spec + `vector_guard.resolve.H3_RESOLUTION` (`4`) | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
 | Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | Primary EDA / `notebook.ipynb` / `train.py` (pathogen-long; no wide species counts) |
@@ -139,6 +141,37 @@ Generation process (notebook `06`, same family as vector taxon groups):
 2. Write `data/external/pathogen_vector_group.csv`.
 3. Merge notebook uses this table (or the code map) to **explode** VectorNet units to pathogen-long panel rows.
 
+### `host_groups.csv` — generation rules
+
+Committed alias table mapping free-text virus host strings to a closed `host_group` vocabulary. Used only when cleaning viruses into interim rows; merge notebook `10` does **not** read this file in this milestone.
+
+Columns:
+
+| Column | Meaning |
+|--------|---------|
+| `host_key` | Normalized match key via `norm_key()` (unique, non-empty) |
+| `host_group` | One of the locked vocabulary values **except** `unknown` (unresolved hosts stay `unknown` at classify time) |
+| `notes` | Provenance tag (e.g. `vectornet_taxon`, `global_vector_genus`, `curated_vertebrate`, `ecdc_token`, `lab_line`) |
+
+**Locked `host_group` vocabulary:**
+
+| Value | Meaning |
+|-------|---------|
+| `mosquito`, `tick`, `biting_midge`, `sandfly` | Arthropod vector groups (same names as VectorNet `vector_group`) |
+| `human` | Human / *Homo sapiens* |
+| `livestock` | Non-human domestic mammals (incl. `Domestic - unspecified mammal` and domestic companion mammals) |
+| `bird` | Avian hosts (incl. wild birds and avian outbreak tokens) |
+| `wildlife_mammal` | Wild non-avian mammals |
+| `lab` | Cell lines / culture / clone / vaccine material |
+| `unknown` | Blank, placeholder, or unresolved after the full ladder (not stored as a curated CSV target) |
+
+Generation process (notebook `notebooks/01_sources/06b_reference_host_groups.ipynb`):
+
+1. Inventory distinct `host` / `isolation_source` strings and frequencies from raw `virus_detections.tsv`.
+2. Seed arthropod aliases from `vector_taxon_groups.csv` plus global non-European vector genera / higher taxa present in virus feeds (`Haemaphysalis`, `Amblyomma`, `Ochlerotatus`, `Culicidae`, `Ixodoidea`, …).
+3. Curate high-frequency vertebrate, outbreak-feed (`ecdc_atlas`, `empres_i`), and lab-line aliases into `host_key` → `host_group` rows.
+4. Write `data/external/host_groups.csv` (committed). Assert unique `host_key` and valid `host_group` values. Residual frequent unmatched hosts guide follow-up curation; notebook `09` also writes rebuildable `data/02_interim/virus_unmatched_hosts.csv`.
+
 ### `priority_vector_taxa.csv` — generation rules
 
 Closed list of VectorNet taxa used as the **locked modelling feature set** after the EDA/prep unit-grain pivot. Do **not** one-hot all ~200+ `scientific_name` values into the panel, and do **not** substitute a frequency-selected open set for the modelling handoff. Merge does **not** read this file.
@@ -197,6 +230,7 @@ flowchart TD
   edaU["04_inspect_viruses"]
   refCountries["05_reference_countries"]
   refTaxa["06_reference_vector_groups"]
+  refHosts["06b_reference_host_groups"]
   h3Density["07_h3_resolution_density"]
   cleanV["08_clean_vectors"]
   cleanU["09_clean_viruses"]
@@ -208,11 +242,14 @@ flowchart TD
   edaV --> refCountries
   edaU --> refCountries
   edaV --> refTaxa
+  edaU --> refHosts
+  refTaxa --> refHosts
   edaV --> h3Density
   edaU --> h3Density
   refCountries --> cleanV
   refCountries --> cleanU
   refTaxa --> cleanV
+  refHosts --> cleanU
   h3Density --> cleanV
   h3Density --> cleanU
   cleanV --> merge
@@ -228,10 +265,11 @@ flowchart TD
 | Source inspect viruses | `notebooks/01_sources/04_inspect_viruses.ipynb` | Insights / cleaning rules only | raw viruses |
 | Country + subnational reference | `notebooks/01_sources/05_reference_countries.ipynb` | `data/external/countries.csv`, `data/external/subnational_locations.csv` | ISO list + alias / region / NUTS needs from multi-source extract; unmatched list from `09` |
 | Vector group map + pathogen mirror + priority taxa | `notebooks/01_sources/06_reference_vector_groups.ipynb` | `data/external/vector_taxon_groups.csv`; `pathogen_vector_group.csv`; `priority_vector_taxa.csv` | VectorNet `scientificName` inventory; `VIRUS_VECTOR_TAXON_MAP` |
+| Host → `host_group` aliases | `notebooks/01_sources/06b_reference_host_groups.ipynb` | `data/external/host_groups.csv` | Virus `host` / `isolation_source` inventory; `vector_taxon_groups.csv`; global vector genus seeds |
 | H3 density check | `07_h3_resolution_density.ipynb` | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` | `data/02_interim/vectors_normalized.parquet` | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
-| Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet`; `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
-| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` (**not** `priority_vector_taxa.csv`) |
+| Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet` (incl. `host_group`); `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag); `data/02_interim/virus_unmatched_hosts.csv` | raw + `countries` + `subnational_locations` + `host_groups.csv` + `vector_taxon_groups` + `H3_RESOLUTION` |
+| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` (**not** `priority_vector_taxa.csv`; **not** `host_group` / `host_groups.csv` in this milestone) |
 | Primary EDA + models | `notebook.ipynb` | Panel prep + locked late species pivot; model training next (see ROADMAP) | modelling panel + species side table + `priority_vector_taxa.csv` |
 
 Source inspect notebooks (`02`, `04` under `notebooks/01_sources/`) diagnose quality and relevance; they do **not** own the final modelling table and are **not** the project EDA deliverable. Cleaning notebooks apply documented rules; the merge notebook owns the panel + species side-table contract.
@@ -292,6 +330,37 @@ Ecological join principle (same `vector_group` only; pathogen-long rows): [`spec
 | Vectors | Join / map `scientificName` via `vector_taxon_groups.csv`. |
 | Merge | Aggregate VectorNet at `(spatial key, year, month, vector_group)`; explode to pathogens via `pathogen_vector_group.csv` / `VIRUS_VECTOR_TAXON_MAP`; attach labels on `(spatial key, pathogen_name)` within the same `vector_group`. |
 | Species features | At merge: compute `species_richness` on the unit; write long `modelling_panel_species` (unit × `scientific_name` × `detection_count`, count ≥ 1; **no** `pathogen_name`). At EDA/prep: unit-grain pivot of locked `priority_vector_taxa.csv` → `vector_count_<feature_slug>` (0 if absent), then left-merge onto the filtered pathogen-long panel. |
+
+### Host → `host_group` (virus interim only)
+
+Detection-level metadata on `viruses_normalized.parquet`. Distinguishes arthropod vector hosts from vertebrate / lab / unknown sample hosts. **Not** a join key to VectorNet `scientific_name`. Merge notebook `10` does **not** consume `host_group` in this milestone (panel labels remain any-host pathogen events). Implemented in `vector_guard.resolve.classify_host_group` and applied by `09_clean_viruses`.
+
+**Segment pre-clean on `host`:**
+
+1. Split on multi-host delimiters (`|` and `;`).
+2. Strip trailing outbreak case-count suffixes (e.g. ECDC `human:22` → `human`, `equid_outbreaks:1` → `equid_outbreaks`).
+3. Treat empty strings and placeholders (`missing`, `unknown`, `na`, `n/a`, `none`, `not applicable`, `not collected`) as blank.
+
+**Per-segment ladder (first match wins):**
+
+| Priority | Rule | Result |
+|----------|------|--------|
+| 1 | Exact `norm_key()` match in `data/external/host_groups.csv` | Curated `host_group` |
+| 2 | Lab / culture markers in `host` (`vero`, `c6/36`, `bhk`, `cell line`, `cell culture`, `cells`, `cdna clone`, `vaccine`) — **before** taxon prefix matching | `lab` |
+| 3 | Arthropod taxon: binomial / first-token genus via `vector_taxon_groups.csv` **plus** global non-EU genera / higher taxa (`Haemaphysalis`, `Amblyomma`, `Ochlerotatus`, `Culicidae`, `Ixodoidea`, …) and unambiguous English vector terms | `mosquito` / `tick` / `biting_midge` / `sandfly` |
+| 4 | Vertebrate cues in order: human → avian (before generic `Wild -`) → domestic mammal (`Domestic -`, livestock common names, companion mammals) → remaining wild mammal | `human` / `bird` / `livestock` / `wildlife_mammal` |
+
+**Multi-segment tie-break:** when `|` / `;` segments resolve to different groups, pick one primary value by biological priority:
+
+`mosquito` / `tick` / `biting_midge` / `sandfly` > `bird` > `wildlife_mammal` > `livestock` > `human` > `lab` > `unknown`
+
+**`isolation_source` fallback** — only when `host` resolves to `unknown`. Do **not** override a resolved `host` (clinical / animal hosts passaged in cells stay vertebrate). When falling back:
+
+1. Lab markers first (`cell culture`, `vero`, `c6/36`, `ap 61`, `cultured virus stock`, `vaccine`, …) → `lab`.
+2. Vector pool / abbreviated binomial cues (`mosquito pool`, `I. persulcatus`, …) → arthropod group.
+3. Explicit host-named clinical / veterinary specimens (`patient`, `human serum`, `bovine`, …) → `human` / `livestock`. Generic specimen types alone (`blood`, `serum`, `plasma`, `brain`, `tissue`, `urine`) stay `unknown`.
+
+**Interim contract:** keep free-text `host`; write `host_group`; drop `isolation_source` after classification. Persist non-empty hosts still mapped to `unknown` to `data/02_interim/virus_unmatched_hosts.csv` for `06b` follow-up curation.
 
 ## Merge step — modelling panel
 
@@ -408,11 +477,12 @@ Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + locked unit-gra
 - Dual group-only and pathogen-long panel artifacts (single replaced panel)
 - Hard species–pathogen competence matrix as a join filter (priority taxa are late-pivot features only)
 - Putting wide `vector_count_*` back on the merge panel, or using a frequency-open species column set as the modelling handoff
+- Consuming `host_group` in merge notebook `10`, splitting panel labels by host role, or adding normalized `host_vector_taxon` / persisting `isolation_source` on interim viruses (deferred)
 - Defining ML architecture beyond the panel + locked late-pivot species contract above
 
 ## Status
 
-Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Virus interim **`host_group`** classification is locked (`06b` reference + `09` resolve); merge does not consume it yet. Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
@@ -421,5 +491,6 @@ Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long sp
 | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) | Tier geometry, Path A/B into H3, ecological link, pathogen-long B2 principles |
 | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | VectorNet source |
 | [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) | Multi-source virus feeds, unified schema, pathogen ↔ vector_group |
+| [`notebooks/01_sources/06b_reference_host_groups.ipynb`](../notebooks/01_sources/06b_reference_host_groups.ipynb) | Host → `host_groups.csv` reference |
 | [`README.md`](../README.md) | Data ladder and intended approach |
 | [`ROADMAP.md`](../ROADMAP.md) | Build status (data foundation Done; EDA / models next) |

@@ -146,8 +146,8 @@ Output of the extract: `data/01_raw/virus/virus_detections.tsv` plus `manifest.j
 | `lon` | Decimal longitude when known at extract time |
 | `coord_source` | `exact_gps` \| `sample_backfill` \| `none` (centroid promotion happens in cleaning, not here) |
 | `collection_date` | Collection / observation / reporting date string as published |
-| `host` | Host organism when available |
-| `isolation_source` | Isolation / specimen source when available |
+| `host` | Host organism when available (free text; interim cleaning adds closed `host_group` — see [`specs/04`](04-reference-data-and-panel-pipeline.md#host--host_group-virus-interim-only)) |
+| `isolation_source` | Isolation / specimen source when available (kept on raw extract; used as classify fallback in `09_clean_viruses`, then dropped from interim) |
 
 ### Deduplication rules (implemented)
 
@@ -237,7 +237,9 @@ from vector_guard.data import load_virus_detections
 df = load_virus_detections()
 ```
 
-Cleaning, ISO-2, subnational centroid → H3, and panel merge remain owned by specs [`03`](03-spatial-temporal-matching-strategy.md) and [`04`](04-reference-data-and-panel-pipeline.md) (`09_clean_viruses`, `10_merge_modelling_panel`).
+Cleaning, ISO-2, subnational centroid → H3, virus `host` → `host_group`, and panel merge remain owned by specs [`03`](03-spatial-temporal-matching-strategy.md) and [`04`](04-reference-data-and-panel-pipeline.md) (`06b_reference_host_groups`, `09_clean_viruses`, `10_merge_modelling_panel`).
+
+**Interim host classification (locked in [`specs/04`](04-reference-data-and-panel-pipeline.md)):** raw `host` and `isolation_source` stay in `VIRUS_RAW_COLUMNS` unchanged. Notebook `09` writes closed `host_group` on `viruses_normalized.parquet` (alias table from `06b` + global vector genus rules + `isolation_source` fallback when `host` is unresolved) and drops `isolation_source` from interim. Merge does **not** consume `host_group` in this milestone.
 
 ### Auxiliary signal from VectorNet
 
@@ -265,10 +267,11 @@ VectorNet’s `dynamicProperties` column sometimes embeds pathogen strings (e.g.
 |------|------|
 | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md) | Paired vector source (VectorNet) |
 | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md) | Join design (H3 + country; subnational Tier 1 path) |
-| [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference tables, virus clean/resolve, modelling panel |
+| [`specs/04-reference-data-and-panel-pipeline.md`](04-reference-data-and-panel-pipeline.md) | Reference tables, virus clean/resolve (incl. `host` → `host_group`), modelling panel |
 | [`README.md`](../README.md) | Published virus data table and refresh steps |
 | [`ROADMAP.md`](../ROADMAP.md) | Build status for multi-source extract / taxonomy |
 | [`notebooks/01_sources/03_extract_viruses.ipynb`](../notebooks/01_sources/03_extract_viruses.ipynb) | Multi-source virus extract |
 | [`notebooks/01_sources/04_inspect_viruses.ipynb`](../notebooks/01_sources/04_inspect_viruses.ipynb) | Virus source inspect (per-source, coord_source, NUTS3) |
+| [`notebooks/01_sources/06b_reference_host_groups.ipynb`](../notebooks/01_sources/06b_reference_host_groups.ipynb) | Host alias → `host_groups.csv` |
 | [`src/vector_guard/data.py`](../src/vector_guard/data.py) | `VIRUS_VECTOR_TAXON_MAP`, `load_virus_detections()` |
 | [`src/vector_guard/virus_extract.py`](../src/vector_guard/virus_extract.py) | Unified schema + dedupe helpers |
