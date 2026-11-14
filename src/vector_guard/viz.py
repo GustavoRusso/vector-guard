@@ -45,11 +45,12 @@ _OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
 _OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 
 
-class _PopupFilterByGroupLayers(MacroElement):
-    """Wire LayerControl group overlays to combined-popup column filtering.
+class _GroupLayerFilter(MacroElement):
+    """LayerControl vector-group toggles filter popup columns and hex visibility.
 
     Empty ``FeatureGroup`` overlays named after each vector_group act as toggles.
-    Popup/tooltip HTML is rebuilt from ``groups_data`` using only active groups.
+    Hexes with no remaining active groups are hidden; others keep a shared color
+    scale using ``max(value_col)`` over active groups only.
     """
 
     _template = Template(
@@ -57,17 +58,59 @@ class _PopupFilterByGroupLayers(MacroElement):
         {% macro script(this, kwargs) %}
             var {{ this.get_name() }}_active = {{ this.groups_json }};
             var {{ this.get_name() }}_metrics = {{ this.metrics_json }};
+            var {{ this.get_name() }}_valueCol = {{ this.value_col_json }};
+            var {{ this.get_name() }}_vmin = {{ this.vmin }};
+            var {{ this.get_name() }}_vmax = {{ this.vmax }};
+            var {{ this.get_name() }}_fillOpacity = {{ this.fill_opacity }};
+            var {{ this.get_name() }}_lineWeight = {{ this.line_weight }};
 
-            {{ this.map_name }}.on("overlayadd", function (e) {
-                if (Object.prototype.hasOwnProperty.call({{ this.get_name() }}_active, e.name)) {
-                    {{ this.get_name() }}_active[e.name] = true;
+            function {{ this.get_name() }}_hexToRgb(hex) {
+                var h = hex.replace("#", "");
+                return [
+                    parseInt(h.substring(0, 2), 16),
+                    parseInt(h.substring(2, 4), 16),
+                    parseInt(h.substring(4, 6), 16)
+                ];
+            }
+            function {{ this.get_name() }}_lerpColor(a, b, t) {
+                var ca = {{ this.get_name() }}_hexToRgb(a);
+                var cb = {{ this.get_name() }}_hexToRgb(b);
+                var r = Math.round(ca[0] + (cb[0] - ca[0]) * t);
+                var g = Math.round(ca[1] + (cb[1] - ca[1]) * t);
+                var bl = Math.round(ca[2] + (cb[2] - ca[2]) * t);
+                return "rgb(" + r + "," + g + "," + bl + ")";
+            }
+            function {{ this.get_name() }}_colorFor(value) {
+                var vmin = {{ this.get_name() }}_vmin;
+                var vmax = {{ this.get_name() }}_vmax;
+                var t = (Number(value) - vmin) / (vmax - vmin);
+                if (!isFinite(t)) { t = 0; }
+                t = Math.max(0, Math.min(1, t));
+                if (t < 0.5) {
+                    return {{ this.get_name() }}_lerpColor("#f7fbff", "#6baed6", t * 2);
                 }
-            });
-            {{ this.map_name }}.on("overlayremove", function (e) {
-                if (Object.prototype.hasOwnProperty.call({{ this.get_name() }}_active, e.name)) {
-                    {{ this.get_name() }}_active[e.name] = false;
-                }
-            });
+                return {{ this.get_name() }}_lerpColor("#6baed6", "#08306b", (t - 0.5) * 2);
+            }
+
+            function {{ this.get_name() }}_activeRows(props) {
+                return (props.groups_data || []).filter(function (row) {
+                    return {{ this.get_name() }}_active[row.vector_group];
+                });
+            }
+
+            function {{ this.get_name() }}_activeFillValue(props) {
+                var cols = {{ this.get_name() }}_activeRows(props);
+                var key = {{ this.get_name() }}_valueCol;
+                var maxVal = null;
+                cols.forEach(function (row) {
+                    var v = row[key];
+                    if (v === null || v === undefined || v === "") { return; }
+                    v = Number(v);
+                    if (!isFinite(v)) { return; }
+                    if (maxVal === null || v > maxVal) { maxVal = v; }
+                });
+                return maxVal;
+            }
 
             function {{ this.get_name() }}_escape(text) {
                 return String(text)
@@ -79,16 +122,13 @@ class _PopupFilterByGroupLayers(MacroElement):
 
             function {{ this.get_name() }}_buildHtml(props) {
                 var cellId = props.h3_cell || "";
-                var allGroups = props.groups_data || [];
-                var cols = allGroups.filter(function (row) {
-                    return {{ this.get_name() }}_active[row.vector_group];
-                });
+                var cols = {{ this.get_name() }}_activeRows(props);
                 if (!cols.length) {
                     return (
                         "<div style='font-family:system-ui,sans-serif;font-size:12px;padding:4px'>"
                         + "<div style='font-weight:600;margin-bottom:4px'>H3 "
                         + {{ this.get_name() }}_escape(cellId) + "</div>"
-                        + "<div>No vector groups selected in the layer control.</div>"
+                        + "<div>No active vector groups for this cell.</div>"
                         + "</div>"
                     );
                 }
@@ -126,6 +166,54 @@ class _PopupFilterByGroupLayers(MacroElement):
                 );
             }
 
+            function {{ this.get_name() }}_syncLayers() {
+                {{ this.geojson_name }}.eachLayer(function (layer) {
+                    if (!(layer.feature && layer.feature.properties)) { return; }
+                    var props = layer.feature.properties;
+                    var cols = {{ this.get_name() }}_activeRows(props);
+                    if (!cols.length) {
+                        layer.setStyle({
+                            fillOpacity: 0,
+                            opacity: 0,
+                            weight: 0
+                        });
+                        if (layer.getElement) {
+                            var el = layer.getElement();
+                            if (el) { el.style.pointerEvents = "none"; }
+                        }
+                        if (layer.closePopup) { layer.closePopup(); }
+                        if (layer.closeTooltip) { layer.closeTooltip(); }
+                        return;
+                    }
+                    var fillVal = {{ this.get_name() }}_activeFillValue(props);
+                    if (fillVal === null) { fillVal = {{ this.get_name() }}_vmin; }
+                    layer.setStyle({
+                        fillColor: {{ this.get_name() }}_colorFor(fillVal),
+                        color: "#333333",
+                        weight: {{ this.get_name() }}_lineWeight,
+                        fillOpacity: {{ this.get_name() }}_fillOpacity,
+                        opacity: 1
+                    });
+                    if (layer.getElement) {
+                        var el2 = layer.getElement();
+                        if (el2) { el2.style.pointerEvents = "auto"; }
+                    }
+                });
+            }
+
+            {{ this.map_name }}.on("overlayadd", function (e) {
+                if (Object.prototype.hasOwnProperty.call({{ this.get_name() }}_active, e.name)) {
+                    {{ this.get_name() }}_active[e.name] = true;
+                    {{ this.get_name() }}_syncLayers();
+                }
+            });
+            {{ this.map_name }}.on("overlayremove", function (e) {
+                if (Object.prototype.hasOwnProperty.call({{ this.get_name() }}_active, e.name)) {
+                    {{ this.get_name() }}_active[e.name] = false;
+                    {{ this.get_name() }}_syncLayers();
+                }
+            });
+
             {{ this.geojson_name }}.eachLayer(function (layer) {
                 if (!(layer.feature && layer.feature.properties)) { return; }
                 layer.bindPopup(function (lyr) {
@@ -135,17 +223,34 @@ class _PopupFilterByGroupLayers(MacroElement):
                     return {{ this.get_name() }}_buildHtml(lyr.feature.properties);
                 }, { sticky: true, opacity: 0.95, className: "vector-guard-h3-tooltip" });
             });
+            {{ this.get_name() }}_syncLayers();
         {% endmacro %}
         """
     )
 
-    def __init__(self, map_name: str, geojson_name: str, groups: list[str]) -> None:
+    def __init__(
+        self,
+        map_name: str,
+        geojson_name: str,
+        groups: list[str],
+        *,
+        value_col: str,
+        vmin: float,
+        vmax: float,
+        fill_opacity: float,
+        line_weight: float,
+    ) -> None:
         super().__init__()
-        self._name = "PopupFilterByGroupLayers"
+        self._name = "GroupLayerFilter"
         self.map_name = map_name
         self.geojson_name = geojson_name
         self.groups_json = json.dumps({g: True for g in groups})
         self.metrics_json = json.dumps(list(_POPUP_METRICS))
+        self.value_col_json = json.dumps(value_col)
+        self.vmin = float(vmin)
+        self.vmax = float(vmax)
+        self.fill_opacity = float(fill_opacity)
+        self.line_weight = float(line_weight)
 
 
 def aggregate_interim_vector_cells(
@@ -307,11 +412,11 @@ def folium_h3_choropleth(
     """Interactive Folium map of H3 cells colored by ``value_col``.
 
     One polygon per ``h3_cell`` on an OSM street basemap (shared color scale;
-    fill = ``max(value_col)`` across groups in the cell).
+    fill = ``max(value_col)`` across *active* groups in the cell).
 
-    When multiple vector groups are present, a LayerControl lists each group.
-    Those toggles do **not** remove hexes; they filter which group columns appear
-    in the combined horizontal popup/tooltip.
+    When multiple vector groups are present, LayerControl lists only those
+    groups (H3 polygons are always on). Toggling a group updates popup columns
+    and hides hexes that no longer have any active group.
     """
     if cell_stats.empty:
         return _base_map(50.0, 10.0, zoom_start=4)
@@ -324,7 +429,7 @@ def folium_h3_choropleth(
 
     caption = title or value_col
     if cell_stats["h3_cell"].nunique() < len(cell_stats):
-        caption = f"{caption} (fill = max across groups)"
+        caption = f"{caption} (fill = max across active groups)"
 
     colormap = LinearColormap(
         colors=["#f7fbff", "#6baed6", "#08306b"],
@@ -355,37 +460,33 @@ def folium_h3_choropleth(
             "fillOpacity": fill_opacity,
         }
 
-    # Hex layer (kept out of the group-filter toggles).
-    hex_group = folium.FeatureGroup(name="H3 cells", show=True)
+    # Always-on hex layer (omitted from LayerControl).
     layer = folium.GeoJson(
         geojson,
         style_function=_style,
         name=title or value_col,
+        control=False,
+        show=True,
     )
-    layer.add_to(hex_group)
-    hex_group.add_to(fmap)
+    layer.add_to(fmap)
 
-    # Empty overlays: LayerControl checkboxes filter popup columns only.
+    filter_kwargs = dict(
+        map_name=fmap.get_name(),
+        geojson_name=layer.get_name(),
+        groups=groups,
+        value_col=value_col,
+        vmin=vmin,
+        vmax=vmax,
+        fill_opacity=fill_opacity,
+        line_weight=line_weight,
+    )
+
     if len(groups) >= 2:
         for group in groups:
             folium.FeatureGroup(name=group, show=True).add_to(fmap)
         folium.LayerControl(collapsed=False).add_to(fmap)
-        fmap.add_child(
-            _PopupFilterByGroupLayers(
-                map_name=fmap.get_name(),
-                geojson_name=layer.get_name(),
-                groups=groups,
-            )
-        )
-    else:
-        # Single group (or none): bind popup with the same horizontal table helper.
-        fmap.add_child(
-            _PopupFilterByGroupLayers(
-                map_name=fmap.get_name(),
-                geojson_name=layer.get_name(),
-                groups=groups,
-            )
-        )
+
+    fmap.add_child(_GroupLayerFilter(**filter_kwargs))
 
     colormap.add_to(fmap)
 
