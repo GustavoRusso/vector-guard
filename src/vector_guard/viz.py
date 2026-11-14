@@ -1,4 +1,4 @@
-"""H3 coverage maps for interim VectorNet detections."""
+"""H3 coverage maps for interim VectorNet / virus detections."""
 
 from __future__ import annotations
 
@@ -11,18 +11,15 @@ import pandas as pd
 from branca.colormap import LinearColormap
 from branca.element import MacroElement, Template
 
-_REQUIRED_VECTOR_COLS = (
+_REQUIRED_BASE_COLS = (
     "h3_cell",
     "year",
     "month",
     "record_id",
     "country_iso2",
-    "vector_group",
 )
 
-_EMPTY_CELL_STATS_COLS = [
-    "h3_cell",
-    "vector_group",
+_METRIC_COLS = [
     "n_year_months",
     "n_records",
     "n_years",
@@ -45,10 +42,14 @@ _OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
 _OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 
 
-class _GroupLayerFilter(MacroElement):
-    """LayerControl vector-group toggles filter popup columns and hex visibility.
+def _empty_cell_stats_cols(group_col: str) -> list[str]:
+    return ["h3_cell", group_col, *_METRIC_COLS]
 
-    Empty ``FeatureGroup`` overlays named after each vector_group act as toggles.
+
+class _GroupLayerFilter(MacroElement):
+    """LayerControl group toggles filter popup columns and hex visibility.
+
+    Empty ``FeatureGroup`` overlays named after each group act as toggles.
     Hexes with no remaining active groups are hidden; others keep a shared color
     scale using ``max(value_col)`` over active groups only.
     """
@@ -59,6 +60,7 @@ class _GroupLayerFilter(MacroElement):
             var {{ this.get_name() }}_active = {{ this.groups_json }};
             var {{ this.get_name() }}_metrics = {{ this.metrics_json }};
             var {{ this.get_name() }}_valueCol = {{ this.value_col_json }};
+            var {{ this.get_name() }}_groupKey = {{ this.group_key_json }};
             var {{ this.get_name() }}_vmin = {{ this.vmin }};
             var {{ this.get_name() }}_vmax = {{ this.vmax }};
             var {{ this.get_name() }}_fillOpacity = {{ this.fill_opacity }};
@@ -93,8 +95,9 @@ class _GroupLayerFilter(MacroElement):
             }
 
             function {{ this.get_name() }}_activeRows(props) {
+                var key = {{ this.get_name() }}_groupKey;
                 return (props.groups_data || []).filter(function (row) {
-                    return {{ this.get_name() }}_active[row.vector_group];
+                    return {{ this.get_name() }}_active[row[key]];
                 });
             }
 
@@ -123,12 +126,13 @@ class _GroupLayerFilter(MacroElement):
             function {{ this.get_name() }}_buildHtml(props) {
                 var cellId = props.h3_cell || "";
                 var cols = {{ this.get_name() }}_activeRows(props);
+                var groupKey = {{ this.get_name() }}_groupKey;
                 if (!cols.length) {
                     return (
                         "<div style='font-family:system-ui,sans-serif;font-size:12px;padding:4px'>"
                         + "<div style='font-weight:600;margin-bottom:4px'>H3 "
                         + {{ this.get_name() }}_escape(cellId) + "</div>"
-                        + "<div>No active vector groups for this cell.</div>"
+                        + "<div>No active groups for this cell.</div>"
                         + "</div>"
                     );
                 }
@@ -137,7 +141,7 @@ class _GroupLayerFilter(MacroElement):
                 cols.forEach(function (row) {
                     header += "<th style='text-align:center;padding:4px 8px;"
                         + "border-bottom:1px solid #ccc'>"
-                        + {{ this.get_name() }}_escape(row.vector_group) + "</th>";
+                        + {{ this.get_name() }}_escape(row[groupKey]) + "</th>";
                 });
                 header += "</tr>";
                 var body = "";
@@ -234,6 +238,7 @@ class _GroupLayerFilter(MacroElement):
         geojson_name: str,
         groups: list[str],
         *,
+        group_col: str,
         value_col: str,
         vmin: float,
         vmax: float,
@@ -246,6 +251,7 @@ class _GroupLayerFilter(MacroElement):
         self.geojson_name = geojson_name
         self.groups_json = json.dumps({g: True for g in groups})
         self.metrics_json = json.dumps(list(_POPUP_METRICS))
+        self.group_key_json = json.dumps(group_col)
         self.value_col_json = json.dumps(value_col)
         self.vmin = float(vmin)
         self.vmax = float(vmax)
@@ -253,13 +259,14 @@ class _GroupLayerFilter(MacroElement):
         self.line_weight = float(line_weight)
 
 
-def aggregate_interim_vector_cells(
-    vectors: pd.DataFrame,
+def aggregate_interim_h3_cells(
+    df: pd.DataFrame,
     *,
+    group_col: str,
     country_iso2: str | None = None,
-    vector_group: str | None = None,
+    group_value: str | None = None,
 ) -> pd.DataFrame:
-    """Aggregate interim vector rows to one row per ``(h3_cell, vector_group)``.
+    """Aggregate interim rows to one row per ``(h3_cell, group_col)``.
 
     Metrics:
     - ``n_year_months``: distinct ``(year, month)`` with ≥1 record
@@ -267,25 +274,27 @@ def aggregate_interim_vector_cells(
     - ``n_years``: distinct years
     - ``year_span``: ``max(year) - min(year) + 1`` (includes gaps)
     """
-    missing = [c for c in _REQUIRED_VECTOR_COLS if c not in vectors.columns]
+    required = [*_REQUIRED_BASE_COLS, group_col]
+    missing = [c for c in required if c not in df.columns]
     if missing:
-        raise ValueError(f"vectors missing required columns: {missing}")
+        raise ValueError(f"dataframe missing required columns: {missing}")
 
-    work = vectors.loc[vectors["h3_cell"].notna() & vectors["vector_group"].notna()].copy()
+    work = df.loc[df["h3_cell"].notna() & df[group_col].notna()].copy()
     if country_iso2 is not None:
         code = str(country_iso2).strip().upper()
         work = work.loc[work["country_iso2"].astype(str).str.upper() == code]
-    if vector_group is not None:
-        group = str(vector_group).strip()
-        work = work.loc[work["vector_group"].astype(str) == group]
+    if group_value is not None:
+        group = str(group_value).strip()
+        work = work.loc[work[group_col].astype(str) == group]
 
     # Frequency / duration metrics need usable year-month; drop incomplete dates.
     work = work.loc[work["year"].notna() & work["month"].notna()]
 
+    empty_cols = _empty_cell_stats_cols(group_col)
     if work.empty:
-        return pd.DataFrame(columns=_EMPTY_CELL_STATS_COLS)
+        return pd.DataFrame(columns=empty_cols)
 
-    keys = ["h3_cell", "vector_group"]
+    keys = ["h3_cell", group_col]
     grouped = work.groupby(keys, sort=False)
     stats = grouped.agg(
         n_records=("record_id", "size"),
@@ -294,7 +303,7 @@ def aggregate_interim_vector_cells(
         year_max=("year", "max"),
     )
     ym = (
-        work.drop_duplicates(subset=["h3_cell", "vector_group", "year", "month"])
+        work.drop_duplicates(subset=["h3_cell", group_col, "year", "month"])
         .groupby(keys, sort=False)
         .size()
         .rename("n_year_months")
@@ -302,8 +311,23 @@ def aggregate_interim_vector_cells(
     out = stats.join(ym, how="left")
     out["year_span"] = (out["year_max"] - out["year_min"] + 1).astype("int64")
     out = out.reset_index()
-    return out[_EMPTY_CELL_STATS_COLS].sort_values(
+    return out[empty_cols].sort_values(
         "n_year_months", ascending=False, ignore_index=True
+    )
+
+
+def aggregate_interim_vector_cells(
+    vectors: pd.DataFrame,
+    *,
+    country_iso2: str | None = None,
+    vector_group: str | None = None,
+) -> pd.DataFrame:
+    """Aggregate interim vector rows to one row per ``(h3_cell, vector_group)``."""
+    return aggregate_interim_h3_cells(
+        vectors,
+        group_col="vector_group",
+        country_iso2=country_iso2,
+        group_value=vector_group,
     )
 
 
@@ -315,10 +339,13 @@ def _json_safe(val: Any) -> Any:
     return val
 
 
-def _groups_data_records(group_rows: pd.DataFrame) -> list[dict[str, Any]]:
+def _groups_data_records(
+    group_rows: pd.DataFrame,
+    group_col: str,
+) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
-    for row in group_rows.sort_values("vector_group").itertuples(index=False):
-        rec: dict[str, Any] = {"vector_group": str(getattr(row, "vector_group"))}
+    for row in group_rows.sort_values(group_col).itertuples(index=False):
+        rec: dict[str, Any] = {group_col: str(getattr(row, group_col))}
         for metric in _POPUP_METRICS:
             rec[metric] = _json_safe(getattr(row, metric))
         records.append(rec)
@@ -328,18 +355,20 @@ def _groups_data_records(group_rows: pd.DataFrame) -> list[dict[str, Any]]:
 def h3_cells_to_geojson(
     cell_stats: pd.DataFrame,
     value_col: str,
+    *,
+    group_col: str = "vector_group",
 ) -> dict[str, Any]:
     """Build a GeoJSON FeatureCollection: one feature per H3 cell.
 
-    Fill ``value`` is ``max(value_col)`` across vector groups in the cell.
+    Fill ``value`` is ``max(value_col)`` across groups in the cell.
     ``groups_data`` holds per-group stats for the filtered combined popup.
     """
     if value_col not in cell_stats.columns:
         raise ValueError(f"value_col {value_col!r} not in cell_stats columns")
     if "h3_cell" not in cell_stats.columns:
         raise ValueError("cell_stats must include h3_cell")
-    if "vector_group" not in cell_stats.columns:
-        raise ValueError("cell_stats must include vector_group")
+    if group_col not in cell_stats.columns:
+        raise ValueError(f"cell_stats must include {group_col}")
 
     features: list[dict[str, Any]] = []
     for cell_id, group_rows in cell_stats.groupby("h3_cell", sort=False):
@@ -352,8 +381,8 @@ def h3_cells_to_geojson(
             continue
         values = pd.to_numeric(group_rows[value_col], errors="coerce").dropna()
         fill_value = float(values.max()) if not values.empty else None
-        groups_data = _groups_data_records(group_rows)
-        groups = [r["vector_group"] for r in groups_data]
+        groups_data = _groups_data_records(group_rows, group_col)
+        groups = [r[group_col] for r in groups_data]
         features.append(
             {
                 "type": "Feature",
@@ -405,6 +434,7 @@ def folium_h3_choropleth(
     cell_stats: pd.DataFrame,
     value_col: str,
     *,
+    group_col: str = "vector_group",
     title: str | None = None,
     fill_opacity: float = 0.45,
     line_weight: float = 0.6,
@@ -414,12 +444,15 @@ def folium_h3_choropleth(
     One polygon per ``h3_cell`` on an OSM street basemap (shared color scale;
     fill = ``max(value_col)`` across *active* groups in the cell).
 
-    When multiple vector groups are present, LayerControl lists only those
-    groups (H3 polygons are always on). Toggling a group updates popup columns
-    and hides hexes that no longer have any active group.
+    When multiple groups are present, LayerControl lists only those groups
+    (H3 polygons are always on). Toggling a group updates popup columns and
+    hides hexes that no longer have any active group.
     """
     if cell_stats.empty:
         return _base_map(50.0, 10.0, zoom_start=4)
+
+    if group_col not in cell_stats.columns:
+        raise ValueError(f"cell_stats must include {group_col}")
 
     values = pd.to_numeric(cell_stats[value_col], errors="coerce").dropna()
     vmin = float(values.min()) if not values.empty else 0.0
@@ -442,9 +475,9 @@ def folium_h3_choropleth(
     lat, lon = h3.cell_to_latlng(first_cell)
     fmap = _base_map(lat, lon, zoom_start=5)
 
-    geojson = h3_cells_to_geojson(cell_stats, value_col)
+    geojson = h3_cells_to_geojson(cell_stats, value_col, group_col=group_col)
     groups = sorted(
-        str(g) for g in cell_stats["vector_group"].dropna().unique().tolist()
+        str(g) for g in cell_stats[group_col].dropna().unique().tolist()
     )
 
     def _style(feature: dict[str, Any]) -> dict[str, Any]:
@@ -474,6 +507,7 @@ def folium_h3_choropleth(
         map_name=fmap.get_name(),
         geojson_name=layer.get_name(),
         groups=groups,
+        group_col=group_col,
         value_col=value_col,
         vmin=vmin,
         vmax=vmax,
