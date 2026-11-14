@@ -225,6 +225,450 @@ def feature_slug_from_scientific_name(scientific_name: object) -> str:
     return re.sub(r"_+", "_", slug).strip("_")
 
 
+# ---------------------------------------------------------------------------
+# Virus host → host_group (spec ``04``; interim only; merge does not consume)
+# ---------------------------------------------------------------------------
+
+HOST_GROUPS: tuple[str, ...] = (
+    "mosquito",
+    "tick",
+    "biting_midge",
+    "sandfly",
+    "human",
+    "livestock",
+    "bird",
+    "wildlife_mammal",
+    "lab",
+    "unknown",
+)
+
+# Lower value = preferred when multi-segment host strings disagree.
+HOST_GROUP_PRIORITY: dict[str, int] = {
+    "mosquito": 0,
+    "tick": 0,
+    "biting_midge": 0,
+    "sandfly": 0,
+    "bird": 1,
+    "wildlife_mammal": 2,
+    "livestock": 3,
+    "human": 4,
+    "lab": 5,
+    "unknown": 6,
+}
+
+# Casefolded genus / higher-taxon → vector_group. VectorNet genera plus global
+# non-EU genera and family/order names seen in virus host strings.
+GLOBAL_VECTOR_GENUS_TO_GROUP: dict[str, str] = {
+    # Mosquitoes (Culicidae) — VectorNet + global
+    "aedes": "mosquito",
+    "anopheles": "mosquito",
+    "coquillettidia": "mosquito",
+    "culex": "mosquito",
+    "culiseta": "mosquito",
+    "orthopodomyia": "mosquito",
+    "uranotaenia": "mosquito",
+    "ochlerotatus": "mosquito",
+    "mansonia": "mosquito",
+    "armigeres": "mosquito",
+    "psorophora": "mosquito",
+    "toxorhynchites": "mosquito",
+    "haemagogus": "mosquito",
+    "culicidae": "mosquito",
+    # Ticks (Ixodida) — VectorNet + global
+    "dermacentor": "tick",
+    "hyalomma": "tick",
+    "ixodes": "tick",
+    "ornithodoros": "tick",
+    "rhipicephalus": "tick",
+    "haemaphysalis": "tick",
+    "amblyomma": "tick",
+    "argas": "tick",
+    "boophilus": "tick",
+    "ixodoidea": "tick",
+    "ixodida": "tick",
+    "ixodidae": "tick",
+    # Biting midges
+    "culicoides": "biting_midge",
+    "ceratopogonidae": "biting_midge",
+    # Sandflies
+    "phlebotomus": "sandfly",
+    "sergentomyia": "sandfly",
+    "lutzomyia": "sandfly",
+    "phlebotominae": "sandfly",
+    "psychodidae": "sandfly",
+}
+
+_HOST_PLACEHOLDERS: frozenset[str] = frozenset(
+    {
+        "",
+        "missing",
+        "unknown",
+        "na",
+        "n/a",
+        "none",
+        "null",
+        "nan",
+        "not applicable",
+        "not collected",
+        "no_value",
+        "<na>",
+    }
+)
+
+_HOST_COUNT_SUFFIX_RE = re.compile(r":\d+\s*$")
+_HOST_SEGMENT_SPLIT_RE = re.compile(r"[|;]")
+
+# Lab / culture markers — checked before arthropod genus matching.
+_HOST_LAB_RE = re.compile(
+    r"(?i)\b("
+    r"vero(?:[-\s]?e?6)?|"
+    r"c6\s*/?\s*36|"
+    r"bhk(?:[-\s]?21)?|"
+    r"bsr|"
+    r"ap\s*61|"
+    r"cell[\s_-]?line|"
+    r"cell[\s_-]?culture|"
+    r"cells?|"
+    r"cdna\s+clone|"
+    r"clone|"
+    r"vaccine|"
+    r"cultured\s+virus|"
+    r"laboratory\s+tissue\s+culture|"
+    r"supernatant"
+    r")\b"
+)
+
+_HOST_HUMAN_RE = re.compile(
+    r"(?i)\b(homo\s+sapiens|human|patient|homo)\b"
+)
+_HOST_BIRD_RE = re.compile(
+    r"(?i)\b("
+    r"bird|avian|aves|poultry|chicken|duck|goose|swan|crow|raven|magpie|"
+    r"jay|sparrow|thrush|pigeon|dove|gull|owl|eagle|hawk|falcon|vulture|"
+    r"corvus|coloeus|turdus|larus|anas|gallus|passer|pica|cyanocitta|"
+    r"buteo|strix|pelecanus|accipitridae|strigiformes|passeriformes|"
+    r"bird_outbreaks|unspecified\s+bird"
+    r")\b"
+)
+_HOST_LIVESTOCK_RE = re.compile(
+    r"(?i)\b("
+    r"cattle|bovine|bos\s+taurus|cow|ox|buffalo|"
+    r"sheep|ovine|ovis\s+aries|"
+    r"goat|caprine|capra|"
+    r"horse|equine|equus|equidae|equid|"
+    r"pig|swine|porcine|sus\s+scrofa|"
+    r"camel|camelid|llama|alpaca|"
+    r"dog|canine|canis\s+lupus\s+fam(?:il)?iaris|canis\s+familiaris|"
+    r"cat|feline|felis\s+catus|"
+    r"domestic|livestock|ruminant|"
+    r"equid_outbreaks|goat/sheep|small\s+ruminant|"
+    r"unspecified\s+mammal"
+    r")\b"
+)
+_HOST_WILD_MAMMAL_RE = re.compile(
+    r"(?i)\b("
+    r"deer|odocoileus|cervid|cervus|mule\s+deer|white[-\s]?tailed|"
+    r"rodent|mouse|mus\s+musculus|rattus|rat|squirrel|sciurus|"
+    r"bat|chiroptera|"
+    r"boar|wild\s+boar|"
+    r"primate|alouatta|macaca|monkey|"
+    r"fox|vulpes|wolf|canis\s+lupus(?!\s+fam)|coyote|canis\s+latrans|"
+    r"hare|lepus|rabbit|oryctolagus|"
+    r"hedgehog|erinaceus|shrew|wildlife"
+    r")\b"
+)
+_HOST_DOMESTIC_PREFIX_RE = re.compile(r"(?i)^\s*domestic\s*-")
+_HOST_WILD_PREFIX_RE = re.compile(r"(?i)^\s*wild\s*-")
+
+_HOST_ENGLISH_VECTOR_RE = re.compile(
+    r"(?i)\b("
+    r"mosquito(?:es)?|tick(?:s)?|biting\s+midge(?:s)?|midge(?:s)?|"
+    r"sand\s*-?\s*fl(?:y|ies)|sandfly|sandflies|vector"
+    r")\b"
+)
+_HOST_ENGLISH_VECTOR_TO_GROUP: dict[str, str] = {
+    "mosquito": "mosquito",
+    "mosquitoes": "mosquito",
+    "tick": "tick",
+    "ticks": "tick",
+    "midge": "biting_midge",
+    "midges": "biting_midge",
+    "biting midge": "biting_midge",
+    "biting midges": "biting_midge",
+    "sandfly": "sandfly",
+    "sandflies": "sandfly",
+    "sand fly": "sandfly",
+    "sand flies": "sandfly",
+    "sand-fly": "sandfly",
+    "sand-flies": "sandfly",
+}
+
+# isolation_source fallbacks (applied only when host → unknown)
+_ISO_LAB_RE = re.compile(
+    r"(?i)\b("
+    r"vero|c6\s*/?\s*36|bhk|ap\s*61|cell[\s_-]?line|cell[\s_-]?culture|"
+    r"cultured\s+virus|laboratory\s+tissue\s+culture|vaccine|passage|"
+    r"supernatant|clone"
+    r")\b"
+)
+_ISO_MOSQUITO_RE = re.compile(
+    r"(?i)\b("
+    r"mosquito\s+pool|pooled\s+(?:blended\s+)?mosquitoes|whole\s+mosquito|"
+    r"mosquito\s+homogenate|mosquitoes?\b"
+    r")"
+)
+_ISO_TICK_RE = re.compile(
+    r"(?i)\b("
+    r"tick\s+pool|ticks?\b|i\.?\s*persulcatus|ixodes|hyalomma|"
+    r"dermacentor|rhipicephalus|haemaphysalis|amblyomma"
+    r")"
+)
+_ISO_MIDGE_RE = re.compile(r"(?i)\bculicoides\b")
+_ISO_SANDFLY_RE = re.compile(r"(?i)\b(sand\s*-?\s*fl(?:y|ies)|phlebotomus|lutzomyia)\b")
+_ISO_HUMAN_RE = re.compile(
+    r"(?i)\b(patient|human\s+(?:blood|serum|plasma)|human)\b"
+)
+_ISO_LIVESTOCK_RE = re.compile(
+    r"(?i)\b(bovine|ovine|caprine|equine|swine|cattle|sheep|goat|horse|pig)\b"
+)
+
+
+def load_host_groups(reference_dir: Path | None = None) -> pd.DataFrame:
+    """Load ``data/external/host_groups.csv`` (virus host → ``host_group`` aliases)."""
+    directory = Path(reference_dir) if reference_dir is not None else default_reference_dir()
+    path = directory / "host_groups.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing {path}. Run notebooks/01_sources/06b_reference_host_groups.ipynb first."
+        )
+    return pd.read_csv(
+        path,
+        dtype={"host_key": str, "host_group": str, "notes": str},
+        keep_default_na=False,
+    )
+
+
+def build_host_alias_map(host_groups_df: pd.DataFrame) -> dict[str, str]:
+    """Map ``norm_key(host_key)`` → ``host_group`` from the curated reference CSV.
+
+    Rejects empty keys, ``unknown`` targets, and values outside ``HOST_GROUPS``.
+    Duplicate normalized keys with conflicting groups raise ``ValueError``.
+    """
+    if "host_key" not in host_groups_df.columns or "host_group" not in host_groups_df.columns:
+        raise ValueError("host_groups_df must have columns host_key, host_group")
+
+    allowed = set(HOST_GROUPS) - {"unknown"}
+    mapping: dict[str, str] = {}
+    for row in host_groups_df.itertuples(index=False):
+        key = norm_key(getattr(row, "host_key", ""))
+        group = _clean_text(getattr(row, "host_group", "")).casefold()
+        if not key:
+            raise ValueError("host_groups.csv has an empty host_key after normalization")
+        if group not in allowed:
+            raise ValueError(
+                f"Invalid host_group {group!r} for host_key {key!r}; "
+                f"expected one of {sorted(allowed)}"
+            )
+        existing = mapping.get(key)
+        if existing is not None and existing != group:
+            raise ValueError(
+                f"Conflicting host_group for key {key!r}: {existing!r} vs {group!r}"
+            )
+        mapping[key] = group
+    return mapping
+
+
+def build_host_taxon_lookup(
+    vector_taxon_df: pd.DataFrame | None = None,
+) -> dict[str, str]:
+    """Casefolded scientific_name / genus → arthropod ``host_group``.
+
+    Starts from ``GLOBAL_VECTOR_GENUS_TO_GROUP`` and overlays VectorNet
+    ``vector_taxon_groups.csv`` scientific names (and their genus tokens).
+    """
+    mapping: dict[str, str] = dict(GLOBAL_VECTOR_GENUS_TO_GROUP)
+    if vector_taxon_df is None:
+        return mapping
+    if "scientific_name" not in vector_taxon_df.columns or "vector_group" not in vector_taxon_df.columns:
+        raise ValueError("vector_taxon_df must have columns scientific_name, vector_group")
+    allowed = {"mosquito", "tick", "biting_midge", "sandfly"}
+    for row in vector_taxon_df.itertuples(index=False):
+        name = _clean_text(getattr(row, "scientific_name", ""))
+        group = _clean_text(getattr(row, "vector_group", "")).casefold()
+        if not name or group not in allowed:
+            continue
+        mapping[name.casefold()] = group
+        genus = name.split()[0].casefold() if name.split() else ""
+        if genus:
+            mapping.setdefault(genus, group)
+    return mapping
+
+
+def _is_host_placeholder(text: str) -> bool:
+    return text.casefold().strip() in _HOST_PLACEHOLDERS
+
+
+def _split_host_segments(host: object) -> list[str]:
+    """Split multi-host strings and strip outbreak ``:count`` suffixes."""
+    raw = _clean_text(host)
+    if not raw or _is_host_placeholder(raw):
+        return []
+    segments: list[str] = []
+    for part in _HOST_SEGMENT_SPLIT_RE.split(raw):
+        segment = _HOST_COUNT_SUFFIX_RE.sub("", part).strip(" ,/-")
+        if not segment or _is_host_placeholder(segment):
+            continue
+        segments.append(segment)
+    return segments
+
+
+def _match_english_vector(text: str) -> str:
+    match = _HOST_ENGLISH_VECTOR_RE.search(text)
+    if not match:
+        return ""
+    token = match.group(0).casefold().replace("-", " ")
+    token = re.sub(r"\s+", " ", token).strip()
+    if token == "vector":
+        return ""
+    return _HOST_ENGLISH_VECTOR_TO_GROUP.get(token, "")
+
+
+def _match_arthropod_taxon(text: str, taxon_to_group: Mapping[str, str]) -> str:
+    # Normalize dotted genera (e.g. Amblyomma.javanense) and collapse spaces.
+    cleaned = re.sub(r"\.", " ", text)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    if not cleaned:
+        return ""
+    folded = cleaned.casefold()
+    if folded in taxon_to_group:
+        return taxon_to_group[folded]
+    # Full binomial / trinomial progressive prefixes.
+    tokens = folded.split()
+    for n in range(len(tokens), 0, -1):
+        candidate = " ".join(tokens[:n])
+        hit = taxon_to_group.get(candidate)
+        if hit:
+            return hit
+    # Abbreviated binomial: "I. persulcatus" / "I.persulcatus"
+    abbrev = re.match(r"^([a-z])\.?\s+([a-z]+)$", folded)
+    if abbrev:
+        species = abbrev.group(2)
+        for key, group in taxon_to_group.items():
+            parts = key.split()
+            if len(parts) >= 2 and parts[0].startswith(abbrev.group(1)) and parts[1] == species:
+                return group
+    return _match_english_vector(cleaned)
+
+
+def _classify_host_segment(
+    segment: str,
+    *,
+    host_alias_map: Mapping[str, str],
+    taxon_to_group: Mapping[str, str],
+) -> str:
+    """Classify one cleaned host segment; never returns empty (uses ``unknown``)."""
+    if not segment or _is_host_placeholder(segment):
+        return "unknown"
+
+    # 1. Curated alias table
+    alias_hit = host_alias_map.get(norm_key(segment))
+    if alias_hit:
+        return alias_hit
+
+    # Outbreak token shortcuts after :count strip (human, bird_outbreaks, …)
+    folded = segment.casefold().strip()
+    if folded in {"human", "homo sapiens", "homo"}:
+        return "human"
+    if folded.startswith("bird_outbreak") or folded in {"bird", "avian"}:
+        return "bird"
+    if folded.startswith("equid_outbreak") or folded.startswith("equine"):
+        return "livestock"
+
+    # 2. Lab / culture guard (before taxon prefix match)
+    if _HOST_LAB_RE.search(segment):
+        return "lab"
+
+    # 3. Arthropod taxon / English vector term
+    arthropod = _match_arthropod_taxon(segment, taxon_to_group)
+    if arthropod:
+        return arthropod
+
+    # 4. Vertebrate cues (avian before Wild -/Domestic -; Wild - before livestock keywords)
+    if _HOST_HUMAN_RE.search(segment):
+        return "human"
+    if _HOST_BIRD_RE.search(segment):
+        return "bird"
+    if _HOST_WILD_PREFIX_RE.search(segment):
+        return "wildlife_mammal"
+    if _HOST_DOMESTIC_PREFIX_RE.search(segment) or _HOST_LIVESTOCK_RE.search(segment):
+        return "livestock"
+    if _HOST_WILD_MAMMAL_RE.search(segment):
+        return "wildlife_mammal"
+
+    return "unknown"
+
+
+def _classify_isolation_source(isolation_source: object) -> str:
+    """Fallback classifier for raw ``isolation_source`` when host is unresolved."""
+    text = _clean_text(isolation_source)
+    if not text or _is_host_placeholder(text):
+        return "unknown"
+    if _ISO_LAB_RE.search(text):
+        return "lab"
+    if _ISO_MOSQUITO_RE.search(text):
+        return "mosquito"
+    if _ISO_TICK_RE.search(text):
+        return "tick"
+    if _ISO_MIDGE_RE.search(text):
+        return "biting_midge"
+    if _ISO_SANDFLY_RE.search(text):
+        return "sandfly"
+    if _ISO_HUMAN_RE.search(text):
+        return "human"
+    if _ISO_LIVESTOCK_RE.search(text):
+        return "livestock"
+    return "unknown"
+
+
+def _pick_host_group(groups: list[str]) -> str:
+    """Pick one ``host_group`` by ``HOST_GROUP_PRIORITY`` (lower wins)."""
+    if not groups:
+        return "unknown"
+    return min(groups, key=lambda g: HOST_GROUP_PRIORITY.get(g, 99))
+
+
+def classify_host_group(
+    host: object,
+    *,
+    host_alias_map: Mapping[str, str],
+    taxon_to_group: Mapping[str, str] | None = None,
+    isolation_source: object = "",
+) -> str:
+    """Classify free-text virus ``host`` into a locked ``host_group`` value.
+
+    Implements the segment ladder, multi-host priority tie-break, and
+    ``isolation_source`` fallback from spec ``04``. Never overrides a resolved
+    host with isolation_source (clinical hosts passaged in cells stay vertebrate).
+    """
+    taxa = taxon_to_group if taxon_to_group is not None else GLOBAL_VECTOR_GENUS_TO_GROUP
+    segments = _split_host_segments(host)
+    if segments:
+        groups = [
+            _classify_host_segment(
+                segment,
+                host_alias_map=host_alias_map,
+                taxon_to_group=taxa,
+            )
+            for segment in segments
+        ]
+        picked = _pick_host_group(groups)
+        if picked != "unknown":
+            return picked
+
+    # Host blank / unresolved → isolation_source fallback
+    return _classify_isolation_source(isolation_source)
+
+
 def load_interim_vectors(interim_dir: Path | None = None) -> pd.DataFrame:
     """Load ``data/02_interim/vectors_normalized.parquet``."""
     directory = Path(interim_dir) if interim_dir is not None else default_interim_dir()
