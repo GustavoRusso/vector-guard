@@ -1,5 +1,13 @@
 # Agent conventions
 
+## ENVIRONMENT
+
+- Use the DevContainer (`.devcontainer/`) to run Jupyter notebooks in VS Code / Cursor. Python **3.12+** in a project virtualenv (`.venv`); `postCreateCommand` runs `uv sync`.
+- Prefer notebook work as notebook cells, each preceded by a markdown cell that states the step’s purpose.
+- Dependencies live in `pyproject.toml`; install and lock with **uv** (`uv.lock`). Do not invent ad-hoc `requirements.txt` or unpinned one-off installs for project code.
+- Resolve paths from the repo root via `vector_guard.data.find_repo_root` (notebooks may be opened from subfolders). Reusable helpers live in `src/vector_guard/` and are imported as `from vector_guard...`.
+- Show tables, plots, and maps **inline** in the notebook (`display`, seaborn, Folium). Put reusable viz helpers in `src/vector_guard/viz.py` rather than duplicating chart code across cells.
+
 ## `docs/` — read-only insight
 
 - Agents **may read** files under `docs/` for background on scope, sources, and early research.
