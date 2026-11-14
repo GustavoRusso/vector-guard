@@ -1,0 +1,522 @@
+host,rows,n_sources,top_source,sample_isolation_source
+Serum,259,1,ena_sequence,Homo sapiens
+Apis mellifera,47,1,ena_read_run,honey bee brood comb
+Denv4,11,1,ena_sequence,serum
+West Nile virus,11,1,ena_read_run,DNA:ss Viral cDNA
+Apodemus uralensis,10,1,bvbrc,liver
+Barbarine ewe,10,1,ena_sequence,blood
+Bison bison,10,1,ena_sequence,
+C.pulicaris,10,1,ena_sequence,C.pulicaris
+Hemophagous bugs,10,1,ena_sequence,
+Hippobosca equina,10,1,ena_sequence,insect homogenate
+Isolate,10,1,ena_sequence,Isolate
+Rana ridibunda,10,1,ena_sequence,brain
+insect,10,1,ena_sequence,
+pronghorn antelope,10,1,ena_sequence,blood
+Branta canadensis,9,2,ena_sequence,"kidney, spleen, and heart"
+Phoenicopterus ruber,9,3,ena_sequence,Bird (American flamingo)
+Bos indicus,8,1,ena_read_run,R. microplus
+Callithrix geoffroyi,8,1,ena_sequence,liver
+Camelus dromedarius,8,3,ena_sequence,serum sample
+Denv1,8,1,ena_sequence,serum
+Falco sparverius,8,2,ena_sequence,American kestrel brain
+Haliaeetus leucocephalus,8,2,ena_sequence,feather
+IRF strain,8,2,ena_sequence,IRF Isolate
+Myodes rufocanus,8,1,ena_sequence,
+Myotis laniger,8,1,bvbrc,liver
+Phalacrocorax auritus,8,2,ena_sequence,brain
+Quiscalus quiscula,8,2,ena_sequence,kidney and spleen
+Rhinolophus ferrumequinum,8,1,bvbrc,lung
+Rhinolophus pusillus,8,1,bvbrc,lung
+Rhinolophus sinicus,8,1,bvbrc,lung
+Allouata sp.,7,1,ena_sequence,liver
+American Robin,7,1,ena_sequence,tissue
+Artibeus phaeotis,7,1,ena_sequence,Blood-feces-saliva pool
+Carpodacus mexicanus,7,1,ena_sequence,
+Denv3,7,1,ena_sequence,serum
+NHP,7,1,ena_sequence,
+Parus major,7,2,ena_sequence,brain
+Stenocranius gregalis,7,1,ena_sequence,
+Sturnira parvidens,7,1,ena_sequence,Blood-feces-saliva pool
+Sturnus vulgaris,7,1,ena_sequence,Birds
+Apodemus flavicollis,6,1,ena_sequence,spleen
+Arthropod,6,1,ena_sequence,
+Athene noctua,6,2,ena_sequence,brain
+Bluejay,6,1,ena_sequence,
+Callicebus,6,1,ena_sequence,kidney female
+Cx. annulirostris,6,1,ena_sequence,
+Myodes rutilus,6,2,ena_sequence,Myodes rutilus
+Northern goshawk,6,1,ena_sequence,brain
+Phoca vitulina,6,2,ena_sequence,marrow
+Pigs,6,1,bvbrc,oronasal secretions
+alpacas,6,1,ena_sequence,
+dengue,6,1,ena_sequence,liver
+northern goshawk,6,1,ena_sequence,brain
+partridge,6,1,ena_sequence,liver
+suckling white mice,6,1,ena_sequence,
+Acrocephalus dumetorum,5,1,ena_sequence,liver
+Aegypius monachus,5,1,ena_sequence,
+Asio otus,5,2,ena_sequence,brain
+Branta ruficollis,5,2,ena_sequence,brain
+Cebus,5,1,ena_sequence,liver male
+Columba livia,5,2,ena_sequence,spleen
+Eretmapodites quinquevittatus,5,1,ena_sequence,
+Lasiopodomys gregalis,5,2,bvbrc,liver
+Melanitta nigra,5,2,ena_sequence,brain
+Mimus polyglottos,5,1,ena_read_run,Tissue
+Northern Mockingbird,5,1,ena_sequence,tissue
+Phalacrocorax carbo,5,1,ena_sequence,
+Phoenicopterus sp.,5,1,ena_sequence,brain + liver
+Rousettus leschenaulti,5,1,ena_sequence,blood
+Sabethes chloropterus,5,1,ena_sequence,1 female mosquito
+Serinus canaria,5,1,ena_sequence,organs
+Zenaida macroura,5,2,ena_sequence,feather pulp
+flamingo,5,1,ena_sequence,heart
+thoroughbred,5,1,ena_sequence,
+Ar. subalbatus,4,1,ena_sequence,
+Black-headed Grosbeak,4,2,ena_read_run,tissue
+Brewers Blackbird,4,2,ena_read_run,tissue
+Bubulcus ibis,4,1,ena_sequence,
+Callicebus sp.,4,1,ena_sequence,liver
+Camelus,4,1,pathoplexus,
+Capricornis milneedwardsii,4,2,ena_sequence,
+Cebidae sp.,4,1,ena_sequence,liver
+Chloris chloris,4,2,ena_sequence,carcass
+Cricetulus migratorius,4,1,bvbrc,liver
+Cx. sitiens subgroup,4,1,ena_sequence,
+Denv2,4,1,ena_sequence,serum
+Eptesicus serotinus andersoni,4,1,bvbrc,liver
+Fringilla coelebs,4,1,ena_sequence,brain tissue
+Fulica atra,4,1,ena_sequence,
+Hamster,4,1,ena_read_run,DMEM+5%FBS
+Histiostoma sp.,4,1,bvbrc,
+Marmosa murina,4,1,ena_sequence,serum
+Microtus maximowiczii,4,1,ena_sequence,
+Microtus oeconomus,4,2,ena_sequence,brain
+Miniopterus fuliginosus,4,1,bvbrc,liver
+Molossus rufus,4,1,ena_sequence,
+Motacilla alba,4,1,ena_sequence,internal organs
+Myotis siligorensis,4,1,bvbrc,lung
+Nestor notabilis,4,1,ena_sequence,
+Nothoprocta perdicaria,4,1,ena_sequence,
+Nyctalus noctula,4,1,bvbrc,liver
+Piliocolobus rufomitratus,4,1,ena_sequence,plasma
+Pipistrellus abramus,4,1,bvbrc,liver
+Pteropus lylei,4,1,bvbrc,
+Rh. microplus / Am. variegatum,4,1,bvbrc,
+Rhinolophus pearsonii,4,1,bvbrc,lung
+Sapajus,4,1,ena_sequence,liver
+Spheniscus demersus,4,2,ena_sequence,carcass
+Sternula,4,2,ena_sequence,kidney and spleen
+Streptopelia decaocto,4,2,ena_sequence,organ
+Sturnidae,4,2,ena_sequence,kidney and spleen
+Sylvia atricapilla,4,2,ena_sequence,brain tissue
+calf,4,1,ena_sequence,
+quail,4,1,ena_sequence,lung
+Ae. vexans,3,1,ena_sequence,
+Alauda arvensis,3,1,ena_sequence,
+Androlaelaps casalis,3,1,ena_sequence,
+Anser indicus,3,1,ena_sequence,organ
+Apodemus,3,1,ena_sequence,
+Apodemus sylvaticus,3,1,ena_sequence,
+Callicebus personatus,3,1,ena_sequence,
+Charadrius melodus,3,2,ena_sequence,feather pulp
+Chlorocebus sabaeus,3,1,ena_read_run,
+Clanga pomarina,3,1,ena_sequence,kidney
+Colaptes auratus,3,1,ena_sequence,
+Didelphis marsupialis,3,1,ena_sequence,serum
+Erithacus rubecula,3,1,ena_sequence,organ
+Gracula religiosa,3,2,ena_sequence,brain
+Hipposideros caffer,3,1,ena_sequence,
+Lagopus lagopus scotica,3,1,ena_sequence,
+Lynx pardinus,3,1,ena_sequence,blood
+Mastomys natalensis,3,1,ena_sequence,brain
+Mergus squamatus,3,1,ena_sequence,spleen
+Molossus nigricans,3,1,ena_sequence,Blood-feces-saliva pool
+Myodes rutilus Pallas,3,1,ena_sequence,brain
+Paridae,3,1,ena_sequence,organ
+Parus caeruleus,3,1,ena_sequence,organ
+Philantomba monticola,3,1,ena_sequence,liver/spleen
+Phylloscopus collybita,3,1,ena_sequence,throat and cloacal swab
+Pipistrellus pipistrellus,3,1,ena_sequence,brain
+Rupicapra rupicapra,3,1,ena_sequence,brain from male
+Sapajus libidinosus,3,1,ena_sequence,liver
+Sapajus sp.,3,2,ena_sequence,liver
+Serinus canaria forma domestica,3,1,ena_sequence,
+Spermophilus undulatus,3,1,ena_sequence,
+Spheniscus humboldti,3,2,ena_sequence,heart tissue
+Surnia ulula,3,1,ena_sequence,
+Syncerus caffer,3,1,ena_sequence,lungs
+Tetrao urogallus,3,1,ena_sequence,organ
+Tupaia glis,3,1,ena_sequence,"T. glis urine, fecal and body fluid"
+piglet,3,1,ena_sequence,
+red-legged partridge,3,1,ena_sequence,cloacal swab
+springbok,3,1,ena_sequence,
+Acanthis flammea,2,1,ena_sequence,brain tissue
+Accipiter cooperii,2,1,ena_sequence,Cooper's hawk brain
+Alopochen aegyptiaca,2,1,ena_sequence,
+Alveonasus lahorensis,2,2,ena_sequence,
+American Kestrel,2,2,ena_sequence,tissue
+Aotus ozzarae infulatus,2,1,ena_sequence,liver
+Apodemus speciosus,2,1,ena_sequence,
+Apus apus,2,2,ena_sequence,brain
+Aquila chrysaetos,2,1,ena_sequence,
+Asio flammeus,2,2,ena_sequence,kidney and spleen
+Black/headed Grosbeak,2,1,ena_sequence,tissue
+Brewer's Blackbird,2,1,ena_sequence,tissue
+Calidris alba,2,2,ena_sequence,kidney and spleen
+Callicebus nigrifrons,2,2,ena_sequence,liver
+Callithrix jacchus,2,1,ena_sequence,blood
+Capreolus capreolus,2,2,ena_read_run,central nervous system from female roe deer
+Caprimulgus europaeus,2,1,ena_sequence,
+Captive - Humboldt penguin (Spheniscus humboldti),2,1,empres_i,Captive
+Cardinalis cardinalis,2,1,ena_sequence,
+Carduelis carduelis,2,1,ena_sequence,pooled organs
+Carollia perspicillata,2,1,ena_sequence,serum
+Chick,2,1,ena_read_run,missing
+Citellus undulatus,2,1,ena_sequence,
+Clethrionomys rutilus Pallas,2,1,ena_sequence,
+Connochaetes taurinus taurinus,2,1,ena_sequence,
+Coragyps atratus,2,2,ena_sequence,kidney and spleen
+Costas Hummingbird,2,2,ena_sequence,tissue
+Crocodylus niloticus,2,1,ena_sequence,
+Cygnus olor,2,1,ena_sequence,"brain tissue, intestines"
+Damaliscus pygargus,2,1,ena_sequence,brain
+Eidolon helvum,2,1,ena_sequence,spleen
+Euphagus cyanocephalus,2,2,ena_sequence,kidney and spleen
+Experimental Strain,2,1,ena_read_run,missing
+Falco,2,2,ena_sequence,kidney and spleen
+Falco rusticolus,2,1,ena_sequence,brain
+Flamingo,2,1,ena_sequence,tissue
+Grackel,2,1,ena_sequence,
+Gymnogyps californianus,2,2,ena_sequence,brain
+Hirundo rustica,2,2,ena_sequence,Tissue
+Hono sapiens,2,1,ena_sequence,serum
+Iguana iguana,2,1,ena_read_run,A. dissimile
+Jaybird,2,2,ena_sequence,tissue
+Kestrel,2,1,ena_sequence,
+Lasiohelea taiwana Shiraki,2,1,ena_sequence,
+Loriini,2,2,ena_sequence,kidney and spleen
+Mareca penelope,2,2,ena_sequence,heart
+Marmota himalayana,2,1,ena_sequence,
+Merops apiaster,2,1,ena_sequence,
+Microtus arvalis,2,1,ena_sequence,liver
+Microtus gregalis,2,1,ena_sequence,
+Mimus,2,2,ena_sequence,kidney and spleen
+Murina aurata,2,1,ena_sequence,brain
+Mus sp.,2,1,ena_sequence,brain
+Northern mockingbird,2,1,ena_sequence,
+Oak Titmouse,2,2,ena_sequence,tissue
+Peropteryx macrotis,2,1,ena_sequence,
+Phoenicurus phoenicurus,2,1,ena_sequence,brain
+Poecile atricapilla,2,1,ena_sequence,black-capped chickadee brain
+Proechimys cuvieri,2,1,ena_sequence,serum
+Prunella modularis,2,1,ena_sequence,brain
+Pyrrhula pyrrhula,2,1,ena_sequence,
+Quiscalus major,2,2,ena_sequence,kidney and spleen
+Rhea americana,2,1,ena_sequence,brain
+Rhesus macaque,2,1,ena_sequence,
+Rhogeessa tumida,2,1,ena_sequence,
+S. pagodarum,2,1,ena_sequence,
+Sabethes albiprivus,2,1,ena_sequence,
+Sabethes sp.,2,1,ena_sequence,
+Simiiformes,2,1,ena_sequence,sentinel monkey
+Sorex araneus,2,1,ena_sequence,brain
+Spinus tristis,2,1,ena_sequence,bird
+Suncus murinus,2,1,ena_sequence,
+Sus domesticus,2,1,ena_sequence,
+Testudo graeca,2,2,ena_sequence,serum
+Tetrastes bonasia,2,1,ena_sequence,
+Turdidae,2,1,ena_sequence,
+Warbler,2,2,ena_sequence,tissue
+Western Bluebird,2,2,ena_sequence,tissue
+Woodpecker,2,1,ena_sequence,
+donkey,2,1,ena_sequence,
+field Aedes albopictus,2,1,ena_sequence,Aedes albopictus
+hamster,2,2,ena_sequence,DMEM+5%FBS
+in vitro,2,1,ena_read_run,in vitro (plasmid DNA)
+marmoset,2,1,ena_sequence,serum
+meerkat,2,1,ena_sequence,brain
+muskrat,2,1,ena_sequence,brain
+peacock,2,1,ena_sequence,Peacock brain
+pelican,2,1,ena_sequence,brain
+sparrowhawk,2,1,ena_sequence,
+stork,2,1,ena_sequence,brain
+A cinerea,1,1,ena_sequence,
+A. funereus,1,1,ena_sequence,
+A. nophelessinensis,1,1,ena_sequence,
+Accipter cooperii,1,1,ena_sequence,
+Actitis hypoleucos,1,1,ena_sequence,brain tissue
+Actitis macularius,1,1,ena_sequence,feather pulp
+Ae.,1,1,ena_sequence,
+Ae. scapularis,1,1,ena_sequence,
+Ae. taeniorhynchus,1,1,ena_sequence,
+Aedeomyia madagascarica,1,1,ena_sequence,
+Aegolius funereus,1,1,ena_sequence,
+Agelaius phoeniceus,1,1,ena_sequence,
+Allens Hummingbird,1,1,ena_read_run,Tissue
+Allouatta clamitans,1,1,ena_sequence,
+Apodemus agrarius Pallas,1,1,ena_sequence,
+Aquila adalberti,1,1,ena_sequence,brain
+Aquila heliaca,1,1,ena_sequence,spleen
+Ardea cinerea,1,1,ena_sequence,throat cloacal swab
+Artibeus planirostris,1,1,ena_sequence,testes
+Assiolo,1,1,ena_sequence,
+Balearica regulorum,1,1,ena_sequence,organ
+Barn Swallow,1,1,ena_sequence,tissue
+Bdellonyssus bursa,1,1,ena_sequence,
+Black-crowned Night Heron,1,1,ena_read_run,Tissue
+Black/crowned Night Heron,1,1,ena_sequence,tissue
+Blastocerus dichotomus,1,1,ena_sequence,spleen
+Blue Heron,1,1,ena_sequence,
+Bombycilla garrulus,1,1,ena_sequence,liver
+Bos,1,1,ena_sequence,
+Buzzard,1,1,ena_sequence,
+C palumbus,1,1,ena_sequence,
+Calandrella cinerea,1,1,ena_sequence,brain
+Callithrix aurita,1,1,ena_read_run,Liver tissue
+Canary,1,1,ena_sequence,
+Captive - Yaks,1,1,empres_i,Captive
+Captive - kudu,1,1,empres_i,Captive
+Cardinal,1,1,ena_sequence,
+Carduelis tristis,1,1,ena_sequence,
+Catbird,1,1,ena_sequence,
+Cebus sp.,1,1,ena_sequence,
+Cephalophorus callipygus,1,1,ena_sequence,liver/spleen
+Chinese soft-shelled turtle,1,1,ena_sequence,
+Chroicocephalus ridibundus,1,1,ena_sequence,kidney
+Ciconia ciconia,1,1,ena_sequence,
+Cinclus cinclus,1,1,ena_sequence,
+Columba sp.,1,1,ena_sequence,
+Common grackle,1,1,ena_sequence,
+Coot,1,1,ena_sequence,
+Copsychus malabaricus,1,1,ena_sequence,mouth swab
+Coracopsis vasa,1,1,ena_sequence,parrot (Coracopsis vasa)
+Cormorant,1,1,ena_sequence,
+Corvuscornix,1,1,ena_sequence,
+Crane,1,1,ena_sequence,
+Cricetulus barabensis,1,1,ena_sequence,
+Cricetus cricetus,1,1,ena_sequence,
+Crocidura sp.,1,1,ena_sequence,brain
+Crocodylus moreletii,1,1,ena_sequence,serum sample
+Crocodylus porosus,1,1,ena_sequence,
+Cuculus canorus,1,1,ena_sequence,
+Cx. bitaeniorhynchus,1,1,ena_sequence,
+Cygnus buccinator,1,1,ena_sequence,feather pulp
+Dendrocopos major,1,1,ena_sequence,
+Egretta garzetta,1,1,ena_sequence,
+Egretta thula,1,1,ena_read_run,Tissue
+Epomophorus labiatus,1,1,ena_sequence,spleen
+Equis Caballus,1,1,ena_sequence,bone marrow
+Eretmapodites sp.,1,1,ena_sequence,
+Erythrocebus patas,1,1,ena_sequence,
+Erythrura prasina,1,1,ena_sequence,
+Eurasian jackdaw,1,1,ena_sequence,heart
+Falco columbarius,1,1,ena_sequence,
+Falco peregrinus,1,1,ena_sequence,spleen
+Falco punctatus,1,1,ena_sequence,
+Falco subbuteo,1,1,ena_sequence,brain tissue
+Garrulusglandarius,1,1,ena_sequence,
+Giraffa camelopardalis,1,1,ena_sequence,
+Giraffa giraffa,1,1,ena_sequence,lungs
+Glaucidium passerinum,1,1,ena_sequence,
+Glossophaga soricina,1,1,ena_sequence,
+Goldfinch,1,1,ena_sequence,
+Green Heron,1,1,ena_sequence,
+Green woodpecker,1,1,ena_sequence,
+Greenback,1,1,ena_sequence,
+Grobbeak,1,1,ena_sequence,tissue
+Gypaetus barbatus,1,1,ena_sequence,pooled organs
+Haemophysalis concinna,1,1,ena_sequence,nymphs (vegetation)
+Hyallomma plumbeum,1,1,ena_sequence,
+Hyallomma scupense,1,1,ena_sequence,
+Hydropotes inermis argyropus,1,1,ena_sequence,
+Hylocichla mustelina,1,1,ena_sequence,
+IAL SPH158615,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH158646,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH162923,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH163022,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH163361,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH163743,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH164954,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH165358,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH166877,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH167178,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH167200,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH167307,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH168330,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH172702,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH172708,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH173963,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH182774,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH182803,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH182896,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH182931,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH183745,1,1,ena_sequence,patients with non-hemorrhagic dengue
+IAL SPH184508,1,1,ena_sequence,patients with non-hemorrhagic dengue
+Ictinia mississippiensis,1,1,ena_sequence,kidney and spleen
+LVM FMRP 01.1,1,1,ena_sequence,patients with non-hemorrhagic dengue
+Laridae sp.,1,1,ena_sequence,
+Lasiohelea taiwana,1,1,ena_sequence,
+Lathamus discolor,1,1,ena_sequence,brain + liver
+Leucopsar rothschildi,1,1,ena_sequence,
+Locustella naevia,1,1,ena_sequence,Locustella naevia
+Loriidae,1,1,ena_sequence,kidney
+Loriidae sp.,1,1,ena_sequence,kidney
+Loriinae subfamily,1,1,ena_read_run,kidney
+Loxia curvirostra,1,1,ena_sequence,
+Mastomys erythroleucus,1,1,ena_sequence,
+Meleagris gallopavo,1,1,ena_sequence,
+Meles meles,1,1,ena_sequence,lung
+Mephitis mephitis,1,1,ena_sequence,
+Micropteropus pusillus,1,1,ena_sequence,
+Micropterus caffer,1,1,ena_sequence,
+Micropterus pusillus,1,1,ena_sequence,
+Microtus fortis,1,1,ena_sequence,
+Microtus maximowiczii ungurensis,1,1,ena_sequence,
+Microtus rossiameridionalis Ognev,1,1,ena_sequence,brain
+Mimomyia flavens,1,1,ena_sequence,
+Miniopterus schreibersi,1,1,ena_sequence,
+Molossus pretiosus,1,1,ena_sequence,
+Molothrus ater,1,1,ena_sequence,
+Muscicapa striata,1,1,ena_sequence,
+Mustela nivalis,1,1,ena_sequence,throat swab
+Myotis pilosus,1,1,ena_sequence,
+Nycticorax nycticorax,1,1,ena_sequence,
+Ochotona alpina,1,1,ena_sequence,
+Oeciacus hirundinis,1,1,ena_sequence,
+Ondatra zibethicus voucher 11617,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 11656,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 11661,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 11704,1,1,ena_sequence,blood
+Ondatra zibethicus voucher 11718,1,1,ena_sequence,urine
+Ondatra zibethicus voucher 11723,1,1,ena_sequence,urine
+Ondatra zibethicus voucher 13943,1,1,ena_sequence,liver
+Ondatra zibethicus voucher 13944,1,1,ena_sequence,kidney
+Ondatra zibethicus voucher 13948,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13952,1,1,ena_sequence,liver
+Ondatra zibethicus voucher 13955,1,1,ena_sequence,liver
+Ondatra zibethicus voucher 13957,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13959,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13964,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13965,1,1,ena_sequence,urine
+Ondatra zibethicus voucher 13967,1,1,ena_sequence,liver
+Ondatra zibethicus voucher 13969,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13971,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13973,1,1,ena_sequence,brain
+Ondatra zibethicus voucher 13977,1,1,ena_sequence,urine
+Ondatra zibethicus voucher 13980,1,1,ena_sequence,urine
+Ondatra zibethicus voucher 13981,1,1,ena_sequence,blood
+Ondatra zibethicus voucher 352m1,1,1,ena_sequence,brain (primary material)
+Ondatra zibethicus voucher 354,1,1,ena_sequence,brain (primary material)
+Ondatra zibethicus voucher 361,1,1,ena_sequence,brain (primary material)
+Orcinus orca,1,1,ena_sequence,
+Oriolus flavocinctus,1,1,ena_sequence,
+Ornitodorus capensis,1,1,ena_sequence,
+Oryzomys sp.,1,1,ena_sequence,liver
+Ovies aries,1,1,ena_read_run,"Farm in Fuente Palmera, Andalusia (Spain)"
+P italiae,1,1,ena_sequence,
+Panurus biarmicus,1,1,ena_sequence,brain
+Papio hamadryas,1,1,ena_sequence,"Liver, Spleen"
+Pelophylax ridibundus,1,1,ena_sequence,
+Phasianus colchicus,1,1,ena_sequence,internal organs
+Pheasant,1,1,ena_sequence,tissue
+Phoenicoparrus andinus,1,1,ena_sequence,heart tissue
+Phoenicopterus roseus,1,1,pathoplexus,Brain
+Phylloscopus proregulus,1,1,ena_sequence,spleen
+Phyllostomus discolor,1,1,ena_sequence,tropical dry forest
+Pinicola enucleator,1,1,ena_sequence,
+Pipistrellus kuhli,1,1,ena_sequence,
+Platycercus eximius,1,1,ena_sequence,organ
+Platyrrhinus helleri,1,1,ena_read_run,brain
+Pluvialis apricaria,1,1,ena_sequence,liver/spleen tissue
+Podiceps cristatus,1,1,ena_sequence,
+Poecile montanus,1,1,ena_sequence,
+Poiana,1,1,ena_sequence,
+Pyrrhocorax graculus,1,1,ena_sequence,Homogenate Suspension
+Pyrrhula erythaca,1,1,ena_sequence,
+Pythium insidiosum,1,1,ena_sequence,
+Quail,1,1,ena_sequence,tissue
+Quarterhorse,1,1,ena_sequence,tissue
+Quiscalus mexicanus,1,1,ena_read_run,Tissue
+Rallus aquaticus,1,1,ena_sequence,
+Rangifer tarandus,1,1,ena_sequence,serum
+Rhinolophus affinis,1,1,ena_sequence,
+Rousettus aegyptiacus,1,1,ena_sequence,spleen
+Rousettus leschenaultii,1,1,ena_sequence,
+Rupicapra rupicapra rupicapra,1,1,ena_sequence,brain
+Saguinus midas,1,1,ena_sequence,
+Sapajus apella,1,1,ena_sequence,liver
+Scotophilus kuhlii,1,1,ena_sequence,
+Seagull,1,1,ena_sequence,
+Seal,1,1,ena_sequence,
+Sergentomia minuta,1,1,ena_sequence,
+Sitta europaea,1,1,ena_sequence,
+Somateria mollissima,1,1,ena_sequence,
+Sorex araneus L.,1,1,ena_sequence,male subadultus
+Sorex sp.,1,1,ena_sequence,
+Spatula clypeata,1,1,ena_sequence,
+Spinus psaltria,1,1,ena_read_run,Tissue
+Spirus tristis,1,1,ena_sequence,
+Spotted Flycatcher,1,1,ena_sequence,organ
+Starling,1,1,ena_sequence,
+Sterna antillarum athalassos,1,1,ena_read_run,Feather
+Stigmochelys pardalis,1,1,bvbrc,
+Streptopelia turtur,1,1,ena_sequence,
+Swallow,1,1,ena_sequence,
+Swift,1,1,ena_sequence,
+Sylviayatricapilla,1,1,ena_sequence,
+T merula,1,1,ena_sequence,
+Tachyeres,1,1,ena_sequence,
+Tachyeres sp.,1,1,ena_sequence,
+Taeniopygia sp.,1,1,ena_sequence,brain
+Tamias sibiricus,1,1,ena_sequence,
+Toxostoma rufum,1,1,ena_sequence,
+Troglodytes troglodytes,1,1,ena_sequence,brain tissue
+Turtledove,1,1,ena_sequence,
+Upupa,1,1,ena_sequence,
+Verrallina butleri,1,1,ena_sequence,
+Virus,1,1,ena_sequence,culture
+animal,1,1,ena_sequence,
+bearded parrotbill,1,1,ena_sequence,
+blesbuck,1,1,ena_sequence,brain
+bluejay,1,1,ena_sequence,
+bonsmara,1,1,ena_sequence,
+bull,1,1,ena_sequence,blood
+chamois,1,1,ena_sequence,brain
+common grackle,1,1,ena_sequence,
+common kestrel,1,1,ena_sequence,
+common pheasant,1,1,ena_sequence,
+common starling,1,1,ena_sequence,blood
+eland,1,1,ena_sequence,spleen
+finch,1,1,ena_sequence,
+gadfly,1,1,ena_sequence,tissue
+giraffe,1,1,ena_sequence,brain
+great tit,1,1,ena_sequence,brain homogenate
+iland,1,1,ena_sequence,whole blood
+lesser florican,1,1,ena_sequence,Lesser Florican brain
+lion,1,1,ena_sequence,
+loggerhead shrike,1,1,ena_sequence,
+macaque,1,1,ena_sequence,brain tissue
+male Sergentomyia minuta,1,1,ena_sequence,
+mosquitos,1,1,ena_sequence,
+nuthatch,1,1,ena_sequence,brain homogenate
+osprey,1,1,ena_sequence,spleen
+ostrich,1,1,ena_sequence,Ostrich serum
+pony,1,1,ena_sequence,
+rainbow lorikeet,1,1,ena_sequence,blood
+red-billed quelea,1,1,ena_sequence,Tana River
+rosella,1,1,ena_sequence,
+ruffed grouse,1,1,ena_sequence,
+sable,1,1,ena_sequence,lung and spleen
+seal,1,1,ena_sequence,brain
+sentinel chickens,1,1,ena_sequence,
+sentinel rhesus,1,1,ena_sequence,
+spectacled warbler,1,1,ena_sequence,
+sturnusvulgaris,1,1,ena_sequence,
+swallow,1,1,ena_sequence,
+swift,1,1,ena_sequence,
+unclassified Phlebotomus,1,1,ena_sequence,
+welsh pony,1,1,ena_sequence,
+white mice brain,1,1,ena_sequence,
+zebra,1,1,ena_sequence,
