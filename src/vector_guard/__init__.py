@@ -10,11 +10,13 @@ from vector_guard.data import (
     load_virus_detections,
 )
 from vector_guard.panel_features import (
+    SPECIES_LONG_COLS,
     UNIT_KEY_COLS,
     attach_priority_species_features,
     pivot_priority_species_at_units,
     priority_count_columns,
     species_long_from_priority_wide,
+    validate_species_long,
 )
 from vector_guard.resolve import (
     GEO_PRECISION_CENTROID,
@@ -54,6 +56,7 @@ __all__ = [
     "GEO_PRECISION_COUNTRY",
     "GEO_PRECISION_EXACT",
     "H3_RESOLUTION",
+    "SPECIES_LONG_COLS",
     "UNIT_KEY_COLS",
     "VECTORNET_CODE_TO_ISO2",
     "VIRUS_RAW_COLUMNS",
@@ -90,4 +93,5 @@ __all__ = [
     "resolve_virus_country_iso2",
     "species_long_from_priority_wide",
     "strip_admin_suffix",
+    "validate_species_long",
 ]

@@ -1,5 +1,15 @@
 """Panel feature helpers for EDA / modelling prep.
 
+Species side-table grain (``modelling_panel_species``)
+------------------------------------------------------
+One row per observed VectorNet **unit** × distinct ``scientific_name`` with
+``detection_count >= 1``, built from the same pre-pathogen-explosion aggregates
+as the panel skeleton (Tier 1 + Tier 2, ``spatial_tier`` convention).
+
+Unit keys are ``UNIT_KEY_COLS`` only. The schema is exactly
+``SPECIES_LONG_COLS`` — **no** ``pathogen_name`` (species composition is not
+pathogen-long).
+
 Locked modelling species rule
 -----------------------------
 ``FEATURE_COLS`` species counts are the **closed** set from
@@ -25,7 +35,8 @@ UNIT_KEY_COLS: list[str] = [
     "vector_group",
 ]
 
-_SPECIES_LONG_REQUIRED = UNIT_KEY_COLS + ["scientific_name", "detection_count"]
+# Complete long species schema (unit × scientific_name). No pathogen_name.
+SPECIES_LONG_COLS: list[str] = UNIT_KEY_COLS + ["scientific_name", "detection_count"]
 
 
 def _merge_key_frame(df: pd.DataFrame, keys: list[str]) -> tuple[pd.DataFrame, list[str]]:
@@ -48,6 +59,40 @@ def priority_count_columns(priority_taxa: pd.DataFrame) -> list[str]:
     return [f"vector_count_{slug}" for slug in slugs]
 
 
+def validate_species_long(species_long: pd.DataFrame) -> pd.DataFrame:
+    """Assert species side-table grain and return a column-ordered copy.
+
+    Grain: observed VectorNet unit × distinct ``scientific_name`` (before
+    pathogen explosion). Rejects ``pathogen_name``. Requires
+    ``SPECIES_LONG_COLS``; ``detection_count >= 1``; unique unit × name.
+    """
+    if "pathogen_name" in species_long.columns:
+        raise ValueError(
+            "species_long must not include pathogen_name "
+            "(grain is unit × scientific_name, before pathogen explosion)"
+        )
+    missing = [c for c in SPECIES_LONG_COLS if c not in species_long.columns]
+    if missing:
+        raise ValueError(f"species_long missing columns: {missing}")
+
+    out = species_long.loc[:, SPECIES_LONG_COLS].copy()
+    if out.empty:
+        return out.reset_index(drop=True)
+
+    if int((out["detection_count"].fillna(0) < 1).sum()) > 0:
+        raise ValueError(
+            "species_long detection_count must be >= 1 "
+            "(no zero-filled absent taxa)"
+        )
+    dup = out.duplicated(UNIT_KEY_COLS + ["scientific_name"], keep=False)
+    if bool(dup.any()):
+        n_dup = int(out.loc[dup, UNIT_KEY_COLS + ["scientific_name"]].drop_duplicates().shape[0])
+        raise ValueError(
+            f"species_long grain violated: {n_dup} duplicate unit × scientific_name keys"
+        )
+    return out.reset_index(drop=True)
+
+
 def pivot_priority_species_at_units(
     species_long: pd.DataFrame,
     priority_taxa: pd.DataFrame,
@@ -57,13 +102,12 @@ def pivot_priority_species_at_units(
     """Pivot long species counts to the **locked** priority wide set at unit grain.
 
     Grain of ``species_long``: one row per unit × ``scientific_name`` (no
-    ``pathogen_name``). Column set is exactly ``priority_taxa`` →
-    ``vector_count_<feature_slug>`` (absent → ``0``). Not a frequency-selected
-    open set. If ``unit_keys`` is given, restrict and left-align to those units.
+    ``pathogen_name``; before pathogen explosion). Column set is exactly
+    ``priority_taxa`` → ``vector_count_<feature_slug>`` (absent → ``0``). Not a
+    frequency-selected open set. If ``unit_keys`` is given, restrict and
+    left-align to those units.
     """
-    missing = [c for c in _SPECIES_LONG_REQUIRED if c not in species_long.columns]
-    if missing:
-        raise ValueError(f"species_long missing columns: {missing}")
+    work = validate_species_long(species_long)
 
     name_to_slug = (
         priority_taxa.drop_duplicates(subset=["scientific_name"])
@@ -73,8 +117,6 @@ def pivot_priority_species_at_units(
     )
     slugs = priority_taxa["feature_slug"].astype(str).tolist()
     count_cols = [f"vector_count_{slug}" for slug in slugs]
-
-    work = species_long.loc[:, _SPECIES_LONG_REQUIRED].copy()
     if unit_keys is not None:
         units = unit_keys.loc[:, UNIT_KEY_COLS].drop_duplicates()
         left, mkeys = _merge_key_frame(units, UNIT_KEY_COLS)
@@ -203,4 +245,4 @@ def species_long_from_priority_wide(
     long["scientific_name"] = long["feature_slug"].map(slug_to_name)
     long = long.loc[long["scientific_name"].notna()]
     long["detection_count"] = long["detection_count"].astype(int)
-    return long.loc[:, _SPECIES_LONG_REQUIRED].reset_index(drop=True)
+    return validate_species_long(long.loc[:, SPECIES_LONG_COLS])
