@@ -37,10 +37,10 @@ Feature and deliverable plan. Items are ordered for a practical build sequence. 
 | Upgrade virus raw extract (multi-source + taxonomy) | Done | Notebook `03`; see [`specs/02`](specs/02-virus-dataset-selection.md) |
 | Build virus dataset (geo + time, clean) | Done | Notebook `09` → interim; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
 | Build reference data (countries, subnational centroids, vector taxon groups) | Done | Notebooks `05`–`06`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
-| Pathogen mirror + priority vector taxa reference | Done | Notebook `06` → `pathogen_vector_group.csv`, `priority_vector_taxa.csv` |
+| Pathogen mirror + priority vector taxa reference | Done | Notebook `06` → `pathogen_vector_group.csv`; `priority_vector_taxa.csv` is **EDA/prep** closed late-pivot set (not merge panel columns) |
 | Choose H3 resolution (density check) | Done | Notebook `07`; `H3_RESOLUTION=4` — [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
-| Merge modelling panel (vector + virus) | Done | Notebook `10` → pathogen-long B2 panel; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
-| Pathogen-long panel redesign (per-pathogen labels + species features) | Done | Specs `03`/`04`; rebuild `10`; consumers must use `pathogen_within_5y` |
+| Merge modelling panel (vector + virus) | Done | Notebook `10` → pathogen-long B2 panel + long `modelling_panel_species.parquet`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Pathogen-long panel redesign (per-pathogen labels + species features) | Done | Specs `03`/`04`; species composition is a **long side table** + locked late priority pivot in EDA (not merge-time wide `vector_count_*`) |
 | Commit data or publish reproducible download steps | Done | Rebuild: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) |
 | Distinguish local vs imported virus detections | Later | Label quality: filter/down-weight travel-related cases so they do not imply an established local cycle; see [`specs/02`](specs/02-virus-dataset-selection.md) § Candidates for future additions |
 
@@ -53,7 +53,7 @@ Feature and deliverable plan. Items are ordered for a practical build sequence. 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | Initial vector / virus source inspect notebooks | Done | Construction QA in `01_sources` (`02`, `04`); not the EDA deliverable |
-| Data cleaning and preparation in `notebook.ipynb` | Done | Panel load + prep handoff in root notebook |
+| Data cleaning and preparation in `notebook.ipynb` | Done | Panel + species side table load; unit-grain late priority pivot; prep handoff |
 | Distribution and range analysis of features | Next | Including spatial/temporal coverage |
 | Target variable analysis (risk / suitability label) | Planned | Class balance, risk-score target definition |
 | Feature importance analysis | Planned | |
@@ -151,7 +151,7 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-Data foundation is **Done**. Next: deepen EDA on the panel, then models → `train.py` → API → env docs / Docker → optional cloud.
+Data foundation is **Done** (pathogen-long panel + long species side table; priority taxa widen in EDA/prep). Next: deepen EDA on the panel, then models → `train.py` → API → env docs / Docker → optional cloud.
 
 ---
 

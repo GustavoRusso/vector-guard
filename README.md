@@ -11,7 +11,7 @@ Existing tools often fall into two categories:
 1. **Suitability / outbreak risk** — Can this place support transmission of a given pathogen *if* introduction occurs? This is relatively tractable with entomological, environmental, and epidemiological signals.
 2. **Exact introduction timing** — *When* will a pathogen first arrive at a given location? That is highly stochastic: it depends on rare human mobility events (for example an infected traveler) and is much harder to predict reliably.
 
-**Vector Guard** focuses on the first problem. The project estimates a **pathogen-specific risk score** for geographic locations by relating vector presence patterns (including priority species/genus counts) to detection patterns of each target pathogen over space and time.
+**Vector Guard** focuses on the first problem. The project estimates a **pathogen-specific risk score** for geographic locations by relating vector presence patterns (group aggregates, richness, and late-pivoted priority species/genus counts) to detection patterns of each target pathogen over space and time.
 
 ### How the solution will be used
 
@@ -71,14 +71,15 @@ Dataset construction under `notebooks/01_sources/` maps to **Reproducibility** /
 
 ## Dataset description
 
-The modelling handoff is a single panel:
+The modelling handoff is a pathogen-long panel plus a long species composition table:
 
 | Item | Path |
 |------|------|
 | Panel | [`data/03_processed/modelling_panel.parquet`](data/03_processed/) |
+| Species (long) | [`data/03_processed/modelling_panel_species.parquet`](data/03_processed/) |
 | Manifest | `data/03_processed/modelling_panel_manifest.json` |
 
-**Grain (B2 pathogen-long):** each observed VectorNet unit × each mapped pathogen — Tier 1 `(h3_cell, year, month, vector_group, pathogen_name)`; Tier 2 `(country_iso2, year, month, vector_group, pathogen_name)`. **Primary target:** `pathogen_within_5y` (forward ≤5 years for **that** pathogen). Also on the panel: `pathogen_within_10y`, ever/delay/same-month flags, `species_richness`, and `vector_count_<slug>` priority-taxon features. Supervised rows require VectorNet coverage (B2/A3 contract in specs `03`/`04`).
+**Grain (B2 pathogen-long):** each observed VectorNet unit × each mapped pathogen — Tier 1 `(h3_cell, year, month, vector_group, pathogen_name)`; Tier 2 `(country_iso2, year, month, vector_group, pathogen_name)`. **Primary target:** `pathogen_within_5y` (forward ≤5 years for **that** pathogen). Also on the panel: `pathogen_within_10y`, ever/delay/same-month flags, and `species_richness`. Full species composition lives in the long side table (unit × `scientific_name`); priority `vector_count_<slug>` columns are built in EDA/prep via a locked unit-grain late pivot from `priority_vector_taxa.csv` (not merge-time wide panel columns). Supervised rows require VectorNet coverage (B2/A3 contract in specs `03`/`04`).
 
 **Pathogen ↔ vector group:** which pathogens explode onto which `vector_group` is documented in [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy); mirror CSV `data/external/pathogen_vector_group.csv`. Authoritative code map: [`src/vector_guard/data.py`](src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`.
 
@@ -90,11 +91,12 @@ import pandas as pd
 from vector_guard.data import default_processed_dir, find_repo_root
 
 REPO_ROOT = find_repo_root(Path.cwd())
-PANEL_PATH = default_processed_dir(REPO_ROOT) / "modelling_panel.parquet"
-panel = pd.read_parquet(PANEL_PATH)
+PROCESSED = default_processed_dir(REPO_ROOT)
+panel = pd.read_parquet(PROCESSED / "modelling_panel.parquet")
+species = pd.read_parquet(PROCESSED / "modelling_panel_species.parquet")
 ```
 
-To regenerate the panel or read how it was designed, see [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) (links to specs `01`–`04`).
+To regenerate the panel / species table or read how they were designed, see [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) (links to specs `01`–`04`).
 
 ## Architecture
 
@@ -114,12 +116,13 @@ flowchart LR
 ```
 
 ```text
-data/03_processed/modelling_panel.parquet  →  notebook.ipynb / train.py  →  predict.py  →  Docker
+data/03_processed/modelling_panel.parquet
+data/03_processed/modelling_panel_species.parquet  →  notebook.ipynb / train.py  →  predict.py  →  Docker
 ```
 
 ## EDA summary
 
-Primary EDA lives in [`notebook.ipynb`](notebook.ipynb) on the modelling panel (missingness, coverage, target, feature importance). Source-inspect notebooks under `notebooks/01_sources/` are construction QA only.
+Primary EDA lives in [`notebook.ipynb`](notebook.ipynb) on the modelling panel + species side table (missingness, coverage, late priority species pivot, target, feature importance). Source-inspect notebooks under `notebooks/01_sources/` are construction QA only.
 
 *Coming soon* — short findings once distribution, target, and importance analyses are complete.
 

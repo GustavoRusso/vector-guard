@@ -2,11 +2,11 @@
 
 Rebuild the modelling panel used by root [`notebook.ipynb`](../../notebook.ipynb) and [`train.py`](../../train.py).
 
-**Output:** [`data/03_processed/modelling_panel.parquet`](../../data/03_processed/) (+ `modelling_panel_manifest.json`).
+**Output:** [`data/03_processed/modelling_panel.parquet`](../../data/03_processed/) + [`modelling_panel_species.parquet`](../../data/03_processed/) (+ `modelling_panel_manifest.json`).
 
-**Panel grain:** B2 **pathogen-long** — observed VectorNet `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Primary label: `pathogen_within_5y`. Species features: `species_richness` + `vector_count_<slug>` from `priority_vector_taxa.csv`.
+**Panel grain:** B2 **pathogen-long** — observed VectorNet `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Primary label: `pathogen_within_5y`. Panel keeps group aggregates + `species_richness`. Full species composition is the long side table (unit × `scientific_name`); priority `vector_count_<slug>` columns are widened in root EDA/prep from `priority_vector_taxa.csv` (locked late pivot — not merge-time wide columns).
 
-This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA and model training use the panel in root `notebook.ipynb`.
+This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA and model training use the panel (+ species table) in root `notebook.ipynb`.
 
 Design decisions live in [`specs/`](../../specs/). Do not invent join rules, schemas, or pipeline contracts here; update the relevant spec when a decision changes.
 
@@ -31,11 +31,11 @@ Run in order when rebuilding from scratch (or re-run from the step that changed)
 | [`03_extract_viruses.ipynb`](03_extract_viruses.ipynb) | Multi-source virus extract | `data/01_raw/virus/virus_detections.tsv` + `manifest.json` |
 | [`04_inspect_viruses.ipynb`](04_inspect_viruses.ipynb) | Virus construction QA | — |
 | [`05_reference_countries.ipynb`](05_reference_countries.ipynb) | Countries + subnational centroids | `data/external/countries.csv`, `subnational_locations.csv` |
-| [`06_reference_vector_groups.ipynb`](06_reference_vector_groups.ipynb) | Taxon → `vector_group`; pathogen mirror; priority taxa | `vector_taxon_groups.csv`, `pathogen_vector_group.csv`, `priority_vector_taxa.csv` |
+| [`06_reference_vector_groups.ipynb`](06_reference_vector_groups.ipynb) | Taxon → `vector_group`; pathogen mirror; priority taxa (**EDA/prep** closed set) | `vector_taxon_groups.csv`, `pathogen_vector_group.csv`, `priority_vector_taxa.csv` |
 | [`07_h3_resolution_density.ipynb`](07_h3_resolution_density.ipynb) | H3 resolution density check | Decision recorded in [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) (`H3_RESOLUTION=4`) |
 | [`08_clean_vectors.ipynb`](08_clean_vectors.ipynb) | Normalize vectors | `data/02_interim/vectors_normalized.parquet` |
 | [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses | `data/02_interim/viruses_normalized.parquet` |
-| [`10_merge_modelling_panel.ipynb`](10_merge_modelling_panel.ipynb) | Merge supervised panel | `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json` |
+| [`10_merge_modelling_panel.ipynb`](10_merge_modelling_panel.ipynb) | Merge supervised panel + species side table | `modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` |
 
 ## Refresh raw extracts
 
@@ -63,6 +63,6 @@ viruses = load_virus_detections()
 1. Refresh raw extracts (`01`, `03`) if sources changed.
 2. Refresh reference tables (`05`, `06`) if aliases or taxon maps changed.
 3. Re-run clean steps (`08`, `09`), then merge (`10`).
-4. Confirm `data/03_processed/modelling_panel.parquet` exists, then open root `notebook.ipynb`.
+4. Confirm `data/03_processed/modelling_panel.parquet` and `modelling_panel_species.parquet` exist, then open root `notebook.ipynb`.
 
-How to load the panel: root [`README.md`](../../README.md) Dataset section and [`notebook.ipynb`](../../notebook.ipynb).
+How to load the panel / species table: root [`README.md`](../../README.md) Dataset section and [`notebook.ipynb`](../../notebook.ipynb).
