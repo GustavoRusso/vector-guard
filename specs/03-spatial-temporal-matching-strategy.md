@@ -4,8 +4,8 @@ Design specification for joining **virus detections** (multi-source extract unde
 
 | Field | Value |
 |-------|-------|
-| Status | Design locked through merge (`07`–`10`); `H3_RESOLUTION=4`; **B2 pathogen-long** panel (A3 zone clock); group-only virus labels superseded |
-| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels + priority vector taxa features) |
+| Status | Design locked through merge (`07`–`10`); `H3_RESOLUTION=4`; **B2 pathogen-long** panel (A3 zone clock); long species composition + late priority pivot; group-only virus labels superseded |
+| Decision date | 2026-11 (initial H3 + country tiers); 2026-11 (subnational / NUTS3 centroid → Tier 1); 2026-11 (B2 panel rows + A3 zone eligibility + forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species side table + late priority pivot) |
 | Spec order | `03` (after vector and virus source selection) |
 | Depends on | [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -174,7 +174,7 @@ Do **not** join every pathogen to every vector taxon.
 2. Map VectorNet `scientificName` (and family/order cues) into the same `vector_group`.
 3. **Explode** each VectorNet place–time × `vector_group` unit to **all** pathogens in that group from `VIRUS_VECTOR_TAXON_MAP` (full factorial negatives). Mosquito units get mosquito-borne pathogens only; tick units get tick-borne pathogens only; and so on.
 4. Restrict label attachment so mosquito vector features inform mosquito-pathogen rows, tick features inform tick-pathogen rows, etc.
-5. Finer competence (e.g. `Culex` / `Aedes` for West Nile) is a **feature**, not a hard join gate for v1 — see priority taxa in [`specs/04`](04-reference-data-and-panel-pipeline.md).
+5. Finer competence (e.g. `Culex` / `Aedes` for West Nile) is a **feature**, not a hard join gate for v1 — via the long species side table and locked late priority pivot in [`specs/04`](04-reference-data-and-panel-pipeline.md).
 
 ## Aggregation into modelling units
 
@@ -224,8 +224,9 @@ Country-only virus rows (`geo_precision=country_only`) do **not** invent H3 and 
 ### Vector features (examples)
 
 - Presence / absence or count of detections in the row’s month (`vector_group` aggregates)
-- `species_richness` — distinct VectorNet `scientific_name` values in the unit
-- Detection counts for a **closed priority-taxon list** (`vector_count_<slug>` from `priority_vector_taxa.csv` — see spec `04`)
+- `species_richness` — distinct VectorNet `scientific_name` values in the unit (on the panel)
+- Long species composition table (`modelling_panel_species`: unit × `scientific_name` × `detection_count`, before pathogen explosion) — see spec `04`
+- Late EDA/prep pivot of the **locked** closed priority-taxon list (`vector_count_<slug>` from `priority_vector_taxa.csv`) onto filtered panel units — not merge-time wide columns
 - Share of positive vs zero `individualCount` where meaningful
 - Establishment signals when published
 - Sampling effort proxies (`samplingProtocol`, `sampleSizeValue`) when usable

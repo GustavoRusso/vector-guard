@@ -4,8 +4,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | **B2 pathogen-long** panel locked and regenerated (`H3_RESOLUTION=4`, A3 clock); notebook `10` + `data/03_processed/modelling_panel.*` |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels + priority vector taxa) |
+| Status | **B2 pathogen-long** panel + **long species side table** contract locked (`H3_RESOLUTION=4`, A3 clock); notebook `10` → `modelling_panel.*` + `modelling_panel_species.parquet`; wide `vector_count_*` are an EDA/prep late pivot, not merge columns |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species composition side table + late priority pivot) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -22,7 +22,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Primary label | `pathogen_within_5y` (forward ≤5 years, same cell × **this** `pathogen_name`) |
 | Secondary label | `pathogen_within_10y` (forward ≤10 years); ever-before / ever-after flags + nullable delay columns for EDA |
 | Temporal grain | Panel rows: **`year` × `month`** (vector observation). Pathogen labels are **not** same-month-only (see spec `03`) |
-| Vector species features | Group aggregates + `species_richness` + closed `vector_count_<slug>` columns from `priority_vector_taxa.csv` (no full sparse one-hot of every `scientific_name`) |
+| Vector species features | Panel: group aggregates + `species_richness` only (no merge-time `vector_count_*`). Full composition in long `modelling_panel_species.parquet` (unit × `scientific_name`). EDA/prep: unit-grain pivot of the **locked** closed set from `priority_vector_taxa.csv` → `vector_count_<feature_slug>` (0 if absent); frequency pivots of the full long table are exploratory only |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in [`specs/02`](02-virus-dataset-selection.md) |
 | Pipeline scope | Virus extract + reference + H3 + clean + merge (`03`–`10`); modelling panel at `data/03_processed/` |
@@ -36,7 +36,7 @@ data/
   01_raw/        # extracts only (gitignored); notebooks 01, 03
   external/      # committed master/lookup tables; notebooks 05, 06
   02_interim/    # normalized vector / virus row tables; notebooks 08, 09
-  03_processed/  # modelling panel + merge manifest; notebook 10
+  03_processed/  # modelling panel + species side table + merge manifest; notebook 10
 ```
 
 | Layer | Contents | Commit? |
@@ -44,7 +44,7 @@ data/
 | `01_raw/` | VectorNet DwC-A; multi-source `virus_detections.tsv` (+ `manifest.json`) | No (re-fetch documented in README) |
 | `external/` | Countries, subnational centroids, vector taxon → group maps, priority taxa, pathogen ↔ group mirror (small) | Yes |
 | `02_interim/` | Per-side normalized detections | Usually no (rebuildable) |
-| `03_processed/` | Aggregated modelling panel | Prefer commit if small; else document rebuild |
+| `03_processed/` | Modelling panel + long species composition table + merge manifest | Prefer commit if small; else document rebuild |
 
 ## What counts as reference data
 
@@ -58,9 +58,10 @@ data/
 | Subnational / NUTS3 centroids | Static reference CSV | `data/external/subnational_locations.csv` (~7.8k rows incl. virus spelling aliases) | Distinct virus region strings + European NUTS3/NE admin1 centroids + original spelling aliases | `(country_iso2, subnational_region \| nuts_id)` → centroid `(lat, lon)` → Tier 1 H3 |
 | Pathogen ↔ `vector_group` | Project config (code) + committed mirror | [`src/vector_guard/data.py`](../src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`; mirror `data/external/pathogen_vector_group.csv` | From [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md); mirror written by notebook `06` | Tag virus rows; ecological join filter; **panel pathogen explosion** |
 | Vector taxon → `vector_group` | Static reference CSV | `data/external/vector_taxon_groups.csv` | Curated from VectorNet `scientificName` inventory (EDA) | Tag VectorNet rows before aggregate / join |
-| Priority vector taxa (species features) | Static reference CSV | `data/external/priority_vector_taxa.csv` | Top / competent genera–species per `vector_group` from VectorNet frequency (notebook `06`) | Closed set of `vector_count_<slug>` panel columns |
+| Priority vector taxa (EDA / prep) | Static reference CSV | `data/external/priority_vector_taxa.csv` | Top / competent genera–species per `vector_group` from VectorNet frequency (notebook `06`) | **Locked** closed set for late unit-grain pivot → `vector_count_<feature_slug>` in EDA/prep / `train.py` handoff — **not** merge panel columns |
 | H3 resolution choice | Decision + code constant | This spec + `vector_guard.resolve.H3_RESOLUTION` (`4`) | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
-| Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | Primary EDA / `notebook.ipynb` / `train.py` |
+| Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | Primary EDA / `notebook.ipynb` / `train.py` (pathogen-long; no wide species counts) |
+| Species composition (long) | Output contract | `data/03_processed/modelling_panel_species.parquet` | Same merge notebook (`10`), from pre-explode unit aggregates | Unit × `scientific_name` counts for late pivot in EDA/prep |
 
 **Out of reference scope (v1):** full NUTS polygon geometry dumps; on-the-fly geocoders for unmatched free-text; committing raw extracts. NUTS **centroids** (and equivalent admin centroids) **are** in scope via `subnational_locations.csv`.
 
@@ -140,7 +141,7 @@ Generation process (notebook `06`, same family as vector taxon groups):
 
 ### `priority_vector_taxa.csv` — generation rules
 
-Closed list of VectorNet taxa that become dedicated panel feature columns. Do **not** one-hot all ~200+ `scientific_name` values.
+Closed list of VectorNet taxa used as the **locked modelling feature set** after the EDA/prep unit-grain pivot. Do **not** one-hot all ~200+ `scientific_name` values into the panel, and do **not** substitute a frequency-selected open set for the modelling handoff. Merge does **not** read this file.
 
 Columns:
 
@@ -148,7 +149,7 @@ Columns:
 |--------|---------|
 | `scientific_name` | Exact VectorNet `scientific_name` string to match (genus- or species-level as published) |
 | `vector_group` | One of `mosquito`, `tick`, `biting_midge`, `sandfly` — must match the taxon’s group in `vector_taxon_groups.csv` |
-| `feature_slug` | Stable snake_case token used as panel column suffix (`vector_count_<feature_slug>`); unique within the file |
+| `feature_slug` | Stable snake_case token used as late-pivot column suffix (`vector_count_<feature_slug>`); unique within the file |
 | `notes` | Optional (e.g. frequency rank, competent genus) |
 
 Generation process (notebook `06`):
@@ -157,7 +158,7 @@ Generation process (notebook `06`):
 2. Keep roughly **10–15** taxa per group: highest-frequency names plus dominant competent genera that already appear as rows (`Culex`, `Aedes`, `Anopheles`, `Ixodes`, `Culicoides`, `Phlebotomus`, …).
 3. Assign a unique `feature_slug` per row (e.g. `culex_pipiens`, `aedes`, `ixodes_ricinus`).
 4. Write `data/external/priority_vector_taxa.csv` (committed).
-5. At merge: for each VectorNet unit, count detections whose `scientific_name` equals a priority row → `vector_count_<feature_slug>` (0 if absent). Unmatched taxa still contribute to `vector_detection_count` and `species_richness` only.
+5. At **EDA / prep** (not merge): after filtering the pathogen-long panel, restrict `modelling_panel_species` to those unit keys, pivot this closed set to `vector_count_<feature_slug>` (0 if absent), and left-merge onto pathogen-long rows. Unmatched taxa remain in the long side table and still contribute to panel `vector_detection_count` / `species_richness` at merge.
 
 ### H3 resolution — selection process (not a static dump)
 
@@ -230,10 +231,10 @@ flowchart TD
 | H3 density check | `07_h3_resolution_density.ipynb` | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` | `data/02_interim/vectors_normalized.parquet` | raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet`; `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag) | raw + `countries` + `subnational_locations` + taxon map + `H3_RESOLUTION` |
-| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` + `priority_vector_taxa.csv` |
-| Primary EDA + models | `notebook.ipynb` | Refresh for pathogen-long panel; model training next (see ROADMAP) | modelling panel |
+| **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` (**not** `priority_vector_taxa.csv`) |
+| Primary EDA + models | `notebook.ipynb` | Panel prep + locked late species pivot; model training next (see ROADMAP) | modelling panel + species side table + `priority_vector_taxa.csv` |
 
-Source inspect notebooks (`02`, `04` under `notebooks/01_sources/`) diagnose quality and relevance; they do **not** own the final modelling table and are **not** the project EDA deliverable. Cleaning notebooks apply documented rules; the merge notebook owns the panel contract.
+Source inspect notebooks (`02`, `04` under `notebooks/01_sources/`) diagnose quality and relevance; they do **not** own the final modelling table and are **not** the project EDA deliverable. Cleaning notebooks apply documented rules; the merge notebook owns the panel + species side-table contract.
 
 Virus raw extract schema, feeds, and taxonomy: [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) (notebook `03` implements that contract).
 
@@ -290,11 +291,11 @@ Ecological join principle (same `vector_group` only; pathogen-long rows): [`spec
 | Viruses | From `VIRUS_VECTOR_TAXON_MAP` / extract tags (`pathogen_name`, `vector_group`). |
 | Vectors | Join / map `scientificName` via `vector_taxon_groups.csv`. |
 | Merge | Aggregate VectorNet at `(spatial key, year, month, vector_group)`; explode to pathogens via `pathogen_vector_group.csv` / `VIRUS_VECTOR_TAXON_MAP`; attach labels on `(spatial key, pathogen_name)` within the same `vector_group`. |
-| Species features | Match unit `scientific_name` counts to `priority_vector_taxa.csv` → `vector_count_<feature_slug>`; compute `species_richness`. |
+| Species features | At merge: compute `species_richness` on the unit; write long `modelling_panel_species` (unit × `scientific_name` × `detection_count`, count ≥ 1; **no** `pathogen_name`). At EDA/prep: unit-grain pivot of locked `priority_vector_taxa.csv` → `vector_count_<feature_slug>` (0 if absent), then left-merge onto the filtered pathogen-long panel. |
 
 ## Merge step — modelling panel
 
-**Goal:** one final dataset for pathogen-specific model analysis and generation (`notebook.ipynb`, later `train.py`) — answering *given vectors here, how likely is pathogen X soon?*
+**Goal:** pathogen-long modelling panel plus long species composition table for analysis and generation (`notebook.ipynb`, later `train.py`) — answering *given vectors here, how likely is pathogen X soon?*
 
 Join principles (B2 pathogen-long rows, A3 zone clock, forward labels): [`specs/03`](03-spatial-temporal-matching-strategy.md#aggregation-into-modelling-units).
 
@@ -339,10 +340,11 @@ Authoritative schema for `data/03_processed/modelling_panel.*` (column order as 
 | `vector_detection_count` | Number of VectorNet records in the unit (`count` of `record_id` at spatial×time×`vector_group`) |
 | `individual_count_sum` | Sum of parsed VectorNet `individualCount` over those records (unparseable / missing contribute 0 to the sum) |
 | `individual_count_mean` | Mean of parsed `individualCount` over records with a parseable value |
-| `species_richness` | Count of distinct VectorNet `scientific_name` values in the unit |
-| `vector_count_<feature_slug>` | One column per row in `priority_vector_taxa.csv`: detection count for that `scientific_name` in the unit; `0` if absent. Column set is closed and documented by the priority-taxa file + merge manifest |
+| `species_richness` | Count of distinct VectorNet `scientific_name` values in the unit (must match `nunique(scientific_name)` for that unit in `modelling_panel_species`) |
 | `first_vector_year` | A3: calendar year of the first VectorNet detection in this `(h3_cell, vector_group)` (Tier 1); Tier 2 analog uses `(country_iso2, vector_group)` if Tier 2 rows exist |
 | `first_vector_month` | A3: calendar month of that first VectorNet detection |
+
+Wide `vector_count_<feature_slug>` columns are **not** part of the merge panel. They are produced in EDA/prep from the species side table + `priority_vector_taxa.csv` (see below).
 
 **Pathogen-specific labels** (all relative to this row’s `pathogen_name` only)
 
@@ -362,32 +364,55 @@ Authoritative schema for `data/03_processed/modelling_panel.*` (column order as 
 | `share_pathogen_exact_coords` | Among this pathogen’s events in the **5-year forward window**, fraction with `geo_precision == exact_coords`. `NA` when the window has no events (or on Tier 2 if not defined) |
 | `share_pathogen_subnational_centroid` | Among this pathogen’s events in the **5-year forward window**, fraction with `geo_precision == subnational_centroid`. `NA` when the window has no events |
 
+### Species side table — `modelling_panel_species`
+
+Authoritative schema for `data/03_processed/modelling_panel_species.parquet`, written by the same merge notebook from the **pre-pathogen-explosion** VectorNet unit aggregates (same skeleton as the panel before explode; Tier 1 + Tier 2 with `spatial_tier`).
+
+**Grain:** one row per observed VectorNet **unit** × distinct `scientific_name` with `detection_count >= 1`. **No** `pathogen_name`. No zero-filled absent taxa. Column set below is complete (`SPECIES_LONG_COLS` in [`src/vector_guard/panel_features.py`](../src/vector_guard/panel_features.py)).
+
+| Column | Meaning |
+|--------|---------|
+| `spatial_tier` | `h3` or `country` (same as panel unit) |
+| `h3_cell` | Tier 1 key; null on Tier 2 |
+| `country_iso2` | Tier 2 key / Tier 1 metadata |
+| `year`, `month` | VectorNet unit window |
+| `vector_group` | Ecological group |
+| `scientific_name` | Exact VectorNet name present in that unit |
+| `detection_count` | Count of VectorNet `record_id`s for that name in the unit |
+
+**Alignment:** species unit keys ⊆ panel skeleton unit keys; per unit, panel `species_richness` equals the number of distinct `scientific_name` rows for that unit in this table.
+
+**Late pivot (EDA / prep, locked for modelling handoff):** after filtering the pathogen-long panel, take distinct unit keys → restrict this side table → pivot the closed `priority_vector_taxa.csv` set to `vector_count_<feature_slug>` (absent → 0) → left-merge onto pathogen-long rows (broadcast across pathogens). Do **not** join species-long onto pathogen-long before pivoting. Frequency pivots of the full long table are exploratory EDA only.
+
 **Removed from the contract (replaced):**
 
 - Group-level “any virus in `vector_group`” columns (`virus_within_5y`, `virus_within_10y`, and the former `virus_*` label family) — superseded by pathogen-specific `pathogen_*` columns. Group-level positives remain derivable as `max` over pathogens in a unit if needed.
 - Same-month-only `virus_detection_count` / `virus_detected` as sole intensity / label fields.
+- Merge-time wide `vector_count_<feature_slug>` panel columns — superseded by the long species side table + late priority pivot in EDA/prep.
 
 ### Outputs
 
 | Path | Role |
 |------|------|
-| `data/03_processed/modelling_panel.parquet` (or `.csv`) | Modelling handoff table (pathogen-long; replaces prior group-only panel) |
-| Merge summary / manifest fields | `H3_RESOLUTION`; `eligibility=from_first_vector`; `primary_label=pathogen_within_5y`; `secondary_label=pathogen_within_10y`; `delay_missing=null`; `tier1_key` / `tier2_key` including `pathogen_name`; `n_pathogens`; row counts by `spatial_tier` and by `pathogen_name`; label positive rates (overall and per pathogen); priority-taxa feature slugs; geo-precision mix; date range / censoring note; training filter rules; source raw manifests’ SHA-256 when available |
+| `data/03_processed/modelling_panel.parquet` (or `.csv`) | Modelling handoff table (pathogen-long; no wide species count columns) |
+| `data/03_processed/modelling_panel_species.parquet` | Long species composition (unit × `scientific_name`); input to late pivot |
+| Merge summary / manifest fields | `H3_RESOLUTION`; `eligibility=from_first_vector`; `primary_label=pathogen_within_5y`; `secondary_label=pathogen_within_10y`; `delay_missing=null`; `tier1_key` / `tier2_key` including `pathogen_name`; `n_pathogens`; row counts by `spatial_tier` and by `pathogen_name`; label positive rates (overall and per pathogen); **species side-table path + row count** (not `priority_feature_slugs`); note that locked priority species pivot happens downstream in EDA/prep; geo-precision mix; date range / censoring note; training filter rules; source raw manifests’ SHA-256 when available |
 
-Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + model selection), `train.py` (load panel or rebuild via the same pipeline).
+Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + locked unit-grain species pivot + model selection), `train.py` (load panel / species table or rebuild via the same pipeline; mirror the late pivot rule).
 
 ## Non-goals (remaining pipeline)
 
-- Changing `H3_RESOLUTION` without re-running notebook `07` and rebuilding interim + panel
+- Changing `H3_RESOLUTION` without re-running notebook `07` and rebuilding interim + panel + species side table
 - Shipping full NUTS polygon dumps or calling live geocoders for unmatched free-text
 - Committing `data/01_raw/` extracts
 - Dual group-only and pathogen-long panel artifacts (single replaced panel)
-- Hard species–pathogen competence matrix as a join filter (priority taxa are features only)
-- Defining the final ML feature set beyond the panel contract above
+- Hard species–pathogen competence matrix as a join filter (priority taxa are late-pivot features only)
+- Putting wide `vector_count_*` back on the merge panel, or using a frequency-open species column set as the modelling handoff
+- Defining ML architecture beyond the panel + locked late-pivot species contract above
 
 ## Status
 
-Pipeline through the **B2 pathogen-long / A3** modelling panel is complete (`03`–`10`; `H3_RESOLUTION=4`). Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 
