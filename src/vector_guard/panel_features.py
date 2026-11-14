@@ -46,7 +46,9 @@ def _merge_key_frame(df: pd.DataFrame, keys: list[str]) -> tuple[pd.DataFrame, l
     for col in keys:
         mk = f"_mk_{col}"
         merge_keys.append(mk)
-        if pd.api.types.is_numeric_dtype(out[col]):
+        if col in {"year", "month"}:
+            out[mk] = pd.to_numeric(out[col], errors="coerce").fillna(-1).astype("int64")
+        elif pd.api.types.is_numeric_dtype(out[col]):
             out[mk] = out[col].fillna(-1)
         else:
             out[mk] = out[col].astype("string").fillna("__NA__")
@@ -77,7 +79,25 @@ def validate_species_long(species_long: pd.DataFrame) -> pd.DataFrame:
 
     out = species_long.loc[:, SPECIES_LONG_COLS].copy()
     if out.empty:
-        return out.reset_index(drop=True)
+        empty = pd.DataFrame(
+            {
+                "spatial_tier": pd.Series(dtype="string"),
+                "h3_cell": pd.Series(dtype="string"),
+                "country_iso2": pd.Series(dtype="string"),
+                "year": pd.Series(dtype="int64"),
+                "month": pd.Series(dtype="int64"),
+                "vector_group": pd.Series(dtype="string"),
+                "scientific_name": pd.Series(dtype="string"),
+                "detection_count": pd.Series(dtype="int64"),
+            }
+        )
+        return empty
+
+    out["year"] = pd.to_numeric(out["year"], errors="coerce").astype("int64")
+    out["month"] = pd.to_numeric(out["month"], errors="coerce").astype("int64")
+    out["detection_count"] = pd.to_numeric(out["detection_count"], errors="coerce").astype(
+        "int64"
+    )
 
     if int((out["detection_count"].fillna(0) < 1).sum()) > 0:
         raise ValueError(
@@ -91,6 +111,102 @@ def validate_species_long(species_long: pd.DataFrame) -> pd.DataFrame:
             f"species_long grain violated: {n_dup} duplicate unit × scientific_name keys"
         )
     return out.reset_index(drop=True)
+
+
+def build_species_long_for_units(
+    detections: pd.DataFrame,
+    units: pd.DataFrame,
+    *,
+    join_keys: list[str],
+) -> pd.DataFrame:
+    """Build long species rows for pre-explode ``units`` from detection rows.
+
+    ``join_keys`` are the VectorNet unit keys for this tier (Tier 1:
+    ``h3_cell, year, month, vector_group``; Tier 2:
+    ``country_iso2, year, month, vector_group``). ``units`` must already carry
+    ``UNIT_KEY_COLS`` (including ``spatial_tier`` and tier metadata).
+    """
+    missing_det = [c for c in join_keys + ["scientific_name"] if c not in detections.columns]
+    if missing_det:
+        raise ValueError(f"detections missing columns: {missing_det}")
+    missing_units = [c for c in UNIT_KEY_COLS if c not in units.columns]
+    if missing_units:
+        raise ValueError(f"units missing columns: {missing_units}")
+
+    empty = pd.DataFrame(columns=SPECIES_LONG_COLS)
+    if units.empty:
+        return validate_species_long(empty)
+
+    work = detections.loc[
+        detections["scientific_name"].fillna("").astype(str).str.len() > 0,
+        join_keys + ["scientific_name"],
+    ].copy()
+    if work.empty:
+        return validate_species_long(empty)
+
+    tall = (
+        work.groupby(join_keys + ["scientific_name"], dropna=False)
+        .size()
+        .rename("detection_count")
+        .reset_index()
+    )
+    tall = tall.loc[tall["detection_count"] >= 1]
+    if tall.empty:
+        return validate_species_long(empty)
+
+    unit_meta = units.loc[:, UNIT_KEY_COLS].drop_duplicates()
+    out = tall.merge(unit_meta, on=join_keys, how="inner")
+    return validate_species_long(out)
+
+
+def assert_species_aligned_to_units(
+    species_long: pd.DataFrame,
+    units: pd.DataFrame,
+) -> None:
+    """Cheap alignment asserts vs pre-explode panel skeleton units.
+
+    1. Every species unit key is in the skeleton (species units ⊆ units).
+    2. Per unit, ``species_richness`` equals ``nunique(scientific_name)`` in
+       the species table (0 when the unit has no species rows).
+    """
+    species = validate_species_long(species_long)
+    if "species_richness" not in units.columns:
+        raise ValueError("units must include species_richness for alignment asserts")
+    skeleton = units.loc[:, UNIT_KEY_COLS + ["species_richness"]].drop_duplicates(
+        UNIT_KEY_COLS
+    )
+
+    sp_units, mkeys = _merge_key_frame(
+        species.loc[:, UNIT_KEY_COLS].drop_duplicates(), UNIT_KEY_COLS
+    )
+    sk_keys, _ = _merge_key_frame(skeleton.loc[:, UNIT_KEY_COLS], UNIT_KEY_COLS)
+    chk = sp_units.merge(
+        sk_keys.loc[:, mkeys].assign(_in_skel=1),
+        on=mkeys,
+        how="left",
+    )
+    n_missing = int(chk["_in_skel"].isna().sum())
+    if n_missing:
+        raise AssertionError(
+            f"species unit keys not in panel skeleton: {n_missing} units"
+        )
+
+    rich = (
+        species.groupby(UNIT_KEY_COLS, dropna=False)["scientific_name"]
+        .nunique()
+        .rename("_n_species")
+        .reset_index()
+    )
+    left, mkeys = _merge_key_frame(skeleton, UNIT_KEY_COLS)
+    right, _ = _merge_key_frame(rich, UNIT_KEY_COLS)
+    right = right.drop(columns=UNIT_KEY_COLS)
+    cmp = left.merge(right, on=mkeys, how="left")
+    cmp["_n_species"] = cmp["_n_species"].fillna(0).astype(int)
+    bad = cmp["species_richness"].astype(int) != cmp["_n_species"]
+    if bool(bad.any()):
+        raise AssertionError(
+            f"species_richness mismatch vs species table on {int(bad.sum())} units"
+        )
 
 
 def pivot_priority_species_at_units(

@@ -17,7 +17,8 @@
   "n_pathogens": 26,
   "outputs": {
     "manifest": "data/03_processed/modelling_panel_manifest.json",
-    "panel": "data/03_processed/modelling_panel.parquet"
+    "panel": "data/03_processed/modelling_panel.parquet",
+    "species": "data/03_processed/modelling_panel_species.parquet"
   },
   "panel_rows": 112134,
   "pathogen_ever_after_units": 6102,
@@ -228,6 +229,8 @@
     "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
     "virus_manifest.json": "315c2263058bdeece996cde5930da410270279408e0899bdac6f5bb12c9786a7"
   },
+  "species_table_rows": 31108,
+  "species_table_units": 12995,
   "temporal_grain": "year x month (vector observation); pathogen labels relative to row timestamp",
   "tier1_key": [
     "h3_cell",
