@@ -1,19 +1,18 @@
 # Vector dataset selection
 
-The project uses the **VectorNet observations** Darwin Core Archive (DwC-A) published by ECDC / EFSA via the official VectorNet GBIF publisher (IPT hosted by GBIF Sweden) as the sole primary vector detection dataset.
+The project uses **two** occurrence sources for vector detections that feed training:
 
-| Field | Value |
-|-------|-------|
-| Dataset | [VectorNet observations](https://www.gbif.org/dataset/4abd984b-122c-44a0-8c92-b37e2f5299b1) (ECDC / EFSA) |
-| Resource key | `vectornet_historical_data` |
-| GBIF dataset UUID | `4abd984b-122c-44a0-8c92-b37e2f5299b1` |
-| DOI | [10.15468/f3k8r9](https://doi.org/10.15468/f3k8r9) |
-| Latest download URL | `https://www.gbif.se/ipt/archive.do?r=vectornet_historical_data` |
-| Format | Darwin Core Archive (DwC-A ZIP) |
-| License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| Local path | `data/01_raw/vector/` (not committed; re-fetched on demand) |
-| Extract notebook | [`notebooks/01_sources/01_extract_vectors.ipynb`](../notebooks/01_sources/01_extract_vectors.ipynb) |
-| Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_vector_detections()` |
+1. **Primary:** [VectorNet observations](https://www.gbif.org/dataset/4abd984b-122c-44a0-8c92-b37e2f5299b1) (Europe / Mediterranean, CC BY 4.0).
+2. **Secondary densifier:** [SPVECTORSURV](https://www.gbif.org/dataset/fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8) (Spain surveillance, CC BY-NC 4.0).
+
+Both are ingested as separate IPT DwC-A extracts, tagged with a closed `source` value, and **unioned** in notebook `08` into `data/02_interim/vectors_normalized.parquet`. SPVECTORSURV does **not** replace VectorNet and is **not** obtained by downloading the VectorNet Data Portal aggregation.
+
+| Role | Dataset | License | Local raw path | Extract notebook |
+|------|---------|---------|----------------|------------------|
+| Primary | VectorNet observations | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | `data/01_raw/vector/` | [`01_extract_vectors.ipynb`](../notebooks/01_sources/01_extract_vectors.ipynb) |
+| Secondary | SPVECTORSURV | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) | `data/01_raw/vector_spvectorsurv/` | [`01b_extract_spvectorsurv.ipynb`](../notebooks/01_sources/01b_extract_spvectorsurv.ipynb) |
+
+Interim / panel semantics (including `source` and the training filter): [`specs/04`](04-reference-data-and-panel-pipeline.md).
 
 ## Requirements that drove the choice
 
@@ -25,7 +24,21 @@ Vector Guard needs occurrence-like records that can be joined later to virus det
 4. **Free access** with a **reproducible download** that does not require a logged-in user account when possible.
 5. Preference for **surveillance / expert-validated** data over mixed citizen-science dumps.
 
-## Selected source: VectorNet observations DwC-A
+## Selected primary source: VectorNet observations DwC-A
+
+| Field | Value |
+|-------|-------|
+| Dataset | [VectorNet observations](https://www.gbif.org/dataset/4abd984b-122c-44a0-8c92-b37e2f5299b1) (ECDC / EFSA) |
+| Resource key | `vectornet_historical_data` |
+| GBIF dataset UUID | `4abd984b-122c-44a0-8c92-b37e2f5299b1` |
+| DOI | [10.15468/f3k8r9](https://doi.org/10.15468/f3k8r9) |
+| Latest download URL | `https://www.gbif.se/ipt/archive.do?r=vectornet_historical_data` |
+| Format | Darwin Core Archive (DwC-A ZIP) |
+| License | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| Local path | `data/01_raw/vector/` (not committed; re-fetched on demand) |
+| Interim `source` value | `vectornet` |
+| Extract notebook | [`notebooks/01_sources/01_extract_vectors.ipynb`](../notebooks/01_sources/01_extract_vectors.ipynb) |
+| Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_vector_detections()` |
 
 ### What it provides
 
@@ -53,7 +66,7 @@ Country is typically derived from the `higherGeographyID` prefix (NUTS/GAUL code
 
 Archive layout after extract: `occurrence.txt` (core table), `meta.xml`, `eml.xml`, plus `manifest.json` written by the extract notebook (fetch time, URL, SHA-256, citation).
 
-### Why VectorNet observations was chosen
+### Why VectorNet observations was chosen as primary
 
 - **Institutional fit:** Official ECDC / EFSA One Health vector surveillance under the VectorNet GBIF publisher, aligned with European public-health One Health vector surveillance use cases.
 - **Schema fit:** Standardized DwC-A with coordinates, administrative geography IDs, and event dates—enough to support country-, NUTS-, or grid-level aggregation later.
@@ -71,27 +84,71 @@ from vector_guard.data import load_vector_detections
 df = load_vector_detections()
 ```
 
+## Selected secondary source: SPVECTORSURV
+
+| Field | Value |
+|-------|-------|
+| Dataset | [SPVECTORSURV](https://www.gbif.org/dataset/fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8) — *Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks), West Nile and Rift Valley Fever in Spain (mosquitos)* (Ministerio de Agricultura, Pesca y Alimentación) |
+| Resource key | `spvectorsurv` |
+| GBIF dataset UUID | `fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8` |
+| DOI | [10.15470/fn1bet](https://doi.org/10.15470/fn1bet) |
+| Latest download URL | `https://ipt.gbif.es/archive.do?r=spvectorsurv` |
+| Format | Darwin Core Archive (DwC-A ZIP), published aligned with VectorNet column conventions |
+| License | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Local path | `data/01_raw/vector_spvectorsurv/` (not committed; re-fetched on demand; **separate** from VectorNet so `01` wipe cannot delete it) |
+| Interim `source` value | `spvectorsurv` |
+| Extract notebook | [`notebooks/01_sources/01b_extract_spvectorsurv.ipynb`](../notebooks/01_sources/01b_extract_spvectorsurv.ipynb) |
+| Loader | [`src/vector_guard/data.py`](../src/vector_guard/data.py) — `load_spvectorsurv_detections()` / `load_all_vector_detections()` |
+
+### What it provides
+
+Expert One Health surveillance (EU4Health / EFSA-coordinated) densifying Spanish vector occurrences that are sparse or absent in VectorNet observations (notably western / southern mainland ticks relevant to Crimean–Congo haemorrhagic fever, plus mosquito sampling as published). Rows appear on the VectorNet Data Portal map because the portal **aggregates** national GBIF datasets; they are **not** inside the VectorNet observations IPT archive.
+
+Coverage relevant to this project:
+
+- **Geographic:** Spain (southern mainland via IREC; Balearic Islands via the University of the Balearic Islands; other Spanish sites as published).
+- **Temporal:** project window January 2024–December 2026; published archive currently on the order of ~2.6k occurrences (exact span depends on the refresh).
+- **Taxonomic groups:** ticks and mosquitoes as present in the published DwC-A (ingest the full occurrence table; do not tick-filter at extract).
+- **Volume:** ~2.6k rows (v1.5-scale); small relative to VectorNet but large relative to Spain VectorNet tick coverage.
+
+### Why secondary (not primary)
+
+- Geography is Spain-only; Europe-wide modelling still depends on VectorNet.
+- Series is still filling through 2026; refresh cadence is publisher-driven.
+- License is **non-commercial** (CC BY-NC 4.0), stricter than VectorNet’s CC BY 4.0. Redistributing SPVECTORSURV rows commercially is not allowed; the combined interim / panel is **multi-license**.
+
+### How to refresh
+
+Run all cells in [`notebooks/01_sources/01b_extract_spvectorsurv.ipynb`](../notebooks/01_sources/01b_extract_spvectorsurv.ipynb). The notebook wipes only `data/01_raw/vector_spvectorsurv/` (except `.gitkeep`), downloads the latest Spanish IPT archive, extracts it, and writes `manifest.json`.
+
+```python
+from vector_guard.data import load_spvectorsurv_detections, load_all_vector_detections
+
+sp = load_spvectorsurv_detections()
+all_vectors = load_all_vector_detections()  # VectorNet + SPVECTORSURV with source
+```
+
+### Dedup vs VectorNet
+
+No cross-source drop at clean time. Keep all rows from both extracts; QA may report soft overlaps on `(rounded lat/lon, scientific_name, year, month)`. Publisher `occurrenceID` namespaces differ and are not treated as a join key across sources.
+
 ## Candidates for future additions
 
-Sources below are **not** part of the primary vector table. They may be joined later if geographic or pathogen coverage needs it.
-
-### SPVECTORSURV (Spain tick and mosquito monitoring)
-
-- **What:** [SPVECTORSURV](https://www.gbif.org/dataset/fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8) — *Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks), West Nile and Rift Valley Fever in Spain (mosquitos)* (Ministerio de Agricultura, Pesca y Alimentación; DOI [10.15470/fn1bet](https://doi.org/10.15470/fn1bet)). Occurrence Darwin Core Archive on the Spanish GBIF IPT ([`r=spvectorsurv`](https://ipt.gbif.es/resource?r=spvectorsurv)).
-- **GBIF dataset UUID:** `fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8`
-- **Latest download URL:** `https://ipt.gbif.es/archive.do?r=spvectorsurv`
-- **License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
-- **Coverage:** Spain (southern mainland via IREC; Balearic Islands via the University of the Balearic Islands). Version 1.5 (published 2026-07-03) holds on the order of ~2.6k occurrences, currently tick sampling from 2024. The project window is January 2024–December 2026; mosquito surveillance for West Nile and Rift Valley fever is in scope and expected in later releases. Sampling follows a predefined protocol and is published in Darwin Core aligned with VectorNet.
-- **Why a candidate, not the primary source:** Expert One Health surveillance (EU4Health, EFSA-coordinated) aimed at competent vectors of Crimean–Congo haemorrhagic fever, West Nile, and Rift Valley fever. It can densify Spanish tick detections, and later mosquito detections, on top of VectorNet. It does not replace VectorNet: geography is Spain only, the current extract is small and tick-only, the series is still being filled through 2026, and the license is non-commercial (CC BY-NC 4.0), which is stricter than VectorNet’s CC BY 4.0.
+Sources below are **not** part of the vector interim table yet. They may be joined later if geographic or pathogen coverage needs it.
 
 ### VectorDistributionStatus (admin-unit establishment snapshots)
 
 - **What:** Expert establishment / presence–absence status by NUTS or GAUL unit, published as versioned DwC-A snapshots (e.g. [VectorDistributionStatus_2026](https://www.gbif.org/dataset/43411a7a-1503-4391-9791-e33801752053)).
-- **Why a candidate, not the primary source:** Useful later as an optional region-level feature join (`occurrenceRemarks` statuses such as Present / Established / Introduced). It is a single-date map product, not a detection time series, and is out of scope for the primary occurrence table.
+- **Why a candidate, not a selected occurrence source:** Useful later as an optional region-level feature join (`occurrenceRemarks` statuses such as Present / Established / Introduced). It is a single-date map product, not a detection time series, and is out of scope for the occurrence table.
+
+### Other VectorNet portal national datasets
+
+- **What:** Additional Member State / project DwC-A datasets shown on [vectornetdata.org](https://www.vectornetdata.org/) alongside VectorNet observations and SPVECTORSURV.
+- **Why deferred:** Each needs its own IPT URL, license review, and taxon-map refresh. Do not substitute a GBIF multi-dataset portal dump for selective IPT extracts.
 
 ## Discarded alternatives
 
-The options below were considered during early research and **not** selected as the primary vector source.
+The options below were considered during early research and **not** selected as the primary vector source (and are not used as the SPVECTORSURV ingest path).
 
 ### Legacy VectorNet IPT `vndatabase` (Training Organization)
 
@@ -101,12 +158,12 @@ The options below were considered during early research and **not** selected as 
 ### GBIF SQL Data Cubes / full occurrence dumps
 
 - **What:** GBIF occurrence warehouse queries and [data cubes](https://techdocs.gbif.org/en/data-use/data-cubes) over global occurrences (SQL-style extracts across many datasets).
-- **Why discarded:** Asynchronous download jobs typically need **GBIF user credentials**; queues can take minutes; results mix many publishers and citizen-science observations without VectorNet’s surveillance protocols or consistent absence/effort metadata. Too heavy and too noisy for a Europe-focused vector–virus risk pipeline when VectorNet already publishes a curated DwC-A.
+- **Why discarded:** Asynchronous download jobs typically need **GBIF user credentials**; queues can take minutes; results mix many publishers and citizen-science observations without VectorNet’s surveillance protocols or consistent absence/effort metadata. Too heavy and too noisy for a Europe-focused vector–virus risk pipeline when curated IPT DwC-As already exist.
 
-### VectorNet Data Portal and static map products
+### VectorNet Data Portal UI and multi-dataset GBIF downloads
 
-- **What:** The [VectorNet data portal](https://www.vectornetdata.org/) browse UI (aggregates VectorNet observations plus national/regional GBIF datasets); ECDC / VectorNet **static distribution map** portals and PNG/PDF map products.
-- **Why discarded:** Useful for human inspection and discovery, but a poor reproducible training input (portal search UI, manual export, image or aggregated polygons, or multi-dataset GBIF occurrence downloads). Prefer the **official observations IPT DwC-A** (`r=vectornet_historical_data`, UUID `4abd984b-122c-44a0-8c92-b37e2f5299b1`) for checksummed refreshes of the primary occurrence table.
+- **What:** The [VectorNet data portal](https://www.vectornetdata.org/) browse UI (aggregates VectorNet observations plus national/regional GBIF datasets); ECDC / VectorNet **static distribution map** portals and PNG/PDF map products; one-shot GBIF downloads that OR many portal dataset keys.
+- **Why discarded as ingest:** Useful for human inspection and discovery, but a poor reproducible training input (portal search UI, manual export, image or aggregated polygons, or account-gated multi-dataset jobs). Prefer **checksummed per-dataset IPT DwC-A** refreshes: VectorNet observations for the primary table, and the Spanish IPT for SPVECTORSURV as the selected secondary.
 
 ### VectorByte (`VecDyn` / `VecTraits`)
 
