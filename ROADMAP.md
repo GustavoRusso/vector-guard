@@ -29,11 +29,11 @@ Feature and deliverable plan. Items are ordered for a practical build sequence. 
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Select and document vector detection source(s) | Done | [`specs/01`](specs/01-vector-dataset-selection.md) |
+| Select and document vector detection source(s) | Done | [`specs/01`](specs/01-vector-dataset-selection.md) — VectorNet primary + SPVECTORSURV secondary |
 | Select and document virus detection source(s) | Done | [`specs/02`](specs/02-virus-dataset-selection.md) |
 | Document spatial join (H3 + subnational centroids) | Done | [`specs/03`](specs/03-spatial-temporal-matching-strategy.md) |
-| Document reference data + panel pipeline | Done | [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
-| Build vector dataset (geo + time) | Done | Notebook `08` → interim; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
+| Document reference data + panel pipeline | Done | [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) — multi-source vector interim `source` |
+| Build vector dataset (geo + time) | Done | Notebooks `01` / `01b` → raw; `08` unions + tags `source` → interim; see [`specs/01`](specs/01-vector-dataset-selection.md) / [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
 | Upgrade virus raw extract (multi-source + taxonomy) | Done | Notebook `03`; see [`specs/02`](specs/02-virus-dataset-selection.md) |
 | Build virus dataset (geo + time, clean) | Done | Notebook `09` → interim; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
 | Build reference data (countries, subnational centroids, vector taxon groups) | Done | Notebooks `05`–`06`; see [`specs/04`](specs/04-reference-data-and-panel-pipeline.md) |
