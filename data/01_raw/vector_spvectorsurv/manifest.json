@@ -1,0 +1,17 @@
+{
+  "source_url": "https://ipt.gbif.es/archive.do?r=spvectorsurv",
+  "resource": "spvectorsurv",
+  "gbif_dataset_uuid": "fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8",
+  "license": "CC BY-NC 4.0",
+  "fetched_at": "2026-11-15T07:59:13.826852+00:00",
+  "zip_name": "spvectorsurv_dwca.zip",
+  "zip_bytes": 99587,
+  "sha256": "901d02df16d67ac428e60e87fcb931f40e126ae0acf8014b9125fd1785095449",
+  "citation": "Ministerio de Agricultura, Pesca y Alimentaci\u00f3n. SPVECTORSURV: Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks), West Nile and Rift Valley Fever in Spain (mosquitos). Occurrence dataset (CC BY-NC 4.0). https://doi.org/10.15470/fn1bet",
+  "extracted_files": [
+    ".gitkeep",
+    "eml.xml",
+    "meta.xml",
+    "occurrence.txt"
+  ]
+}

@@ -1,4 +1,4 @@
-"""Load raw VectorNet and multi-source virus detection tables from local copies."""
+"""Load raw vector (VectorNet / SPVECTORSURV) and multi-source virus detection tables."""
 
 from __future__ import annotations
 
@@ -208,6 +208,11 @@ def default_vector_raw_dir(repo_root: Path | None = None) -> Path:
     return root / "data" / "01_raw" / "vector"
 
 
+def default_spvectorsurv_raw_dir(repo_root: Path | None = None) -> Path:
+    root = repo_root or find_repo_root()
+    return root / "data" / "01_raw" / "vector_spvectorsurv"
+
+
 def default_virus_raw_dir(repo_root: Path | None = None) -> Path:
     root = repo_root or find_repo_root()
     return root / "data" / "01_raw" / "virus"
@@ -233,7 +238,8 @@ def resolve_vector_core_path(raw_dir: Path) -> Path:
     if not raw_dir.exists():
         raise FileNotFoundError(
             f"Vector raw directory not found: {raw_dir}. "
-            "Run notebooks/01_sources/01_extract_vectors.ipynb first."
+            "Run notebooks/01_sources/01_extract_vectors.ipynb "
+            "or 01b_extract_spvectorsurv.ipynb first."
         )
 
     meta_path = raw_dir / "meta.xml"
@@ -256,7 +262,8 @@ def resolve_vector_core_path(raw_dir: Path) -> Path:
 
     raise FileNotFoundError(
         f"Could not find DwC-A core table under {raw_dir}. "
-        "Run notebooks/01_sources/01_extract_vectors.ipynb to refresh the raw archive."
+        "Run notebooks/01_sources/01_extract_vectors.ipynb "
+        "or 01b_extract_spvectorsurv.ipynb to refresh the raw archive."
     )
 
 
@@ -290,6 +297,44 @@ def load_vector_detections(raw_dir: Path | None = None) -> pd.DataFrame:
     directory = Path(raw_dir) if raw_dir is not None else default_vector_raw_dir()
     core_path = resolve_vector_core_path(directory)
     return pd.read_csv(core_path, sep="\t", dtype=str, low_memory=False)
+
+
+def load_spvectorsurv_detections(raw_dir: Path | None = None) -> pd.DataFrame:
+    """Load the SPVECTORSURV occurrence core table as a string-typed DataFrame.
+
+    Parameters
+    ----------
+    raw_dir:
+        Directory containing the extracted DwC-A. Defaults to
+        ``<repo>/data/01_raw/vector_spvectorsurv``.
+    """
+    directory = (
+        Path(raw_dir) if raw_dir is not None else default_spvectorsurv_raw_dir()
+    )
+    if not directory.exists():
+        raise FileNotFoundError(
+            f"SPVECTORSURV raw directory not found: {directory}. "
+            "Run notebooks/01_sources/01b_extract_spvectorsurv.ipynb first."
+        )
+    core_path = resolve_vector_core_path(directory)
+    return pd.read_csv(core_path, sep="\t", dtype=str, low_memory=False)
+
+
+def load_all_vector_detections(
+    vector_raw_dir: Path | None = None,
+    spvectorsurv_raw_dir: Path | None = None,
+) -> pd.DataFrame:
+    """Load VectorNet + SPVECTORSURV raw cores with a closed ``source`` column.
+
+    Concatenates both extracts after tagging rows as ``vectornet`` or
+    ``spvectorsurv``. Intended for notebook ``08`` (and taxon inventory) before
+    the shared resolve / normalize path.
+    """
+    vectornet = load_vector_detections(vector_raw_dir).copy()
+    vectornet["source"] = "vectornet"
+    spvectorsurv = load_spvectorsurv_detections(spvectorsurv_raw_dir).copy()
+    spvectorsurv["source"] = "spvectorsurv"
+    return pd.concat([vectornet, spvectorsurv], ignore_index=True)
 
 
 def load_virus_detections(raw_dir: Path | None = None) -> pd.DataFrame:

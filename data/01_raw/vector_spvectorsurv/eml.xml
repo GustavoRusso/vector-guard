@@ -1,0 +1,230 @@
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0"
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+         packageId="fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8/v1.5" system="http://gbif.org" scope="system"
+         xml:lang="eng">
+    <dataset>
+        <alternateIdentifier>10.15470/fn1bet</alternateIdentifier>
+        <alternateIdentifier>fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8</alternateIdentifier>
+        <alternateIdentifier>https://ipt.gbif.es/resource?r=spvectorsurv</alternateIdentifier>
+        <shortName>SPVECTORSURV</shortName>
+        <title xml:lang="eng">Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks) , West Nile and Rift Valley Fever in Spain (mosquitos)</title>
+        <creator>
+            <individualName>
+                <givenName>Germán</givenName>
+                <surName>Cáceres Garrido</surName>
+            </individualName>
+            <organizationName>Ministerio Agricultura, Pesca y Alimentación</organizationName>
+            <address>
+                <city>Madrid</city>
+                <administrativeArea>Madrid</administrativeArea>
+                <postalCode>28010</postalCode>
+                <country>ES</country>
+            </address>
+            <phone>0034913474132</phone>
+            <electronicMailAddress>gcaceres@mapa.es</electronicMailAddress>
+            <onlineUrl>https://www.mapa.gob.es/es/ganaderia/temas/sanidad-animal-higiene-ganadera/</onlineUrl>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Miguel Ángel</givenName>
+                <surName>Miranda</surName>
+            </individualName>
+            <organizationName>Applied Zoology and Animal Conservation research group. University of the Balearic Islands. (ZAP-UIB) Agro-Environmental and Water Economics Research Institute, University of the Balearic Islands (INAGEA)</organizationName>
+            <address>
+                <city>Mallorca</city>
+                <administrativeArea>Islas Baleares</administrativeArea>
+                <country>ES</country>
+            </address>
+            <electronicMailAddress>ma.miranda@uib.es</electronicMailAddress>
+        </metadataProvider>
+        <metadataProvider>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Ruiz-Fons</surName>
+            </individualName>
+            <organizationName>CSIC-IREC: Spanish Scientific Research Council – Game and Wildlife Research Institute</organizationName>
+            <address>
+                <city>Ciudad Real</city>
+                <administrativeArea>Castilla La Mancha</administrativeArea>
+                <country>ES</country>
+            </address>
+            <electronicMailAddress>josefrancisco.ruiz@uclm.es</electronicMailAddress>
+        </metadataProvider>
+        <pubDate>
+            2026-07-03
+        </pubDate>
+        <language>eng</language>
+        <abstract>
+            One Health surveillance and Vector monitoring for cross-border pathogens. Ticks and mosquitoes can transmit infectious diseases as vectors. In the frame of the SPVECTORSURV project, we are setting up in Spain a nationwide mosquito and tick monitoring system. The aim of the project is to monitor vector distribution and dynamics, and to establish an one-health surveillance system for emerging pathogens, in which mosquitoes and ticks are collected and analysed for detection of pre-selected pathogens, that in the Case of SPVECTORSURV are Crimea Congo hemorragic fever (ticks), West Nile and Rift valley fever. In this dataset we present data provided by ticks monitoring activities carried out in 2024 in the frame of work package 1 of the project devoted to Crimea Congo hemorrhagic fever. The group of the University of Balearic Islands collected ticks from the islands, and IREC collected ticks from the southern part of Spanish mainland. We have released this dataset to the public domain under a Creative Commons Attribution 4.0 International (CC BY_NC 4.0) license. We would appreciate citation of the provided DOI when using the data. If you have any questions regarding this dataset, don't hesitate contact us via the contact information provided in the metadata. Funding: EU4Health Work Program CP-g-22-04.01 (HaDEA) Project duration: Januay 2024 – December 2026 (36 months)
+        </abstract>
+        <keywordSet>
+            <keyword>occurrences</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Monitorización</keyword>
+            <keyword>vigilancia</keyword>
+            <keyword>vectores competentes</keyword>
+            <keyword>Fiebre del Nilo occidental</keyword>
+            <keyword>Fiebre hemorrágica de Crimea Congo</keyword>
+            <keyword>Fiebre del valle del Rift.</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC 4.0) License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.gbif.es/archive.do?r=spvectorsurv</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>N/A</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-13.359</westBoundingCoordinate>
+                    <eastBoundingCoordinate>5.625</eastBoundingCoordinate>
+                    <northBoundingCoordinate>47.99</northBoundingCoordinate>
+                    <southBoundingCoordinate>33.138</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>2024-02-09</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>2026-01-14</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose>El proyecto que estará en ejecución durante los años 2024, 2025 y 2026, consiste en la captura de garrapatas para la vigilancia de CCHF en al menos 24 localizaciones en la España peninsular y 3 o 4 más en las islas Baleares, y de la captura de mosquitos para la vigilancia de WN y de RVF, en 10 localizaciones en la península y 2 o 3 en las islas Baleares para WN, y 10 localizaciones en la península y 2 o 3 en las islas Baleares para RVF. En ambos casos las localizaciones de los lugares de trampeo para mosquitos se han seleccionado en base a dos evaluaciones de riesgo espacial y mensual, para cada una de las enfermedades. En el caso de las garrapatas la selección de los puntos de muestreo se han decido en base a la opinión de expertos que han elegido en función del riesgo de presencia de garrapatas competentes, particularmente Hyalomma lusitanicum.</purpose>
+        <introduction><para>Los datos incluirán al final del proyecto, todas los especímenes capturados a lo largo de los años 2024, 2025 y 2026. El objetivo es ganar información en cuanto a distribución y abundancia de los vectores competentes, y vigilancia de las tres enfermedades en función de su situación, en el caso de CCHF y WN, enfermedades presentes en España, para caracterización del riesgo, y en el caso de RVF, enfermedad no presente en España, para la detección temprana en caso de incursión.</para></introduction>
+        <acknowledgements>Agradecimientos a la CE DG SANTE por la financiación del proyecto, a la EFSA por la coordinación y apoyo.</acknowledgements>
+        <maintenance>
+            <description>
+                <para>Neew data will be uploaded when it is generated by the project.</para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Germán</givenName>
+                <surName>Cáceres Garrido</surName>
+            </individualName>
+            <organizationName>Ministerio Agricultura, Pesca y Alimentación</organizationName>
+            <positionName>Head of Epidemiology Department</positionName>
+            <address>
+                <deliveryPoint>Calle Almagro nº33</deliveryPoint>
+                <city>Madrid</city>
+                <administrativeArea>Madrid</administrativeArea>
+                <postalCode>28010</postalCode>
+                <country>ES</country>
+            </address>
+            <phone>0034913474132</phone>
+            <electronicMailAddress>gcaceres@mapa.es</electronicMailAddress>
+            <onlineUrl>https://www.mapa.gob.es/es/ganaderia/temas/sanidad-animal-higiene-ganadera/</onlineUrl>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>https://www.mapa.gob.es/es/dam/jcr:64e23df0-2049-4656-baa0-f94a277e5f88/Protocolo%20trampeo%20mosquitos_Grant%20Una%20salud%20abril%202025.pdf </para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Captura de garrapatas en 2024 en localizaciones de la zona sur de la península (IREC) y en las islas Baleares (UIB).</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Method steps in the case of IREC 
+
+1.  Researchers from CSIC-IREC defined the appropriate sampling protocol for the target species.
+2. Fieldwork was planned and coordinated by CSIC-IREC.
+3. Data was collected in the field by tick sampling experts.
+4. Specimens were identified by experts at CSIC-IREC based on morphology.
+5. The collected data was entered into an Excel database.
+6. The data was verified and manually corrected by experts if necessary.
+7.  The data was converted to the Darwin Core Standard in accordance with VectorNet specifications.
+8. The data was checked again by experts at CSIC-IREC and sent to VectorNet for validation by MAPA.
+9. The dataset is published and registered with GBIF.     
+Quality control
+Data are collected using a predefined sampling protocol and checked by professionals
+
+Method steps in the case of the Balearic Islands
+ 
+1.  Researchers from ZAP-UIB prepared protocols of extraction, vials and formulary for COFIB (Recovery center) in order to collect ticks from wild animals.
+ 2. Personnel from COFIB collected ticks from wild animals from location was known.
+ 3. Personnel from COFIB communicated with ZAP-UIB each time ticks were collected. Ticks were collected from COFIB and transported to INAGEA keeping cold chain and stored at -80ºC. 
+ 4. Specimens were identified by experts at INAGEA based on morphology and keeping cold chain. 
+ 5. Each identification was contrasted by at least two entomologists (MAM and CB). 
+6. The collected data was entered into an Excel database.
+ 7. The data was verified and manually corrected by experts if necessary.
+ 8.  The data was converted to the Darwin Core Standard in accordance with SPVECTORSURV specifications.
+ 9. The data was checked again by experts at ZAP-UIB and sent to SPVECTORSURV for validation by MAPA.
+ 10. The dataset is published and registered with GBIF.     
+
+</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Data are collected using a predefined sampling protocol and checked by professionals</para>
+                </description>
+            </qualityControl>
+        </methods>
+        <project id="SPVECTORSURV">
+            <title>Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks) , West Nile and Rift Valley Fever in Spain (mosquitos).</title>
+            <personnel>
+                <individualName>
+                    <givenName>Germán</givenName>
+                    <surName>Cáceres Garrido</surName>
+                </individualName>
+                <role>contentProvider</role>
+            </personnel>
+            <abstract>
+                <para>One Health surveillance and Vector monitoring for cross-border pathogens
+ 
+Ticks and mosquitoes can transmit infectious diseases as vectors. In the SURVector project, we are setting up a nationwide mosquito and tick monitoring system. The aim of the project is to establish a one-health surveillance system for emerging pathogens, in which mosquitoes and ticks are collected and analysed for relevant pathogens.
+ 
+In this dataset we present the data on the ticks monitoring in the frame of activities within work package 1 devoted to Crimea Congo Hemorrhagic Fever part of this project from 2024. The group of the University of Balearic Islands collected ticks from the islands, and IREC collected ticks from the southern part of Spanish mainland. 
+We have released this dataset to the public domain under a Creative Commons Attribution 4.0 International (CC BY_NC 4.0) license. We would appreciate it if you cite the provided DOI when using the data. If you have any questions regarding this dataset, don&apos;t hesitate to contact us via the contact information provided in the metadata.
+ 
+Funding: EU4Health Work Program CP-g-22-04.01 (HaDEA)
+Project duration: January 2024 – December 2026 (36 months)</para>
+            </abstract>
+            <funding>
+                <para>EU4Health Work Program CP-g-22-04.01 (HaDEA)</para>
+            </funding>
+        </project>
+    </dataset>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2025-02-28T09:18:40.464+01:00</dateStamp>
+                <hierarchyLevel>dataset</hierarchyLevel>
+                <citation identifier="https://doi.org/10.15470/fn1bet">Cáceres Garrido G, Miranda M Á, Ruiz-Fons F (2026). Monitoring competent vectors of Crimea Congo Haemorragic Fever (ticks) , West Nile and Rift Valley Fever in Spain (mosquitos). Version 1.5. Ministerio de Agricultura, Pesca y Alimentación. Occurrence dataset. https://doi.org/10.15470/fn1bet</citation>
+                <dc:replaces>fc1dd9e3-ff53-4d57-9d8e-e29afbb955b8/v1.5.xml</dc:replaces>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+</eml:eml>
