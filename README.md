@@ -25,15 +25,14 @@ The intended output is an **early-warning / prioritization aid** for surveillanc
 
 Organize the repository as a **generic ML project**:
 
-1. **Root surface** — this README, primary analysis notebook, training script, prediction service, container, dependency file.
+1. **Root surface** — this README, training script, prediction service, container, dependency file.
 2. **Upstream dataset construction** — when inputs are not a single ready table, build the modelling dataset under `notebooks/01_sources/` into `data/03_processed/`.
 3. **Staged data** — `data/01_raw/` → `data/02_interim/` → `data/03_processed/`, plus `data/external/` for lookups.
-4. **Staged notebooks** — `01_sources`, `02_eda`, `03_features`, `04_modeling`; primary EDA and modeling remain in root `notebook.ipynb`.
+4. **Staged notebooks** — `01_sources` (dataset construction), `02_eda` (EDA), `03_features` (prep / feature handoff), `04_modeling` (train / tune / compare).
 
 ```text
 vector-guard/
 ├── README.md
-├── notebook.ipynb
 ├── train.py
 ├── predict.py
 ├── Dockerfile
@@ -58,8 +57,9 @@ vector-guard/
 | Deliverable area | Where |
 |------------------|-------|
 | Problem description | This README § [Problem statement](#problem-statement) |
-| EDA | [`notebook.ipynb`](notebook.ipynb) only |
-| Model training | [`notebook.ipynb`](notebook.ipynb) |
+| EDA | [`notebooks/02_eda/`](notebooks/02_eda/) — runbook [`notebooks/02_eda/README.md`](notebooks/02_eda/README.md) |
+| Feature prep / modelling handoff | [`notebooks/03_features/`](notebooks/03_features/) — runbook [`notebooks/03_features/README.md`](notebooks/03_features/README.md) |
+| Model training | [`notebooks/04_modeling/`](notebooks/04_modeling/) — runbook [`notebooks/04_modeling/README.md`](notebooks/04_modeling/README.md) |
 | Exporting notebook to script | [`train.py`](train.py) |
 | Reproducibility | [`data/`](data/) + [Dataset description](#dataset-description); rebuild via [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) |
 | Model deployment | [`predict.py`](predict.py) |
@@ -83,7 +83,7 @@ The modelling handoff is a pathogen-long panel plus a long species composition t
 
 **Pathogen ↔ vector group:** which pathogens explode onto which `vector_group` is documented in [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy); mirror CSV `data/external/pathogen_vector_group.csv`. Authoritative code map: [`src/vector_guard/data.py`](src/vector_guard/data.py) `VIRUS_VECTOR_TAXON_MAP`.
 
-Load it in a notebook (same pattern as root [`notebook.ipynb`](notebook.ipynb)):
+Load it in a notebook (same pattern as notebooks under [`02_eda`](notebooks/02_eda/) / [`03_features`](notebooks/03_features/)):
 
 ```python
 from pathlib import Path
@@ -117,26 +117,28 @@ flowchart LR
 
 ```text
 data/03_processed/modelling_panel.parquet
-data/03_processed/modelling_panel_species.parquet  →  notebook.ipynb / train.py  →  predict.py  →  Docker
+data/03_processed/modelling_panel_species.parquet
+  → notebooks/02_eda → notebooks/03_features → notebooks/04_modeling
+  → train.py → predict.py → Docker
 ```
 
 ## EDA summary
 
-Primary EDA lives in [`notebook.ipynb`](notebook.ipynb) on the modelling panel + species side table (missingness, coverage, late priority species pivot, target, feature importance). Source-inspect notebooks under `notebooks/01_sources/` are construction QA only.
+Primary EDA lives under [`notebooks/02_eda/`](notebooks/02_eda/) on the modelling panel + species side table (missingness, coverage, target, spatial/temporal plots). Locked late priority species pivot and the modelling feature handoff live under [`notebooks/03_features/`](notebooks/03_features/). Source-inspect notebooks under `notebooks/01_sources/` are construction QA only.
 
 *Coming soon* — short findings once distribution, target, and importance analyses are complete.
 
 ## Modeling approach & metrics
 
-Train multiple models (linear and tree-based), tune hyperparameters, and select the best performer in [`notebook.ipynb`](notebook.ipynb); export the final fit via [`train.py`](train.py).
+Train multiple models (linear and tree-based), tune hyperparameters, and select the best performer under [`notebooks/04_modeling/`](notebooks/04_modeling/); export the final fit via [`train.py`](train.py).
 
 *Coming soon* — chosen models, metrics (e.g. ROC-AUC / PR-AUC / calibration), and comparison results.
 
 ## How to run locally and via Docker
 
-*Coming soon* — install dependencies (`pyproject.toml` / `uv.lock`), run `notebook.ipynb` and `train.py`, and build/run the Docker image for the prediction service.
+*Coming soon* — install dependencies (`pyproject.toml` / `uv.lock`), run stage notebooks and `train.py`, and build/run the Docker image for the prediction service.
 
-Until then: rebuild the panel via [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md), then open [`notebook.ipynb`](notebook.ipynb).
+Until then: rebuild the panel via [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md), then continue with [`notebooks/02_eda/README.md`](notebooks/02_eda/README.md) → [`03_features`](notebooks/03_features/README.md) → [`04_modeling`](notebooks/04_modeling/README.md).
 
 ## API usage example
 

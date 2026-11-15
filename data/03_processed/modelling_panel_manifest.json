@@ -175,7 +175,7 @@
     "vector_manifest.json": "16d4c9fc77a969141cfcb66dacc49d39bc4eda685a5aa56b7cd42178de05d541",
     "virus_manifest.json": "315c2263058bdeece996cde5930da410270279408e0899bdac6f5bb12c9786a7"
   },
-  "species_pivot": "Locked closed priority_vector_taxa.csv \u2192 vector_count_<slug> via unit-grain late pivot in notebook.ipynb / train.py (not merge output)",
+  "species_pivot": "Locked closed priority_vector_taxa.csv \u2192 vector_count_<slug> via unit-grain late pivot in notebooks/03_features / train.py (not merge output)",
   "species_table_rows": 32255,
   "species_table_units": 13353,
   "temporal_grain": "year x month (vector observation); pathogen labels relative to row timestamp",

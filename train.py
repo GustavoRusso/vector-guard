@@ -1,6 +1,6 @@
 """Train the final Vector Guard model and save the artifact to disk.
 
-TODO: export the selected pipeline from notebook.ipynb (fit + preprocess),
+TODO: export the selected pipeline from notebooks/04_modeling/ (fit + preprocess),
 then persist a loadable model for predict.py.
 """
 

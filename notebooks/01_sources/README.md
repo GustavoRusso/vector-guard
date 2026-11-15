@@ -1,12 +1,12 @@
 # Dataset construction (`01_sources`)
 
-Rebuild the modelling panel used by root [`notebook.ipynb`](../../notebook.ipynb) and [`train.py`](../../train.py).
+Rebuild the modelling panel used by staged analysis notebooks (`02_eda` → `03_features` → `04_modeling`) and [`train.py`](../../train.py).
 
 **Output:** [`data/03_processed/modelling_panel.parquet`](../../data/03_processed/) + [`modelling_panel_species.parquet`](../../data/03_processed/) (+ `modelling_panel_manifest.json`).
 
-**Panel grain:** B2 **pathogen-long** — observed interim vector `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Units come from VectorNet (primary) + SPVECTORSURV (secondary densifier). Primary label: `pathogen_within_5y`. Panel keeps group aggregates + `species_richness`. Full species composition is the long side table (unit × `scientific_name`); priority `vector_count_<slug>` columns are widened in root EDA/prep from `priority_vector_taxa.csv` (locked late pivot — not merge-time wide columns).
+**Panel grain:** B2 **pathogen-long** — observed interim vector `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Units come from VectorNet (primary) + SPVECTORSURV (secondary densifier). Primary label: `pathogen_within_5y`. Panel keeps group aggregates + `species_richness`. Full species composition is the long side table (unit × `scientific_name`); priority `vector_count_<slug>` columns are widened in `03_features` from `priority_vector_taxa.csv` (locked late pivot — not merge-time wide columns).
 
-This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA and model training use the panel (+ species table) in root `notebook.ipynb`.
+This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA, feature prep, and model training use the panel (+ species table) under `notebooks/02_eda/`, `03_features/`, and `04_modeling/`.
 
 Design decisions live in [`specs/`](../../specs/). Do not invent join rules, schemas, or pipeline contracts here; update the relevant spec when a decision changes.
 
@@ -75,6 +75,6 @@ viruses = load_virus_detections()
 1. Refresh raw extracts (`01`, `01b`, `03`) if sources changed.
 2. Refresh reference tables (`05`, `06`, `06b`) if country/region aliases, taxon maps, or host → `host_group` aliases changed.
 3. Re-run clean steps (`08`, `09`), then merge (`10`). (`08` unions VectorNet + SPVECTORSURV with `source`; `09` applies `host_groups.csv`; merge does not consume `host_group` yet.)
-4. Confirm `data/03_processed/modelling_panel.parquet` and `modelling_panel_species.parquet` exist, then open root `notebook.ipynb`.
+4. Confirm `data/03_processed/modelling_panel.parquet` and `modelling_panel_species.parquet` exist, then open [`../02_eda/`](../02_eda/) (then [`03_features`](../03_features/), [`04_modeling`](../04_modeling/)).
 
-How to load the panel / species table: root [`README.md`](../../README.md) Dataset section and [`notebook.ipynb`](../../notebook.ipynb).
+How to load the panel / species table: root [`README.md`](../../README.md) Dataset section and stage runbooks under `02_eda` / `03_features`.

@@ -64,7 +64,7 @@ data/
 | Host → `host_group` aliases | Static reference CSV | `data/external/host_groups.csv` | Curated from virus `host` inventory + VectorNet / global vector taxa seeds (notebook `06b`) | Tag virus interim rows with closed `host_group` (EDA / future label splits; **not** a merge key) |
 | Priority vector taxa (EDA / prep) | Static reference CSV | `data/external/priority_vector_taxa.csv` | Top / competent genera–species per `vector_group` from VectorNet frequency (notebook `06`) | **Locked** closed set for late unit-grain pivot → `vector_count_<feature_slug>` in EDA/prep / `train.py` handoff — **not** merge panel columns |
 | H3 resolution choice | Decision + code constant | This spec + `vector_guard.resolve.H3_RESOLUTION` (`4`) | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
-| Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | Primary EDA / `notebook.ipynb` / `train.py` (pathogen-long; no wide species counts) |
+| Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `notebooks/02_eda` / `03_features` / `04_modeling` / `train.py` (pathogen-long; no wide species counts) |
 | Species composition (long) | Output contract | `data/03_processed/modelling_panel_species.parquet` | Same merge notebook (`10`), from pre-explode unit aggregates | Unit × `scientific_name` counts for late pivot in EDA/prep |
 
 **Out of reference scope (v1):** full NUTS polygon geometry dumps; on-the-fly geocoders for unmatched free-text; committing raw extracts. NUTS **centroids** (and equivalent admin centroids) **are** in scope via `subnational_locations.csv`.
@@ -238,7 +238,9 @@ flowchart TD
   cleanV["08_clean_vectors"]
   cleanU["09_clean_viruses"]
   merge["10_merge_modelling_panel"]
-  courseNb["notebook.ipynb"]
+  edaNb["notebooks/02_eda"]
+  featuresNb["notebooks/03_features"]
+  modelingNb["notebooks/04_modeling"]
 
   extractV --> edaV
   extractSp --> edaV
@@ -260,8 +262,11 @@ flowchart TD
   extractV --> cleanV
   cleanV --> merge
   cleanU --> merge
-  merge --> courseNb
+  merge --> edaNb
+  edaNb --> featuresNb
+  featuresNb --> modelingNb
 ```
+
 
 | Step | Notebook | Writes | Reads |
 |------|----------|--------|-------|
@@ -277,7 +282,9 @@ flowchart TD
 | Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` | `data/02_interim/vectors_normalized.parquet` (incl. `source`) | VectorNet + SPVECTORSURV raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet` (incl. `host_group`); `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag); `data/02_interim/virus_unmatched_hosts.csv` | raw + `countries` + `subnational_locations` + `host_groups.csv` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` (**not** `priority_vector_taxa.csv`; **not** `host_group` / `host_groups.csv` in this milestone) |
-| Primary EDA + models | `notebook.ipynb` | Panel prep + locked late species pivot; model training next (see ROADMAP) | modelling panel + species side table + `priority_vector_taxa.csv` |
+| EDA | `notebooks/02_eda/` | Descriptive analysis (coverage, missingness, target, plots) | modelling panel + species side table |
+| Feature prep | `notebooks/03_features/` | Panel prep + locked late species pivot + feature handoff | modelling panel + species side table + `priority_vector_taxa.csv` |
+| Model training | `notebooks/04_modeling/` | Train / tune / compare (see ROADMAP); feeds `train.py` | feature handoff from `03_features` |
 
 Source inspect notebooks (`02`, `04` under `notebooks/01_sources/`) diagnose quality and relevance; they do **not** own the final modelling table and are **not** the project EDA deliverable. Cleaning notebooks apply documented rules; the merge notebook owns the panel + species side-table contract.
 
@@ -388,7 +395,7 @@ Detection-level metadata on `viruses_normalized.parquet`. Distinguishes arthropo
 
 ## Merge step — modelling panel
 
-**Goal:** pathogen-long modelling panel plus long species composition table for analysis and generation (`notebook.ipynb`, later `train.py`) — answering *given vectors here, how likely is pathogen X soon?*
+**Goal:** pathogen-long modelling panel plus long species composition table for analysis and generation (`notebooks/02_eda` → `03_features` → `04_modeling`, later `train.py`) — answering *given vectors here, how likely is pathogen X soon?*
 
 Join principles (B2 pathogen-long rows, A3 zone clock, forward labels): [`specs/03`](03-spatial-temporal-matching-strategy.md#aggregation-into-modelling-units).
 
@@ -491,7 +498,7 @@ Authoritative schema for `data/03_processed/modelling_panel_species.parquet`, wr
 | `data/03_processed/modelling_panel_species.parquet` | Long species composition (unit × `scientific_name`); input to late pivot |
 | Merge summary / manifest fields | `H3_RESOLUTION`; `eligibility=from_first_vector`; `primary_label=pathogen_within_5y`; `secondary_label=pathogen_within_10y`; `delay_missing=null`; `tier1_key` / `tier2_key` including `pathogen_name`; `n_pathogens`; row counts by `spatial_tier` and by `pathogen_name`; label positive rates (overall and per pathogen); **species side-table path + row count** (not `priority_feature_slugs`); note that locked priority species pivot happens downstream in EDA/prep; geo-precision mix; date range / censoring note; training filter rules (**vector coverage**, any interim `source`); SHA-256 from VectorNet **and** SPVECTORSURV raw manifests when available |
 
-Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + locked unit-grain species pivot + model selection), `train.py` (load panel / species table or rebuild via the same pipeline; mirror the late pivot rule).
+Consumers: `notebooks/02_eda/` (EDA stratified by `pathogen_name`), `notebooks/03_features/` (locked unit-grain species pivot + feature handoff), `notebooks/04_modeling/` (model selection), `train.py` (load panel / species table or rebuild via the same pipeline; mirror the late pivot rule).
 
 ## Non-goals (remaining pipeline)
 
@@ -506,7 +513,7 @@ Consumers: `notebook.ipynb` (EDA stratified by `pathogen_name` + locked unit-gra
 
 ## Status
 
-Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Virus interim **`host_group`** classification is locked (`06b` reference + `09` resolve); merge does not consume it yet. Vector interim is **multi-source** (VectorNet + SPVECTORSURV) with closed `source`; training filter is **vector coverage** from that interim. Consumers (`notebook.ipynb`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Virus interim **`host_group`** classification is locked (`06b` reference + `09` resolve); merge does not consume it yet. Vector interim is **multi-source** (VectorNet + SPVECTORSURV) with closed `source`; training filter is **vector coverage** from that interim. Consumers (`notebooks/02_eda` → `03_features` → `04_modeling`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 

@@ -53,24 +53,24 @@ Feature and deliverable plan. Items are ordered for a practical build sequence. 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
 | Initial vector / virus source inspect notebooks | Done | Construction QA in `01_sources` (`02`, `04`); not the EDA deliverable |
-| Data cleaning and preparation in `notebook.ipynb` | Done | Panel + species side table load; unit-grain late priority pivot; prep handoff |
-| Distribution and range analysis of features | Next | Including spatial/temporal coverage |
-| Target variable analysis (risk / suitability label) | Planned | Class balance, risk-score target definition |
-| Feature importance analysis | Planned | |
-| Spatial / temporal exploratory plots | Planned | |
+| Data cleaning and preparation in `notebooks/03_features/` | Done | Panel + species side table load; unit-grain late priority pivot; prep handoff |
+| Distribution and range analysis of features | Next | Under [`notebooks/02_eda/`](notebooks/02_eda/); including spatial/temporal coverage |
+| Target variable analysis (risk / suitability label) | Planned | Under `02_eda`; class balance, risk-score target definition |
+| Feature importance analysis | Planned | Under `02_eda` / after features in `03_features` |
+| Spatial / temporal exploratory plots | Planned | Under `02_eda` |
 
 ---
 
 ## 4. Model training and selection
 
-**Deliverable area:** Model training (complete when: multiple models **and** hyperparameter tuning).
+**Deliverable area:** Model training (complete when: multiple models **and** hyperparameter tuning). Location: [`notebooks/04_modeling/`](notebooks/04_modeling/).
 
 | Feature / deliverable | Status | Notes |
 |-----------------------|--------|-------|
-| Baseline linear model (e.g. logistic regression) | Planned | |
-| Tree-based model(s) (e.g. Random Forest, XGBoost) | Planned | At least one linear + one tree-based |
-| Hyperparameter tuning for candidate models | Planned | |
-| Model comparison metrics documented in notebook | Planned | e.g. ROC-AUC, PR-AUC, calibration |
+| Baseline linear model (e.g. logistic regression) | Planned | Under `04_modeling` |
+| Tree-based model(s) (e.g. Random Forest, XGBoost) | Planned | Under `04_modeling`; at least one linear + one tree-based |
+| Hyperparameter tuning for candidate models | Planned | Under `04_modeling` |
+| Model comparison metrics documented in notebook | Planned | Under `04_modeling`; e.g. ROC-AUC, PR-AUC, calibration |
 | Persist final model artifact | Planned | |
 
 ---
@@ -151,7 +151,7 @@ flowchart TD
   api --> docker --> cloud
 ```
 
-Data foundation is **Done** (pathogen-long panel + long species side table; priority taxa widen in EDA/prep). Next: deepen EDA on the panel, then models → `train.py` → API → env docs / Docker → optional cloud.
+Data foundation is **Done** (pathogen-long panel + long species side table; priority taxa widen in EDA/prep). Next: deepen EDA under `notebooks/02_eda/`, then features under `03_features/` and models under `04_modeling/` → `train.py` → API → env docs / Docker → optional cloud.
 
 ---
 

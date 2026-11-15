@@ -26,8 +26,10 @@
 See [`README.md`](README.md) § Project layout and Deliverable areas → location.
 
 - `notebooks/01_sources/` — dataset construction only (not the EDA deliverable). Runbook: [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md).
-- Primary EDA and modeling: root `notebook.ipynb`.
-- Reusable notebook code: `src/vector_guard/`.
+- `notebooks/02_eda/` — EDA on the modelling panel. Runbook: [`notebooks/02_eda/README.md`](notebooks/02_eda/README.md).
+- `notebooks/03_features/` — panel prep, locked late species pivot, feature handoff. Runbook: [`notebooks/03_features/README.md`](notebooks/03_features/README.md).
+- `notebooks/04_modeling/` — train / tune / compare. Runbook: [`notebooks/04_modeling/README.md`](notebooks/04_modeling/README.md).
+- Reusable notebook code: `src/vector_guard/` — import shared prep and viz helpers; do not duplicate them across stage notebooks.
 
 ## Related living docs
 
@@ -36,3 +38,6 @@ See [`README.md`](README.md) § Project layout and Deliverable areas → locatio
 | [`README.md`](README.md) | Problem statement, layout, deliverable map, dataset pointer, run instructions |
 | [`ROADMAP.md`](ROADMAP.md) | Feature and deliverable plan / status |
 | [`notebooks/01_sources/README.md`](notebooks/01_sources/README.md) | Dataset construction runbook |
+| [`notebooks/02_eda/README.md`](notebooks/02_eda/README.md) | EDA runbook |
+| [`notebooks/03_features/README.md`](notebooks/03_features/README.md) | Feature prep runbook |
+| [`notebooks/04_modeling/README.md`](notebooks/04_modeling/README.md) | Modeling runbook |
