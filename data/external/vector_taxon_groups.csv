@@ -125,6 +125,7 @@ Aedes rossicus,mosquito,genus_rule:Aedes
 Aedes rusticus,mosquito,genus_rule:Aedes
 Aedes sticticus,mosquito,genus_rule:Aedes
 Aedes surcoufi,mosquito,genus_rule:Aedes
+Aedes vexans,mosquito,genus_rule:Aedes
 Aedes vexans vexans,mosquito,genus_rule:Aedes
 Aedes vittatus,mosquito,genus_rule:Aedes
 Anopheles,mosquito,genus_rule:Anopheles
@@ -145,6 +146,7 @@ Anopheles petragnani,mosquito,genus_rule:Anopheles
 Anopheles plumbeus,mosquito,genus_rule:Anopheles
 Anopheles sacharovi,mosquito,genus_rule:Anopheles
 Anopheles superpictus,mosquito,genus_rule:Anopheles
+Coquillettidia,mosquito,genus_rule:Coquillettidia
 Coquillettidia buxtoni,mosquito,genus_rule:Coquillettidia
 Coquillettidia richiardii,mosquito,genus_rule:Coquillettidia
 Culex,mosquito,genus_rule:Culex
@@ -165,6 +167,7 @@ Culex theileri,mosquito,genus_rule:Culex
 Culex torrentium,mosquito,genus_rule:Culex
 Culex tritaeniorhynchus,mosquito,genus_rule:Culex
 Culex univittatus,mosquito,genus_rule:Culex
+Culiseta,mosquito,genus_rule:Culiseta
 Culiseta alaskaensis,mosquito,genus_rule:Culiseta
 Culiseta annulata,mosquito,genus_rule:Culiseta
 Culiseta bergrothi,mosquito,genus_rule:Culiseta
@@ -216,10 +219,29 @@ Sergentomyia dreyfussi,sandfly,genus_rule:Sergentomyia
 Sergentomyia fallax,sandfly,genus_rule:Sergentomyia
 Sergentomyia minuta,sandfly,genus_rule:Sergentomyia
 Sergentomyia pawlowsky,sandfly,genus_rule:Sergentomyia
+Dermacentor,tick,genus_rule:Dermacentor
+Dermacentor marginatus,tick,genus_rule:Dermacentor
 Dermacentor reticulatus,tick,genus_rule:Dermacentor
+Haemaphysalis,tick,genus_rule:Haemaphysalis
+Haemaphysalis concinna,tick,genus_rule:Haemaphysalis
+Haemaphysalis inermis,tick,genus_rule:Haemaphysalis
+Haemaphysalis punctata,tick,genus_rule:Haemaphysalis
+Haemaphysalis sulcata,tick,genus_rule:Haemaphysalis
+Hyalomma,tick,genus_rule:Hyalomma
+Hyalomma aegyptium,tick,genus_rule:Hyalomma
 Hyalomma lusitanicum,tick,genus_rule:Hyalomma
 Hyalomma marginatum,tick,genus_rule:Hyalomma
+Hyalomma scupense,tick,genus_rule:Hyalomma
+Ixodes,tick,genus_rule:Ixodes
+Ixodes arboricola,tick,genus_rule:Ixodes
+Ixodes frontalis,tick,genus_rule:Ixodes
 Ixodes persulcatus,tick,genus_rule:Ixodes
 Ixodes ricinus,tick,genus_rule:Ixodes
+Ixodes ventalloi,tick,genus_rule:Ixodes
 Ornithodoros erraticus,tick,genus_rule:Ornithodoros
 Rhipicephalus,tick,genus_rule:Rhipicephalus
+Rhipicephalus annulatus,tick,genus_rule:Rhipicephalus
+Rhipicephalus bursa,tick,genus_rule:Rhipicephalus
+Rhipicephalus pusillus,tick,genus_rule:Rhipicephalus
+Rhipicephalus sanguineus,tick,genus_rule:Rhipicephalus
+Rhipicephalus turanicus,tick,genus_rule:Rhipicephalus

@@ -54,7 +54,9 @@ from vector_guard.resolve import (
     region_candidate_keys,
     resolve_coords_ladder,
     resolve_vector_country_iso2,
+    resolve_vector_group,
     resolve_virus_country_iso2,
+    scientific_name_lookup_candidates,
     strip_admin_suffix,
 )
 from vector_guard.virus_extract import (
@@ -114,7 +116,9 @@ __all__ = [
     "region_candidate_keys",
     "resolve_coords_ladder",
     "resolve_vector_country_iso2",
+    "resolve_vector_group",
     "resolve_virus_country_iso2",
+    "scientific_name_lookup_candidates",
     "species_long_from_priority_wide",
     "strip_admin_suffix",
     "validate_species_long",

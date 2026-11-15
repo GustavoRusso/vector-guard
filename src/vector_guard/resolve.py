@@ -225,6 +225,76 @@ def feature_slug_from_scientific_name(scientific_name: object) -> str:
     return re.sub(r"_+", "_", slug).strip("_")
 
 
+_PARENTHETICAL_RE = re.compile(r"\([^)]*\)")
+_YEAR_TOKEN_RE = re.compile(r"^\d{4}$")
+
+
+def _strip_scientific_name_authorship(name: str) -> str:
+    """Keep genus + lowercase epithets; drop author / year tokens."""
+    tokens = re.sub(r"\s+", " ", name).strip().split()
+    if not tokens:
+        return ""
+    kept = [tokens[0]]
+    for tok in tokens[1:]:
+        cleaned = tok.strip(",")
+        if not cleaned:
+            continue
+        if _YEAR_TOKEN_RE.fullmatch(cleaned):
+            break
+        # Species / infra-specific epithets are lowercase; authors are capitalized.
+        if cleaned[0].isupper():
+            break
+        kept.append(cleaned)
+    return " ".join(kept)
+
+
+def scientific_name_lookup_candidates(scientific_name: object) -> list[str]:
+    """Ordered unique keys for ``vector_taxon_groups.csv`` lookup.
+
+    Ladder (spec ``04`` / SPVECTORSURV authored names):
+
+    1. Exact cleaned string
+    2. Parenthetical subgenus / clutter removed
+    3. Authorship / year stripped (binomial / trinomial bare name)
+    4. Genus-only token (CSV genus-level row fallback)
+    """
+    raw = _clean_text(scientific_name)
+    if not raw:
+        return []
+
+    candidates: list[str] = []
+
+    def _add(value: str) -> None:
+        text = re.sub(r"\s+", " ", value).strip(" ,;")
+        if text and text not in candidates:
+            candidates.append(text)
+
+    _add(raw)
+    no_paren = _PARENTHETICAL_RE.sub(" ", raw)
+    _add(no_paren)
+    bare = _strip_scientific_name_authorship(no_paren)
+    _add(bare)
+    genus = bare.split()[0] if bare else ""
+    _add(genus)
+    return candidates
+
+
+def resolve_vector_group(
+    scientific_name: object,
+    taxon_map: Mapping[str, str],
+) -> str:
+    """Map a published ``scientificName`` to ``vector_group`` via the lookup ladder.
+
+    Prefers an exact map hit, then normalized candidates, then a genus-only CSV
+    key when present. Returns ``\"\"`` when unmapped.
+    """
+    for candidate in scientific_name_lookup_candidates(scientific_name):
+        hit = taxon_map.get(candidate)
+        if hit:
+            return str(hit)
+    return ""
+
+
 # ---------------------------------------------------------------------------
 # Virus host → host_group (spec ``04``; interim only; merge does not consume)
 # ---------------------------------------------------------------------------
