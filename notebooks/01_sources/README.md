@@ -36,7 +36,9 @@ Run in order when rebuilding from scratch (or re-run from the step that changed)
 | [`06b_reference_host_groups.ipynb`](06b_reference_host_groups.ipynb) | Host → `host_group` aliases | `data/external/host_groups.csv` |
 | [`07_h3_resolution_density.ipynb`](07_h3_resolution_density.ipynb) | H3 resolution density check | Decision recorded in [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) (`H3_RESOLUTION=4`) |
 | [`08_clean_vectors.ipynb`](08_clean_vectors.ipynb) | Normalize + union vectors (`source` tag) | `data/02_interim/vectors_normalized.parquet` |
+| [`08b-vector_h3_coverage.ipynb`](vector_h3_coverage.ipynb) | Vector H3 / spatial coverage exploration |
 | [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses (incl. `host_group`) | `viruses_normalized.parquet`; `virus_unmatched_regions.csv`; `virus_unmatched_hosts.csv` |
+| [`09b-virus_h3_coverage.ipynb`](virus_h3_coverage.ipynb) | Virus H3 / spatial coverage exploration |
 | [`10_merge_modelling_panel.ipynb`](10_merge_modelling_panel.ipynb) | Merge supervised panel + species side table | `modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` |
 
 ## Refresh raw extracts

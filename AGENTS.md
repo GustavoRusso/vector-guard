@@ -8,13 +8,24 @@
 - Resolve paths from the repo root via `vector_guard.data.find_repo_root` (notebooks may be opened from subfolders). Reusable helpers live in `src/vector_guard/` and are imported as `from vector_guard...`.
 - Show tables, plots, and maps **inline** in the notebook (`display`, seaborn, Folium). Put reusable viz helpers in `src/vector_guard/viz.py` rather than duplicating chart code across cells.
 
-## `docs/` — read-only insight
+## WORKING STYLE
+
+- Before each code block, 2–3 lines on what you will do and why.
+- Print every key number. Never invent results.
+- Ask before adding a library.
+- In every answer, list the files you created or changed.
+- Do ONE step per answer and wait for me to say "next".
+- If I say a rule is broken, redo only the affected code and keep everything else.
+
+## Project structure
+
+### `docs/` — read-only insight
 
 - Agents **may read** files under `docs/` for background on scope, sources, and early research.
 - Agents **must not** create, edit, delete, rename, or move anything under `docs/`.
 - `docs/` is **not** the project’s living documentation or source of truth for decisions. Do not add new project docs there, do not reference those documents from outside the docs/ folder, and do not treat it as the place to record or update decisions.
 
-## `specs/` — decision documentation
+### `specs/` — decision documentation
 
 - Store documentation of **decisions taken** on the project in `specs/` (for example dataset choice, geographic unit, model selection).
 - One document per **topic or project step**.
