@@ -32,6 +32,24 @@
 - When a decision is made or changed during work, record or update it in `specs/`, not in `docs/`.
 - Repo layout and deliverable → path map live in [`README.md`](README.md), not in `specs/`.
 
+## Documentation single source of truth
+
+Each concept is **defined in exactly one** canonical document (or section). Other docs may **link** or use a one-line pointer; they must **not** restate the contract, decision table, or grain definition.
+
+- Canonical doc **defines**. Non-canonical docs **link**.
+- To change a concept, edit the canonical owner first; then fix links elsewhere if needed.
+- `docs/` is never a living source of truth (see above).
+
+| Concept | Canonical |
+|---------|-----------|
+| Problem statement / deliverable map / how to run | [`README.md`](README.md) |
+| Feature / deliverable status | [`ROADMAP.md`](ROADMAP.md) |
+| Vector source selection | [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md) |
+| Virus taxonomy / pathogen↔group | [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) (+ code `VIRUS_VECTOR_TAXON_MAP`) |
+| Spatial-temporal join (tiers, Path A/B, A3) | [`specs/03-spatial-temporal-matching-strategy.md`](specs/03-spatial-temporal-matching-strategy.md) |
+| Panel contract, H3 res, reference artifacts, pipeline | [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md) |
+| Stage how-to (commands, notebook order) | Matching `notebooks/*/README.md` only |
+
 ## Layout and deliverables
 
 See [`README.md`](README.md) § Project layout and Deliverable areas → location.

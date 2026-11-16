@@ -4,7 +4,7 @@ Rebuild the modelling panel used by staged analysis notebooks (`02_eda` → `03_
 
 **Output:** [`data/03_processed/modelling_panel.parquet`](../../data/03_processed/) + [`modelling_panel_species.parquet`](../../data/03_processed/) (+ `modelling_panel_manifest.json`).
 
-**Panel grain:** B2 **pathogen-long** — observed interim vector `(spatial key, year, month, vector_group)` × each `pathogen_name` mapped to that group. Units come from VectorNet (primary) + SPVECTORSURV (secondary densifier). Primary label: `pathogen_within_5y`. Panel keeps group aggregates + `species_richness`. Full species composition is the long side table (unit × `scientific_name`); priority `vector_count_<slug>` columns are widened in `03_features` from `priority_vector_taxa.csv` (locked late pivot — not merge-time wide columns).
+Panel grain, labels, and species side table: [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) ([Panel columns](../../specs/04-reference-data-and-panel-pipeline.md#panel-columns)).
 
 This folder supports **Reproducibility** / Data. It is **not** the EDA deliverable area — EDA, feature prep, and model training use the panel (+ species table) under `notebooks/02_eda/`, `03_features/`, and `04_modeling/`.
 
