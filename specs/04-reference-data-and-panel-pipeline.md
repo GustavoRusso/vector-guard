@@ -4,8 +4,8 @@ Decision record for **reference / master data**, how each side is **resolved** o
 
 | Field | Value |
 |-------|-------|
-| Status | **B2 pathogen-long** panel + **long species side table** contract locked (`H3_RESOLUTION=4`, A3 clock); notebook `10` → `modelling_panel.*` + `modelling_panel_species.parquet`; wide `vector_count_*` are an EDA/prep late pivot, not merge columns; virus interim `host_group` classification locked (merge does **not** consume it yet); **vector interim multi-source** (VectorNet primary + SPVECTORSURV secondary) with closed `source` column |
-| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species composition side table + late priority pivot); 2026-11 (virus `host` → `host_group`); 2026-11 (SPVECTORSURV secondary vector source → interim `source`) |
+| Status | **B2 pathogen-long** panel + **long species side table** contract locked (`H3_RESOLUTION=4`, A3 clock); notebook `10` → `modelling_panel.*` + `modelling_panel_species.parquet`; **vectors species-monthly** aggregate locked (notebook `08d` → `vectors_species_monthly.parquet`); wide `vector_count_*` are an EDA/prep late pivot, not merge columns; virus interim `host_group` classification locked (merge does **not** consume it yet); **vector interim multi-source** (VectorNet primary + SPVECTORSURV secondary) with closed `source` column |
+| Decision date | 2026-11 (initial pipeline); 2026-11 (multi-source virus extract + subnational centroid reference); 2026-11 (`H3_RESOLUTION=4`); 2026-11 (Path B lookup parity + virus spelling aliases); 2026-11 (virus ENA / ISO-week date parsing); 2026-11 (B2/A3 forward virus labels); 2026-11 (B2 pathogen-long grain + pathogen-specific labels); 2026-11 (long species composition side table + late priority pivot); 2026-11 (virus `host` → `host_group`); 2026-11 (SPVECTORSURV secondary vector source → interim `source`); 2026-11 (vectors species-monthly H3 aggregate) |
 | Spec order | `04` (after spatial-temporal matching strategy) |
 | Depends on | [`specs/03-spatial-temporal-matching-strategy.md`](03-spatial-temporal-matching-strategy.md), [`specs/01-vector-dataset-selection.md`](01-vector-dataset-selection.md), [`specs/02-virus-dataset-selection.md`](02-virus-dataset-selection.md) |
 
@@ -25,6 +25,7 @@ Decision record for **reference / master data**, how each side is **resolved** o
 | Secondary label | `pathogen_within_10y` (forward ≤10 years); ever-before / ever-after flags + nullable delay columns for EDA |
 | Temporal grain | Panel rows: **`year` × `month`** (vector observation). Pathogen labels are **not** same-month-only (see spec `03`) |
 | Vector species features | Panel: group aggregates + `species_richness` only (no merge-time `vector_count_*`). Full composition in long `modelling_panel_species.parquet` (unit × `scientific_name`). EDA/prep: unit-grain pivot of the **locked** closed set from `priority_vector_taxa.csv` → `vector_count_<feature_slug>` (0 if absent); frequency pivots of the full long table are exploratory only |
+| Vectors species-monthly | Additive H3-only training aggregate from interim vectors: `(h3_cell, year, month, scientific_name, vector_group)` → `individual_count` / `observation_count` / `sampling_protocol_count`; notebook `08d` → `data/03_processed/vectors_species_monthly.parquet`. **Not** a replacement for `modelling_panel_species` |
 | H3 resolution | **`4`** — chosen in `07_h3_resolution_density.ipynb`; constant `vector_guard.resolve.H3_RESOLUTION` |
 | Virus raw extract | Multi-source unified `virus_detections.tsv` (ENA `sequence` + `read_run`/`sample`, BV-BRC, Pathoplexus, EMPRES-i, ECDC) — contract in [`specs/02`](02-virus-dataset-selection.md) |
 | Virus `host_group` | Interim classification of free-text `host` (+ `isolation_source` fallback when unresolved) into a closed vocabulary on `viruses_normalized.parquet`; merge notebook `10` does **not** consume `host_group` in this milestone |
@@ -39,7 +40,7 @@ data/
   01_raw/        # extracts only (gitignored); notebooks 01, 01b, 03
   external/      # committed master/lookup tables; notebooks 05, 06, 06b
   02_interim/    # normalized vector / virus row tables; notebooks 08, 09
-  03_processed/  # modelling panel + species side table + merge manifest; notebook 10
+  03_processed/  # modelling panel + species side table + merge manifest; vectors species-monthly; notebooks 08d, 10
 ```
 
 | Layer | Contents | Commit? |
@@ -47,7 +48,7 @@ data/
 | `01_raw/` | VectorNet DwC-A (`vector/`); SPVECTORSURV DwC-A (`vector_spvectorsurv/`); multi-source `virus_detections.tsv` (+ per-extract `manifest.json`) | No (re-fetch documented in README) |
 | `external/` | Countries, subnational centroids, vector taxon → group maps, host → `host_group` aliases, priority taxa, pathogen ↔ group mirror (small) | Yes |
 | `02_interim/` | Per-side normalized detections (+ rebuildable unmatched region / host lists); vectors carry `source` | Usually no (rebuildable) |
-| `03_processed/` | Modelling panel + long species composition table + merge manifest | Prefer commit if small; else document rebuild |
+| `03_processed/` | Modelling panel + long species composition table + merge manifest; vectors species-monthly aggregate | Prefer commit if small; else document rebuild |
 
 ## What counts as reference data
 
@@ -66,6 +67,7 @@ data/
 | H3 resolution choice | Decision + code constant | This spec + `vector_guard.resolve.H3_RESOLUTION` (`4`) | Density-check notebook `07_h3_resolution_density.ipynb` | `lat/lon` → `h3_cell` |
 | Modelling panel schema | Output contract | `data/03_processed/modelling_panel.*` | Merge notebook `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `notebooks/02_eda` / `03_features` / `04_modeling` / `train.py` (pathogen-long; no wide species counts) |
 | Species composition (long) | Output contract | `data/03_processed/modelling_panel_species.parquet` | Same merge notebook (`10`), from pre-explode unit aggregates | Unit × `scientific_name` counts for late pivot in EDA/prep |
+| Vectors species-monthly | Output contract | `data/03_processed/vectors_species_monthly.parquet` | Notebook `08d` from `vectors_normalized.parquet` | H3 × month × species effort aggregates for vector-only training / analysis |
 
 **Out of reference scope (v1):** full NUTS polygon geometry dumps; on-the-fly geocoders for unmatched free-text; committing raw extracts. NUTS **centroids** (and equivalent admin centroids) **are** in scope via `subnational_locations.csv`.
 
@@ -236,6 +238,7 @@ flowchart TD
   refHosts["06b_reference_host_groups"]
   h3Density["07_h3_resolution_density"]
   cleanV["08_clean_vectors"]
+  aggSpecies["08d_aggregate_vectors_species_monthly"]
   cleanU["09_clean_viruses"]
   merge["10_merge_modelling_panel"]
   edaNb["notebooks/02_eda"]
@@ -260,6 +263,7 @@ flowchart TD
   h3Density --> cleanV
   h3Density --> cleanU
   extractV --> cleanV
+  cleanV --> aggSpecies
   cleanV --> merge
   cleanU --> merge
   merge --> edaNb
@@ -280,6 +284,7 @@ flowchart TD
 | Host → `host_group` aliases | `notebooks/01_sources/06b_reference_host_groups.ipynb` | `data/external/host_groups.csv` | Virus `host` / `isolation_source` inventory; `vector_taxon_groups.csv`; global vector genus seeds |
 | H3 density check | `07_h3_resolution_density.ipynb` | Decision in this spec + `vector_guard.resolve.H3_RESOLUTION`; no world H3 dump | lat/lon from both sides under exact-only and exact+centroid modes |
 | Clean vectors | `notebooks/01_sources/08_clean_vectors.ipynb` | `data/02_interim/vectors_normalized.parquet` (incl. `source`) | VectorNet + SPVECTORSURV raw + `countries` + optional `subnational_locations` + `vector_taxon_groups` + `H3_RESOLUTION` |
+| Aggregate vectors species-monthly | `notebooks/01_sources/08d_aggregate_vectors_species_monthly.ipynb` | `data/03_processed/vectors_species_monthly.parquet` | `vectors_normalized.parquet` |
 | Clean viruses | `notebooks/01_sources/09_clean_viruses.ipynb` | `data/02_interim/viruses_normalized.parquet` (incl. `host_group`); `data/02_interim/virus_unmatched_regions.csv` (`in_vectornet_scope` flag); `data/02_interim/virus_unmatched_hosts.csv` | raw + `countries` + `subnational_locations` + `host_groups.csv` + `vector_taxon_groups` + `H3_RESOLUTION` |
 | **Merge panel** | `notebooks/01_sources/10_merge_modelling_panel.ipynb` | `data/03_processed/modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` | both interim tables + `pathogen_vector_group.csv` (**not** `priority_vector_taxa.csv`; **not** `host_group` / `host_groups.csv` in this milestone) |
 | EDA | `notebooks/02_eda/` | Descriptive analysis (coverage, missingness, target, plots) | modelling panel + species side table |
@@ -361,6 +366,34 @@ Written by notebook `08` from **both** raw vector extracts. Row grain = one occu
 | `individual_count`, `sampling_protocol`, `sample_size_value` | Effort fields passthrough |
 
 **Union rules:** concatenate VectorNet + SPVECTORSURV after the same resolve path; **no** cross-source dedup drop. Soft-overlap QA may report `(rounded lat/lon, scientific_name, year, month)` collisions. SPVECTORSURV rows remain CC BY-NC 4.0; combined interim is multi-license ([`specs/01`](01-vector-dataset-selection.md)).
+
+### Vectors species-monthly contract (`vectors_species_monthly.parquet`)
+
+Written by notebook `08d` from `vectors_normalized.parquet` (VectorNet + SPVECTORSURV). Additive **vector-only** training / analysis table — **not** a replacement for `modelling_panel_species.parquet` and **not** pathogen-long.
+
+**Grain:** one row per `(h3_cell, year, month, scientific_name, vector_group)`.
+
+**Inclusion rules:**
+
+- Input = multi-source interim vectors (`source` ∈ `{vectornet, spvectorsurv}`).
+- Drop rows missing any key: null/empty `h3_cell`, `year`, `month`, `scientific_name`, or `vector_group` (unmapped taxa stay interim-only).
+- **No** Tier-2 country fallback (H3-only).
+- **No** pathogen explode / labels.
+
+**Columns** (complete; order as written by `08d` / `vector_guard.vectors_agg`):
+
+| Column | Meaning |
+|--------|---------|
+| `h3_cell` | H3 cell ID at `H3_RESOLUTION` |
+| `year` | Calendar year of the interim vector observation |
+| `month` | Calendar month (1–12) |
+| `scientific_name` | Interim taxon string |
+| `vector_group` | Ecological class from `vector_taxon_groups.csv` |
+| `individual_count` | Sum of numeric-coerced DwC `individualCount` (`pd.to_numeric(..., errors="coerce")`; NaNs skipped by sum) |
+| `observation_count` | Number of interim rows in the group |
+| `sampling_protocol_count` | Number of distinct non-null `sampling_protocol` values in the group |
+
+Helper: `vector_guard.vectors_agg.aggregate_vectors_species_monthly`.
 
 ### Host → `host_group` (virus interim only)
 
@@ -496,6 +529,7 @@ Authoritative schema for `data/03_processed/modelling_panel_species.parquet`, wr
 |------|------|
 | `data/03_processed/modelling_panel.parquet` (or `.csv`) | Modelling handoff table (pathogen-long; no wide species count columns) |
 | `data/03_processed/modelling_panel_species.parquet` | Long species composition (unit × `scientific_name`); input to late pivot |
+| `data/03_processed/vectors_species_monthly.parquet` | H3 × month × species vector effort aggregate (notebook `08d`; additive to panel artifacts) |
 | Merge summary / manifest fields | `H3_RESOLUTION`; `eligibility=from_first_vector`; `primary_label=pathogen_within_5y`; `secondary_label=pathogen_within_10y`; `delay_missing=null`; `tier1_key` / `tier2_key` including `pathogen_name`; `n_pathogens`; row counts by `spatial_tier` and by `pathogen_name`; label positive rates (overall and per pathogen); **species side-table path + row count** (not `priority_feature_slugs`); note that locked priority species pivot happens downstream in EDA/prep; geo-precision mix; date range / censoring note; training filter rules (**vector coverage**, any interim `source`); SHA-256 from VectorNet **and** SPVECTORSURV raw manifests when available |
 
 Consumers: `notebooks/02_eda/` (EDA stratified by `pathogen_name`), `notebooks/03_features/` (locked unit-grain species pivot + feature handoff), `notebooks/04_modeling/` (model selection), `train.py` (load panel / species table or rebuild via the same pipeline; mirror the late pivot rule).
@@ -513,7 +547,7 @@ Consumers: `notebooks/02_eda/` (EDA stratified by `pathogen_name`), `notebooks/0
 
 ## Status
 
-Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). Virus interim **`host_group`** classification is locked (`06b` reference + `09` resolve); merge does not consume it yet. Vector interim is **multi-source** (VectorNet + SPVECTORSURV) with closed `source`; training filter is **vector coverage** from that interim. Consumers (`notebooks/02_eda` → `03_features` → `04_modeling`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
+Pipeline through the **B2 pathogen-long / A3** modelling panel and the **long species side table** contract is locked (`03`–`10`; `H3_RESOLUTION=4`). The **vectors species-monthly** H3 aggregate contract is locked (notebook `08d` → `vectors_species_monthly.parquet`). Virus interim **`host_group`** classification is locked (`06b` reference + `09` resolve); merge does not consume it yet. Vector interim is **multi-source** (VectorNet + SPVECTORSURV) with closed `source`; training filter is **vector coverage** from that interim. Consumers (`notebooks/02_eda` → `03_features` → `04_modeling`, later `train.py`) use `pathogen_within_5y` stratified by `pathogen_name`, with priority `vector_count_<slug>` attached via unit-grain late pivot. Further EDA, models, and `train.py` are tracked in [`ROADMAP.md`](../ROADMAP.md).
 
 ## Related project files
 

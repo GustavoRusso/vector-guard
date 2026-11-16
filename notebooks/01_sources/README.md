@@ -36,7 +36,9 @@ Run in order when rebuilding from scratch (or re-run from the step that changed)
 | [`06b_reference_host_groups.ipynb`](06b_reference_host_groups.ipynb) | Host → `host_group` aliases | `data/external/host_groups.csv` |
 | [`07_h3_resolution_density.ipynb`](07_h3_resolution_density.ipynb) | H3 resolution density check | Decision recorded in [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md) (`H3_RESOLUTION=4`) |
 | [`08_clean_vectors.ipynb`](08_clean_vectors.ipynb) | Normalize + union vectors (`source` tag) | `data/02_interim/vectors_normalized.parquet` |
-| [`08b-vector_h3_coverage.ipynb`](vector_h3_coverage.ipynb) | Vector H3 / spatial coverage exploration |
+| [`08b-vector_h3_coverage.ipynb`](08b-vector_h3_coverage.ipynb) | Vector H3 / spatial coverage exploration |
+| [`08c-vectors-source-visualization.ipynb`](08c-vectors-source-visualization.ipynb) | Interim vector source / effort visualization |
+| [`08d_aggregate_vectors_species_monthly.ipynb`](08d_aggregate_vectors_species_monthly.ipynb) | H3 × month × species effort aggregate | `data/03_processed/vectors_species_monthly.parquet` |
 | [`09_clean_viruses.ipynb`](09_clean_viruses.ipynb) | Normalize viruses (incl. `host_group`) | `viruses_normalized.parquet`; `virus_unmatched_regions.csv`; `virus_unmatched_hosts.csv` |
 | [`09b-virus_h3_coverage.ipynb`](virus_h3_coverage.ipynb) | Virus H3 / spatial coverage exploration |
 | [`10_merge_modelling_panel.ipynb`](10_merge_modelling_panel.ipynb) | Merge supervised panel + species side table | `modelling_panel.parquet` + `modelling_panel_species.parquet` + `modelling_panel_manifest.json` |
@@ -76,7 +78,7 @@ viruses = load_virus_detections()
 
 1. Refresh raw extracts (`01`, `01b`, `03`) if sources changed.
 2. Refresh reference tables (`05`, `06`, `06b`) if country/region aliases, taxon maps, or host → `host_group` aliases changed.
-3. Re-run clean steps (`08`, `09`), then merge (`10`). (`08` unions VectorNet + SPVECTORSURV with `source`; `09` applies `host_groups.csv`; merge does not consume `host_group` yet.)
+3. Re-run clean steps (`08`, `09`), then merge (`10`). Optionally run `08d` after `08` for `vectors_species_monthly.parquet`. (`08` unions VectorNet + SPVECTORSURV with `source`; `09` applies `host_groups.csv`; merge does not consume `host_group` yet.)
 4. Confirm `data/03_processed/modelling_panel.parquet` and `modelling_panel_species.parquet` exist, then open [`../02_eda/`](../02_eda/) (then [`03_features`](../03_features/), [`04_modeling`](../04_modeling/)).
 
 How to load the panel / species table: root [`README.md`](../../README.md) Dataset section and stage runbooks under `02_eda` / `03_features`.

@@ -23,6 +23,11 @@ from vector_guard.panel_features import (
     species_long_from_priority_wide,
     validate_species_long,
 )
+from vector_guard.vectors_agg import (
+    SPECIES_MONTHLY_COLS,
+    SPECIES_MONTHLY_KEYS,
+    aggregate_vectors_species_monthly,
+)
 from vector_guard.resolve import (
     GEO_PRECISION_CENTROID,
     GEO_PRECISION_COUNTRY,
@@ -74,10 +79,13 @@ __all__ = [
     "HOST_GROUPS",
     "HOST_GROUP_PRIORITY",
     "SPECIES_LONG_COLS",
+    "SPECIES_MONTHLY_COLS",
+    "SPECIES_MONTHLY_KEYS",
     "UNIT_KEY_COLS",
     "VECTORNET_CODE_TO_ISO2",
     "VIRUS_RAW_COLUMNS",
     "VIRUS_VECTOR_TAXON_MAP",
+    "aggregate_vectors_species_monthly",
     "assert_species_aligned_to_units",
     "assign_h3",
     "attach_priority_species_features",

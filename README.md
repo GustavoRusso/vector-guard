@@ -77,9 +77,10 @@ The modelling handoff is a pathogen-long panel plus a long species composition t
 |------|------|
 | Panel | [`data/03_processed/modelling_panel.parquet`](data/03_processed/) |
 | Species (long) | [`data/03_processed/modelling_panel_species.parquet`](data/03_processed/) |
+| Vectors species-monthly | [`data/03_processed/vectors_species_monthly.parquet`](data/03_processed/) |
 | Manifest | `data/03_processed/modelling_panel_manifest.json` |
 
-Panel grain, labels, species side table, and coverage contract: [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md). Pathogen ↔ `vector_group` taxonomy: [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy) (code: `VIRUS_VECTOR_TAXON_MAP`; mirror CSV `data/external/pathogen_vector_group.csv`). Vector sources: [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md).
+Panel grain, labels, species side table, vectors species-monthly, and coverage contract: [`specs/04-reference-data-and-panel-pipeline.md`](specs/04-reference-data-and-panel-pipeline.md). Pathogen ↔ `vector_group` taxonomy: [`specs/02-virus-dataset-selection.md`](specs/02-virus-dataset-selection.md) § [Target virus taxonomy](specs/02-virus-dataset-selection.md#target-virus-taxonomy) (code: `VIRUS_VECTOR_TAXON_MAP`; mirror CSV `data/external/pathogen_vector_group.csv`). Vector sources: [`specs/01-vector-dataset-selection.md`](specs/01-vector-dataset-selection.md).
 
 Load it in a notebook (same pattern as notebooks under [`02_eda`](notebooks/02_eda/) / [`03_features`](notebooks/03_features/)):
 
