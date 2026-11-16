@@ -14,7 +14,7 @@ Layout and deliverable map: [`README.md`](../../README.md).
 
 | Notebook | Role |
 |----------|------|
-| *(pending)* | Panel prep filters + locked late priority pivot + feature matrix handoff |
+| [`panel_prep.ipynb`](panel_prep.ipynb) | Panel prep filters + locked late priority pivot + feature matrix handoff |
 
 See [`ROADMAP.md`](../../ROADMAP.md) § Exploratory data analysis for status. Contract for the late pivot: [`specs/04`](../../specs/04-reference-data-and-panel-pipeline.md).
 

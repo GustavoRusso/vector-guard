@@ -14,8 +14,9 @@ Layout and deliverable map: [`README.md`](../../README.md).
 |----------|------|
 | [`vector_h3_coverage.ipynb`](vector_h3_coverage.ipynb) | Vector H3 / spatial coverage exploration |
 | [`virus_h3_coverage.ipynb`](virus_h3_coverage.ipynb) | Virus H3 / spatial coverage exploration |
+| [`panel_eda.ipynb`](panel_eda.ipynb) | Panel profile, target rates, missingness, effort-proxy outliers |
 
-Add further notebooks here for missingness, feature ranges, target analysis, and spatial/temporal plots as they land ([`ROADMAP.md`](../../ROADMAP.md) § Exploratory data analysis).
+Add further notebooks here for feature-range plots, deeper target analysis, and spatial/temporal plots as they land ([`ROADMAP.md`](../../ROADMAP.md) § Exploratory data analysis).
 
 ## Load the panel
 
