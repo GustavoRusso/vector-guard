@@ -28,6 +28,11 @@ from vector_guard.vectors_agg import (
     SPECIES_MONTHLY_KEYS,
     aggregate_vectors_species_monthly,
 )
+from vector_guard.virus_agg import (
+    VIRUS_MONTHLY_COLS,
+    VIRUS_MONTHLY_KEYS,
+    aggregate_virus_monthly,
+)
 from vector_guard.resolve import (
     GEO_PRECISION_CENTROID,
     GEO_PRECISION_COUNTRY,
@@ -83,9 +88,12 @@ __all__ = [
     "SPECIES_MONTHLY_KEYS",
     "UNIT_KEY_COLS",
     "VECTORNET_CODE_TO_ISO2",
+    "VIRUS_MONTHLY_COLS",
+    "VIRUS_MONTHLY_KEYS",
     "VIRUS_RAW_COLUMNS",
     "VIRUS_VECTOR_TAXON_MAP",
     "aggregate_vectors_species_monthly",
+    "aggregate_virus_monthly",
     "assert_species_aligned_to_units",
     "assign_h3",
     "attach_priority_species_features",
